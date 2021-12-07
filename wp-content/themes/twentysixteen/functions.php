@@ -594,3 +594,13 @@ function twentysixteen_widget_tag_cloud_args( $args ) {
 	return $args;
 }
 add_filter( 'widget_tag_cloud_args', 'twentysixteen_widget_tag_cloud_args' );
+add_filter('get_avatar', function ($avatar) {
+    return str_replace([
+        'www.gravatar.com/avatar/',
+        '0.gravatar.com/avatar/',
+        '1.gravatar.com/avatar/',
+        '2.gravatar.com/avatar/',
+        'secure.gravatar.com/avatar/',
+        'cn.gravatar.com/avatar/'
+    ], 'sdn.geekzu.org/avatar/', $avatar);
+});
