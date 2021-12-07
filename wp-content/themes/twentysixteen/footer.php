@@ -60,7 +60,8 @@
 				<a href="<?php echo esc_url( __( '../', 'twentysixteen' ) ); ?>" class="imprint">
 					<?php
 					/* translators: %s: WordPress */
-					printf( __( 'Proudly powered by %s', 'twentysixteen' ), 'Monk' );
+					/*printf( __( 'Proudly powered by %s', 'twentysixteen' ), 'Monk' );*/
+					printf("Monk's Blog")
 					?>
 				</a>
 			</div><!-- .site-info -->
