@@ -86,3 +86,18 @@
 [Crayon Syntax Highlighter Log Entry - 6:10:38 AM - 08 Dec 2021]
 
  'Calling update plugin...'
+
+[Crayon Syntax Highlighter Log Entry - 6:11:34 AM - 08 Dec 2021]
+
+ 'Calling update plugin...'
+
+[Crayon Syntax Highlighter Log Entry - 6:11:37 AM - 08 Dec 2021]
+
+ 'Calling update plugin...'
+ [SYSTEM LOG] 'Upload directory is empty:  cannot load languages.'
+ [SYSTEM LOG] 'The resource directory is missing, should be at \'\'.'
+ [UrvanovSyntaxHighlighterUtil::lines()] 'Cannot read lines at \'default/default.txt\'.'
+
+[Crayon Syntax Highlighter Log Entry - 6:11:38 AM - 08 Dec 2021]
+
+ 'Calling update plugin...'
