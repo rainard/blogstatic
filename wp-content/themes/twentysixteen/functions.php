@@ -249,7 +249,7 @@ add_action( 'after_setup_theme', 'twentysixteen_content_width', 0 );
 function twentysixteen_resource_hints( $urls, $relation_type ) {
 	if ( wp_style_is( 'twentysixteen-fonts', 'queue' ) && 'preconnect' === $relation_type ) {
 		$urls[] = array(
-			'href' => 'https://fonts.gstatic.com',
+			'href' => 'https://fonts-gstatic.lug.ustc.edu.cn',
 			'crossorigin',
 		);
 	}
@@ -350,7 +350,7 @@ if ( ! function_exists( 'twentysixteen_fonts_url' ) ) :
 					'subset'  => urlencode( $subsets ),
 					'display' => urlencode( 'fallback' ),
 				),
-				'https://fonts.googleapis.com/css'
+				'https://fonts.lug.ustc.edu.cn/css'
 			);
 		}
 
@@ -604,3 +604,13 @@ add_filter('get_avatar', function ($avatar) {
         'cn.gravatar.com/avatar/'
     ], 'sdn.geekzu.org/avatar/', $avatar);
 });
+
+
+/** ------------ my code -------------**/
+// wordpress上传文件重命名
+function git_upload_filter($file) {
+	$time = date("YmdHis");
+	$file['name'] = $time . "" . mt_rand(1, 100) . "." . pathinfo($file['name'], PATHINFO_EXTENSION);
+	return $file;
+}
+add_filter('wp_handle_upload_prefilter', 'git_upload_filter');
