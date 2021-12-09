@@ -1,0 +1,290 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Card Elements for Elementor\n"
+"POT-Creation-Date: 2021-07-20 10:32+0530\n"
+"PO-Revision-Date: 2017-03-11 16:09+0530\n"
+"Last-Translator: \n"
+"Language-Team: Techeshta <info@techeshta.com>\n"
+"Language: en_EN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.0\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop;__;_e;_n:1,2;_x:1,2c;_ex:1,2c;"
+"_nx:1,2c;esc_attr_e;esc_attr__;esc_attr_x:1,2c;esc_html__;esc_html_e;"
+"esc_html_x:1,2c;_n_noop:1,2\n"
+"X-Poedit-Basepath: ..\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: item-lists-for-elementor.php:104
+msgid ""
+"<strong>Item Lists for Elementor<strong> not working because you need to "
+"activate the Elementor plugin."
+msgstr ""
+
+#: item-lists-for-elementor.php:105
+msgid "Activate Elementor Now"
+msgstr ""
+
+#: item-lists-for-elementor.php:113
+msgid ""
+"<strong>Item Lists for Elementor</strong> not working because you need to "
+"install the Elementor plugin"
+msgstr ""
+
+#: item-lists-for-elementor.php:114
+msgid "Install Elementor Now"
+msgstr ""
+
+#: widgets/elementor-helper.php:8
+msgid "Item Lists Element"
+msgstr ""
+
+#: widgets/item-lists-widget.php:19
+msgid "Item Lists"
+msgstr ""
+
+#: widgets/item-lists-widget.php:43
+msgid "General"
+msgstr ""
+
+#: widgets/item-lists-widget.php:49
+msgid "List Style"
+msgstr ""
+
+#: widgets/item-lists-widget.php:52
+msgid "Material Bullets"
+msgstr ""
+
+#: widgets/item-lists-widget.php:53
+msgid "Shape Bullets"
+msgstr ""
+
+#: widgets/item-lists-widget.php:54
+msgid "Timeline Bullets"
+msgstr ""
+
+#: widgets/item-lists-widget.php:55
+msgid "Alternate Timeline Bullets"
+msgstr ""
+
+#: widgets/item-lists-widget.php:56
+msgid "Gradient Ordered Bullets"
+msgstr ""
+
+#: widgets/item-lists-widget.php:69 widgets/item-lists-widget.php:241
+#: widgets/item-lists-widget.php:351 widgets/item-lists-widget.php:495
+msgid "Items"
+msgstr ""
+
+#: widgets/item-lists-widget.php:81 widgets/item-lists-widget.php:83
+#: widgets/item-lists-widget.php:253 widgets/item-lists-widget.php:255
+#: widgets/item-lists-widget.php:363 widgets/item-lists-widget.php:365
+#: widgets/item-lists-widget.php:507 widgets/item-lists-widget.php:509
+#: widgets/item-lists-widget.php:1059
+msgid "Title"
+msgstr ""
+
+#: widgets/item-lists-widget.php:90 widgets/item-lists-widget.php:262
+#: widgets/item-lists-widget.php:372 widgets/item-lists-widget.php:516
+#: widgets/item-lists-widget.php:1108
+msgid "Content"
+msgstr ""
+
+#: widgets/item-lists-widget.php:92 widgets/item-lists-widget.php:264
+#: widgets/item-lists-widget.php:374 widgets/item-lists-widget.php:518
+msgid ""
+"Lorem ipsum dolor sit amet, consectetur adipisi cing elit, sed do eiusmod "
+"tempor incididunt ut abore et dolore magna"
+msgstr ""
+
+#: widgets/item-lists-widget.php:99 widgets/item-lists-widget.php:107
+#: widgets/item-lists-widget.php:271 widgets/item-lists-widget.php:279
+#: widgets/item-lists-widget.php:381 widgets/item-lists-widget.php:389
+#: widgets/item-lists-widget.php:821
+msgid "Icon"
+msgstr ""
+
+#: widgets/item-lists-widget.php:103 widgets/item-lists-widget.php:275
+#: widgets/item-lists-widget.php:385
+msgid "None"
+msgstr ""
+
+#: widgets/item-lists-widget.php:111 widgets/item-lists-widget.php:393
+#: widgets/item-lists-widget.php:1009
+msgid "Image"
+msgstr ""
+
+#: widgets/item-lists-widget.php:148 widgets/item-lists-widget.php:430
+#: widgets/item-lists-widget.php:848
+msgid "Icon Color"
+msgstr ""
+
+#: widgets/item-lists-widget.php:159 widgets/item-lists-widget.php:441
+#: widgets/item-lists-widget.php:902
+msgid "Icon Background Color"
+msgstr ""
+
+#: widgets/item-lists-widget.php:170 widgets/item-lists-widget.php:1066
+msgid "Title Color"
+msgstr ""
+
+#: widgets/item-lists-widget.php:178 widgets/item-lists-widget.php:1115
+msgid "Content Color"
+msgstr ""
+
+#: widgets/item-lists-widget.php:186
+msgid "Content Background Color"
+msgstr ""
+
+#: widgets/item-lists-widget.php:195 widgets/item-lists-widget.php:317
+#: widgets/item-lists-widget.php:453 widgets/item-lists-widget.php:525
+msgid "List Items"
+msgstr ""
+
+#: widgets/item-lists-widget.php:303
+msgid "Icon Box Style"
+msgstr ""
+
+#: widgets/item-lists-widget.php:306
+msgid "Diamond"
+msgstr ""
+
+#: widgets/item-lists-widget.php:307
+msgid "Circle"
+msgstr ""
+
+#: widgets/item-lists-widget.php:308
+msgid "Square"
+msgstr ""
+
+#: widgets/item-lists-widget.php:553
+msgid "Box"
+msgstr ""
+
+#: widgets/item-lists-widget.php:560
+msgid "Direction"
+msgstr ""
+
+#: widgets/item-lists-widget.php:563
+msgid "LTR"
+msgstr ""
+
+#: widgets/item-lists-widget.php:564
+msgid "RTL"
+msgstr ""
+
+#: widgets/item-lists-widget.php:575
+msgid "Background Color"
+msgstr ""
+
+#: widgets/item-lists-widget.php:589
+msgid "Box Margin"
+msgstr ""
+
+#: widgets/item-lists-widget.php:603
+msgid "Content Padding"
+msgstr ""
+
+#: widgets/item-lists-widget.php:614
+msgid "Space Between Box"
+msgstr ""
+
+#: widgets/item-lists-widget.php:637
+msgid "Border Radius"
+msgstr ""
+
+#: widgets/item-lists-widget.php:660
+msgid "Timeline"
+msgstr ""
+
+#: widgets/item-lists-widget.php:670
+msgid "Timeline Color"
+msgstr ""
+
+#: widgets/item-lists-widget.php:682
+msgid "Timeline Width"
+msgstr ""
+
+#: widgets/item-lists-widget.php:702
+msgid "Timeline Horizontal Width"
+msgstr ""
+
+#: widgets/item-lists-widget.php:719
+msgid "Timeline Horizontal Spacing"
+msgstr ""
+
+#: widgets/item-lists-widget.php:740
+msgid "Number"
+msgstr ""
+
+#: widgets/item-lists-widget.php:750
+msgid "Color"
+msgstr ""
+
+#: widgets/item-lists-widget.php:768
+msgid "Background Size"
+msgstr ""
+
+#: widgets/item-lists-widget.php:785
+msgid "Vertical Alignment"
+msgstr ""
+
+#: widgets/item-lists-widget.php:788
+msgid "Top"
+msgstr ""
+
+#: widgets/item-lists-widget.php:789
+msgid "Middle"
+msgstr ""
+
+#: widgets/item-lists-widget.php:790
+msgid "Botttom"
+msgstr ""
+
+#: widgets/item-lists-widget.php:806 widgets/item-lists-widget.php:1035
+msgid "Radius"
+msgstr ""
+
+#: widgets/item-lists-widget.php:831
+msgid "Icon Size"
+msgstr ""
+
+#: widgets/item-lists-widget.php:862
+msgid "Icon Box Width"
+msgstr ""
+
+#: widgets/item-lists-widget.php:882
+msgid "Icon Box Size"
+msgstr ""
+
+#: widgets/item-lists-widget.php:916
+msgid "Icon Border Width"
+msgstr ""
+
+#: widgets/item-lists-widget.php:936
+msgid "Icon Border Color"
+msgstr ""
+
+#: widgets/item-lists-widget.php:950
+msgid "Line Width"
+msgstr ""
+
+#: widgets/item-lists-widget.php:970
+msgid "Line Color"
+msgstr ""
+
+#: widgets/item-lists-widget.php:984
+msgid "Icon Box Radius"
+msgstr ""
+
+#: widgets/item-lists-widget.php:1019
+msgid "Image Width"
+msgstr ""
+
+#: widgets/item-lists-widget.php:1087
+msgid "Title Spacing"
+msgstr ""
