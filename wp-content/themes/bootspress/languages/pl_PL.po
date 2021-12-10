@@ -1,0 +1,351 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: BootsPress\n"
+"POT-Creation-Date: 2021-11-12 18:13+0100\n"
+"PO-Revision-Date: 2021-11-12 18:13+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: pl_PL\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.0\n"
+"X-Poedit-Basepath: ..\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 "
+"|| n%100>14) ? 1 : 2);\n"
+"X-Poedit-Flags-xgettext: --add-comments=translators:\n"
+"X-Poedit-WPHeader: style.css\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
+"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.min.js\n"
+
+#: 404.php:17
+msgid "Page not found"
+msgstr "Nie znaleziono strony"
+
+#: 404.php:21
+msgid "It looks like nothing was found at this location. Maybe try a search?"
+msgstr ""
+"Wygląda na to, że nic nie zostało znalezione w tej lokalizacji. Być może "
+"spróbuj innego wyszukiwania?"
+
+#. translators: 1: title.
+#: comments.php:35
+#, php-format
+msgid "One reply on &ldquo;%1$s&rdquo;"
+msgstr "Jedna odpowiedź na \"%1$s\""
+
+#. translators: 1: comment count number, 2: title.
+#: comments.php:41
+#, php-format
+msgctxt "comments title"
+msgid "%1$s reply on &ldquo;%2$s&rdquo;"
+msgid_plural "%1$s replies on &ldquo;%2$s&rdquo;"
+msgstr[0] "%1$s odpowiedź na &ldquo;%2$s&rdquo;"
+msgstr[1] "%1$s odpowiedzi na &ldquo;%2$s&rdquo;"
+msgstr[2] "%1$s odpowiedzi na &ldquo;%2$s&rdquo;"
+
+#: comments.php:68
+msgid "Comments are closed."
+msgstr "Komentarze są wyłączone."
+
+#: functions.php:57 inc/starter-content.php:66
+msgid "Primary menu"
+msgstr "Główne menu"
+
+#: functions.php:58 inc/starter-content.php:76
+msgid "Footer menu"
+msgstr "Menu stopki"
+
+#: functions.php:147 sidebar.php:15
+msgid "Sidebar"
+msgstr "Pasek boczny"
+
+#: functions.php:149 functions.php:162 functions.php:175 functions.php:188
+msgid "Add widgets here."
+msgstr "Dodaj widgety tutaj."
+
+#: functions.php:160
+msgid "Header After"
+msgstr "Pod nagłówkiem"
+
+#: functions.php:173 template-parts/footer-widgets.php:12
+msgid "Footer"
+msgstr "Stopka"
+
+#: functions.php:186 template-parts/footer-widgets.php:22
+msgid "Colophon"
+msgstr "Kolofon"
+
+#: header.php:25
+msgid "Skip to content"
+msgstr "Przejdź do treści"
+
+#: header.php:50
+msgid "Toggle navigation"
+msgstr "Przełącz nawigację"
+
+#. translators: %s: WordPress Version.
+#: inc/back-compat.php:40 inc/back-compat.php:59 inc/back-compat.php:84
+#, php-format
+msgid ""
+"This theme requires WordPress 4.7 or newer. You are running version %s. "
+"Please upgrade."
+msgstr ""
+
+#: inc/class-wp-bootstrap-navwalker.php:366
+msgid "Add a menu"
+msgstr "Dodaj menu"
+
+#: inc/custom-header.php:47
+msgctxt "header image description"
+msgid "Black"
+msgstr "Czarny"
+
+#: inc/custom-header.php:52
+msgctxt "header image description"
+msgid "Gray"
+msgstr "Szary"
+
+#: inc/custom-header.php:57
+msgctxt "header image description"
+msgid "Pink"
+msgstr "Różowy"
+
+#: inc/customizer.php:41
+msgid "Google Font"
+msgstr "Google Font"
+
+#: inc/customizer.php:58
+msgid "Google Font family"
+msgstr "Google Font family"
+
+#: inc/customizer.php:75
+msgid "Google Font subset"
+msgstr "Google Font subset"
+
+#: inc/starter-content.php:29
+msgctxt "Theme starter content"
+msgid "About"
+msgstr ""
+
+#: inc/starter-content.php:34
+msgctxt "Theme starter content"
+msgid "Elsewhere"
+msgstr ""
+
+#: inc/starter-content.php:44
+msgctxt "Theme starter content"
+msgid "Title of a longer featured blog post"
+msgstr ""
+
+#: inc/starter-content.php:45
+msgctxt "Theme starter content"
+msgid ""
+"Multiple lines of text that form the lede, informing new readers quickly and "
+"efficiently about what’s most interesting in this post’s contents."
+msgstr ""
+
+#: inc/starter-content.php:46
+msgctxt "Theme starter content"
+msgid "Continue reading..."
+msgstr ""
+
+#: inc/starter-content.php:79
+msgctxt "Theme starter content"
+msgid "Back to top"
+msgstr ""
+
+#. translators: %s: post date.
+#: inc/template-tags.php:30
+#, php-format
+msgctxt "post date"
+msgid "Posted on %s"
+msgstr "Opublikowano %s"
+
+#. translators: %s: post author.
+#: inc/template-tags.php:46
+#, php-format
+msgctxt "post author"
+msgid "by %s"
+msgstr "przez %s"
+
+#. translators: used between list items, there is a space after the comma
+#: inc/template-tags.php:63
+msgid ", "
+msgstr ", "
+
+#. translators: 1: list of categories.
+#: inc/template-tags.php:66
+#, php-format
+msgid "Posted in %1$s"
+msgstr "Opublikowano w %1$s"
+
+#. translators: used between list items, there is a space after the comma
+#: inc/template-tags.php:70
+msgctxt "list item separator"
+msgid ", "
+msgstr ", "
+
+#. translators: 1: list of tags.
+#: inc/template-tags.php:73
+#, php-format
+msgid "Tagged %1$s"
+msgstr "Tagi: %1$s"
+
+#. translators: %s: post title
+#: inc/template-tags.php:83
+#, php-format
+msgid "Leave a Comment<span class=\"screen-reader-text\"> on %s</span>"
+msgstr "Zostaw komentarz <span class=\"screen-reader-text\"> w %s</span>"
+
+#. translators: %s: Name of current post. Only visible to screen readers
+#: inc/template-tags.php:100 template-parts/content-page.php:39
+#, php-format
+msgid "Edit <span class=\"screen-reader-text\">%s</span>"
+msgstr "Edytuj <span class=\"screen-reader-text\">%s</span>"
+
+#: inc/template-tags.php:193
+msgid "Older posts"
+msgstr "Starsze wpisy"
+
+#: inc/template-tags.php:194
+msgid "Newer posts"
+msgstr "Nowsze wpisy"
+
+#: inc/woocommerce.php:184
+msgid "View your shopping cart"
+msgstr "Zobacz swój koszyk"
+
+#. translators: number of items in the mini cart.
+#: inc/woocommerce.php:188
+#, php-format
+msgid "%d item"
+msgid_plural "%d items"
+msgstr[0] "%d produkt"
+msgstr[1] "%d produkty"
+msgstr[2] "%d produkty"
+
+#. translators: %s: search query.
+#: search.php:21
+#, php-format
+msgid "Search Results for: %s"
+msgstr "Wyniki wyszukiwania dla: %s"
+
+#: searchform.php:20
+msgid "Search&hellip;"
+msgstr "Szukaj&hellip;"
+
+#: searchform.php:21
+msgctxt "placeholder"
+msgid "Search&hellip;"
+msgstr "Szukaj&hellip;"
+
+#: searchform.php:22
+msgctxt "submit button"
+msgid "Search"
+msgstr "Szukaj"
+
+#: single.php:23
+msgid "Previous:"
+msgstr "Poprzedni:"
+
+#: single.php:24
+msgid "Next:"
+msgstr "Następny:"
+
+#: template-parts/content-none.php:14
+msgid "Nothing Found"
+msgstr "Nic nie znaleziono"
+
+#. translators: 1: link to WP admin new post page.
+#: template-parts/content-none.php:24
+#, php-format
+msgid ""
+"Ready to publish your first post? <a href=\"%1$s\">Get started here</a>."
+msgstr ""
+"Gotowy do opublikowania pierwszego posta? <a href=\"%1$s\">Zacznij tutaj</a>."
+
+#: template-parts/content-none.php:37
+msgid ""
+"Sorry, but nothing matched your search terms. Please try again with some "
+"different keywords."
+msgstr ""
+"Przepraszamy, ale nic nie pasowało do wyszukiwanych haseł. Spróbuj ponownie, "
+"używając różnych słów kluczowych."
+
+#: template-parts/content-none.php:44
+msgid ""
+"It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps "
+"searching can help."
+msgstr ""
+"Wygląda na to, że nie możemy znaleźć tego, czego szukasz. Być może "
+"wyszukiwanie może pomóc."
+
+#: template-parts/content-page.php:25 template-parts/content.php:53
+msgid "Pages:"
+msgstr "Strony:"
+
+#. translators: %s: Name of current post. Only visible to screen readers
+#: template-parts/content.php:40
+#, php-format
+msgid "Continue reading<span class=\"screen-reader-text\"> \"%s\"</span>"
+msgstr "Czytaj dalej<span class=\"screen-reader-text\"> \"%s\"</span>"
+
+#. translators: 1: Theme name, 2: Theme author.
+#: template-parts/footer-widgets.php:32
+#, php-format
+msgid "Theme %1$s by %2$s."
+msgstr "Temat %1$s przez %2$s."
+
+#. Theme Name of the plugin/theme
+msgid "BootsPress"
+msgstr "BootsPress"
+
+#. Theme URI of the plugin/theme
+#, fuzzy
+#| msgid "https://bootspress.com/"
+msgid "https://bootspress.com"
+msgstr "https://bootspress.com/"
+
+#. Description of the plugin/theme
+msgid ""
+"Hi. I'm a starter theme called BootsPress. I'm a theme which combines the "
+"world’s most popular front-end open source toolkit called Bootstrap with "
+"open source software which you can use to create a beautiful website called "
+"WordPress. You can use me as a Parent Theme or hack me and try turning me "
+"into the next, most awesome, WordPress theme out there. That's what I'm here "
+"for."
+msgstr ""
+"Cześć, jestem motywem startowym o nazwie BootsPress. Jestem motywem, który "
+"łączy najpopularniejszy na świecie front-endowy zestaw narzędzi open source "
+"o nazwie Bootstrap z oprogramowaniem open source, którego możesz użyć do "
+"stworzenia pięknej strony internetowej o nazwie WordPress. Możesz użyć mnie "
+"jako motywu rodzicielskiego lub zhakować mnie i spróbować przekształcić mnie "
+"w następny, najbardziej niesamowity motyw WordPress. To właśnie do tego "
+"tutaj jestem."
+
+#. Author of the plugin/theme
+#, fuzzy
+#| msgid "krusze.com"
+msgid "krusze"
+msgstr "krusze.com"
+
+#. Author URI of the plugin/theme
+msgid "https://krusze.com"
+msgstr "https://krusze.com"
+
+#. Template Name of the plugin/theme
+msgid "Full Width Without Container"
+msgstr "Pełna szerokość bez kontenera"
+
+#. Template Name of the plugin/theme
+msgid "Full Width"
+msgstr "Pełna szerokość"
+
+#. Template Name of the plugin/theme
+msgid "Left Sidebar"
+msgstr "Lewy pasek boczny"
