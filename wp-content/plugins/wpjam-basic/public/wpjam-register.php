@@ -42,13 +42,7 @@ function wpjam_register_option($name, $args=[]){
 		$args	= ['sections'=>$args];
 	}
 
-	return WPJAM_Option_Setting::register($name, wp_parse_args($args, [
-		'option_group'	=> $name, 
-		'option_page'	=> $name, 
-		'option_type'	=> 'array',
-		'capability'	=> 'manage_options',
-		'ajax'			=> true
-	]));
+	return WPJAM_Option_Setting::register($name, $args);
 }
 
 function wpjam_unregister_option($name){
@@ -73,8 +67,9 @@ function wpjam_add_menu_page($menu_slug, $args=[]){
 
 // 注册 Meta 类型
 function wpjam_register_meta_type($name, $args=[]){
-	$object		= WPJAM_Meta_Type::get($name);
-	$object		= $object ?: WPJAM_Meta_Type::register($name, $args);
+	$object	= WPJAM_Meta_Type::get($name);
+	$object	= $object ?: WPJAM_Meta_Type::register($name, $args);
+
 	$table_name	= sanitize_key($name).'meta';
 
 	$GLOBALS['wpdb']->$table_name = $object->get_table();
@@ -89,45 +84,6 @@ function wpjam_get_meta_type_object($name){
 
 // 注册文章类型
 function wpjam_register_post_type($name, $args=[]){
-	$args	= wp_parse_args($args, [
-		'public'			=> true,
-		'show_ui'			=> true,
-		'hierarchical'		=> false,
-		'rewrite'			=> true,
-		'permastruct'		=> false,
-		'thumbnail_size'	=> '',
-		'supports'			=> ['title']
-	]);
-
-	if(empty($args['taxonomies'])){
-		unset($args['taxonomies']);
-	}
-
-	if($args['hierarchical']){
-		$args['supports'][]	= 'page-attributes';
-
-		if($args['permastruct'] && (strpos($args['permastruct'], '%post_id%') || strpos($args['permastruct'], '%'.$name.'_id%'))){
-			$args['permastruct']	= false;
-		}
-	}else{
-		if($args['permastruct'] && (strpos($args['permastruct'], '%post_id%') || strpos($args['permastruct'], '%'.$name.'_id%'))){
-			$args['permastruct']	= str_replace('%post_id%', '%'.$name.'_id%', $args['permastruct']);
-			$args['query_var']		= $args['query_var'] ?? false;
-		}
-	}
-
-	if($args['permastruct'] && empty($args['rewrite'])){
-		$args['rewrite']	= true;
-	}
-
-	if($args['rewrite']){
-		if(is_array($args['rewrite'])){
-			$args['rewrite']	= wp_parse_args($args['rewrite'], ['with_front'=>false, 'feeds'=>false]);
-		}else{
-			$args['rewrite']	= ['with_front'=>false, 'feeds'=>false];
-		}
-	}
-
 	return WPJAM_Post_Type::register($name, $args);
 }
 
@@ -138,13 +94,6 @@ function wpjam_register_post_option($meta_box, $args=[]){
 		trigger_error('Post Option 「'.$meta_box.'」已经注册。');
 	}
 
-	if(!isset($args['post_type']) && !empty($args['post_types'])){
-		$args['post_type']	= (array)$args['post_types'];
-	}
-
-	$args	= wp_parse_args($args, ['fields'=>[],	'list_table'=>0]);
-	$args	= apply_filters('wpjam_register_post_option_args', $args, $meta_box);
-
 	return WPJAM_Post_Option::register($meta_box, $args);
 }
 
@@ -154,52 +103,15 @@ function wpjam_unregister_post_option($meta_box){
 
 function wpjam_register_posts_column($name, ...$args){
 	if(is_admin()){
-		if(is_array($args[0])){
-			$field	= $args[0];
-		}else{
-			$column_callback	= $args[1] ?? null;
+		$field	= is_array($args[0]) ? $args[0] : ['title'=>$args[0], 'column_callback'=>($args[1] ?? null)];
 
-			$field	= ['title'=>$args[0], 'column_callback'=>$column_callback];
-		}
-
-		$field['screen_base']	= 'edit';
-
-		return wpjam_register_list_table_column($name, $field);
+		return wpjam_register_list_table_column($name, array_merge($field, ['screen_base'=>'edit']));
 	}
 }
 
 
 // 注册分类模式
 function wpjam_register_taxonomy($name, $args=[]){
-	if(empty($args['object_type'])){
-		return;
-	}
-
-	if(isset($args['args'])){
-		$args	= array_merge($args['args'], ['object_type'=>$args['object_type']]);
-	}
-
-	$args = wp_parse_args($args, [
-		'permastruct'		=> null,
-		'rewrite'			=> true,
-		'show_ui'			=> true,
-		'show_in_nav_menus'	=> false,
-		'show_admin_column'	=> true,
-		'hierarchical'		=> true,
-	]);
-
-	if($args['permastruct'] && empty($args['rewrite'])){
-		$args['rewrite']	= true;
-	}
-
-	if($args['rewrite']){
-		if(is_array($args['rewrite'])){
-			$args['rewrite']	= wp_parse_args($args['rewrite'], ['with_front'=>false, 'feed'=>false, 'hierarchical'=>false]);
-		}else{
-			$args['rewrite']	= ['with_front'=>false, 'feed'=>false, 'hierarchical'=>false];
-		}
-	}
-
 	return WPJAM_Taxonomy::register($name, $args);
 }
 
@@ -209,17 +121,11 @@ function wpjam_register_term_option($key, $args=[]){
 		trigger_error('Term Option 「'.$key.'」已经注册。');
 	}
 
-	if(!is_callable($args)){
-		if(!isset($args['taxonomy'])){
-			if($taxonomies = wpjam_array_pull($args, 'taxonomies')){
-				$args['taxonomy']	= (array)$taxonomies;
-			}
+	if(!is_callable($args) && !isset($args['taxonomy'])){
+		if($taxonomies = wpjam_array_pull($args, 'taxonomies')){
+			$args['taxonomy']	= (array)$taxonomies;
 		}
-
-		$args	= wp_parse_args($args, ['list_table'=>0]);
 	}
-
-	$args	= apply_filters('wpjam_register_term_option_args', $args, $key);
 
 	return WPJAM_Term_Option::register($key, $args);
 }
@@ -230,27 +136,17 @@ function wpjam_unregister_term_option($key){
 
 function wpjam_register_terms_column($name, ...$args){
 	if(is_admin()){
-		if(is_array($args[0])){
-			$field	= $args[0];
-		}else{
-			$column_callback	= $args[1] ?? null;
+		$field	= is_array($args[0]) ? $args[0] : ['title'=>$args[0], 'column_callback'=>($args[1] ?? null)];
 
-			$field	= ['title'=>$args[0], 'column_callback'=>$column_callback];
-		}
-
-		$field['screen_base']	= 'edit-tags';
-
-		return wpjam_register_list_table_column($name, $field);
+		return wpjam_register_list_table_column($name, array_merge($field, ['screen_base', 'edit-tags']));
 	}
 }
 
 // 注册 LazyLoader
 function wpjam_register_lazyloader($name, $args){
-	if($object = WPJAM_Lazyloader::get($name)){
-		return $object;
-	}
+	$object	= WPJAM_Lazyloader::get($name);
 
-	return WPJAM_Lazyloader::register($name, $args);
+	return $object ?: WPJAM_Lazyloader::register($name, $args);
 }
 
 function wpjam_get_lazyloader($name){
@@ -299,8 +195,8 @@ function wpjam_ajax_enqueue_scripts(){
 }
 
 // 注册 map_meta_cap
-function wpjam_register_map_meta_cap($capability, $callback){
-	WPJAM_Map_Meta_Cap::register($capability, ['callback'=>$callback]);
+function wpjam_register_capability($capability, $map_meta_cap){
+	return WPJAM_Capability::register($capability, ['map_meta_cap'=>$map_meta_cap]);
 }
 
 

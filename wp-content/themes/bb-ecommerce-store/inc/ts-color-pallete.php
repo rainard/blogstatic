@@ -401,5 +401,13 @@
 		$bb_ecommerce_store_custom_css .='padding: '.esc_attr($bb_ecommerce_store_sticky_header_padding_settings).'px;';
 	$bb_ecommerce_store_custom_css .='}';
 
+	// woocommerce Product Navigation
+	$bb_ecommerce_store_products_navigation = get_theme_mod('bb_ecommerce_store_products_navigation', 'Yes');
+	if($bb_ecommerce_store_products_navigation == 'No'){
+		$bb_ecommerce_store_custom_css .='.woocommerce nav.woocommerce-pagination{';
+			$bb_ecommerce_store_custom_css .='display: none;';
+		$bb_ecommerce_store_custom_css .='}';
+	}
+
 
 

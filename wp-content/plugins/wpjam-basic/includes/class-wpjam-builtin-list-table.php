@@ -149,7 +149,8 @@ class WPJAM_Posts_List_Table extends WPJAM_Builtin_List_Table{
 			'title'			=> $pt_obj->label,
 			'singular'		=> 'post',
 			'capability'	=> 'edit_post',
-			'data_type'		=> 'post_meta',
+			'data_type'		=> 'post_type',
+			'post_type'		=> $post_type,
 			'form_id'		=> 'posts-filter'
 		]));
 	}
@@ -300,7 +301,7 @@ class WPJAM_Terms_List_Table extends WPJAM_Builtin_List_Table{
 		$tax_obj	= get_taxonomy($taxonomy);
 
 		$this->taxonomy		= $taxonomy;
-		$this->post_type	= $screen->post_type;
+		$this->post_type	= $post_type = $screen->post_type;
 		$this->model		= 'WPJAM_Term';
 
 		if($tax_obj->hierarchical){
@@ -339,7 +340,9 @@ class WPJAM_Terms_List_Table extends WPJAM_Builtin_List_Table{
 			'title'			=> $tax_obj->label,
 			'capability'	=> $tax_obj->cap->edit_terms,
 			'singular'		=> 'tag',
-			'data_type'		=> 'term_meta',
+			'data_type'		=> 'taxonomy',
+			'taxonomy'		=> $taxonomy,
+			'post_type'		=> $post_type,
 			'form_id'		=> 'posts-filter'
 		]));
 	}
@@ -385,7 +388,7 @@ class WPJAM_Terms_List_Table extends WPJAM_Builtin_List_Table{
 
 	public function get_sorteable_items(){
 		$parent	= $this->get_parent();
-		$level	= $parent ? ($this->get_level($parent)+1) : 0;
+		$level	= $parent ? (wpjam_get_term_level($parent)+1) : 0;
 
 		return 'tr.level-'.$level;
 	}
@@ -408,12 +411,6 @@ class WPJAM_Terms_List_Table extends WPJAM_Builtin_List_Table{
 		}else{
 			return (int)$parent;
 		}
-	}
-
-	public function get_level($term_id){
-		$term	= get_term($term_id);
-
-		return ($term && $term->parent) ? count(get_ancestors($term->term_id, $term->taxonomy, 'taxonomy')) : 0;
 	}
 
 	public function get_edit_tags_link($args=[]){
@@ -448,7 +445,7 @@ class WPJAM_Terms_List_Table extends WPJAM_Builtin_List_Table{
 
 	public function single_row($raw_item){
 		$term	= is_numeric($raw_item) ? get_term($raw_item) : $raw_item;
-		$level	= $this->get_level($term);
+		$level	= wpjam_get_term_level($term);
 
 		$this->wp_list_table()->single_row($term, $level);
 	}
@@ -564,7 +561,7 @@ class WPJAM_Users_List_Table extends WPJAM_Builtin_List_Table{
 			'title'			=> '用户',
 			'singular'		=> 'user',
 			'capability'	=> 'edit_user',
-			'data_type'		=> 'user_meta',
+			'data_type'		=> 'user',
 		]));
 	}
 

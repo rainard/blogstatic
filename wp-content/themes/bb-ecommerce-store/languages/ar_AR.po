@@ -31,7 +31,7 @@ msgstr ""
 
 #: functions.php:74
 msgid "Click here..."
-msgstr "Click here..."
+msgstr "انقر هنا..."
 
 #: functions.php:81
 msgid "Blog Sidebar"
@@ -281,13 +281,13 @@ msgstr "إعدادات زر بيع المنتج"
 msgid "Product Sale Button Alignment"
 msgstr "محاذاة زر بيع المنتج"
 
-#: customizer.php:622 customizer.php:1026 customizer.php:1532
-#: customizer.php:1587
+#: customizer.php:622 customizer.php:1041 customizer.php:1557
+#: customizer.php:1612
 msgid "Right"
 msgstr "حق"
 
-#: customizer.php:623 customizer.php:1025 customizer.php:1531
-#: customizer.php:1586
+#: customizer.php:623 customizer.php:1040 customizer.php:1556
+#: customizer.php:1611
 msgid "Left"
 msgstr "اليسار"
 
@@ -345,7 +345,7 @@ msgstr "الشريط الجانبي الأيمن"
 
 #: customizer.php:733 customizer.php:751 customizer.php:766
 msgid "One Column"
-msgstr "عمود واحد"
+msgstr "إظهار / إخفاء حدود المنتج"
 
 #: customizer.php:734
 msgid "Three Columns"
@@ -393,7 +393,7 @@ msgstr "خيار الزر"
 
 #: customizer.php:797
 msgid "Top and Bottom Padding"
-msgstr "الحشو العلوي والسفلي"
+msgstr "الحشوة العلوية والسفلية"
 
 #: customizer.php:812
 msgid "Left and Right Padding"
@@ -407,7 +407,7 @@ msgstr "نصف قطر حد الزر"
 msgid "Topbar Section"
 msgstr "قسم Topbar"
 
-#: customizer.php:840 customizer.php:892
+#: customizer.php:840 customizer.php:907
 msgid "Add Header Content here"
 msgstr "أضف رأس المحتوى هنا"
 
@@ -415,307 +415,315 @@ msgstr "أضف رأس المحتوى هنا"
 msgid "Show / Hide Topbar"
 msgstr "إظهار / إخفاء الشريط العلوي"
 
-#: customizer.php:863 customizer.php:1195
+#: customizer.php:863 customizer.php:1210
 msgid "Sticky Header"
 msgstr "رأس مثبت"
 
 #: customizer.php:872
+msgid "Sticky Header Padding"
+msgstr "حشوة الرأس اللاصقة"
+
+#: customizer.php:887
 msgid "Add Phone Number"
 msgstr "أضف رقم الهاتف"
 
-#: customizer.php:883
+#: customizer.php:898
 msgid "Add Email"
 msgstr "أضف بريدًا إلكترونيًا"
 
-#: customizer.php:891
+#: customizer.php:906
 msgid "Social Icon Section"
 msgstr "قسم الأيقونة الاجتماعية"
 
-#: customizer.php:902
+#: customizer.php:917
 msgid "Add Youtube link"
 msgstr "أضف رابط يوتيوب"
 
-#: customizer.php:913
+#: customizer.php:928
 msgid "Add Facebook link"
 msgstr "أضف رابط الفيسبوك"
 
-#: customizer.php:924
+#: customizer.php:939
 msgid "Add Twitter link"
 msgstr "أضف رابط تويتر"
 
-#: customizer.php:935
+#: customizer.php:950
 msgid "Add Instagram link"
 msgstr "أضف رابط Instagram"
 
-#: customizer.php:946
+#: customizer.php:961
 msgid "Add RSS link"
 msgstr "أضف رابط RSS"
 
-#: customizer.php:954
+#: customizer.php:969
 msgid "Slider Settings"
 msgstr "إعدادات المنزلق"
 
-#: customizer.php:964
+#: customizer.php:979
 msgid "Show / Hide slider"
 msgstr "إظهار / إخفاء شريط التمرير"
 
-#: customizer.php:974
+#: customizer.php:989
 msgid "Show / Hide Slider Title"
 msgstr "إظهار / إخفاء عنوان شريط التمرير"
 
-#: customizer.php:986
+#: customizer.php:1001
 msgid "Select Slide Image Page"
 msgstr "حدد صفحة صورة الشريحة"
 
-#: customizer.php:998
+#: customizer.php:1013
 msgid "Home Page Slider Overlay"
 msgstr "الصفحة الرئيسية تراكب المنزلق"
 
-#: customizer.php:999
+#: customizer.php:1014
 msgid "This option will add colors over the slider."
 msgstr "سيضيف هذا الخيار ألوانًا فوق شريط التمرير."
 
-#: customizer.php:1008
+#: customizer.php:1023
 msgid "Home Page Slider Overlay Color"
 msgstr "الصفحة الرئيسية لون تراكب شريط التمرير"
 
-#: customizer.php:1010
+#: customizer.php:1025
 msgid ""
 "It will add the color overlay of the slider. To make it transparent, use the "
 "below option."
 msgstr "سيضيف تراكب اللون لشريط التمرير لجعلها شفافة ، استخدم الخيار أدناه."
 
-#: customizer.php:1021
+#: customizer.php:1036
 msgid "Slider Content Alignment"
 msgstr "محاذاة محتوى شريط التمرير"
 
-#: customizer.php:1024 customizer.php:1533 customizer.php:1588
+#: customizer.php:1039 customizer.php:1558 customizer.php:1613
 msgid "Center"
 msgstr "مركز"
 
-#: customizer.php:1036
+#: customizer.php:1051
 msgid "Slider Image Opacity"
 msgstr "تعتيم صورة المنزلق"
 
-#: customizer.php:1059
+#: customizer.php:1074
 msgid "Slider Speed Option"
 msgstr "خيار سرعة المنزلق"
 
-#: customizer.php:1070
+#: customizer.php:1085
 msgid "550"
 msgstr "خمسة مائة و خمسون"
 
-#: customizer.php:1074
+#: customizer.php:1089
 msgid "Slider Image Height"
 msgstr "ارتفاع صورة المنزلق"
 
-#: customizer.php:1080 customizer.php:1338
+#: customizer.php:1095 customizer.php:1363
 msgid "READ MORE"
 msgstr "اقرأ أكثر"
 
-#: customizer.php:1084
+#: customizer.php:1099
 msgid "Slider Button"
 msgstr "زر المنزلق"
 
-#: customizer.php:1091
+#: customizer.php:1106
 msgid "Services"
 msgstr "خدمات"
 
-#: customizer.php:1092
+#: customizer.php:1107
 msgid "This section will appear below the slider."
 msgstr "سيظهر هذا القسم أسفل شريط التمرير."
 
-#: customizer.php:1115
+#: customizer.php:1130
 msgid "Select Category to display post"
 msgstr "حدد الفئة لعرض آخر"
 
-#: customizer.php:1121
+#: customizer.php:1136
 msgid "Products"
 msgstr "منتجات"
 
-#: customizer.php:1122
+#: customizer.php:1137
 msgid "This section will appear below the services."
 msgstr "سيظهر هذا القسم أسفل الخدمات."
 
-#: customizer.php:1131
+#: customizer.php:1146
 msgid "Section Title"
 msgstr "عنوان القسم"
 
-#: customizer.php:1142
+#: customizer.php:1157
 msgid "Select Page"
 msgstr "حدد الصفحة"
 
-#: customizer.php:1149
+#: customizer.php:1164
 msgid "404 Page"
 msgstr "404 صفحة"
 
-#: customizer.php:1154
+#: customizer.php:1169
 msgid "404 Not Found"
 msgstr "404 غير موجود"
 
-#: customizer.php:1158
+#: customizer.php:1173
 msgid "404 Page Title"
 msgstr "404 عنوان الصفحة"
 
-#: customizer.php:1164
+#: customizer.php:1179
 msgid ""
 "Looks like you have taken a wrong turn&hellip. Dont worry&hellip it happens "
 "to the best of us."
 msgstr "يبدو أنك اتخذت منعطفًا خاطئًا. لا تقلق ، فهذا يحدث لأفضل منا."
 
-#: customizer.php:1168
+#: customizer.php:1183
 msgid "404 Page Content"
 msgstr "404 محتوى الصفحة"
 
-#: customizer.php:1174
+#: customizer.php:1189
 msgid "Back to Home Page"
 msgstr "العودة إلى الصفحة الرئيسية"
 
-#: customizer.php:1178
+#: customizer.php:1193
 msgid "404 Page Button"
 msgstr "404 صفحة زر"
 
-#: customizer.php:1185
+#: customizer.php:1200
 msgid "Responsive Settings"
 msgstr "إعدادات الاستجابة"
 
-#: customizer.php:1205
+#: customizer.php:1220
 msgid "Slider"
 msgstr "المنزلق"
 
-#: customizer.php:1215
+#: customizer.php:1230
 msgid "Scroll To Top"
 msgstr "انتقل إلى أعلى"
 
-#: customizer.php:1225
+#: customizer.php:1240
 msgid "Sidebar"
 msgstr "الشريط الجانبي"
 
-#: customizer.php:1235
+#: customizer.php:1250
 msgid "Preloader"
 msgstr "محمل"
 
-#: customizer.php:1241
+#: customizer.php:1256
 msgid "Blog Page Settings"
 msgstr "إعدادات صفحة المدونة"
 
-#: customizer.php:1251
+#: customizer.php:1266
 msgid "Post Date"
 msgstr "تاريخ آخر"
 
-#: customizer.php:1261
+#: customizer.php:1276
 msgid "Comments"
 msgstr "تعليقات"
 
-#: customizer.php:1271
+#: customizer.php:1286
 msgid "Author"
 msgstr "مؤلف"
 
-#: customizer.php:1281
+#: customizer.php:1296
+msgid "Time"
+msgstr "زمن"
+
+#: customizer.php:1306
 msgid "Single Post Tags"
 msgstr "علامات مشاركة واحدة"
 
-#: customizer.php:1291
+#: customizer.php:1316
 msgid "Single Post Image"
 msgstr "صورة مشاركة واحدة"
 
-#: customizer.php:1301
+#: customizer.php:1326
 msgid "Post Description Length"
 msgstr "طول وصف المنشور"
 
-#: customizer.php:1304
+#: customizer.php:1329
 msgid "No Content"
 msgstr "لا يوجد محتوى"
 
-#: customizer.php:1305
+#: customizer.php:1330
 msgid "Excerpt Content"
 msgstr "محتوى مقتطف"
 
-#: customizer.php:1306
+#: customizer.php:1331
 msgid "Full Content"
 msgstr "المحتوى الكامل"
 
-#: customizer.php:1315
+#: customizer.php:1340
 msgid "Excerpt length"
 msgstr "طول المقتطف"
 
-#: customizer.php:1327
+#: customizer.php:1352
 msgid "..."
 msgstr "..."
 
-#: customizer.php:1331
+#: customizer.php:1356
 msgid "Post Excerpt Indicator Option"
 msgstr "خيار مؤشر ما بعد مقتطفات"
 
-#: customizer.php:1342
+#: customizer.php:1367
 msgid "Add Button Text"
 msgstr "أضف نص الزر"
 
-#: customizer.php:1352
+#: customizer.php:1377
 msgid "Meta Box Separator"
 msgstr "فاصل الميتا بوكس"
 
-#: customizer.php:1354
+#: customizer.php:1379
 msgid "Add Meta Separator. e.g.: \"|\", \"/\", etc."
 msgstr "أضف فاصل التعريف. على سبيل المثال: \"|\" ، \"/\" ، إلخ."
 
-#: customizer.php:1367
+#: customizer.php:1392
 msgid "Display Blog Page Post :"
 msgstr "عرض مشاركة صفحة المدونة:"
 
-#: customizer.php:1370
+#: customizer.php:1395
 msgid "In Box"
 msgstr "صندوق الوارد"
 
-#: customizer.php:1371
+#: customizer.php:1396
 msgid "Without Box"
 msgstr "بدون صندوق"
 
-#: customizer.php:1381
+#: customizer.php:1406
 msgid "Pagination in Blog Page"
 msgstr "ترقيم الصفحات في صفحة المدونة"
 
-#: customizer.php:1391
+#: customizer.php:1416
 msgid "Related Post"
 msgstr "منشور له صلة"
 
-#: customizer.php:1401
+#: customizer.php:1426
 msgid "Related Post Taxonomies"
 msgstr "التصنيفات اللاحقة ذات الصلة"
 
-#: customizer.php:1404
+#: customizer.php:1429
 msgid "Categories"
 msgstr "فئات"
 
-#: customizer.php:1405
+#: customizer.php:1430
 msgid "Tags"
 msgstr "العلامات"
 
-#: customizer.php:1410
+#: customizer.php:1435
 msgid "Related Posts"
 msgstr "المنشورات ذات الصلة"
 
-#: customizer.php:1414
+#: customizer.php:1439
 msgid "Related Post Title"
 msgstr "عنوان المنشور ذات الصلة"
 
-#: customizer.php:1424
+#: customizer.php:1449
 msgid "Related Post Number"
 msgstr "رقم الوظيفة ذات الصلة"
 
-#: customizer.php:1436
+#: customizer.php:1461
 msgid "No Result Found"
 msgstr "لم يتم العثور على نتائج"
 
-#: customizer.php:1441
+#: customizer.php:1466
 msgid "Nothing Found"
 msgstr "لم يتم العثور على شيء"
 
-#: customizer.php:1445
+#: customizer.php:1470
 msgid "No Result Found Title"
 msgstr "لم يتم العثور على عنوان نتيجة"
 
-#: customizer.php:1451
+#: customizer.php:1476
 msgid ""
 "Sorry, but nothing matched your search terms. Please try again with some "
 "different keywords."
@@ -723,23 +731,23 @@ msgstr ""
 "آسف ، ولكن لا شيء يطابق شروط البحث الخاصة بك. أرجو المحاولة مرة أخرى "
 "بإستخدام كلمات أخرى."
 
-#: customizer.php:1455
+#: customizer.php:1480
 msgid "No Result Found Content"
 msgstr "لا توجد نتيجة العثور على المحتوى"
 
-#: customizer.php:1466
+#: customizer.php:1491
 msgid "No Result search"
 msgstr "لا نتيجة للبحث"
 
-#: customizer.php:1472
+#: customizer.php:1497
 msgid "Footer Text"
 msgstr "نص التذييل"
 
-#: customizer.php:1483
+#: customizer.php:1508
 msgid "Footer widget area"
 msgstr "منطقة القطعة التذييل"
 
-#: customizer.php:1485
+#: customizer.php:1510
 msgid ""
 "Select the number of widget areas you want in the footer. After that, go to "
 "Appearance > Widgets and add your widgets."
@@ -747,62 +755,62 @@ msgstr ""
 "حدد عدد مناطق عناصر واجهة المستخدم التي تريدها في التذييل. بعد ذلك ، انتقل "
 "إلى Appearance> Widgets وأضف عناصر واجهة المستخدم الخاصة بك."
 
-#: customizer.php:1487
+#: customizer.php:1512
 msgid "One"
 msgstr "واحد"
 
-#: customizer.php:1488
+#: customizer.php:1513
 msgid "Two"
 msgstr "اثنين"
 
-#: customizer.php:1489
+#: customizer.php:1514
 msgid "Three"
 msgstr "ثلاثة"
 
-#: customizer.php:1490
+#: customizer.php:1515
 msgid "Four"
 msgstr "أربعة"
 
-#: customizer.php:1499
+#: customizer.php:1524
 msgid "Footer Widget Background Color"
 msgstr "لون خلفية القطعة التذييل"
 
-#: customizer.php:1508
+#: customizer.php:1533
 msgid "Footer Widget Background Image"
 msgstr "القطعة تذييل صورة الخلفية"
 
-#: customizer.php:1517
+#: customizer.php:1542
 msgid "Copyright Text"
 msgstr "نص حقوق النشر"
 
-#: customizer.php:1528
+#: customizer.php:1553
 msgid "Copyright Text Alignment "
 msgstr "محاذاة نص حقوق النشر"
 
-#: customizer.php:1542
+#: customizer.php:1567
 msgid "Copyright Font Size"
 msgstr "حجم خط حقوق النشر"
 
-#: customizer.php:1557
+#: customizer.php:1582
 msgid "Copyright Padding"
 msgstr "الحشو حقوق التأليف والنشر"
 
-#: customizer.php:1573
+#: customizer.php:1598
 msgid "Show / Hide Scroll Top Button"
 msgstr "إظهار / إخفاء زر التمرير العلوي"
 
-#: customizer.php:1583
+#: customizer.php:1608
 msgid "Scroll Back to Top Position"
 msgstr "انتقل إلى أعلى الموضع"
 
-#: customizer.php:1597
+#: customizer.php:1622
 msgid "Scroll Icon Font Size"
 msgstr "حجم خط رمز التمرير"
 
-#: customizer.php:1688
+#: customizer.php:1713
 msgid "BB Ecommerce Pro"
 msgstr "بي بي التجارة الإلكترونية برو"
 
-#: customizer.php:1689
+#: customizer.php:1714
 msgid "Go Pro"
 msgstr "Go Pro"

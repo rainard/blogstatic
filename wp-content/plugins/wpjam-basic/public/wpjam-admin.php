@@ -53,9 +53,6 @@ function wpjam_register_page_action($name, $args){
 		trigger_error('Page Action 「'.$name.'」已经注册。');
 	}
 
-	$args	= wp_parse_args($args, ['response'=>$name, 'direct'=>false, 'fields'=>[]]);
-	$args	= apply_filters('wpjam_register_page_action_args', $args, $name);
-
 	return WPJAM_Page_Action::register($name, $args);
 }
 
@@ -166,8 +163,6 @@ function wpjam_register_list_table_action($name, $args){
 		trigger_error('List Table Action 「'.$name.'」已经注册。');
 	}
 
-	$args	= apply_filters('wpjam_register_list_table_action_args', $args, $name);
-
 	return WPJAM_List_Table_Action::register($name, $args);
 }
 
@@ -179,8 +174,6 @@ function wpjam_register_list_table_column($name, $field){
 	if(WPJAM_List_Table_Column::get($name)){
 		trigger_error('List Table Column 「'.$name.'」已经注册。');
 	}
-
-	$field	= wp_parse_args($field, ['type'=>'view', 'show_admin_column'=>true]);
 
 	return WPJAM_List_Table_Column::register($name, $field);
 }
@@ -328,5 +321,60 @@ add_action('wp_loaded', function(){	// 内部的 hook 使用 优先级 9，因�
 			return isset($_GET['page']) ? $value : $status;
 		}, 9, 3);
 	}
+
+	add_action('wpjam_list_table_load', function($wpjam_list_table){
+		$data_type		= $wpjam_list_table->data_type;
+		$screen_base	= get_current_screen()->base;
+
+		if($data_type == 'post_type'){
+			$post_type	= $wpjam_list_table->post_type;
+
+			foreach(WPJAM_Post_Option::get_registereds() as $name => $object){
+				if($object->is_available_for_post_type($post_type) 
+					&& $object->title 
+					&& ($object->list_table 
+						|| !in_array($screen_base, ['edit', 'upload'])
+					)
+				){
+					if($object->update_callback && is_callable($object->update_callback)){
+						$callback	= $object->update_callback ;
+					}else{
+						$callback	= ['WPJAM_Post', 'update_meta'];
+					}
+					
+					wpjam_register_list_table_action('set_'.$name, wp_parse_args($object->to_array(), [
+						'page_title'	=> '设置'.$object->title,
+						'submit_text'	=> '设置',
+						'callback'		=> $callback,
+						'fields'		=> [$object, 'get_fields']
+					]));
+				}
+			}
+		}elseif($data_type	== 'taxonomy'){
+			$taxonomy	= $wpjam_list_table->taxonomy;
+
+			foreach(WPJAM_Term_Option::get_registereds() as $name => $object){
+				if($object->is_available_for_taxonomy($taxonomy) 
+					&& $object->title
+					&& ($object->list_table 
+						|| $screen_base != 'edit-tags'
+					)
+				){
+					if($object->update_callback && is_callable($object->update_callback)){
+						$callback	= $object->update_callback ;
+					}else{
+						$callback	= ['WPJAM_Term', 'update_meta'];
+					}
+
+					wpjam_register_list_table_action('set_'.$name, wp_parse_args($object->to_array(), [
+						'page_title'	=> '设置'.$object->title,
+						'submit_text'	=> '设置',
+						'callback'		=> $callback,
+						'fields'		=> [$object, 'get_fields']
+					]));
+				}
+			}
+		}
+	});
 });
 

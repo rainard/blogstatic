@@ -24,6 +24,9 @@
     <?php if( get_theme_mod( 'bb_ecommerce_store_comment_hide',true) != '') { ?>
       <span class="entry-comments"><i class="fas fa-comments"></i> <?php comments_number( __('0 Comment', 'bb-ecommerce-store'), __('0 Comments', 'bb-ecommerce-store'), __('% Comments', 'bb-ecommerce-store') ); ?> </span>
     <?php } ?>
+    <?php if( get_theme_mod( 'bb_ecommerce_store_time_hide',false) != '') { ?>
+      <span class="entry-time"><i class="fas fa-clock"></i> <?php echo esc_html( get_the_time() ); ?></span>
+    <?php }?>
   </div>
   <div class="box-image">
     <?php 

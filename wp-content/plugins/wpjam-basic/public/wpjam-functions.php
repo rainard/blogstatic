@@ -106,12 +106,11 @@ function wpjam_update_metadata($meta_type, $object_id, ...$args){
 
 // WP_Query 缓存
 function wpjam_query($args=[]){
-	$args['no_found_rows']			= $args['no_found_rows'] ?? true;
-	$args['ignore_sticky_posts']	= $args['ignore_sticky_posts'] ?? true;
-
-	$args['cache_it']	= true;
-
-	return new WP_Query($args);
+	return new WP_Query(wp_parse_args($args, [
+		'no_found_rows'			=> true,
+		'ignore_sticky_posts'	=> true,
+		'cache_it'				=> true
+	]));
 }
 
 function wpjam_parse_query($query, $args=[], $parse_for_json=true){
@@ -158,10 +157,10 @@ function wpjam_update_post_views($post=null){
 	return is_wp_error($object) ? null : $object->view();
 }
 
-function wpjam_get_post_excerpt($post=null, $excerpt_length=240){
+function wpjam_get_post_excerpt($post=null, $length=240){
 	$object	= WPJAM_Post::get_instance($post);
 
-	return is_wp_error($object) ? '' : $object->get_excerpt($excerpt_length);
+	return is_wp_error($object) ? '' : $object->get_excerpt($length);
 }
 
 function wpjam_get_post_content($post=null, $raw=false){
@@ -182,12 +181,6 @@ function wpjam_get_post_first_image_url($post=null, $size='full'){
 	return is_wp_error($object) ? '' : $object->get_first_image_url($size);
 }
 
-function wpjam_get_post_term_taxonomy_ids($post=null, $taxonomies=[]){
-	$object	= WPJAM_Post::get_instance($post);
-
-	return is_wp_error($object) ? [] : $object->get_term_taxonomy_ids($taxonomies);
-}
-
 function wpjam_related_posts($args=[]){
 	echo wpjam_get_related_posts(null, $args, false);
 }
@@ -196,7 +189,7 @@ function wpjam_get_related_posts($post=null, $args=[], $parse_for_json=false){
 	$object	= WPJAM_Post::get_instance($post);
 
 	if(is_wp_error($object)){
-		return [];
+		return '';
 	}
 
 	$number	= wpjam_array_pull($args, 'number') ?: 5;
@@ -239,32 +232,13 @@ function wpjam_get_permastruct($name){
 
 
 function wpjam_get_taxonomy_query_key($taxonomy){
-	if($taxonomy == 'category'){
-		return 'cat';
-	}elseif($taxonomy == 'post_tag'){
-		return 'tag_id';
-	}else{
-		return $taxonomy.'_id';
-	}
+	$query_keys	= ['category'=>'cat', 'post_tag'=>'tag_id'];
+
+	return $query_keys[$taxonomy] ?? $taxonomy.'_id';
 }
 
-function wpjam_get_terms(...$args){
-	if($args[0] && wp_is_numeric_array($args[0])){
-		$term_ids	= $args[0];
-		$_args		= $args[1] ?? [];
-		$terms		= WPJAM_Term::update_caches($term_ids, $_args);
-
-		return $terms ? array_values($terms) : [];
-	}else{
-		$max_depth	= $args[1] ?? -1;
-		$_args		= $args[0];
-
-		return WPJAM_Term::get_terms($_args, $max_depth);
-	}
-}
-
-function wpjam_flatten_terms($terms){
-	return WPJAM_Term::flatten($terms);
+function wpjam_get_terms($args, $max_depth=null){
+	return WPJAM_Term::get_terms($args, $max_depth);
 }
 
 function wpjam_get_term_id_field($taxonomy='category', $args=[]){
@@ -276,18 +250,13 @@ function wpjam_get_related_object_ids($term_taxonomy_ids, $number, $page=1){
 }
 
 function wpjam_get_term($term, $taxonomy=''){
-	$term	= get_term($term, $taxonomy);
-	$object	= is_wp_error($term) ? $term : WPJAM_Term::get_instance($term);
+	$result	= WPJAM_Term::validate($term, $taxonomy);
 
-	if(is_wp_error($object)){
-		return $object;
+	if(is_wp_error($result)){
+		return $result;
 	}
 
-	if($taxonomy && $taxonomy != 'any' && $taxonomy != $object->taxonomy){
-		return new WP_Error('invalid_taxonomy', '无效的分类模式');
-	}
-
-	return $object->parse_for_json();
+	return (WPJAM_Term::get_instance($term))->parse_for_json();
 }
 
 function wpjam_get_term_thumbnail_url($term=null, $size='full', $crop=1){
@@ -296,6 +265,11 @@ function wpjam_get_term_thumbnail_url($term=null, $size='full', $crop=1){
 	return is_wp_error($object) ? '' : $object->get_thumbnail_url($size, $crop);
 }
 
+function wpjam_get_term_level($term){
+	$object	= WPJAM_Term::get_instance($term);
+
+	return is_wp_error($object) ? '' : $object->get_level();
+}
 
 
 function wpjam_get_current_page_url(){
@@ -530,13 +504,19 @@ function wpjam_validate_fields_value($fields, $values=null){
 }
 
 function wpjam_validate_field_value($field, $value){
-	$object	= new WPJAM_Field($field);
-	return $object->validate($value);
+	return (new WPJAM_Field($field))->validate($value);
+}
+
+function wpjam_parse_field_value($field, $args=[]){
+	return (new WPJAM_Field($field))->parse_value($args);
 }
 
 function wpjam_get_field_value($field, $args=[]){
-	$object	= new WPJAM_Field($field);
-	return $object->parse_value($args);
+	return wpjam_parse_field_value($field, $args);
+}
+
+function wpjam_parse_field_show_in_rest($field, &$type=null, &$default=null){
+	return (new WPJAM_Field($field))->parse_show_in_rest($type, $default);
 }
 
 function wpjam_get_field_html($field){
@@ -544,17 +524,7 @@ function wpjam_get_field_html($field){
 }
 
 function wpjam_render_field($field){
-	$field_obj	= new WPJAM_Field($field);
-
-	return WPJAM_Field::render($field_obj->to_array());
-}
-
-function wpjam_get_form_post($fields, $nonce_action='', $capability='manage_options'){
-	return WPJAM_Field::form_validate($fields, $nonce_action, $capability);
-}
-
-function wpjam_form($fields, $form_url, $nonce_action='', $submit_text=''){
-	WPJAM_Field::form_callback($fields, $form_url, $nonce_action, $submit_text);
+	return (new WPJAM_Field($field))->render();
 }
 
 function wpjam_get_field_name_object($name){
@@ -661,6 +631,10 @@ function wpjam_list_sort($list, $order_key='order', $order='DESC', $preserve_key
 
 function wpjam_list_filter($list, $args=[], $operator='AND'){	// 增强 wp_list_filter ，支持 in_array 判断
 	return WPJAM_List_Util::filter($list, $args, $operator);
+}
+
+function wpjam_list_flatten($list, $depth=0, $fields=[]){
+	return WPJAM_List_Util::flatten($list, $depth, $fields);
 }
 
 function wpjam_localize_script($handle, $object_name, $l10n ){

@@ -128,7 +128,7 @@ function wpjam_parse_query_vars($wp){
 	WPJAM_Route::parse_query_vars($wp);
 }
 
-add_filter('map_meta_cap',	['WPJAM_Map_Meta_Cap', 'filter'], 10, 4);
+add_filter('map_meta_cap',	['WPJAM_Capability', 'filter'], 10, 4);
 
 add_filter('register_taxonomy_args',		['WPJAM_Taxonomy', 'filter_register_args'], 10, 2);
 add_filter('wpjam_data_type_field_value',	['WPJAM_Taxonomy', 'filter_data_type_field_value'], 1, 2);

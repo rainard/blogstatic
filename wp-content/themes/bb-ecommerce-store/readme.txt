@@ -4,7 +4,7 @@ Tags: wide-blocks, flexible-header, block-styles, left-sidebar, right-sidebar, o
 Requires at least: 5.0
 Tested up to: 5.8
 Requires PHP: 7.2
-Stable tag: 1.7.6
+Stable tag: 1.7.7
 License: License: GNU General Public License v3 or later
 License URI: http://www.gnu.org/licenses/gps-3.0.html
 
@@ -304,6 +304,11 @@ E-commerce Store is a free multipurpose E-commerce WordPress theme. E-commerce S
 
 = 1.7.6 =
   * Added sticky header padding settings.
+  * Updated POT file.
+
+= 1.7.7 =
+  * Added post time settings.
+  * Added show/hide Woocommerce Products Navigation settings.
   * Updated POT file.
 
 == Resources ==

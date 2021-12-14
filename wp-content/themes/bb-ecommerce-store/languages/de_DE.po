@@ -72,7 +72,7 @@ msgstr "Seitenleiste der Shop-Seite"
 
 #: functions.php:136 functions.php:146
 msgid "Appears on shop page"
-msgstr "Erscheint auf der Shop-Seite"
+msgstr "Seitenleiste"
 
 #: functions.php:145
 msgid "Single Product Page Sidebar"
@@ -282,13 +282,13 @@ msgstr "Einstellungen für Produktverkaufsschaltflächen"
 msgid "Product Sale Button Alignment"
 msgstr "Produktverkaufsknopfausrichtung"
 
-#: customizer.php:622 customizer.php:1026 customizer.php:1532
-#: customizer.php:1587
+#: customizer.php:622 customizer.php:1041 customizer.php:1557
+#: customizer.php:1612
 msgid "Right"
 msgstr "Richtig"
 
-#: customizer.php:623 customizer.php:1025 customizer.php:1531
-#: customizer.php:1586
+#: customizer.php:623 customizer.php:1040 customizer.php:1556
+#: customizer.php:1611
 msgid "Left"
 msgstr "Links"
 
@@ -374,7 +374,7 @@ msgstr "Behälterbox"
 
 #: customizer.php:777
 msgid "Here you can change the Width layout. "
-msgstr "Hier können Sie das Breitenlayout ändern."
+msgstr "Nein"
 
 #: customizer.php:780
 msgid "Default"
@@ -408,7 +408,7 @@ msgstr "Schaltflächenrandradius"
 msgid "Topbar Section"
 msgstr "Abschnitt der oberen Leiste"
 
-#: customizer.php:840 customizer.php:892
+#: customizer.php:840 customizer.php:907
 msgid "Add Header Content here"
 msgstr "Fügen Sie hier Header-Inhalte hinzu"
 
@@ -416,71 +416,75 @@ msgstr "Fügen Sie hier Header-Inhalte hinzu"
 msgid "Show / Hide Topbar"
 msgstr "Topbar ein- / ausblenden"
 
-#: customizer.php:863 customizer.php:1195
+#: customizer.php:863 customizer.php:1210
 msgid "Sticky Header"
 msgstr "Sticky Header"
 
 #: customizer.php:872
+msgid "Sticky Header Padding"
+msgstr "Sticky Header Padding"
+
+#: customizer.php:887
 msgid "Add Phone Number"
 msgstr "Telefonnummer hinzufügen"
 
-#: customizer.php:883
+#: customizer.php:898
 msgid "Add Email"
 msgstr "Add Email"
 
-#: customizer.php:891
+#: customizer.php:906
 msgid "Social Icon Section"
 msgstr "Social Icon Section"
 
-#: customizer.php:902
+#: customizer.php:917
 msgid "Add Youtube link"
 msgstr "Youtube-Link hinzufügen"
 
-#: customizer.php:913
+#: customizer.php:928
 msgid "Add Facebook link"
 msgstr "Facebook-Link hinzufügen"
 
-#: customizer.php:924
+#: customizer.php:939
 msgid "Add Twitter link"
 msgstr "Twitter-Link hinzufügen"
 
-#: customizer.php:935
+#: customizer.php:950
 msgid "Add Instagram link"
 msgstr "Instagram-Link hinzufügen"
 
-#: customizer.php:946
+#: customizer.php:961
 msgid "Add RSS link"
 msgstr "RSS-Link hinzufügen"
 
-#: customizer.php:954
+#: customizer.php:969
 msgid "Slider Settings"
 msgstr "Slider-Einstellungen"
 
-#: customizer.php:964
+#: customizer.php:979
 msgid "Show / Hide slider"
 msgstr "Schieberegler ein-/ausblenden"
 
-#: customizer.php:974
+#: customizer.php:989
 msgid "Show / Hide Slider Title"
 msgstr "Slider-Titel ein- / ausblenden"
 
-#: customizer.php:986
+#: customizer.php:1001
 msgid "Select Slide Image Page"
 msgstr "Wählen Sie Folienbildseite"
 
-#: customizer.php:998
+#: customizer.php:1013
 msgid "Home Page Slider Overlay"
 msgstr "Überlagerung des Startseiten-Schiebereglers"
 
-#: customizer.php:999
+#: customizer.php:1014
 msgid "This option will add colors over the slider."
 msgstr "Diese Option fügt dem Schieberegler Farben hinzu."
 
-#: customizer.php:1008
+#: customizer.php:1023
 msgid "Home Page Slider Overlay Color"
 msgstr "Startseite Schieberegler Überlagerungsfarbe"
 
-#: customizer.php:1010
+#: customizer.php:1025
 msgid ""
 "It will add the color overlay of the slider. To make it transparent, use the "
 "below option."
@@ -488,79 +492,79 @@ msgstr ""
 "Dadurch wird die Farbüberlagerung des Schiebereglers hinzugefügt. Verwenden "
 "Sie die folgende Option, um es transparent zu machen."
 
-#: customizer.php:1021
+#: customizer.php:1036
 msgid "Slider Content Alignment"
 msgstr "Ausrichtung des Schiebereglerinhalts"
 
-#: customizer.php:1024 customizer.php:1533 customizer.php:1588
+#: customizer.php:1039 customizer.php:1558 customizer.php:1613
 msgid "Center"
 msgstr "Center"
 
-#: customizer.php:1036
+#: customizer.php:1051
 msgid "Slider Image Opacity"
 msgstr "Deckkraft des Schiebereglers"
 
-#: customizer.php:1059
+#: customizer.php:1074
 msgid "Slider Speed Option"
 msgstr "Schieberegler-Geschwindigkeitsoption"
 
-#: customizer.php:1070
+#: customizer.php:1085
 msgid "550"
 msgstr "fünf­hundert­fünfzig"
 
-#: customizer.php:1074
+#: customizer.php:1089
 msgid "Slider Image Height"
 msgstr "Slider-Bildhöhe"
 
-#: customizer.php:1080 customizer.php:1338
+#: customizer.php:1095 customizer.php:1363
 msgid "READ MORE"
 msgstr "READ MORE"
 
-#: customizer.php:1084
+#: customizer.php:1099
 msgid "Slider Button"
 msgstr "Schieberegler"
 
-#: customizer.php:1091
+#: customizer.php:1106
 msgid "Services"
 msgstr "Dienstleistungen"
 
-#: customizer.php:1092
+#: customizer.php:1107
 msgid "This section will appear below the slider."
 msgstr "Dieser Abschnitt wird unter dem Schieberegler angezeigt."
 
-#: customizer.php:1115
+#: customizer.php:1130
 msgid "Select Category to display post"
 msgstr "Wählen Sie Kategorie, um den Beitrag anzuzeigen"
 
-#: customizer.php:1121
+#: customizer.php:1136
 msgid "Products"
 msgstr "Produkte"
 
-#: customizer.php:1122
+#: customizer.php:1137
 msgid "This section will appear below the services."
 msgstr "Dieser Abschnitt wird unter den Diensten angezeigt."
 
-#: customizer.php:1131
+#: customizer.php:1146
 msgid "Section Title"
 msgstr "Abschnittsüberschrift"
 
-#: customizer.php:1142
+#: customizer.php:1157
 msgid "Select Page"
 msgstr "Seite auswählen"
 
-#: customizer.php:1149
+#: customizer.php:1164
 msgid "404 Page"
 msgstr "404 Seite"
 
-#: customizer.php:1154
+#: customizer.php:1169
 msgid "404 Not Found"
 msgstr "404 Nicht gefunden"
 
-#: customizer.php:1158
+#: customizer.php:1173
 msgid "404 Page Title"
 msgstr "404 Seitentitel"
 
-#: customizer.php:1164
+#: customizer.php:1179
 msgid ""
 "Looks like you have taken a wrong turn&hellip. Dont worry&hellip it happens "
 "to the best of us."
@@ -568,159 +572,163 @@ msgstr ""
 "Sieht so aus, als hättest du eine falsche Wendung genommen. Mach dir keine "
 "Sorgen und verdammt noch mal, es passiert den Besten von uns."
 
-#: customizer.php:1168
+#: customizer.php:1183
 msgid "404 Page Content"
 msgstr "404 Seiteninhalt"
 
-#: customizer.php:1174
+#: customizer.php:1189
 msgid "Back to Home Page"
 msgstr "Zurück zur Startseite"
 
-#: customizer.php:1178
+#: customizer.php:1193
 msgid "404 Page Button"
 msgstr "404 Seitentaste"
 
-#: customizer.php:1185
+#: customizer.php:1200
 msgid "Responsive Settings"
 msgstr "Reaktionsschnelle Einstellungen"
 
-#: customizer.php:1205
+#: customizer.php:1220
 msgid "Slider"
 msgstr "Schieberegler"
 
-#: customizer.php:1215
+#: customizer.php:1230
 msgid "Scroll To Top"
 msgstr "Nach oben scrollen"
 
-#: customizer.php:1225
+#: customizer.php:1240
 msgid "Sidebar"
 msgstr "Seitenleiste"
 
-#: customizer.php:1235
+#: customizer.php:1250
 msgid "Preloader"
 msgstr "Preloader"
 
-#: customizer.php:1241
+#: customizer.php:1256
 msgid "Blog Page Settings"
 msgstr "Blog-Seiteneinstellungen"
 
-#: customizer.php:1251
+#: customizer.php:1266
 msgid "Post Date"
 msgstr "Nach Datum"
 
-#: customizer.php:1261
+#: customizer.php:1276
 msgid "Comments"
 msgstr "Bemerkungen"
 
-#: customizer.php:1271
+#: customizer.php:1286
 msgid "Author"
 msgstr "Autor"
 
-#: customizer.php:1281
+#: customizer.php:1296
+msgid "Time"
+msgstr "Zeit"
+
+#: customizer.php:1306
 msgid "Single Post Tags"
 msgstr "Einzelne Post-Tags"
 
-#: customizer.php:1291
+#: customizer.php:1316
 msgid "Single Post Image"
 msgstr "Einzelne Post Bild"
 
-#: customizer.php:1301
+#: customizer.php:1326
 msgid "Post Description Length"
 msgstr "Beitrag Beschreibung Länge"
 
-#: customizer.php:1304
+#: customizer.php:1329
 msgid "No Content"
 msgstr "Kein Inhalt"
 
-#: customizer.php:1305
+#: customizer.php:1330
 msgid "Excerpt Content"
 msgstr "Auszug Inhalt"
 
-#: customizer.php:1306
+#: customizer.php:1331
 msgid "Full Content"
 msgstr "Voller Inhalt"
 
-#: customizer.php:1315
+#: customizer.php:1340
 msgid "Excerpt length"
 msgstr "Auszugslänge"
 
-#: customizer.php:1327
+#: customizer.php:1352
 msgid "..."
 msgstr "..."
 
-#: customizer.php:1331
+#: customizer.php:1356
 msgid "Post Excerpt Indicator Option"
 msgstr "Option für einen Indikator nach dem Auszug"
 
-#: customizer.php:1342
+#: customizer.php:1367
 msgid "Add Button Text"
 msgstr "Schaltflächentext hinzufügen"
 
-#: customizer.php:1352
+#: customizer.php:1377
 msgid "Meta Box Separator"
 msgstr "Meta Box Separator"
 
-#: customizer.php:1354
+#: customizer.php:1379
 msgid "Add Meta Separator. e.g.: \"|\", \"/\", etc."
 msgstr "Meta Separator hinzufügen. z. B.: \"|\", \"/\" usw."
 
-#: customizer.php:1367
+#: customizer.php:1392
 msgid "Display Blog Page Post :"
 msgstr "Blog-Seitenbeitrag anzeigen:"
 
-#: customizer.php:1370
+#: customizer.php:1395
 msgid "In Box"
 msgstr "In Box"
 
-#: customizer.php:1371
+#: customizer.php:1396
 msgid "Without Box"
 msgstr "Ohne Box"
 
-#: customizer.php:1381
+#: customizer.php:1406
 msgid "Pagination in Blog Page"
 msgstr "Paginierung in der Blog-Seite"
 
-#: customizer.php:1391
+#: customizer.php:1416
 msgid "Related Post"
 msgstr "In Verbindung stehender Beitrag"
 
-#: customizer.php:1401
+#: customizer.php:1426
 msgid "Related Post Taxonomies"
 msgstr "Verwandte Post-Taxonomien"
 
-#: customizer.php:1404
+#: customizer.php:1429
 msgid "Categories"
 msgstr "Kategorien"
 
-#: customizer.php:1405
+#: customizer.php:1430
 msgid "Tags"
 msgstr "Stichworte"
 
-#: customizer.php:1410
+#: customizer.php:1435
 msgid "Related Posts"
 msgstr "zusammenhängende Posts"
 
-#: customizer.php:1414
+#: customizer.php:1439
 msgid "Related Post Title"
 msgstr "Titel des zugehörigen Beitrags"
 
-#: customizer.php:1424
+#: customizer.php:1449
 msgid "Related Post Number"
 msgstr "Zugehörige Beitragsnummer"
 
-#: customizer.php:1436
+#: customizer.php:1461
 msgid "No Result Found"
 msgstr "Keine Einträge gefunden"
 
-#: customizer.php:1441
+#: customizer.php:1466
 msgid "Nothing Found"
 msgstr "Nichts gefunden"
 
-#: customizer.php:1445
+#: customizer.php:1470
 msgid "No Result Found Title"
 msgstr "Kein Ergebnis Titel gefunden"
 
-#: customizer.php:1451
+#: customizer.php:1476
 msgid ""
 "Sorry, but nothing matched your search terms. Please try again with some "
 "different keywords."
@@ -728,23 +736,23 @@ msgstr ""
 "Entschuldigung, aber nichts stimmte mit Ihren Suchbegriffen überein. Bitte "
 "versuchen Sie es erneut mit verschiedenen Schlüsselwörtern."
 
-#: customizer.php:1455
+#: customizer.php:1480
 msgid "No Result Found Content"
 msgstr "Kein Ergebnis Inhalt gefunden"
 
-#: customizer.php:1466
+#: customizer.php:1491
 msgid "No Result search"
 msgstr "Keine Ergebnissuche"
 
-#: customizer.php:1472
+#: customizer.php:1497
 msgid "Footer Text"
 msgstr "Fusszeile"
 
-#: customizer.php:1483
+#: customizer.php:1508
 msgid "Footer widget area"
 msgstr "Footer-Widget-Bereich"
 
-#: customizer.php:1485
+#: customizer.php:1510
 msgid ""
 "Select the number of widget areas you want in the footer. After that, go to "
 "Appearance > Widgets and add your widgets."
@@ -752,62 +760,62 @@ msgstr ""
 "Wählen Sie die Anzahl der gewünschten Widget-Bereiche in der Fußzeile aus. "
 "Gehen Sie danach zu Darstellung> Widgets und fügen Sie Ihre Widgets hinzu."
 
-#: customizer.php:1487
+#: customizer.php:1512
 msgid "One"
 msgstr "Eins"
 
-#: customizer.php:1488
+#: customizer.php:1513
 msgid "Two"
 msgstr "Zwei"
 
-#: customizer.php:1489
+#: customizer.php:1514
 msgid "Three"
 msgstr "Drei"
 
-#: customizer.php:1490
+#: customizer.php:1515
 msgid "Four"
 msgstr "Vier"
 
-#: customizer.php:1499
+#: customizer.php:1524
 msgid "Footer Widget Background Color"
 msgstr "Hintergrundfarbe des Fußzeilen-Widgets"
 
-#: customizer.php:1508
+#: customizer.php:1533
 msgid "Footer Widget Background Image"
 msgstr "Fußzeile Widget Hintergrundbild"
 
-#: customizer.php:1517
+#: customizer.php:1542
 msgid "Copyright Text"
 msgstr "Copyright-Text"
 
-#: customizer.php:1528
+#: customizer.php:1553
 msgid "Copyright Text Alignment "
 msgstr "Copyright-Textausrichtung"
 
-#: customizer.php:1542
+#: customizer.php:1567
 msgid "Copyright Font Size"
 msgstr "Copyright Schriftgröße"
 
-#: customizer.php:1557
+#: customizer.php:1582
 msgid "Copyright Padding"
 msgstr "Copyright-Auffüllung"
 
-#: customizer.php:1573
+#: customizer.php:1598
 msgid "Show / Hide Scroll Top Button"
 msgstr "Scroll Top Button ein- / ausblenden"
 
-#: customizer.php:1583
+#: customizer.php:1608
 msgid "Scroll Back to Top Position"
 msgstr "Scrollen Sie zurück zur obersten Position"
 
-#: customizer.php:1597
+#: customizer.php:1622
 msgid "Scroll Icon Font Size"
 msgstr "Bildlaufsymbol Schriftgröße"
 
-#: customizer.php:1688
+#: customizer.php:1713
 msgid "BB Ecommerce Pro"
 msgstr "BB E-Commerce Pro"
 
-#: customizer.php:1689
+#: customizer.php:1714
 msgid "Go Pro"
 msgstr "Gehen Sie Pro"

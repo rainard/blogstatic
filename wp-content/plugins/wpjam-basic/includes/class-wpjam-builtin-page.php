@@ -105,15 +105,6 @@ class WPJAM_Post_Page extends WPJAM_Builtin_Page{
 				}
 			}
 		}elseif(in_array($screen_base, ['edit', 'upload'])){
-			foreach(WPJAM_Post_Option::get_registereds() as $name => $object){
-				if($object->is_available_for_post_type($this->post_type) && $object->list_table && $object->title){
-					wpjam_register_list_table_action('set_'.$name, wp_parse_args($object->to_array(), [
-						'page_title'	=> '设置'.$object->title,
-						'submit_text'	=> '设置'
-					]));
-				}
-			}
-
 			if($screen_base == 'upload'){
 				$mode	= get_user_option('media_library_mode', get_current_user_id()) ?: 'grid';
 
@@ -149,8 +140,8 @@ class WPJAM_Post_Page extends WPJAM_Builtin_Page{
 
 	public function filter_admin_thumbnail_html($content, $post_id){
 		if($post_id){
-			$thumbnail_size	= get_post_type_object($this->post_type)->thumbnail_size ?? '';
-			$content		.= $thumbnail_size ? wpautop('尺寸：'.$thumbnail_size) : '';
+			$size		= get_post_type_object($this->post_type)->thumbnail_size ?? '';
+			$content	.= $size ? wpautop('尺寸：'.$size) : '';
 		}
 
 		return $content;
@@ -188,11 +179,10 @@ class WPJAM_Post_Page extends WPJAM_Builtin_Page{
 		// 自动草稿不处理
 		// 自动保存不处理
 		// 预览不处理
-		if(
-			$_SERVER['REQUEST_METHOD'] != 'POST'  ||
-			$post->post_status == 'auto-draft' || 
-			(defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) || 
-			(!empty($_POST['wp-preview']) && $_POST['wp-preview'] == 'dopreview')
+		if($_SERVER['REQUEST_METHOD'] != 'POST'
+			|| $post->post_status == 'auto-draft'
+			|| (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) 
+			|| (!empty($_POST['wp-preview']) && $_POST['wp-preview'] == 'dopreview')
 		){
 			return;
 		}
@@ -218,9 +208,7 @@ class WPJAM_Post_Page extends WPJAM_Builtin_Page{
 				continue;
 			}
 
-			$update_callback	= $object->update_callback;
-
-			if($update_callback){
+			if($update_callback	= $object->update_callback){
 				if(is_callable($update_callback)){
 					$result	= call_user_func($update_callback, $post_id, $data, $fields);
 
@@ -258,9 +246,8 @@ class WPJAM_Post_Page extends WPJAM_Builtin_Page{
 			if($object->is_available_for_post_type($post_type) && $object->list_table !== 'only' && $object->title){
 				$callback	= $object->callback ?? [$this, 'meta_box_cb'];
 				$context	= $object->context ?? $context;
-				$priority	= $object->priority ?? 'default';
-
-				add_meta_box($name, $object->title, $callback, $post_type, $context, $priority);
+				
+				add_meta_box($name, $object->title, $callback, $post_type, $context, $object->priority);
 			}
 		}
 	}
@@ -272,10 +259,10 @@ class WPJAM_Post_Page extends WPJAM_Builtin_Page{
 			echo wpautop($object->summary);
 		}
 
-		$args	= [];
-
-		$args['fields_type']	= $object->context == 'side' ? 'list' : 'table';
-		$args['is_add']			= $GLOBALS['current_screen']->action == 'add';
+		$args	= [
+			'fields_type'	=> $object->context == 'side' ? 'list' : 'table',
+			'is_add'		=> $GLOBALS['current_screen']->action == 'add'
+		];
 
 		if(!$args['is_add']){
 			$args['id']	= $post->ID;
@@ -283,11 +270,7 @@ class WPJAM_Post_Page extends WPJAM_Builtin_Page{
 			if($object->data){
 				$args['data']	= $object->data;
 			}else{
-				if($object->value_callback && is_callable($object->value_callback)){
-					$args['value_callback']	= $object->value_callback; 
-				}else{
-					$args['value_callback']	= ['WPJAM_Post', 'value_callback'];
-				}
+				$args['value_callback']	= $object->value_callback; 
 			}
 		}
 
@@ -380,16 +363,6 @@ class WPJAM_Term_Page extends WPJAM_Builtin_Page{
 			add_action('edited_term',	[$this, 'on_edited_term'], 10, 3);
 
 			if($term_options = WPJAM_Term_Option::get_registereds()){
-				foreach($term_options as $name => $object){
-					if($object->is_available_for_taxonomy($this->taxonomy) && $object->list_table){
-						wpjam_register_list_table_action('set_'.$name, wp_parse_args($object->to_array(), [
-							'page_title'	=> '设置'.$object->title,
-							'submit_text'	=> '设置',
-							'fields'		=> [$object, 'get_fields']
-						]));
-					}
-				}
-
 				if(wp_doing_ajax()){
 					if($_POST['action'] == 'add-tag'){
 						add_filter('pre_insert_term',	[$this, 'filter_pre_insert_term'], 10, 2);
@@ -444,23 +417,24 @@ class WPJAM_Term_Page extends WPJAM_Builtin_Page{
 			$args['depth']	= $levels - 1;
 
 			if($action_type == 'edit'){
-				$term_id		= $args['exclude_tree'];
-				$term_levels	= count(get_ancestors($term_id, $taxonomy, 'taxonomy'));
-				$child_levels	= $term_levels;
+				$term_id	= $args['exclude_tree'];
+				$term_level	= wpjam_get_term_level($term_id);
 
-				$children	= get_term_children($term_id, $taxonomy);
-				if($children){
-					$child_levels = 0;
+				if($children = get_term_children($term_id, $taxonomy)){
+					$child_level	= 0;
 
 					foreach($children as $child){
-						$new_child_levels	= count(get_ancestors($child, $taxonomy, 'taxonomy'));
-						if($child_levels	< $new_child_levels){
-							$child_levels	= $new_child_levels;
+						$new_child_level	= wpjam_get_term_level($child);
+
+						if($child_level	< $new_child_level){
+							$child_level	= $new_child_level;
 						}
 					}
+				}else{
+					$child_level	= $term_level;
 				}
 
-				$redueced	= $child_levels - $term_levels;
+				$redueced	= $child_level - $term_level;
 
 				if($redueced < $args['depth']){
 					$args['depth']	-= $redueced;
@@ -480,7 +454,7 @@ class WPJAM_Term_Page extends WPJAM_Builtin_Page{
 			if($object->is_available_for_taxonomy($this->taxonomy) && $object->list_table !== 'only'){
 				foreach($object->get_fields($term_id) as $key => $field){
 					if(empty($field['action']) || $field['action'] == $action){
-						if(empty($field['value_callback']) && $object->value_callback && is_callable($object->value_callback)){
+						if(empty($field['value_callback']) || !is_callable($field['value_callback'])){
 							$field['value_callback']	= $object->value_callback;
 						}
 
@@ -508,8 +482,7 @@ class WPJAM_Term_Page extends WPJAM_Builtin_Page{
 			wpjam_fields($fields, [
 				'fields_type'	=> 'tr',
 				'wrap_class'	=> 'form-field',
-				'id'			=> $term->term_id,
-				'value_callback'=> ['WPJAM_Term', 'value_callback']
+				'id'			=> $term->term_id
 			]);
 		}
 	}

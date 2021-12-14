@@ -146,6 +146,10 @@ if(!function_exists('array_key_last')){
 	}
 }
 
+function wpjam_flatten_terms($terms){
+	return wpjam_list_flatten($terms);
+}
+
 function wpjam_get_option_setting($name){
 	$object = WPJAM_Option_Setting::get($name);
 
@@ -212,7 +216,9 @@ function wpjam_get_post_fields($post_type, $post_id=null){
 	return wpjam_get_post_option_fields($post_type, $post_id);
 }
 
-class WPJAM_PostType extends WPJAM_Post{}
+function wpjam_register_map_meta_cap($capability, $map_meta_cap){
+	return wpjam_register_capability($capability, $map_meta_cap);
+}
 
 add_filter('rewrite_rules_array', function($rules){
 	if(has_filter('wpjam_rewrite_rules')){
@@ -603,6 +609,32 @@ function wpjam_get_form_fields($admin_column = false){
 	return [];
 }
 
+function wpjam_get_form_post($fields, $nonce_action='', $capability='manage_options'){
+	check_admin_referer($nonce_action);
+
+	if(!current_user_can($capability)){
+		ob_clean();
+		wp_die('无权限');
+	}
+
+	return wpjam_validate_fields_value($fields);
+}
+
+function wpjam_form($fields, $form_url, $nonce_action='', $submit_text=''){
+	echo '<form method="post" action="'.$form_url.'" enctype="multipart/form-data" id="form">';
+
+	echo wpjam_fields($fields);
+
+	wp_nonce_field($nonce_action);
+	wp_original_referer_field(true, 'previous');
+
+	if($submit_text!==false){ 
+		submit_button($submit_text);
+	}
+
+	echo '</form>';
+}
+
 function wpjam_api_validate_quota($json='', $max_times=1000){
 	$today	= date('Y-m-d', current_time('timestamp'));
 	$times	= wp_cache_get($json.':'.$today, 'wpjam_api_times');
@@ -640,42 +672,6 @@ add_action('wpjam_api', function($json){
 	}
 });
 
-class WPJAM_PlatformBit extends WPJAM_Bit{
-	public function __construct($bit){
-		$this->set_platform($bit);
-	}
-
-	public function set_platform($bit){
-		$this->bit	= $bit;
-	}
-
-	public function get_platform(){
-		return $this->bit;
-	}
-}
-
-class WPJAM_OPENSSL_Crypt{
-	private $key;
-	private $method = 'aes-128-cbc';
-	private $iv = '';
-	private $options = OPENSSL_RAW_DATA;
-
-	public function __construct($key, $args=[]){
-		$this->key		= $key;
-		$this->method	= $args['method'] ?? $this->method;
-		$this->options	= $args['options'] ?? $this->options;
-		$this->iv		= $args['iv'] ?? '';
-	}
-
-	public function encrypt($text){
-		return openssl_encrypt($text, $this->method, $this->key, $this->options, $this->iv);
-	}
-
-	public function decrypt($encrypted_text){
-		return openssl_decrypt($encrypted_text, $this->method, $this->key, $this->options, $this->iv);
-	}
-}
-
 function wpjam_create_meta_table($meta_type, $table=''){
 	if($meta_type = sanitize_key($meta_type)){
 		global $wpdb;
@@ -694,46 +690,6 @@ function wpjam_create_meta_table($meta_type, $table=''){
 				KEY meta_key (meta_key(191))
 			)");
 		}
-	}
-}
-
-// 直接在 handler 里面定义即可。
-// 需要在使用的 CLASS 中设置 public static $meta_type
-trait WPJAM_Meta_Trait{
-	public static function get_meta_type_object(){
-		return wpjam_get_meta_type_object(self::$meta_type);
-	}
-
-	public static function add_meta($id, $meta_key, $meta_value, $unique=false){
-		return self::get_meta_type_object()->add_data($id, $meta_key, $meta_value, $unique);
-	}
-
-	public static function delete_meta($id, $meta_key, $meta_value=''){
-		return self::get_meta_type_object()->delete_data($id, $meta_key, $meta_value);
-	}
-
-	public static function get_meta($id, $key = '', $single = false){
-		return self::get_meta_type_object()->get_data($id, $key, $single);
-	}
-
-	public static function update_meta($id, $meta_key, $meta_value, $prev_value=''){
-		return self::get_meta_type_object()->update_data($id, $meta_key, wp_slash($meta_value), $prev_value);
-	}
-
-	public static function delete_meta_by_key($meta_key){
-		return self::get_meta_type_object()->delete_by_key($meta_key);
-	}
-
-	public static function update_meta_cache($object_ids){
-		self::get_meta_type_object()->update_cache($object_ids);
-	}
-
-	public static function create_meta_table(){
-		self::get_meta_type_object()->create_table();
-	}
-
-	public static function get_meta_table(){
-		return self::get_meta_type_object()->get_table();
 	}
 }
 
@@ -797,6 +753,38 @@ function wpjam_sub_summary($tabs){
 	<?php }
 }
 
+class WPJAM_PlatformBit extends WPJAM_Bit{
+	public function set_platform($bit){
+		$this->bit	= $bit;
+	}
+
+	public function get_platform(){
+		return $this->bit;
+	}
+}
+
+class WPJAM_OPENSSL_Crypt{
+	private $key;
+	private $method = 'aes-128-cbc';
+	private $iv = '';
+	private $options = OPENSSL_RAW_DATA;
+
+	public function __construct($key, $args=[]){
+		$this->key		= $key;
+		$this->method	= $args['method'] ?? $this->method;
+		$this->options	= $args['options'] ?? $this->options;
+		$this->iv		= $args['iv'] ?? '';
+	}
+
+	public function encrypt($text){
+		return openssl_encrypt($text, $this->method, $this->key, $this->options, $this->iv);
+	}
+
+	public function decrypt($encrypted_text){
+		return openssl_decrypt($encrypted_text, $this->method, $this->key, $this->options, $this->iv);
+	}
+}
+
 class WPJAM_PostContent extends WPJAM_Content_Items{
 	public function __construct($args=[]){
 		$post_id	= wpjam_get_data_parameter('post_id');
@@ -811,6 +799,45 @@ class WPJAM_MetaItem extends WPJAM_Meta_Items{
 	}
 }
 
+// 直接在 handler 里面定义即可。
+// 需要在使用的 CLASS 中设置 public static $meta_type
+trait WPJAM_Meta_Trait{
+	public static function get_meta_type_object(){
+		return wpjam_get_meta_type_object(self::$meta_type);
+	}
+
+	public static function add_meta($id, $meta_key, $meta_value, $unique=false){
+		return self::get_meta_type_object()->add_data($id, $meta_key, $meta_value, $unique);
+	}
+
+	public static function delete_meta($id, $meta_key, $meta_value=''){
+		return self::get_meta_type_object()->delete_data($id, $meta_key, $meta_value);
+	}
+
+	public static function get_meta($id, $key = '', $single = false){
+		return self::get_meta_type_object()->get_data($id, $key, $single);
+	}
+
+	public static function update_meta($id, $meta_key, $meta_value, $prev_value=''){
+		return self::get_meta_type_object()->update_data($id, $meta_key, wp_slash($meta_value), $prev_value);
+	}
+
+	public static function delete_meta_by_key($meta_key){
+		return self::get_meta_type_object()->delete_by_key($meta_key);
+	}
+
+	public static function update_meta_cache($object_ids){
+		self::get_meta_type_object()->update_cache($object_ids);
+	}
+
+	public static function create_meta_table(){
+		self::get_meta_type_object()->create_table();
+	}
+
+	public static function get_meta_table(){
+		return self::get_meta_type_object()->get_table();
+	}
+}
 
 trait WPJAM_Qrcode_Bind_Trait{
 	public function verify_qrcode($scene, $code){

@@ -273,40 +273,30 @@ class WPJAM_CDN_Setting{
 	}
 
 	public static function get_sections(){
-		$detail = '阿里云 OSS 用户：请点击这里注册和申请<a href="http://wpjam.com/go/aliyun/" target="_blank">阿里云</a>可获得代金券，阿里云OSS<strong><a href="https://blog.wpjam.com/m/aliyun-oss-cdn/" target="_blank">详细使用指南</a></strong>。
-		腾讯云 COS 用户：请点击这里注册和申请<a href="http://wpjam.com/go/qcloud/" target="_blank">腾讯云</a>可获得优惠券，腾讯云COS<strong><a href="https://blog.wpjam.com/m/qcloud-cos-cdn/" target="_blank">详细使用指南</a></strong>。';
+		$oss_guide		= '请点击这里注册和申请<strong><a href="http://wpjam.com/go/aliyun/" target="_blank">阿里云</a></strong>可获得代金券，点击这里查看<strong><a href="https://blog.wpjam.com/m/aliyun-oss-cdn/" target="_blank">阿里云OSS详细使用指南</a></strong>。';
+		$cos_guide		= '请点击这里注册和申请<strong><a href="http://wpjam.com/go/qcloud/" target="_blank">腾讯云</a></strong>可获得优惠券，点击这里查看<strong><a href="https://blog.wpjam.com/m/qcloud-cos-cdn/" target="_blank">腾讯云COS详细使用指南</a></strong>。';
+		$imagex_guide	= '使用邀请码 <strong>CLEMNL</strong> 注册和申请<strong><a href="https://wpjam.com/go/volc-imagex" target="_blank">火山引擎</a></strong>，可以领取每月免费额度（10GB流量+10GB存储+20TB基础处理），<br />HTTPS 访问免费和回源流量免费，点击这里查看<strong><a href="http://blog.wpjam.com/m/volc-veimagex/" target="_blank">火山引擎 veImageX 详细使用指南</a></strong>。';
 
 		$options	= array_merge([''=>' '], wp_list_pluck(WPJAM_CDN_Type::get_by(), 'title'));
 
 		$cdn_fields		= [
-			'guide'		=> ['title'=>'使用说明',		'type'=>'view',		'value'=>wpautop($detail)],
-			'cdn_name'	=> ['title'=>'云存储',		'type'=>'select',	'options'=>$options,	'class'=>'show-if-key'],
-			'host'		=> ['title'=>'CDN 域名',		'type'=>'url',		'show_if'=>self::get_show_if('!=',''),	'description'=>'设置为在CDN云存储绑定的域名。'],
-			'disabled'	=> ['title'=>'使用本站',		'type'=>'checkbox',	'show_if'=>self::get_show_if('=',''),	'description'=>'如使用 CDN 之后切换回使用本站图片，请勾选该选项，并将原 CDN 域名填回「本地设置」的「额外域名」中。'],
-			'image'		=> ['title'=>'图片处理',		'type'=>'checkbox',	'show_if'=>self::get_show_if('IN', ['aliyun_oss', 'qcloud_cos', 'qiniu']),	'value'=>1,	'description'=>'开启云存储图片处理功能，使用云存储进行裁图、添加水印等操作。<br />&emsp;* 注意：开启云存储图片处理功能，文章和媒体库中的所有图片都会镜像到云存储。'],
+			'cdn_name'		=> ['title'=>'云存储',		'type'=>'select',	'options'=>$options,	'class'=>'show-if-key'], 
+			'host'			=> ['title'=>'CDN 域名',		'type'=>'url',		'show_if'=>self::get_show_if('!=',''),	'description'=>'设置为在CDN云存储绑定的域名。'],
+			'oss_guide'		=> ['title'=>'使用说明',		'type'=>'view',		'value'=>$oss_guide,	'show_if'=>self::get_show_if('=','aliyun_oss')],
+			'cos_guide'		=> ['title'=>'使用说明',		'type'=>'view',		'value'=>$cos_guide,	'show_if'=>self::get_show_if('=','qcloud_cos')],
+			'imagex_guide'	=> ['title'=>'使用说明',		'type'=>'view',		'value'=>$imagex_guide,	'show_if'=>self::get_show_if('=','volc_imagex')],
+			'disabled'		=> ['title'=>'使用本站',		'type'=>'checkbox',	'show_if'=>self::get_show_if('=',''),	'description'=>'如使用 CDN 之后切换回使用本站图片，请勾选该选项，并将原 CDN 域名填回「本地设置」的「额外域名」中。'],
+			'image'			=> ['title'=>'图片处理',		'type'=>'checkbox',	'show_if'=>self::get_show_if('IN', ['aliyun_oss', 'volc_imagex', 'qcloud_cos', 'qiniu']),	'value'=>1,	'description'=>'开启云存储图片处理功能，使用云存储进行裁图、添加水印等操作。<br />&emsp;* 注意：开启云存储图片处理功能，文章和媒体库中的所有图片都会镜像到云存储。'],
 		];
 
 		$local_fields	= [
-			'local'		=> ['title'=>'本地域名',		'type'=>'url',		'value'=>home_url(),	'description'=>'将该域名填入<strong>云存储的镜像源</strong>。'],
-			'no_http'	=> ['title'=>'无HTTP替换',	'type'=>'checkbox',	'show_if'=>self::get_show_if('!=',''),	'description'=>'将无<code>http://</code>或<code>https://</code>的静态资源也进行镜像处理'],
+			'local_set'	=> ['title'=>'本地域名',		'type'=>'fieldset',	'fields'=>[
+				'local'		=> ['type'=>'url',		'value'=>home_url(),	'description'=>'将该域名填入<strong>云存储的镜像源</strong>。'],
+				'no_http'	=> ['type'=>'checkbox',	'description'=>'将无<code>http://</code>或<code>https://</code>的静态资源也进行镜像处理'],
+			]],
 			'exts'		=> ['title'=>'扩展名',		'type'=>'mu-text',	'value'=>['png','jpg','gif','ico'],		'class'=>'',	'description'=>'设置要镜像的静态文件的扩展名。'],
 			'dirs'		=> ['title'=>'目录',			'type'=>'mu-text',	'value'=>['wp-content','wp-includes'],	'class'=>'',	'description'=>'设置要镜像的静态文件所在的目录。'],
 			'locals'	=> ['title'=>'额外域名',		'type'=>'mu-text',	'item_type'=>'url'],
-		];
-
-		$image_fields	= [
-			'thumbnail_set'	=> ['title'=>'缩图设置',	'type'=>'fieldset',	'fields'=>[
-				'no_subsizes'	=> ['type'=>'checkbox',	'value'=>1,	'description'=>'云存储有更强大的缩图功能，本地不用再生成缩略图。'],
-				'thumbnail'		=> ['type'=>'checkbox',	'value'=>1,	'description'=>'使用云存储缩图功能对文章内容中的图片进行最佳尺寸显示处理。'],
-				'max_view'		=> ['type'=>'view',		'group'=>'max',	'show_if'=>['key'=>'thumbnail', 'value'=>1],	'value'=>'文章中图片最大宽度：'],
-				'max_width'		=> ['type'=>'number',	'group'=>'max',	'show_if'=>['key'=>'thumbnail', 'value'=>1],	'value'=>($GLOBALS['content_width'] ?? 0),	'class'=>'small-text',	'description'=>'px。']
-			]],
-			'image_set'		=> ['title'=>'格式质量',	'type'=>'fieldset',	'fields'=>[
-				'webp'			=> ['type'=>'checkbox',	'description'=>'将图片转换成WebP格式，仅支持阿里云OSS和腾讯云COS。'],
-				'interlace'		=> ['type'=>'checkbox',	'description'=>'JPEG格式图片渐进显示。'],
-				'quality_view'	=> ['type'=>'view',		'group'=>'quality',	'value'=>'图片质量：'],
-				'quality'		=> ['type'=>'number',	'group'=>'quality',	'class'=>'small-text',	'mim'=>0,	'max'=>100]
-			]],
 		];
 
 		$watermark_options = [
@@ -321,17 +311,25 @@ class WPJAM_CDN_Setting{
 			'South'		=> '下中间',
 		];
 
-		$watermark_fields = [
-			'watermark'	=> ['title'=>'水印图片',	'type'=>'image',	'description'=>'请使用云存储域名下的图片'],
-			'disslove'	=> ['title'=>'透明度',	'type'=>'number',	'class'=>'small-text',	'description'=>'取值范围：1-100，默认为100（不透明）',	'min'=>0,	'max'=>100],
-			'set'		=> ['title'=>'位置边距',	'type'=>'fieldset',	'fields'=>[
-				'gravity_v'	=> ['type'=>'view',		'group'=>'gravity',	'value'=>'水印位置：'],
-				'gravity'	=> ['type'=>'select',	'group'=>'gravity',	'options'=>$watermark_options],
-				'dx_v'		=> ['type'=>'view',		'group'=>'dx',		'value'=>'横轴边距：'],
-				'dx'		=> ['type'=>'number',	'group'=>'dx',		'class'=>'small-text',	'value'=>10,	'description'=>'px'],
-				'dy_v'		=> ['type'=>'view',		'group'=>'dy',		'value'=>'纵轴边距：'],
-				'dy'		=> ['type'=>'number',	'group'=>'dy',		'class'=>'small-text',	'value'=>10,	'description'=>'px']
+		$image_fields	= [
+			'thumbnail_set'	=> ['title'=>'缩图设置',	'type'=>'fieldset',	'fields'=>[
+				'no_subsizes'	=> ['type'=>'checkbox',	'value'=>1,	'description'=>'云存储有更强大的缩图功能，本地不用再生成缩略图。'],
+				'thumbnail'		=> ['type'=>'checkbox',	'value'=>1,	'description'=>'使用云存储缩图功能对文章内容中的图片进行最佳尺寸显示处理。'],
+				'max_width'		=> ['title'=>'文章中图片最大宽度：',	'type'=>'number',	'group'=>'max',	'show_if'=>['key'=>'thumbnail', 'value'=>1],	'value'=>($GLOBALS['content_width'] ?? 0),	'class'=>'small-text',	'description'=>'px。']
 			]],
+			'image_set'		=> ['title'=>'格式质量',	'type'=>'fieldset',	'show_if'=>self::get_show_if('!=','volc_imagex'),	'fields'=>[
+				'webp'			=> ['type'=>'checkbox',	'description'=>'将图片转换成WebP格式，仅支持阿里云OSS和腾讯云COS。'],
+				'interlace'		=> ['type'=>'checkbox',	'description'=>'JPEG格式图片渐进显示。'],
+				'quality'		=> ['title'=>'图片质量：',	'type'=>'number',	'group'=>'quality',	'class'=>'small-text',	'mim'=>0,	'max'=>100]
+			]],
+			'watermark_set'	=> ['title'=>'水印设置',		'type'=>'fieldset',	'show_if'=>self::get_show_if('!=','volc_imagex'),	'fields'=>[
+				'watermark'	=> ['title'=>'水印图片：',	'type'=>'image',	'group'=>'watermark',	'description'=>'请使用云存储域名下的图片'],
+				'disslove'	=> ['title'=>'透明度：',		'type'=>'number',	'group'=>'disslove',	'class'=>'small-text',	'description'=>'1-100，默认100（不透明）', 'min'=>0, 'max'=>100],
+				'gravity'	=> ['title'=>'水印位置：',	'type'=>'select',	'group'=>'gravity',		'options'=>$watermark_options],
+				'dx'		=> ['title'=>'横轴边距：',	'type'=>'number',	'group'=>'gravity',		'class'=>'small-text',	'value'=>10],
+				'dy'		=> ['title'=>'纵轴边距：',	'type'=>'number',	'group'=>'gravity',		'class'=>'small-text',	'value'=>10]
+			]],
+			'volc_imagex_template'	=> ['title'=>'火山引擎图片处理模板',	'type'=>'text',	'show_if'=>self::get_show_if('=','volc_imagex')]
 		];
 
 		if(is_network_admin()){
@@ -365,7 +363,6 @@ class WPJAM_CDN_Setting{
 			'cdn'		=> ['title'=>'云存储设置',	'fields'=>$cdn_fields],
 			'local'		=> ['title'=>'本地设置',		'fields'=>$local_fields],
 			'image'		=> ['title'=>'图片设置',		'fields'=>$image_fields,	'show_if'=>['key'=>'image', 'compare'=>'=', 'value'=>1]],
-			'watermark'	=> ['title'=>'水印设置',		'fields'=>$watermark_fields,'show_if'=>['key'=>'image', 'compare'=>'=', 'value'=>1]],
 			'remote'	=> ['title'=>'外部图片',		'fields'=>$remote_fields,	'show_if'=>self::get_show_if('!=', ''),	'summary'=>$remote_summary],
 		];
 	}
@@ -399,10 +396,11 @@ function wpjam_cdn_host_replace($html, $to_cdn=true){
 	return WPJAM_CDN::host_replace($html, $to_cdn);
 }
 
-wpjam_register_cdn('aliyun_oss',	['title'=>'阿里云OSS',	'file'=>WPJAM_BASIC_PLUGIN_DIR.'cdn/aliyun_oss.php']);
-wpjam_register_cdn('qcloud_cos',	['title'=>'腾讯云COS',	'file'=>WPJAM_BASIC_PLUGIN_DIR.'cdn/qcloud_cos.php']);
-wpjam_register_cdn('ucloud',		['title'=>'UCloud', 	'file'=>WPJAM_BASIC_PLUGIN_DIR.'cdn/ucloud.php']);
-wpjam_register_cdn('qiniu',			['title'=>'七牛云存储',	'file'=>WPJAM_BASIC_PLUGIN_DIR.'cdn/qiniu.php']);
+wpjam_register_cdn('aliyun_oss',	['title'=>'阿里云OSS',		'file'=>WPJAM_BASIC_PLUGIN_DIR.'cdn/aliyun_oss.php']);
+wpjam_register_cdn('qcloud_cos',	['title'=>'腾讯云COS',		'file'=>WPJAM_BASIC_PLUGIN_DIR.'cdn/qcloud_cos.php']);
+wpjam_register_cdn('volc_imagex',	['title'=>'火山引擎veImageX',	'file'=>WPJAM_BASIC_PLUGIN_DIR.'cdn/volc_imagex.php']);
+wpjam_register_cdn('ucloud',		['title'=>'UCloud', 		'file'=>WPJAM_BASIC_PLUGIN_DIR.'cdn/ucloud.php']);
+wpjam_register_cdn('qiniu',			['title'=>'七牛云存储',		'file'=>WPJAM_BASIC_PLUGIN_DIR.'cdn/qiniu.php']);
 
 add_action('plugins_loaded', function(){
 	$local	= wpjam_cdn_get_setting('local');

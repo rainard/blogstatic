@@ -658,6 +658,24 @@ class WPJAM_List_Util{
 
 		return $filtered;
 	}
+
+	public static function flatten($list, $depth=0, $fields=[]){
+		$flat	= [];
+
+		$name		= $fields['name'] ?? 'name'; 
+		$children	= $fields['children'] ?? 'children'; 
+
+		foreach($list as $item){
+			$item[$name]	= str_repeat('&emsp;', $depth).$item[$name];
+			$flat[]			= $item;
+
+			if(!empty($item[$children])){
+				$flat	= array_merge($flat, self::flatten($item[$children], $depth+1));
+			}
+		}
+
+		return $flat;
+	}
 }
 
 class WPJAM_Var{
@@ -777,36 +795,38 @@ class WPJAM_Var{
 			$app	= 'bytedance';
 		}
 
-		global $is_lynx, $is_gecko, $is_opera, $is_safari, $is_chrome, $is_IE, $is_edge;
-
-		if($is_safari){
+		if(strpos($user_agent, 'Lynx') !== false){
+			$browser	= 'lynx';
+		}elseif(stripos($user_agent, 'safari') !== false){
 			$browser	= 'safrai';
+
 			if(preg_match('/Version\/(.*?)\s/i', $user_agent, $matches)){
 				$browser_version	= (float)(trim($matches[1]));
 			}
-		}elseif($is_chrome){
+		}elseif(strpos($user_agent, 'Edge') !== false){
+			$browser	= 'edge';
+
+			if(preg_match('/Edge\/(.*?)\s/i', $user_agent, $matches)){
+				$browser_version	= (float)(trim($matches[1]));
+			}
+		}elseif(stripos($user_agent, 'chrome')){
 			$browser	= 'chrome';
+
 			if(preg_match('/Chrome\/(.*?)\s/i', $user_agent, $matches)){
 				$browser_version	= (float)(trim($matches[1]));
 			}
 		}elseif(stripos($user_agent, 'Firefox') !== false){
 			$browser	= 'firefox';
+
 			if(preg_match('/Firefox\/(.*?)\s/i', $user_agent, $matches)){
 				$browser_version	= (float)(trim($matches[1]));
 			}
-		}elseif($is_edge){
-			$browser	= 'edge';
-			if(preg_match('/Edge\/(.*?)\s/i', $user_agent, $matches)){
-				$browser_version	= (float)(trim($matches[1]));
-			}
-		}elseif($is_lynx){
-			$browser	= 'lynx';
-		}elseif($is_gecko){
-			$browser	= 'gecko';
-		}elseif($is_opera){
-			$browser	= 'opera';
-		}elseif($is_IE){
+		}elseif(strpos($user_agent, 'MSIE') !== false || strpos($user_agent, 'Trident') !== false){
 			$browser	= 'ie';
+		}elseif(strpos($user_agent, 'Gecko') !== false){
+			$browser	= 'gecko';
+		}elseif(strpos($user_agent, 'Opera') !== false){
+			$browser	= 'opera';
 		}
 
 		return compact('os', 'device', 'app', 'browser', 'os_version', 'browser_version', 'app_version');
@@ -817,15 +837,15 @@ class WPJAM_Bit{
 	protected $bit;
 
 	public function __construct($bit){
-		$this->set_bit($bit);
-	}
-
-	public function set_bit($bit){
 		$this->bit	= $bit;
 	}
 
-	public function get_bit(){
-		return $this->bit;
+	public function __get($name){
+		return $name == 'bit' ? $this->bit : null;
+	}
+
+	public function __isset($name){
+		return $name == 'bit';
 	}
 
 	public function has($bit){
@@ -841,6 +861,14 @@ class WPJAM_Bit{
 	public function remove($bit){
 		$this->bit = $this->bit & (~(int)$bit);
 
+		return $this->bit;
+	}
+
+	protected function set_bit($bit){
+		$this->bit	= $bit;
+	}
+
+	protected function get_bit(){
 		return $this->bit;
 	}
 }

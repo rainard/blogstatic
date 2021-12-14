@@ -10,7 +10,6 @@ class WPJAM_List_Table extends WP_List_Table{
 			'model'			=> '',
 			'capability'	=> 'manage_options',
 			'data_type'		=> 'form',
-			'screen'		=> get_current_screen(),
 			'per_page'		=> 50
 		]);
 
@@ -77,7 +76,12 @@ class WPJAM_List_Table extends WP_List_Table{
 	}
 
 	public function parse_args($args){
+		$this->screen	= get_current_screen();
 		$this->_args	= $args;
+
+		$args['screen']	= $this->screen;
+
+		do_action('wpjam_list_table_load', $this);
 
 		if(isset($args['actions']) && is_array($args['actions'])){
 			foreach($args['actions'] as $key => $action){
@@ -176,42 +180,28 @@ class WPJAM_List_Table extends WP_List_Table{
 	}
 
 	public function is_available($object){
-		if($object->plugin_page){
-			if(empty($GLOBALS['plugin_page']) || !in_array($GLOBALS['plugin_page'], (array)$object->plugin_page)){
-				return false;
-			}
+		if($object->plugin_page && (empty($GLOBALS['plugin_page']) || !in_array($GLOBALS['plugin_page'], (array)$object->plugin_page))){
+			return false;
+		}
 
-			if($object->current_tab){
-				if(empty($GLOBALS['current_tab']) || !in_array($GLOBALS['current_tab'], (array)$object->current_tab)){
-					return false;
-				}
-			}
-		}else{
-			$screen	= get_current_screen();
+		if($object->current_tab && (empty($GLOBALS['current_tab']) || !in_array($GLOBALS['current_tab'], (array)$object->current_tab))){
+			return false;
+		}
 
-			if($object->screen_base){
-				if(!in_array($screen->base, (array)$object->screen_base)){
-					return false;
-				}
-			}
+		if($object->screen_base && !in_array($this->screen->base, (array)$object->screen_base)){
+			return false;
+		}
 
-			if($object->post_type && $screen->screen_base == 'edit'){
-				if(!in_array($screen->post_type, (array)$object->post_type)){
-					return false;
-				}
-			}
+		if($object->screen_id && !in_array($this->screen->id, (array)$object->screen_id)){
+			return false;
+		}
 
-			if($object->taxonomy && $screen->screen_base == 'edit-tags'){
-				if(!in_array($screen->taxonomy, (array)$object->taxonomy)){
-					return false;
-				}
-			}
-
-			if($object->screen_id){
-				if(!in_array($screen->id, (array)$object->screen_id)){
-					return false;
-				}
-			}
+		if($object->post_type && ($this->data_type != 'post_type' || !in_array($this->post_type, (array)$object->post_type))){
+			return false;
+		}
+		
+		if($object->taxonomy && ($this->data_type != 'taxonomy' || !in_array($this->taxonomy, (array)$object->taxonomy))){
+			return false;
 		}
 
 		return true;
@@ -1027,8 +1017,8 @@ class WPJAM_List_Table extends WP_List_Table{
 			return $this->per_page;
 		}
 
-		if($option	= get_current_screen()->get_option('per_page', 'option')){
-			$default	= get_current_screen()->get_option('per_page', 'default')?:50;
+		if($option	= $this->screen->get_option('per_page', 'option')){
+			$default	= $this->screen->get_option('per_page', 'default')?:50;
 			return $this->get_items_per_page($option, $default);
 		}
 
@@ -1694,7 +1684,7 @@ class WPJAM_List_Table_Action{
 
 	public function get_nonce_action($id=0){
 		$key	= $id ? $this->name.'-'.$id : 'bulk_'.$this->name;
-		$prefix	= $GLOBALS['plugin_page'] ?? get_current_screen()->id;
+		$prefix	= $GLOBALS['plugin_page'] ?? $GLOBALS['current_screen']->id;
 
 		return $prefix.'-'.$key;
 	}
@@ -1702,6 +1692,10 @@ class WPJAM_List_Table_Action{
 
 class WPJAM_List_Table_Column{
 	use WPJAM_Register_Trait;
+
+	public function parse_args(){
+		return wp_parse_args($this->args, ['type'=>'view', 'show_admin_column'=>true]);
+	}
 
 	public function callback($id, $column_name, $value){
 		if($callback = $this->column_callback){

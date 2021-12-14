@@ -167,7 +167,7 @@ class WPJAM_Menu_Page{
 		}
 
 		if(!empty($menu_page['map_meta_cap']) && is_callable($menu_page['map_meta_cap'])){
-			wpjam_register_map_meta_cap($capability, $menu_page['map_meta_cap']);
+			wpjam_register_capability($capability, $menu_page['map_meta_cap']);
 		}
 
 		if(self::$is_rendering){
@@ -826,6 +826,10 @@ class WPJAM_Page_Action{
 
 	protected static function verify_nonce($nonce, $key){
 		return wp_verify_nonce($nonce, self::get_nonce_action($key));
+	}
+
+	public function parse_args(){
+		return wp_parse_args($this->args, ['response'=>$this->name, 'direct'=>false, 'fields'=>[]]);
 	}
 
 	public function current_user_can($type=''){

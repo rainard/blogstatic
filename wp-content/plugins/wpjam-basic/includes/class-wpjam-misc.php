@@ -2,13 +2,26 @@
 trait WPJAM_Register_Trait{
 	protected $name;
 	protected $args;
+	protected $filtered	= false;
 
 	public function __construct($name, $args=[]){
 		$this->name	= $name;
 		$this->args	= $args;
 	}
 
-	public function filter_args(){
+	public function parse_args(){
+		return $this->args;
+	}
+
+	protected function get_args(){
+		if(!$this->filtered){
+			$filter	= strtolower(get_called_class()).'_args';
+			$args	= $this->parse_args();
+
+			$this->args		= apply_filters($filter, $args, $this->name);
+			$this->filtered	= true;
+		}
+
 		return $this->args;
 	}
 
@@ -16,30 +29,30 @@ trait WPJAM_Register_Trait{
 		if($key == 'name'){
 			return $this->name;
 		}else{
-			$args	= $this->filter_args();
+			$args	= $this->get_args();
 			return $args[$key] ?? null;
 		}
 	}
 
 	public function __set($key, $value){
 		if($key != 'name'){
-			$this->args	= $this->filter_args();
+			$this->args	= $this->get_args();
 			$this->args[$key]	= $value;
 		}
 	}
 
 	public function __isset($key){
-		$args	= $this->filter_args();
+		$args	= $this->get_args();
 		return isset($args[$key]);
 	}
 
 	public function __unset($key){
-		$this->args	= $this->filter_args();
+		$this->args	= $this->get_args();
 		unset($this->args[$key]);
 	}
 
 	public function to_array(){
-		return $this->filter_args();
+		return $this->get_args();
 	}
 
 	protected static $_registereds	= [];
@@ -535,7 +548,7 @@ jQuery(function($){
 	}
 }
 
-class WPJAM_Map_Meta_Cap{
+class WPJAM_Capability{
 	use WPJAM_Register_Trait;
 
 	public static function filter($caps, $cap, $user_id, $args){
@@ -544,7 +557,7 @@ class WPJAM_Map_Meta_Cap{
 		}
 
 		if($object = self::get($cap)){
-			return call_user_func($object->callback, $user_id, $args, $cap);
+			return call_user_func($object->map_meta_cap, $user_id, $args, $cap);
 		}
 
 		return $caps;

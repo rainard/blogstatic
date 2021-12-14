@@ -50,7 +50,8 @@ WPJAM Basic 主要功能，就是去掉 WordPress 当中一些不常用的功能
 
 == Changelog ==
 
-= 5.8.13 =
+= 5.8.14 =
+* CDN 加速新增支持火山引擎的 veImageX
 * 解决部分博客插件冲突造成文章列表页空白的问题
 * 解决 show_if 和默认 disabled 字段兼容问题
 * 在文章列表页新增「上传外部图片」操作
@@ -63,7 +64,7 @@ WPJAM Basic 主要功能，就是去掉 WordPress 当中一些不常用的功能
 * 新增函数 wpjam_is_external_image，用于判断外部图片
 * 新增函数 wpjam_hex2rgba，支持将16进制颜色转成RGBA格式
 * 新增函数 wpjam_list_filter，支持 in_array 判断
-* 新增函数 wpjam_register_map_meta_cap
+* 新增函数 wpjam_register_capability
 * 新增函数 wpjam_get_ajax_data_attr
 * 新增和优化 Gravatar 加速和 Google 字体加速服务
 * 新增 field 支持 minlength 和 maxlength 服务端验证

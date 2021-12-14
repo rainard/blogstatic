@@ -109,37 +109,38 @@ trait WPJAM_Setting_Trait{
 class WPJAM_Option_Setting{
 	use WPJAM_Register_Trait;
 
-	public function filter_args(){
-		$args	= $this->args;
+	public function parse_args(){
+		$args	= wp_parse_args($this->args, [
+			'option_group'	=> $this->name, 
+			'option_page'	=> $this->name, 
+			'option_type'	=> 'array',
+			'capability'	=> 'manage_options',
+			'ajax'			=> true
+		]);
+		
+		if(isset($args['sections'])){
+			if(is_callable($args['sections'])){
+				$args['sections']	= call_user_func($args['sections'], $this->name);
+			}
 
-		if(empty($args['filtered'])){
-			if(isset($args['sections'])){
-				if(is_callable($args['sections'])){
-					$args['sections']	= call_user_func($args['sections'], $this->name);
-				}
-
-				if(!is_array($args['sections'])){
-					$args['sections']	= [];
-				}
+			if(!is_array($args['sections'])){
+				$args['sections']	= [];
+			}
+		}else{
+			if(isset($args['fields'])){
+				$args['sections']	= [$this->name	=> [
+					'title'		=> $args['title'] ?? '', 
+					'fields'	=> $args['fields']
+				]];
 			}else{
-				if(isset($args['fields'])){
-					$args['sections']	= [$this->name	=> [
-						'title'		=> $args['title'] ?? '', 
-						'fields'	=> $args['fields']
-					]];
-				}else{
-					$args['sections']	= [];
-				}
+				$args['sections']	= [];
 			}
+		}
 
-			foreach($args['sections'] as $section_id => &$section){
-				if(is_callable($section['fields'])){
-					$section['fields']	= call_user_func($section['fields'], $section_id, $this->name);
-				}
+		foreach($args['sections'] as $section_id => &$section){
+			if(is_callable($section['fields'])){
+				$section['fields']	= call_user_func($section['fields'], $section_id, $this->name);
 			}
-
-			$args	= apply_filters('wpjam_option_setting_args', $args, $this->name);
-			$args['filtered']	= true;
 		}
 
 		return $args;

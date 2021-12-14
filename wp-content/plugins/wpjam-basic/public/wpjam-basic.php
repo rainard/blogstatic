@@ -31,7 +31,7 @@ class WPJAM_Basic{
 				'disable_texturize'			=>['title'=>'屏蔽字符转码',		'short'=>'9sSXaK5r5XO7xB-3yjV1zQ',	'description'=>'屏蔽字符换成格式化的HTML实体功能。'],
 				'disable_feed'				=>['title'=>'屏蔽站点Feed',		'short'=>'YgJT8Mlhv08p9lvVLC5L1Q',	'description'=>'屏蔽站点Feed，防止文章被快速被采集。'],
 				'disable_admin_email_check'	=>['title'=>'屏蔽邮箱验证',		'short'=>'GUPxPQQo3Qa2AMuKuM7CzQ',	'description'=>'屏蔽站点管理员邮箱定期验证功能。'],
-				'disable_auto_update'		=>['title'=>'屏蔽自动更新',		'slug'=>'disable-wordpress-auto-update',	'description'=>'关闭自动更新功能，通过手动或SSH方式更新。'],
+				'disable_auto_update'		=>['title'=>'屏蔽自动更新',		'short'=>'bxVdrLhGo075s4TKmi6p3A',	'description'=>'关闭自动更新功能，通过手动或SSH方式更新。'],
 				'disable_privacy'			=>['title'=>'屏蔽后台隐私',		'slug'=>'wordpress-remove-gdpr-pages',		'description'=>'移除为欧洲通用数据保护条例而生成的页面。'],
 				'disable_autoembed'			=>['title'=>'屏蔽Auto Embeds',	'slug'=>'disable-auto-embeds-in-wordpress',	'description'=>'禁用Auto Embeds功能，加快页面解析速度。'],
 				'disable_post_embed'		=>['title'=>'屏蔽文章Embed',		'slug'=>'disable-wordpress-post-embed',		'description'=>'屏蔽嵌入其他WordPress文章的Embed功能。'],
@@ -56,14 +56,9 @@ class WPJAM_Basic{
 					$tax_options	= array_column($hierarchical_taxonomies, 'label', 'name');
 					$tax_show_if	= ['key'=>'no_category_base','value'=>1];
 
-					$no_category_base_field['fields']	+= [
-						'no_category_base_view'	=>['type'=>'view',		'show_if'=>$tax_show_if,	'value'=>'分类模式：'],
-						'no_category_base_for'	=>['type'=>'select',	'show_if'=>$tax_show_if,	'options'=>$tax_options]
-					];
+					$no_category_base_field['fields']['no_category_base_for']	= ['title'=>'分类模式：',	'type'=>'select',	'show_if'=>$tax_show_if,	'options'=>$tax_options];
 				}else{
-					$no_category_base_field['fields']	+= [
-						'no_category_base_for'	=>['type'=>'hidden',	'value'=>current($hierarchical_taxonomies)->name]
-					];
+					$no_category_base_field['fields']['no_category_base_for']	= ['type'=>'hidden',	'value'=>current($hierarchical_taxonomies)->name];
 				}
 			}
 
@@ -101,12 +96,9 @@ class WPJAM_Basic{
 					'upload_external_images'	=> ['type'=>'checkbox',	'value'=>0,	'description'=>'支持<strong>上传外部图片</strong>'],
 				]],
 				'excerpt_fieldset'			=> ['title'=>'文章摘要',	'type'=>'fieldset',	'fields'=>[
-					'excerpt_view'			=> ['type'=>'view',		'group'=>'excerpt',	'value'=>'未设文章摘要：'],
-					'excerpt_optimization'	=> ['type'=>'select',	'group'=>'excerpt',	'options'=>[0=>'WordPress 默认方式截取',1=>'按照中文最优方式截取',2=>'直接不显示摘要']],
-					'excerpt_length_view'	=> ['type'=>'view',		'group'=>'length',	'value'=>'文章摘要长度：',	'show_if'=>['key'=>'excerpt_optimization', 'value'=>1]],
-					'excerpt_length'		=> ['type'=>'number',	'group'=>'length',	'show_if'=>$excerpt_show_if,	'value'=>200],
-					'excerpt_cn_view1'		=> ['type'=>'view',		'group'=>'cn',		'show_if'=>$excerpt_show_if,	'value'=>'中文截取算法：'],
-					'excerpt_cn_view2'		=> ['type'=>'view',		'group'=>'cn',		'show_if'=>$excerpt_show_if,	'value'=>'<a target="_blank" href="'.$url_prefix.'/get_post_excerpt/"><strong>中文算2个字节，英文算1个字节</strong></a>']
+					'excerpt_optimization'	=> ['title'=>'未设文章摘要：',	'type'=>'select',	'options'=>[0=>'WordPress 默认方式截取',1=>'按照中文最优方式截取',2=>'直接不显示摘要']],
+					'excerpt_length'		=> ['title'=>'文章摘要长度：',	'type'=>'number',	'show_if'=>$excerpt_show_if,	'value'=>200],
+					'excerpt_cn_view2'		=> ['title'=>'中文截取算法：',	'type'=>'view',		'show_if'=>$excerpt_show_if,	'value'=>'<a target="_blank" href="'.$url_prefix.'/get_post_excerpt/"><strong>中文算2个字节，英文算1个字节</strong></a>']
 				]],
 				'404_optimization'			=> ['title'=>'404 跳转',	'type'=>'checkbox',	'value'=>0,	'description'=>'增强404页面跳转到文章页面能力']
 			];

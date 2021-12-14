@@ -360,10 +360,14 @@ if(wpjam_basic_get_setting('disable_post_embed')){
 	});
 }
 
-// 屏蔽自动更新
+// 屏蔽自动更新和更新检查作业
 if(wpjam_basic_get_setting('disable_auto_update')){  
 	add_filter('automatic_updater_disabled', '__return_true');
+
 	remove_action('init', 'wp_schedule_update_checks');
+	remove_action('wp_version_check', 'wp_version_check');
+	remove_action('wp_update_plugins', 'wp_update_plugins');
+	remove_action('wp_update_themes', 'wp_update_themes');
 }
 
 // 禁止使用 admin 用户名尝试登录

@@ -553,6 +553,20 @@ function bb_ecommerce_store_customize_register( $wp_customize ) {
 		'type'		=> 'range'
 	));
 
+	$wp_customize->add_setting('bb_ecommerce_store_products_navigation',array(
+       'default' => 'Yes',
+       'sanitize_callback'	=> 'bb_ecommerce_store_sanitize_choices'
+    ));
+    $wp_customize->add_control('bb_ecommerce_store_products_navigation',array(
+       'type' => 'radio',
+       'label' => __('Woocommerce Products Navigation','bb-ecommerce-store'),
+       'choices' => array(
+            'Yes' => __('Yes','bb-ecommerce-store'),
+            'No' => __('No','bb-ecommerce-store'),
+        ),
+       'section' => 'woocommerce_product_catalog',
+    ));
+
 	$wp_customize->add_section('bb_ecommerce_store_product_button_section', array(
 		'title'    => __('Product Button Settings', 'bb-ecommerce-store'),
 		'priority' => null,
@@ -1284,6 +1298,16 @@ function bb_ecommerce_store_customize_register( $wp_customize ) {
     $wp_customize->add_control('bb_ecommerce_store_author_hide',array(
        'type' => 'checkbox',
        'label' => __('Author','bb-ecommerce-store'),
+       'section' => 'bb_ecommerce_store_blog_post'
+    ));
+
+    $wp_customize->add_setting('bb_ecommerce_store_time_hide',array(
+       'default' => false,
+       'sanitize_callback'	=> 'bb_ecommerce_store_sanitize_checkbox'
+    ));
+    $wp_customize->add_control('bb_ecommerce_store_time_hide',array(
+       'type' => 'checkbox',
+       'label' => __('Time','bb-ecommerce-store'),
        'section' => 'bb_ecommerce_store_blog_post'
     ));
 

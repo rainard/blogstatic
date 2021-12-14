@@ -1,10 +1,8 @@
 jQuery(function($){
 	$.fn.extend({
 		wpjam_add_attachment: function(attachment){
-			let render	= wp.template('wpjam-img');
-
 			$(this).next('input').val($(this).data('item_type') == 'url' ? attachment.url : attachment.id);
-			$(this).html(render({
+			$(this).html($.wpjam_render('img', {
 				img_url		: attachment.url,
 				img_style	: $(this).data('img_style'),
 				thumb_args	: $(this).data('thumb_args')
@@ -18,14 +16,12 @@ jQuery(function($){
 				return ;
 			}
 
-			let mu_img	= wp.template('wpjam-mu-img');
-
-			$(this).before('<div class="'+$(this).data('item_class')+'">'+mu_img({
+			$(this).before('<div class="'+$(this).data('item_class')+'">'+$.wpjam_render('mu-img', {
 				img_url		: attachment.url, 
 				img_value	: ($(this).data('item_type') == 'url') ? attachment.url : attachment.id,
 				thumb_args	: $(this).data('thumb_args'),
 				name		: $(this).data('name')
-			})+'</div>');
+			})+$(this).html()+'</div>');
 		},
 
 		wpjam_show_if: function(){
@@ -34,10 +30,12 @@ jQuery(function($){
 				let show_if_val	= $(this).val();
 
 				if($(this).is(':checkbox')){
-					if($(this).hasClass('mu-checkbox')){
+					let wrap_id	= $(this).data('wrap_id');
+
+					if(wrap_id){
 						show_if_val	= [];
 
-						$('.checkbox-'+show_if_key+':checked').each(function(){
+						$('#'+wrap_id+' input:checked').each(function(){
 							show_if_val.push($(this).val());
 						});
 					}else{
@@ -82,10 +80,10 @@ jQuery(function($){
 
 		wpjam_autocomplete: function(){
 			this.each(function(){
-				if($(this).next('.wpjam-query-title').length){
-					$(this).addClass('hidden');
-				}else{
+				if($(this).next('.wpjam-query-title').hasClass('hidden')){
 					$(this).removeClass('hidden');
+				}else{
+					$(this).addClass('hidden');
 				}
 
 				$(this).autocomplete({
@@ -121,8 +119,7 @@ jQuery(function($){
 						});
 					},
 					select: function(event, ui){
-						$(this).after('<span class="wpjam-query-title"><span class="dashicons dashicons-dismiss"></span>'+ui.item.label+'</span>');
-						$(this).addClass('hidden');
+						$(this).addClass('hidden').next('.wpjam-query-title').removeClass('hidden').find('.wpjam-query-text').html(ui.item.label);
 						$('body').trigger('wpjam_autocomplete_selected', ui.item, $(this));
 					}
 				}).focus(function(){
@@ -185,6 +182,12 @@ jQuery(function($){
 	});
 
 	$.extend({
+		wpjam_render: function(tmpl_id, args){
+			let render	= wp.template('wpjam-'+tmpl_id);
+
+			return render(args);
+		},
+
 		wpjam_compare: function(a, compare, b){
 			if(a === null){
 				return false;
@@ -265,8 +268,6 @@ jQuery(function($){
 
 			$('input.color').wpColorPicker();
 
-			$('input[type="range"]').change();
-
 			$('textarea.wpjam-editor').wpjam_editor();
 		}
 	});
@@ -275,16 +276,22 @@ jQuery(function($){
 		$(this).wpjam_show_if();
 	});
 
-	$('body').on('change', 'input[type="range"]', function(){
-		$(this).next('span').html($(this).val());
-	});
-
 	$('body').on('change', 'input[type="radio"]', function(){
 		if($(this).is(':checked')){
-			let id	= $(this).data('id');
+			let wrap_id	= $(this).data('wrap_id');
 
-			$('#'+id+' label').removeClass('checked');
+			if(wrap_id){
+				$('#'+wrap_id+' label').removeClass('checked');
+				$(this).parent('label').addClass('checked');
+			}
+		}
+	});
+
+	$('body').on('change', 'input[type="checkbox"]', function(){
+		if($(this).is(':checked')){
 			$(this).parent('label').addClass('checked');
+		}else{
+			$(this).parent('label').removeClass('checked');
 		}
 	});
 
@@ -302,11 +309,10 @@ jQuery(function($){
 		$.wpjam_form_init();
 	});
 
-	//  重新设置
 	$('body').on('click', '.wpjam-query-title span.dashicons', function(){
 		$(this).parent().fadeOut(300, function(){
 			$(this).prev('input').val('').removeClass('hidden');
-			$(this).remove();
+			$(this).addClass('hidden').css('display', '');
 		});
 	});
 
@@ -317,12 +323,12 @@ jQuery(function($){
 	});
 
 	var custom_uploader;
-	if (custom_uploader) {
+	if(custom_uploader){
 		custom_uploader.open();
 		return;
 	}
 
-	$('body').on('click', '.wpjam-file', function(e) {
+	$('body').on('click', '.wpjam-file a', function(e) {
 		let prev_input	= $(this).prev('input');
 		let item_type	= $(this).data('item_type');
 		let title		= (item_type == 'image')?'选择图片':'选择文件';
@@ -394,16 +400,14 @@ jQuery(function($){
 		}).on('select', function() {
 			let name		= _this.data('name');
 			let item_class	= _this.data('item_class');
-			let mu_file		= wp.template('wpjam-mu-file');
-			let mu_action	= wp.template('wpjam-mu-action');
-
+			
 			custom_uploader.state().get('selection').map(function(attachment){
 				attachment	= attachment.toJSON();
 
-				_this.parent().before('<div class="'+item_class+'">'+mu_file({
+				_this.parent().before('<div class="'+item_class+'">'+$.wpjam_render('mu-file', {
 					img_url	: attachment.url,
 					name	: name,
-				})+mu_action()+'</div>');
+				})+$.wpjam_render('mu-action')+'</div>');
 			});
 
 			$('.media-modal-close').trigger('click');
@@ -464,12 +468,10 @@ jQuery(function($){
 		let item	= $(this).parent().clone();
 
 		item.insertAfter($(this).parent());
-		item.find('.wpjam-query-title').remove();
+		item.find('.wpjam-query-title').addClass('hidden');
 		item.find('.wpjam-autocomplete').removeClass('hidden').wpjam_autocomplete();
 
-		let mu_action = wp.template('wpjam-mu-action');
-
-		$(this).parent().append(mu_action());
+		$(this).parent().append($.wpjam_render('mu-action'));
 		$(this).remove();
 
 		return false;
@@ -480,10 +482,8 @@ jQuery(function($){
 			return false;
 		}
 
-		let mu_fields	= wp.template($(this).data('tmpl_id'));
-		let mu_action	= wp.template('wpjam-mu-action');
-		let i			= $(this).data('i')+1;
-		let item		= $(mu_fields({i:i}));
+		let i		= $(this).data('i')+1;
+		let item	= $($.wpjam_render($(this).data('tmpl_id'), {i:i}));
 
 		item.insertAfter($(this).parent());
 		item.find('.show-if-key').wpjam_show_if();
@@ -493,9 +493,7 @@ jQuery(function($){
 
 		item.wrapAll('<div class="'+$(this).data('item_class')+'"></div>');
 
-		
-
-		$(this).parent().append(mu_action());
+		$(this).parent().append($.wpjam_render('mu-action'));
 		$(this).parent().parent().trigger('mu_fields_added', i);
 		$(this).remove();
 
@@ -504,7 +502,7 @@ jQuery(function($){
 
 	//  删除图片
 	$('body').on('click', '.wpjam-del-img', function(){
-		$(this).parent().prev('input').val('');
+		$(this).parent().next('input').val('');
 		$(this).prev('img').fadeOut(300, function(){
 			$(this).parent().removeClass('has-img');
 			$(this).remove();
@@ -528,7 +526,7 @@ jQuery(function($){
 	});
 });
 
-if (self != top) {
+if(self != top){
 	document.getElementsByTagName('html')[0].className += ' TB_iframe';
 }
 

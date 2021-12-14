@@ -80,8 +80,7 @@ class WPJAM_Related_Posts{
 			'thumb_set'	=> ['title'=>'列表内容',	'type'=>'fieldset',	'fields'=>[
 				'_excerpt'	=> ['type'=>'checkbox',	'name'=>'excerpt',	'description'=>'显示文章摘要。'],
 				'thumb'		=> ['type'=>'checkbox',	'description'=>'显示缩略图。','group'=>'size',	'value'=>1],
-				'size'		=> ['type'=>'view',		'show_if'=>$show_if,	'group'=>'size',	'value'=>'尺寸：'],
-				'width'		=> ['type'=>'number',	'show_if'=>$show_if,	'group'=>'size',	'value'=>100,	'class'=>'small-text'],
+				'width'		=> ['type'=>'number',	'show_if'=>$show_if,	'group'=>'size',	'value'=>100,	'title'=>'尺寸：',	'class'=>'small-text'],
 				'x'			=> ['type'=>'view',		'show_if'=>$show_if,	'group'=>'size',	'value'=>'<span class="dashicons dashicons-no-alt"></span>'],
 				'height'	=> ['type'=>'number',	'show_if'=>$show_if,	'group'=>'size',	'value'=>100,	'class'=>'small-text'],
 				'_view'		=> ['type'=>'view',		'show_if'=>$show_if,	'value'=>'如勾选之后缩略图不显示，请到「<a href="'.admin_url('admin.php?page=wpjam-thumbnail').'">缩略图设置</a>」勾选「无需修改主题，程序自动使用 WPJAM 的缩略图设置」。']

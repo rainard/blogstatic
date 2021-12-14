@@ -23,12 +23,10 @@ class WPJAM_Thumbnail_Setting{
 			]],
 			'term_set'		=> ['title'=>'分类缩略图',	'type'=>'fieldset',	'fields'=>[
 				'term_thumbnail_type'		=> ['type'=>'select',	'options'=>[''=>'关闭分类缩略图', 'img'=>'本地媒体模式','image'=>'输入图片链接模式']],
-				'term_thumbnail_view'		=> ['type'=>'view',		'show_if'=>$term_show_if,	'group'=>'taxonomy',	'value'=>'支持的分类模式：'],
-				'term_thumbnail_taxonomies'	=> ['type'=>'checkbox',	'show_if'=>$term_show_if,	'group'=>'taxonomy',	'options'=>$tax_options],
-				'term_thumbnail_size'		=> ['type'=>'view',		'show_if'=>$term_show_if,	'group'=>'term',		'value'=>'缩略图尺寸：'],
-				'term_thumbnail_width'		=> ['type'=>'number',	'show_if'=>$term_show_if,	'group'=>'term',		'class'=>'small-text'],
-				'term_thumbnail_plus'		=> ['type'=>'view',		'show_if'=>$term_show_if,	'group'=>'term',		'value'=>'<span class="dashicons dashicons-no-alt"></span>'],
-				'term_thumbnail_height'		=> ['type'=>'number',	'show_if'=>$term_show_if,	'group'=>'term',		'class'=>'small-text']
+				'term_thumbnail_taxonomies'	=> ['type'=>'checkbox',	'show_if'=>$term_show_if,	'title'=>'支持的分类模式：',	'options'=>$tax_options],
+				'term_thumbnail_width'		=> ['type'=>'number',	'show_if'=>$term_show_if,	'group'=>'term',	'title'=>'缩略图尺寸：',	'class'=>'small-text'],
+				'term_thumbnail_plus'		=> ['type'=>'view',		'show_if'=>$term_show_if,	'group'=>'term',	'title'=>'<span class="dashicons dashicons-no-alt"></span>'],
+				'term_thumbnail_height'		=> ['type'=>'number',	'show_if'=>$term_show_if,	'group'=>'term',	'class'=>'small-text']
 			]],
 			'post_set'		=> ['title'=>'文章缩略图',	'type'=>'fieldset',	'fields'=>[
 				'post_thumbnail_view'	=> ['type'=>'view',	'value'=>'首先使用文章特色图片，如未设置，将按照下面的顺序获取：'],
@@ -242,6 +240,9 @@ function wpjam_parse_size($size, $ratio=1){
 			$height	= (int)($size[1]??0);
 		}
 	}else{
+		$size	= strtolower($size);
+		$size	= str_replace('*', 'x', $size);
+
 		if(strpos($size, 'x')){
 			$size	= explode('x', $size);
 			$width	= (int)$size[0];
@@ -322,7 +323,6 @@ add_action('wp_loaded', function(){
 			}
 		}else{
 			$field['type']	= 'image';
-			$field['style']	= 'width:calc(100% - 100px);';
 		}
 
 		wpjam_register_term_option('thumbnail', $field);
