@@ -1,23 +1,33 @@
-<!DOCTYPE html> 
-<html class="no-js" lang="zh-CN">
-
+<!DOCTYPE html>
+<!--[if IE 7]>
+<html class="ie ie7" lang="zh-CN">
+<![endif]-->
+<!--[if IE 8]>
+<html class="ie ie8" lang="zh-CN">
+<![endif]-->
+<!--[if !(IE 7) & !(IE 8)]><!-->
+<html lang="zh-CN">
+<!--<![endif]-->
 <head>
 	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="viewport" content="width=device-width">
+	<title>Monk IT | 又一个WordPress站点</title>
 	<link rel="profile" href="https://gmpg.org/xfn/11">
-		
-	<title>Monk IT &#8211; 又一个WordPress站点</title>
-<meta name='robots' content='max-image-preview:large' />
-<script>document.documentElement.className = document.documentElement.className.replace("no-js","js");</script>
+	<link rel="pingback" href="https://blog.bonp.top/xmlrpc.php">
+	<!--[if lt IE 9]>
+	<script src="https://blog.bonp.top/wp-content/themes/twentyfourteen/js/html5.js?ver=3.7.0"></script>
+	<![endif]-->
+	<meta name='robots' content='max-image-preview:large' />
 <link rel='dns-prefetch' href='//fonts.googleapis.com' />
 <link rel='dns-prefetch' href='//s.w.org' />
-<link rel="alternate" type="application/rss+xml" title="Monk IT &raquo; Feed" href="https://blog.bonp.top/?feed=rss2" />
-<link rel="alternate" type="application/rss+xml" title="Monk IT &raquo; 评论Feed" href="https://blog.bonp.top/?feed=comments-rss2" />
-		<script type="text/javascript">
+<link href='https://fonts.gstatic.com' crossorigin rel='preconnect' />
+<link rel="alternate" type="application/rss+xml" title="Monk IT &raquo; Feed" href="https://blog.bonp.top/feed" />
+<link rel="alternate" type="application/rss+xml" title="Monk IT &raquo; 评论Feed" href="https://blog.bonp.top/comments/feed" />
+		<script>
 			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/blog.bonp.top\/wp-includes\/js\/wp-emoji-release.min.js?ver=5.8.2"}};
 			!function(e,a,t){var n,r,o,i=a.createElement("canvas"),p=i.getContext&&i.getContext("2d");function s(e,t){var a=String.fromCharCode;p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,e),0,0);e=i.toDataURL();return p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,t),0,0),e===i.toDataURL()}function c(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(o=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},r=0;r<o.length;r++)t.supports[o[r]]=function(e){if(!p||!p.fillText)return!1;switch(p.textBaseline="top",p.font="600 32px Arial",e){case"flag":return s([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])?!1:!s([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!s([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]);case"emoji":return!s([10084,65039,8205,55357,56613],[10084,65039,8203,55357,56613])}return!1}(o[r]),t.supports.everything=t.supports.everything&&t.supports[o[r]],"flag"!==o[r]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[o[r]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(n=t.source||{}).concatemoji?c(n.concatemoji):n.wpemoji&&n.twemoji&&(c(n.twemoji),c(n.wpemoji)))}(window,document,window._wpemojiSettings);
 		</script>
-		<style type="text/css">
+		<style>
 img.wp-smiley,
 img.emoji {
 	display: inline !important;
@@ -31,135 +41,111 @@ img.emoji {
 	padding: 0 !important;
 }
 </style>
-	<link rel='stylesheet' id='wp-block-library-css'  href='https://blog.bonp.top/wp-includes/css/dist/block-library/style.min.css?ver=5.8.2' type='text/css' media='all' />
-<link rel='stylesheet' id='dashscroll-style-css'  href='https://blog.bonp.top/wp-content/themes/dashscroll/style.css?ver=5.8.2' type='text/css' media='all' />
-<style id='dashscroll-style-inline-css' type='text/css'>
-body { font-family: "Roboto", Arial, sans-serif; }
-
+	<link rel='stylesheet' id='wp-block-library-css'  href='https://blog.bonp.top/wp-includes/css/dist/block-library/style.min.css?ver=5.8.2' media='all' />
+<style id='wp-block-library-theme-inline-css'>
+#start-resizable-editor-section{display:none}.wp-block-audio figcaption{color:#555;font-size:13px;text-align:center}.is-dark-theme .wp-block-audio figcaption{color:hsla(0,0%,100%,.65)}.wp-block-code{font-family:Menlo,Consolas,monaco,monospace;color:#1e1e1e;padding:.8em 1em;border:1px solid #ddd;border-radius:4px}.wp-block-embed figcaption{color:#555;font-size:13px;text-align:center}.is-dark-theme .wp-block-embed figcaption{color:hsla(0,0%,100%,.65)}.blocks-gallery-caption{color:#555;font-size:13px;text-align:center}.is-dark-theme .blocks-gallery-caption{color:hsla(0,0%,100%,.65)}.wp-block-image figcaption{color:#555;font-size:13px;text-align:center}.is-dark-theme .wp-block-image figcaption{color:hsla(0,0%,100%,.65)}.wp-block-pullquote{border-top:4px solid;border-bottom:4px solid;margin-bottom:1.75em;color:currentColor}.wp-block-pullquote__citation,.wp-block-pullquote cite,.wp-block-pullquote footer{color:currentColor;text-transform:uppercase;font-size:.8125em;font-style:normal}.wp-block-quote{border-left:.25em solid;margin:0 0 1.75em;padding-left:1em}.wp-block-quote cite,.wp-block-quote footer{color:currentColor;font-size:.8125em;position:relative;font-style:normal}.wp-block-quote.has-text-align-right{border-left:none;border-right:.25em solid;padding-left:0;padding-right:1em}.wp-block-quote.has-text-align-center{border:none;padding-left:0}.wp-block-quote.is-large,.wp-block-quote.is-style-large{border:none}.wp-block-search .wp-block-search__label{font-weight:700}.wp-block-group.has-background{padding:1.25em 2.375em;margin-top:0;margin-bottom:0}.wp-block-separator{border:none;border-bottom:2px solid;margin-left:auto;margin-right:auto;opacity:.4}.wp-block-separator:not(.is-style-wide):not(.is-style-dots){width:100px}.wp-block-separator.has-background:not(.is-style-dots){border-bottom:none;height:1px}.wp-block-separator.has-background:not(.is-style-wide):not(.is-style-dots){height:2px}.wp-block-table thead{border-bottom:3px solid}.wp-block-table tfoot{border-top:3px solid}.wp-block-table td,.wp-block-table th{padding:.5em;border:1px solid;word-break:normal}.wp-block-table figcaption{color:#555;font-size:13px;text-align:center}.is-dark-theme .wp-block-table figcaption{color:hsla(0,0%,100%,.65)}.wp-block-video figcaption{color:#555;font-size:13px;text-align:center}.is-dark-theme .wp-block-video figcaption{color:hsla(0,0%,100%,.65)}.wp-block-template-part.has-background{padding:1.25em 2.375em;margin-top:0;margin-bottom:0}#end-resizable-editor-section{display:none}
 </style>
-<link rel='stylesheet' id='dashscroll-responsive-css'  href='https://blog.bonp.top/wp-content/themes/dashscroll/responsive.css?ver=5.8.2' type='text/css' media='all' />
-<link rel='stylesheet' id='dashscroll-font-awesome-css'  href='https://blog.bonp.top/wp-content/themes/dashscroll/fonts/all.min.css?ver=5.8.2' type='text/css' media='all' />
-<link rel='stylesheet' id='roboto-css'  href='//fonts.googleapis.com/css?family=Roboto%3A400%2C300italic%2C300%2C400italic%2C700&#038;subset=latin%2Clatin-ext&#038;ver=5.8.2' type='text/css' media='all' />
-<script type='text/javascript' src='https://blog.bonp.top/wp-includes/js/jquery/jquery.min.js?ver=3.6.0' id='jquery-core-js'></script>
-<script type='text/javascript' src='https://blog.bonp.top/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.3.2' id='jquery-migrate-js'></script>
-<script type='text/javascript' src='https://blog.bonp.top/wp-content/themes/dashscroll/js/slick.min.js?ver=5.8.2' id='dashscroll-slick-js'></script>
-<link rel="https://api.w.org/" href="https://blog.bonp.top/index.php?rest_route=/" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://blog.bonp.top/xmlrpc.php?rsd" />
+<link rel='stylesheet' id='twentyfourteen-lato-css'  href='https://fonts.googleapis.com/css?family=Lato%3A300%2C400%2C700%2C900%2C300italic%2C400italic%2C700italic&#038;subset=latin%2Clatin-ext&#038;display=fallback' media='all' />
+<link rel='stylesheet' id='genericons-css'  href='https://blog.bonp.top/wp-content/themes/twentyfourteen/genericons/genericons.css?ver=3.0.3' media='all' />
+<link rel='stylesheet' id='twentyfourteen-style-css'  href='https://blog.bonp.top/wp-content/themes/twentyfourteen/style.css?ver=20190507' media='all' />
+<link rel='stylesheet' id='twentyfourteen-block-style-css'  href='https://blog.bonp.top/wp-content/themes/twentyfourteen/css/blocks.css?ver=20190102' media='all' />
+<!--[if lt IE 9]>
+<link rel='stylesheet' id='twentyfourteen-ie-css'  href='https://blog.bonp.top/wp-content/themes/twentyfourteen/css/ie.css?ver=20140701' media='all' />
+<![endif]-->
+<script src='https://blog.bonp.top/wp-includes/js/jquery/jquery.min.js?ver=3.6.0' id='jquery-core-js'></script>
+<script src='https://blog.bonp.top/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.3.2' id='jquery-migrate-js'></script>
+<link rel="https://api.w.org/" href="https://blog.bonp.top/wp-json/" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://blog.bonp.top/xmlrpc.php?rsd" />
 <link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://blog.bonp.top/wp-includes/wlwmanifest.xml" /> 
 <meta name="generator" content="WordPress 5.8.2" />
-<style id="kirki-inline-styles"></style></head>
+</head>
 
-<body class="home blog col-2cr full-width logged-out">
-
-
-<a class="skip-link screen-reader-text" href="#page">Skip to content</a>
-
-<div id="wrapper">
+<body class="home blog wp-embed-responsive masthead-fixed list-view full-width grid">
+<div id="page" class="hfeed site">
 	
-		
-	<div id="wrapper-inner">
-	
-		<header id="header">
-			
+	<header id="masthead" class="site-header" role="banner">
+		<div class="header-main">
 			<h1 class="site-title"><a href="https://blog.bonp.top/" rel="home">Monk IT</a></h1>
-							<p class="site-description">又一个WordPress站点</p>
-			
-			<div id="move-sidebar-header"></div>
-			
-	<div class="sidebar s1">
-		
-		<div class="sidebar-content">
 
-						
-			
-			<div id="block-2" class="widget widget_block widget_search"><form role="search" method="get" action="https://blog.bonp.top/" class="wp-block-search__button-outside wp-block-search__text-button wp-block-search"><label for="wp-block-search__input-1" class="wp-block-search__label">搜索</label><div class="wp-block-search__inside-wrapper"><input type="search" id="wp-block-search__input-1" class="wp-block-search__input" name="s" value="" placeholder=""  required /><button type="submit" class="wp-block-search__button ">搜索</button></div></form></div><div id="block-3" class="widget widget_block"><div class="wp-block-group"><div class="wp-block-group__inner-container"><h2>近期文章</h2><ul class="wp-block-latest-posts__list wp-block-latest-posts"></ul></div></div></div><div id="block-4" class="widget widget_block"><div class="wp-block-group"><div class="wp-block-group__inner-container"><h2>近期评论</h2><div class="no-comments wp-block-latest-comments">没有评论可显示。</div></div></div></div>
-		</div><!--/.sidebar-content-->
-		
-	</div><!--/.sidebar-->
-	
-			
-		</header><!--/#header-->
-		
-		<div class="sidebar s2">
-							<div class="search-trap-focus">
-					<button class="toggle-search" data-target=".search-trap-focus">
-						<svg class="svg-icon" id="svg-search" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 23 23"><path d="M38.710696,48.0601792 L43,52.3494831 L41.3494831,54 L37.0601792,49.710696 C35.2632422,51.1481185 32.9839107,52.0076499 30.5038249,52.0076499 C24.7027226,52.0076499 20,47.3049272 20,41.5038249 C20,35.7027226 24.7027226,31 30.5038249,31 C36.3049272,31 41.0076499,35.7027226 41.0076499,41.5038249 C41.0076499,43.9839107 40.1481185,46.2632422 38.710696,48.0601792 Z M36.3875844,47.1716785 C37.8030221,45.7026647 38.6734666,43.7048964 38.6734666,41.5038249 C38.6734666,36.9918565 35.0157934,33.3341833 30.5038249,33.3341833 C25.9918565,33.3341833 22.3341833,36.9918565 22.3341833,41.5038249 C22.3341833,46.0157934 25.9918565,49.6734666 30.5038249,49.6734666 C32.7048964,49.6734666 34.7026647,48.8030221 36.1716785,47.3875844 C36.2023931,47.347638 36.2360451,47.3092237 36.2726343,47.2726343 C36.3092237,47.2360451 36.347638,47.2023931 36.3875844,47.1716785 Z" transform="translate(-20 -31)"></path></svg>
-						<svg class="svg-icon" id="svg-close" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 16 16"><polygon fill="" fill-rule="evenodd" points="6.852 7.649 .399 1.195 1.445 .149 7.899 6.602 14.352 .149 15.399 1.195 8.945 7.649 15.399 14.102 14.352 15.149 7.899 8.695 1.445 15.149 .399 14.102"></polygon></svg>
-					</button>
-					<div class="search-expand">
-						<div class="search-expand-inner">
-							<form method="get" class="searchform themeform" action="https://blog.bonp.top/">
-	<div>
-		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
-	</div>
-</form>						</div>
-					</div>
-				</div>
-															</div>
-
-		<div class="main" id="page">
-		
-						
-						
-			<div class="main-inner group">
-<div class="content">
-	
-	
-	<div class="content-inner group">
-				
+			<div class="search-toggle">
+				<a href="#search-container" class="screen-reader-text" aria-expanded="false" aria-controls="search-container">Search</a>
 			</div>
-</div><!--/.content-->
 
-<div id="move-sidebar-content"></div>
+			<nav id="primary-navigation" class="site-navigation primary-navigation" role="navigation">
+				<button class="menu-toggle">Primary Menu</button>
+				<a class="screen-reader-text skip-link" href="#content">Skip to content</a>
+				<div id="primary-menu" class="nav-menu"><ul>
+<li class="page_item page-item-2"><a href="https://blog.bonp.top/sample-page">示例页面</a></li>
+</ul></div>
+			</nav>
+		</div>
 
-			</div><!--/.main-inner-->
-				
-			<footer id="footer">
-			
-									
-								
-				<div id="footer-bottom">
-					
-					<a id="back-to-top" href="#"><i class="fas fa-angle-up"></i></a>
-						
-					<div class="pad group">
-						
-						<div class="grid one-full">
-							
-														
-							<div id="copyright">
-																	<p>Monk IT &copy; 2021. All Rights Reserved.</p>
-															</div><!--/#copyright-->
-							
-														<div id="credit">
-								<p>Powered by <a href="http://wordpress.org" rel="nofollow">WordPress</a>. Theme by <a href="http://alx.media" rel="nofollow">Alx</a>.</p>
-							</div><!--/#credit-->
-														
-						</div>
-						
-						<div class="grid one-full">	
-																												</div>
-						
-					</div><!--/.pad-->
+		<div id="search-container" class="search-box-wrapper hide">
+			<div class="search-box">
+				<form role="search" method="get" class="search-form" action="https://blog.bonp.top/">
+				<label>
+					<span class="screen-reader-text">搜索：</span>
+					<input type="search" class="search-field" placeholder="搜索&hellip;" value="" name="s" />
+				</label>
+				<input type="submit" class="search-submit" value="搜索" />
+			</form>			</div>
+		</div>
+	</header><!-- #masthead -->
 
-				</div><!--/#footer-bottom-->
+	<div id="main" class="site-main">
 
-			</footer><!--/#footer-->
+<div id="main-content" class="main-content">
+
+
+	<div id="primary" class="content-area">
+		<div id="content" class="site-content" role="main">
+
 		
-		</div><!--/.main-->	
-	
-	</div><!--/#wrapper-inner-->
-</div><!--/#wrapper-->
+<header class="page-header">
+	<h1 class="page-title">Nothing Found</h1>
+</header>
 
-<script type='text/javascript' src='https://blog.bonp.top/wp-content/themes/dashscroll/js/jquery.fitvids.js?ver=5.8.2' id='dashscroll-fitvids-js'></script>
-<script type='text/javascript' src='https://blog.bonp.top/wp-content/themes/dashscroll/js/scripts.js?ver=5.8.2' id='dashscroll-scripts-js'></script>
-<script type='text/javascript' src='https://blog.bonp.top/wp-content/themes/dashscroll/js/nav.js?ver=1639023793' id='dashscroll-nav-script-js'></script>
-<script type='text/javascript' src='https://blog.bonp.top/wp-includes/js/wp-embed.min.js?ver=5.8.2' id='wp-embed-js'></script>
-	<script>
-	/(trident|msie)/i.test(navigator.userAgent)&&document.getElementById&&window.addEventListener&&window.addEventListener("hashchange",function(){var t,e=location.hash.substring(1);/^[A-z0-9_-]+$/.test(e)&&(t=document.getElementById(e))&&(/^(?:a|select|input|button|textarea)$/i.test(t.tagName)||(t.tabIndex=-1),t.focus())},!1);
-	</script>
-	</body>
+<div class="page-content">
+	
+	<p>It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help.</p>
+		<form role="search" method="get" class="search-form" action="https://blog.bonp.top/">
+				<label>
+					<span class="screen-reader-text">搜索：</span>
+					<input type="search" class="search-field" placeholder="搜索&hellip;" value="" name="s" />
+				</label>
+				<input type="submit" class="search-submit" value="搜索" />
+			</form>
+	</div><!-- .page-content -->
+
+		</div><!-- #content -->
+	</div><!-- #primary -->
+	</div><!-- #main-content -->
+
+<div id="secondary">
+		<h2 class="site-description">又一个WordPress站点</h2>
+	
+	
+		<div id="primary-sidebar" class="primary-sidebar widget-area" role="complementary">
+		<aside id="block-2" class="widget widget_block widget_search"><form role="search" method="get" action="https://blog.bonp.top/" class="wp-block-search__button-outside wp-block-search__text-button wp-block-search"><label for="wp-block-search__input-1" class="wp-block-search__label">搜索</label><div class="wp-block-search__inside-wrapper"><input type="search" id="wp-block-search__input-1" class="wp-block-search__input" name="s" value="" placeholder=""  required /><button type="submit" class="wp-block-search__button ">搜索</button></div></form></aside><aside id="block-3" class="widget widget_block"><div class="wp-block-group"><div class="wp-block-group__inner-container"><h2>近期文章</h2><ul class="wp-block-latest-posts__list wp-block-latest-posts"></ul></div></div></aside><aside id="block-4" class="widget widget_block"><div class="wp-block-group"><div class="wp-block-group__inner-container"><h2>近期评论</h2><div class="no-comments wp-block-latest-comments">没有评论可显示。</div></div></div></aside>	</div><!-- #primary-sidebar -->
+	</div><!-- #secondary -->
+
+		</div><!-- #main -->
+
+		<footer id="colophon" class="site-footer" role="contentinfo">
+
+			
+			<div class="site-info">
+												<a href="https://wordpress.org/" class="imprint">
+					Proudly powered by WordPress				</a>
+			</div><!-- .site-info -->
+		</footer><!-- #colophon -->
+	</div><!-- #page -->
+
+	<script src='https://blog.bonp.top/wp-content/themes/twentyfourteen/js/functions.js?ver=20171218' id='twentyfourteen-script-js'></script>
+<script src='https://blog.bonp.top/wp-includes/js/wp-embed.min.js?ver=5.8.2' id='wp-embed-js'></script>
+</body>
 </html>
-<!-- Dynamic page generated in 1.272 seconds. -->
-<!-- Cached page generated by WP-Super-Cache on 2021-12-21 13:57:34 -->
+
+<!-- Dynamic page generated in 2.995 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2021-12-24 14:47:26 -->
 
 <!-- super cache -->
