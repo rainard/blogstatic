@@ -36,13 +36,9 @@ get_header(); ?>
 	</div><!-- #primary -->
 
 <?php
-<div class="breadcrumbs">  
-<?php  
-if(function_exists('bcn_display')){  
-    bcn_display();  
-}  
-?>  
-</div> 
+<div class="breadcrumbs">
+	
+</div>
 get_sidebar( 'content' );
 get_sidebar();
 get_footer();
