@@ -1,0 +1,174 @@
+# Translation of Plugins - Q2W3 Fixed Widget for WordPress - Stable (latest release) in Chinese (China)
+# This file is distributed under the same license as the Plugins - Q2W3 Fixed Widget for WordPress - Stable (latest release) package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2021-07-13 14:07:52+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: GlotPress/3.0.0-alpha.2\n"
+"Language: zh_CN\n"
+"Project-Id-Version: Plugins - Q2W3 Fixed Widget for WordPress - Stable (latest release)\n"
+
+#. Plugin Name of the plugin
+msgid "Fixed Widget"
+msgstr "固定的Widget"
+
+#: q2w3-fixed-widget.php:528
+msgid "Settings"
+msgstr "设置"
+
+#: q2w3-fixed-widget.php:497
+msgid "Install Now"
+msgstr "立即安装"
+
+#: q2w3-fixed-widget.php:494
+msgid "Activate Now"
+msgstr "立即激活"
+
+#: q2w3-fixed-widget.php:480
+msgid "This ad management plugin provides many features to optimize your ads and to boost your conversions. It works perfectly with the Q2W3 Fixed Widget plugin."
+msgstr "这个广告管理插件提供了许多功能，可以优化您的广告并提高转化率。 它与Q2W3 Fixed Widget插件完美配合。"
+
+#: q2w3-fixed-widget.php:446
+msgid " Works like the Disable Width option."
+msgstr "类似于“禁用宽度”选项。"
+
+#: q2w3-fixed-widget.php:443
+msgid "You need to provide the HTML tag ID here. The position of that HTML element will determine the margin-bottom value."
+msgstr "您需要在此处提供HTML标签ID。 该HTML元素的位置将确定下边距。"
+
+#: q2w3-fixed-widget.php:426
+msgid " Note for users of caching plugins. Please, don’t forget to clear the cache after changing options."
+msgstr "缓存插件用户注意事项。 请不要忘记更改选项后清除缓存。"
+
+#: q2w3-fixed-widget.php:398
+msgid "Documentation and Support"
+msgstr "文档和支持"
+
+#: q2w3-fixed-widget.php:397
+msgid "Recommended Integration"
+msgstr "推荐整合"
+
+#. Description of the plugin
+msgid "Use the fixed widget plugin to create sticky widgets that stay in the visible screen area when the page is scrolled up or down and boost your conversions."
+msgstr "使用 fixed widget小工具插件来创建粘性窗口小工具，这些页面在向上或向下滚动页面时会停留在可见的屏幕区域中，从而提高转化率。"
+
+#. Author of the plugin
+msgid "Thomas Maier, Max Bond"
+msgstr "Thomas Maier, Max Bond"
+
+#. Plugin URI of the plugin
+#. Author URI of the plugin
+msgid "https://wpadvancedads.com/fixed-widget-wordpress/"
+msgstr "https://wpadvancedads.com/fixed-widget-wordpress/"
+
+#: q2w3-fixed-widget.php:466
+msgid "If MutationObserver is disabled, the plugin will use the refresh interval to reflect page changes (version 4 behavior)"
+msgstr "如果禁用MutationObserver，则插件将使用刷新间隔来反映页面更改（版本4行为）"
+
+#: q2w3-fixed-widget.php:466
+msgid "Disable MutationObserver:"
+msgstr "停用 MutationObserver:"
+
+#: q2w3-fixed-widget.php:446
+msgid "Disable Height:"
+msgstr "停用高度:"
+
+#: q2w3-fixed-widget.php:445
+msgid "Use this option to disable the plugin on portable devices. When the browser screen width is less than the specified value, the plugin will be disabled."
+msgstr "使用此选项可在移动设备上禁用插件。 当浏览器的屏幕宽度小于指定的值时，该插件将被禁用。"
+
+#: q2w3-fixed-widget.php:445
+msgid "Disable Width:"
+msgstr "停用宽度："
+
+#: q2w3-fixed-widget.php:444
+msgid "Used only for compatibility with browsers without MutationObserver API support. Set 0 to disable it completely."
+msgstr "仅用于与不支持MutationObserver API的浏览器兼容。 设置为0以完全禁用它。"
+
+#: q2w3-fixed-widget.php:469
+msgid "Enable this option only if you have problems with other scroll oriented javascript code"
+msgstr "仅当您对其他面向滚动的javascript代码有问题时才启用此选项"
+
+#: q2w3-fixed-widget.php:469
+msgid "Use jQuery(window).load() hook:"
+msgstr "Use jQuery(window).load() hook:"
+
+#: q2w3-fixed-widget.php:468
+msgid "Enable this option for themes with a responsive sidebar"
+msgstr "使用响应式边栏为主题启用此选项"
+
+#: q2w3-fixed-widget.php:468
+msgid "Inherit widget width from the parent container:"
+msgstr "从父容器继承小工具宽度："
+
+#: q2w3-fixed-widget.php:467
+msgid "Enable this option for debug purposes (frontend problems and etc.)"
+msgstr "出于调试目的（前端问题等）启用此选项"
+
+#: q2w3-fixed-widget.php:467
+msgid "Enable the plugin for logged-in users only:"
+msgstr "仅对已登录的用户启用该插件："
+
+#: q2w3-fixed-widget.php:465
+msgid "Auto fix widget ID:"
+msgstr "自动 fix widget ID:"
+
+#: q2w3-fixed-widget.php:456
+msgid "Custom HTML IDs (each one on a new line):"
+msgstr "自定义HTML ID（每行一个）："
+
+#: q2w3-fixed-widget.php:444
+msgid "milliseconds"
+msgstr "毫秒"
+
+#: q2w3-fixed-widget.php:444
+msgid "Refresh interval:"
+msgstr "刷新间隔："
+
+#: q2w3-fixed-widget.php:443
+msgid "Stop ID:"
+msgstr "停止ID:"
+
+#: q2w3-fixed-widget.php:442
+msgid "Margin Bottom:"
+msgstr "底外距："
+
+#: q2w3-fixed-widget.php:441 q2w3-fixed-widget.php:442
+#: q2w3-fixed-widget.php:445 q2w3-fixed-widget.php:446
+msgid "px"
+msgstr "像素"
+
+#: q2w3-fixed-widget.php:441
+msgid "Margin Top:"
+msgstr "上边距："
+
+#: q2w3-fixed-widget.php:428
+msgid "Save Changes"
+msgstr "保存更改"
+
+#: q2w3-fixed-widget.php:405
+msgid "Settings saved."
+msgstr "设置已保存。"
+
+#: q2w3-fixed-widget.php:396
+msgid "Custom IDs"
+msgstr "自定义ID"
+
+#: q2w3-fixed-widget.php:395
+msgid "Compatibility"
+msgstr "兼容性"
+
+#: q2w3-fixed-widget.php:394
+msgid "General Options"
+msgstr "常规选项"
+
+#: q2w3-fixed-widget.php:292 q2w3-fixed-widget.php:402
+msgid "Fixed Widget Options"
+msgstr "Fixed Widget 选项"
+
+#: q2w3-fixed-widget.php:262
+msgid "Fixed widget"
+msgstr "Fixed widget"
