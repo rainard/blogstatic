@@ -1,0 +1,226 @@
+/*computer*/
+@media (min-width: 1024px) {
+	.page-content .row{
+		display: flex;
+		align-items: flex-start;
+	}
+	.sidebar-left .page-content .row{
+		flex-direction:row-reverse;
+	}
+	.main-content{
+		width:var(--primary-column-width);
+	}
+	.sidebar{
+		width:var(--sidebar-column-width);
+	}
+	.sidebar-right .sidebar{
+		padding-left:20px;
+	}
+	.sidebar-left .sidebar{
+		padding-right:20px;
+	}
+}
+
+@media (max-width: 1023px) {
+	.social-navigation{
+		display:none;
+	}
+	.main-navigation ul.nav-menu > li > a{
+		font-size: 0.8rem;
+		transform: scale(1,1.5);
+	}
+}
+@media (min-width: 783px) {
+	.main-content.posts .has-post-thumbnail .post-featured-image{
+		width:34%;
+	}
+	.thumbnail-left .main-content.posts .has-post-thumbnail .post-info,
+	.thumbnail-right .main-content.posts .has-post-thumbnail .post-info{
+		width:64%;
+	}
+	.thumbnail-left .main-content.posts .has-post-thumbnail .post-featured-image{
+		float:left;
+		margin-right:2%
+	}
+	.thumbnail-left .main-content.posts .has-post-thumbnail .post-info{
+		float:right;
+	}
+	.thumbnail-right .main-content.posts .has-post-thumbnail .post-featured-image{
+		float:right;
+		margin-left:2%
+	}
+	.thumbnail-right .main-content.posts .has-post-thumbnail .post-info{
+		float:left;
+	}
+	.container{
+		width:100%;
+	}
+    #main-navigation-mobile{
+		display: none;
+	} 
+	.main-navigation .menu-toggle{
+		display: none;
+	}
+    .main-navigation ul{
+		display: flex;
+	}
+	.main-navigation ul.nav-menu
+	{
+		flex-direction: row;
+		justify-content: left;
+	}
+	.main-navigation ul.sub-menu{
+		flex-direction: column;
+		justify-content: left;
+	}
+	.header-search{
+		margin-left: auto;
+		margin-right:unset;
+	}
+}
+/*pad*/
+@media (max-width: 782px) {
+	.admin-bar .site-header .float-layer {
+		top: 46px;
+	}
+	.main-content.posts .has-post-thumbnail .post-featured-image{
+		margin-bottom:20px;
+	}
+	#main-navigation{
+		display:none;
+	}
+	.site-header .main-navigation{
+		padding: 0 0 0 20px;
+	}
+	.main-navigation .primary-menu-container{
+		position: absolute;
+		display:none;
+	}
+	.main-navigation.toggled .primary-menu-container{
+		background: #fff;
+		box-shadow: 0 5px 10px rgb(0 0 0 / 10%);
+		position: fixed;
+		left: 0;
+		top: 60px;
+		bottom: 0;
+		width: 70%;
+		overflow: hidden scroll;
+		display:block;
+	}
+	.admin-bar .main-navigation.toggled .primary-menu-container{
+		top:108px;
+	}
+	.main-navigation ul.nav-menu{
+		text-align: left;
+		width: 100%;
+		box-shadow: 5px 0 10px rgb(0 0 0 / 10%);
+		z-index: 99999;
+		overflow: hidden auto;
+		transform: translateZ(0);
+		padding: 0 20px;
+		display:block;
+	}
+	.main-navigation ul.nav-menu > li > a{
+		font-size: 1.2rem;
+		transform: unset;
+	}
+	.main-navigation ul li{
+		display: block;
+	}
+	.main-navigation ul li a{
+		border-bottom: 1px solid rgba(0,0,0,0.1);
+		display: block;
+		padding: 0;
+		line-height: 60px;
+	}
+	.main-navigation .menu-item-has-children > a:after{
+		float: right;
+		margin-top: 30px;
+	}
+	.main-navigation .submenu-toggle{
+		display: block;
+		width: 60px;
+		height: 60px;
+		line-height: 60px;
+		top: 0;
+		right: 0;	
+	}
+	.main-navigation ul ul{
+		padding: 0 0 0 20px;
+		position: static;
+		visibility: visible;
+		opacity: 1;
+		box-shadow: none;
+		width: 100%;
+		display: none;
+		transition: none;
+		background-color:unset;
+	}
+	.main-navigation ul li.focus>ul{
+		display:block;
+	}
+	.main-navigation ul ul a{
+		width:100%;
+	}
+	.main-navigation ul ul ul{
+		margin-left: 0;
+	}
+	.main-content.posts .post-summary{
+		-webkit-line-clamp: unset;
+	}
+	.comments-form-container .comment-form-author,
+	.comments-form-container .comment-form-email,
+	.comments-form-container .comment-form-url{
+		width: 100%;
+	}
+}
+@media (min-width: 601px) {
+
+}
+/*phone*/
+@media (max-width: 600px) {
+	.admin-bar .site-header .float-layer{
+		top: 0;
+	}
+	.site-header .float-layer{
+		position: relative;
+	}
+	.site-header .menu-text{
+		display: none;
+	}
+	.main-navigation.toggled .primary-menu-container{
+		top:unset !important;
+		bottom:unset;
+		position: absolute;
+	}
+	.post-meta{
+		display: flex !important;
+		flex-wrap: wrap;
+		justify-content: space-around;
+	}
+	.meta-span{
+		margin:10px !important;
+		white-space: nowrap;
+		flex: 1;
+		text-align:center;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
