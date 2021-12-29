@@ -1,0 +1,100 @@
+/*
+Theme Name: EnterMag
+Theme URI: https://afthemes.com/products/entermag/
+Author: AF themes
+Author URI: https://www.afthemes.com/
+Description: EnterMag is a child theme of EnterNews, the most responsive news and magazine theme for WordPress. It has some changes regarding to the default main banner layout and the header layout of the theme. An additional widget, AFTN Post Carousel, has been added to this child theme. To make a fantastic news website, the theme has a number of free starter sites with a single click import. The theme is completely widgetized, empowering users to control site content with 8+ custom widgets and widget areas. Also it includes default and dark color mode, allowing you to present articles and blog posts in a trendy manner. In addition, it comes with a variety of useful customizer options for creating a stunning newsportal. You can design it however you like and preview the changes using live customizer. It works with Gutenberg WordPress blocks and RTL, as well as the WooCommerce plugin, which helps you to combine an online store with our newspaper style. The theme is perfect for a news, newspaper, magazine, publishing, or review platform, and it&#8217;s also useful for blogging. It&#8217;s well-designed to get the website to the top of search engines, and users can get excellent assistance from the team if they run into any issues when using the theme.
+Requires PHP: 5.6
+Tested up to: 5.8
+Template: enternews
+Version: 1.0.1
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: entermag
+Tags: news, blog, entertainment, one-column, two-columns, grid-layout, block-styles, left-sidebar, right-sidebar, custom-header, flexible-header, custom-background, custom-colors, custom-menu, featured-images, full-width-template, post-formats, sticky-post, rtl-language-support, footer-widgets, translation-ready, theme-options, threaded-comments
+
+This theme, like WordPress, is licensed under the GPL.
+Use it to make something cool, have fun, and share what you've learned with others.
+
+EnterNews is based on Underscores https://underscores.me/, (C) 2012-2017 Automattic, Inc.
+Underscores is distributed under the terms of the GNU GPL v2 or later.
+
+EnterNews WordPress Theme, Copyright 2021 AF themes
+EnterNews is distributed under the terms of the GNU GPL v2 or later.
+*/
+
+/*Normalizing styles have been helped along thanks to the fine work of
+Nicolas Gallagher and Jonathan Neal https://necolas.github.io/normalize.css/
+*/
+
+body .header-style1 .top-header {
+
+    background: #363636;
+}
+
+body .bottom-bar {
+    background: #363636;
+    background-image: -moz-linear-gradient(140deg, #363636, #363636);
+    background-image: -o-linear-gradient(140deg, #363636, #363636);
+    background-image: -webkit-linear-gradient(140deg, #363636, #363636);
+    background-image: linear-gradient(140deg, #363636, #363636);
+
+}
+
+body footer.site-footer {
+    background-color: #363636;
+}
+
+body.aft-default-mode .aft-widget-background-dark.widget.enternews_youtube_video_slider_widget .widget-block .af-widget-body,
+body.aft-default-mode .aft-main-banner-section .af-trending-news-part .trending-posts.dark .read-single,
+body.aft-default-mode .aft-widget-background-dark .social-widget-menu ul li a,
+body.aft-default-mode .aft-widget-background-dark .social-widget-menu ul li a[href*="facebook.com"],
+body.aft-default-mode .aft-widget-background-dark .social-widget-menu ul li a[href*="dribble.com"],
+body.aft-default-mode .aft-widget-background-dark .social-widget-menu ul li a[href*="vk.com"],
+body.aft-default-mode .aft-widget-background-dark .social-widget-menu ul li a[href*="twitter.com"],
+body.aft-default-mode .aft-widget-background-dark .social-widget-menu ul li a[href*="linkedin.com"],
+body.aft-default-mode .aft-widget-background-dark .social-widget-menu ul li a[href*="instagram.com"],
+body.aft-default-mode .aft-widget-background-dark .social-widget-menu ul li a[href*="youtube.com"],
+body.aft-default-mode .aft-widget-background-dark .social-widget-menu ul li a[href*="vimeo.com"],
+body.aft-default-mode .aft-widget-background-dark .social-widget-menu ul li a[href*="pinterest.com"],
+body.aft-default-mode .aft-widget-background-dark .social-widget-menu ul li a[href*="tumblr.com"],
+body.aft-default-mode .aft-widget-background-dark .social-widget-menu ul li a[href*="wordpress.org"],
+body.aft-default-mode .aft-widget-background-dark .social-widget-menu ul li a[href*="whatsapp.com"],
+body.aft-default-mode .aft-widget-background-dark .social-widget-menu ul li a[href*="reddit.com"],
+body.aft-default-mode .aft-widget-background-dark .social-widget-menu ul li a[href*="t.me"],
+body.aft-default-mode .aft-widget-background-dark .social-widget-menu ul li a[href*="ok.ru"],
+body.aft-default-mode .aft-widget-background-dark .social-widget-menu ul li a[href*="wechat.com"],
+body.aft-default-mode .aft-widget-background-dark .social-widget-menu ul li a[href*="weibo.com"],
+body.aft-default-mode .aft-widget-background-dark .social-widget-menu ul li a[href*="github.com"],
+body.aft-default-mode .aft-main-banner-section .af-banner-carousel-1.dark,
+body.aft-default-mode .alternative-sidebar-background #secondary,
+body.aft-default-mode .enternews_author_info_widget.aft-widget-background-dark.widget .widget-block,
+body.aft-default-mode .aft-widget-background-dark.widget .widget-block .read-single,
+body.aft-default-mode .aft-main-banner-section .af-editors-pick .dark .af-sec-post .read-single,
+body.aft-default-mode .enternews_tabbed_posts_widget .nav-tabs > li > a{
+    background-color: #363636;
+}
+
+.af-category-inside-img a.enternews-categories.category-color-1 {
+    background-color: #9D090D;
+    color:#fff;
+}
+a.enternews-categories.category-color-1{
+    border-color: #9D090D;
+}
+
+.af-category-inside-img a.enternews-categories.category-color-2 {
+    background-color: #0052A1;
+    color:#fff;
+}
+a.enternews-categories.category-color-2{
+    border-color: #0052A1;
+}
+
+.af-category-inside-img a.enternews-categories.category-color-3 {
+    background-color: #2f2f2f;
+    color:#fff;
+}
+a.enternews-categories.category-color-3{
+    border-color: #2f2f2f;
+}
