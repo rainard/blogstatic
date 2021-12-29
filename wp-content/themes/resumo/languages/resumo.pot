@@ -1,0 +1,278 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Fotofly\n"
+"POT-Creation-Date: 2021-12-09 10:49+0500\n"
+"PO-Revision-Date: 2021-12-09 10:49+0500\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: en_US\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.6.10\n"
+"X-Poedit-Basepath: .\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;esc_html__;esc_html_e\n"
+"X-Poedit-SearchPath-0: ..\n"
+
+#: ../404.php:35
+msgid "404"
+msgstr ""
+
+#: ../404.php:36
+msgid "Page Not Found"
+msgstr ""
+
+#: ../404.php:37
+msgid ""
+"Sorry, but the page you are looking for was moved, removed, renamed or might "
+"never existed..."
+msgstr ""
+
+#: ../archive.php:23 ../archive.php:25
+#, php-format
+msgid "All posts in %s"
+msgstr ""
+
+#: ../archive.php:27
+#, php-format
+msgid "All posts tagged in %s"
+msgstr ""
+
+#: ../archive.php:29 ../archive.php:31 ../archive.php:33
+msgid "Archive for"
+msgstr ""
+
+#: ../archive.php:35
+msgid "All posts by"
+msgstr ""
+
+#: ../archive.php:37
+msgid "Blog Archives"
+msgstr ""
+
+#: ../archive.php:42
+msgid "All Works"
+msgstr ""
+
+#: ../comments.php:8
+msgid "Pingback:"
+msgstr ""
+
+#: ../comments.php:8
+msgid "Edit"
+msgstr ""
+
+#: ../comments.php:27
+msgid "Your comment is awaiting moderation"
+msgstr ""
+
+#: ../comments.php:30
+msgid "edit"
+msgstr ""
+
+#: ../comments.php:42
+msgid "This post is password protected. Enter the password to view comments."
+msgstr ""
+
+#: ../comments.php:53
+msgid "No Comment"
+msgstr ""
+
+#: ../comments.php:53
+msgid "One Comment"
+msgstr ""
+
+#: ../comments.php:53
+msgid "% Comments"
+msgstr ""
+
+#: ../comments.php:64
+msgid "Older Comments"
+msgstr ""
+
+#: ../comments.php:65
+msgid "Newer Comments"
+msgstr ""
+
+#: ../comments.php:75
+msgid "Comments are closed."
+msgstr ""
+
+#: ../comments.php:117
+msgid "Leave a reply"
+msgstr ""
+
+#: ../footer.php:35
+#, php-format
+msgid ""
+"Copyright &copy; 2021. All rights reserved. %1$s Designed &amp; Developed by "
+"%2$sFrenify%3$s"
+msgstr ""
+
+#: ../functions.php:10
+msgid "Main Menu"
+msgstr ""
+
+#: ../functions.php:11
+msgid "Mobile Menu"
+msgstr ""
+
+#: ../header.php:23
+msgid "Skip to content"
+msgstr ""
+
+#: ../inc/resumo_fn_functions.php:25
+msgid "Menu"
+msgstr ""
+
+#: ../inc/resumo_fn_functions.php:37
+msgid "Hi There! I am"
+msgstr ""
+
+#: ../inc/resumo_fn_functions.php:43
+msgid "Bruce Wilson"
+msgstr ""
+
+#: ../inc/resumo_fn_functions.php:44
+msgid "Web Developer"
+msgstr ""
+
+#: ../inc/resumo_fn_functions.php:45
+msgid "Freelancer"
+msgstr ""
+
+#: ../inc/resumo_fn_functions.php:46
+msgid "Photographer"
+msgstr ""
+
+#: ../inc/resumo_fn_functions.php:146
+msgid "(p) Prev Post"
+msgstr ""
+
+#: ../inc/resumo_fn_functions.php:147
+msgid "(n) Next Post"
+msgstr ""
+
+#: ../inc/resumo_fn_functions.php:148
+msgid "No Image"
+msgstr ""
+
+#: ../inc/resumo_fn_functions.php:278
+msgid "Read More"
+msgstr ""
+
+#: ../inc/resumo_fn_functions.php:534
+msgid "Protected Page"
+msgstr ""
+
+#: ../inc/resumo_fn_functions.php:535
+msgid "Please, enter the password to have access to this page."
+msgstr ""
+
+#: ../inc/resumo_fn_functions.php:553
+msgid "In "
+msgstr ""
+
+#: ../inc/resumo_fn_functions.php:745
+msgid ""
+"This content is password protected. To view it please enter your password "
+"below:"
+msgstr ""
+
+#: ../inc/resumo_fn_functions.php:761
+msgid "Home"
+msgstr ""
+
+#: ../inc/resumo_fn_functions.php:790 ../inc/resumo_fn_functions.php:793
+msgid "Archive"
+msgstr ""
+
+#: ../inc/resumo_fn_functions.php:940 ../inc/resumo_fn_functions.php:944
+#: ../inc/resumo_fn_functions.php:948 ../inc/resumo_fn_functions.php:955
+#: ../inc/resumo_fn_functions.php:959 ../inc/resumo_fn_functions.php:964
+msgid " Archives"
+msgstr ""
+
+#: ../inc/resumo_fn_functions.php:975
+msgid "Author: "
+msgstr ""
+
+#: ../inc/resumo_fn_functions.php:980
+msgid "Page"
+msgstr ""
+
+#: ../inc/resumo_fn_functions.php:985
+msgid "Search results for: "
+msgstr ""
+
+#: ../inc/resumo_fn_functions.php:990
+msgid "Error 404"
+msgstr ""
+
+#: ../inc/resumo_fn_pagination.php:48
+msgid "Prev"
+msgstr ""
+
+#: ../inc/resumo_fn_pagination.php:53
+msgid "Next"
+msgstr ""
+
+#: ../inc/resumo_fn_sidebars.php:15
+msgid "Main Sidebar"
+msgstr ""
+
+#: ../inc/resumo_fn_sidebars.php:17
+msgid "These are widgets for the sidebar."
+msgstr ""
+
+#: ../index.php:39
+msgid "Latest Articles"
+msgstr ""
+
+#: ../page.php:64 ../template-parts/single-post-template.php:75
+msgid "Pages:"
+msgstr ""
+
+#: ../search.php:16
+msgid "If you are not happy with the results below please do another search"
+msgstr ""
+
+#: ../search.php:38
+#, php-format
+msgid "Results For: \"%s\""
+msgstr ""
+
+#: ../search.php:55
+msgid "It seems we can't find what you're looking for."
+msgstr ""
+
+#: ../template-parts/desktop-navigation.php:7
+msgid "No menu assigned"
+msgstr ""
+
+#: ../template-parts/desktop-navigation.php:17
+#, php-format
+msgid "%1$sDeveloped by Frenify%2$s"
+msgstr ""
+
+#: ../template-parts/desktop-navigation.php:58
+msgid "Type your search terms and press enter."
+msgstr ""
+
+#: ../template-parts/desktop-navigation.php:70
+msgid "Show More"
+msgstr ""
+
+#: ../template-parts/single-post-template.php:33
+msgid "By "
+msgstr ""
+
+#: ../template-parts/single-post-template.php:34
+#, php-format
+msgid "%1$s Comments"
+msgstr ""
+
+#: ../template-parts/single-post-template.php:68
+msgid "Tags:"
+msgstr ""
