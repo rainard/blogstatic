@@ -1,0 +1,402 @@
+// out:false
+
+/*WordPress Unit test css*/
+
+/* =WordPress Core
+-------------------------------------------------------------- */
+.alignnone {
+    margin: 5px 20px 20px 0;
+}
+
+.aligncenter,
+div.aligncenter {
+    display: block;
+    margin: 5px auto 5px auto;
+}
+
+.alignright {
+    float:right;
+    margin: 5px 0 20px 20px;
+}
+
+.alignleft {
+    float: left;
+    margin: 5px 20px 20px 0;
+}
+
+a img.alignright {
+    float: right;
+    margin: 5px 0 20px 20px;
+}
+
+a img.alignnone {
+    margin: 5px 20px 20px 0;
+}
+
+a img.alignleft {
+    float: left;
+    margin: 5px 20px 20px 0;
+}
+
+a img.aligncenter {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.wp-caption {
+
+    max-width: 96%; /* Image does not overflow the content area */
+    text-align: center;
+}
+
+.wp-caption.alignnone {
+    margin: 5px 20px 20px 0;
+}
+
+.wp-caption.alignleft {
+    margin: 5px 20px 20px 0;
+}
+
+.wp-caption.alignright {
+    margin: 5px 0 20px 20px;
+}
+
+.wp-caption img {
+    border: 0 none;
+    height: auto;
+    margin: 0;
+    max-width: 98.5%;
+    padding: 0;
+    width: auto;
+}
+
+.wp-caption p.wp-caption-text {
+    font-size: 11px;
+    line-height: 17px;
+    margin: 0;
+    padding: 0 4px 5px;
+}
+
+/* Text meant only for screen readers. */
+.screen-reader-text {
+    border: 0;
+    clip: rect(1px, 1px, 1px, 1px);
+    clip-path: inset(50%);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute !important;
+    width: 1px;
+    word-wrap: normal !important; /* Many screen reader and browser combinations announce broken words as they would appear visually. */
+}
+
+.screen-reader-text:focus {
+    background-color: #eee;
+    clip: auto !important;
+    clip-path: none;
+    color: #444;
+    display: block;
+    font-size: 1em;
+    height: auto;
+    left: 5px;
+    line-height: normal;
+    padding: 15px 23px 14px;
+    text-decoration: none;
+    top: 5px;
+    width: auto;
+    z-index: 100000;
+    /* Above WP toolbar. */
+}
+
+.gallery-caption
+
+.bypostauthor
+
+
+iframe{
+    max-width: 100%;
+}
+
+
+.uiScaledImageContainer .scaledImageFitWidth {
+    height: auto;
+    min-height: initial;
+    width: 100%;
+}
+
+
+img {
+    max-width: 100%;
+}
+
+.gallery-columns-3 {
+
+    .gallery-item {
+        max-width: calc((100% - 16px * 2) / 3);
+
+        &:nth-child(3n+3) {
+            margin-right: 0px;
+        }
+    }
+}
+
+.gallery-item {
+    display: inline-block;
+    margin-right: 16px;
+    margin-bottom: 16px;
+    text-align: center;
+    vertical-align: top;
+
+    img {
+        height: auto;
+    }
+}
+
+
+.gallery-columns-4 {
+    .gallery-item {
+        max-width: calc((100% - 16px * 3) / 4);
+
+        &:nth-child(4n+4) {
+            margin-right: 0px;
+        }
+    }
+}
+
+form {
+    label {
+        padding-bottom: 11px;
+        display: block;
+        width: 100%;
+    }
+}
+
+pre {
+    white-space: pre-wrap;
+    overflow-x: auto;
+}
+
+label {
+    padding-bottom: 11px;
+    display: inline-block;
+}
+
+.wp-block-archives-dropdown {
+    margin-bottom: 11px;
+
+}
+
+.ct-content-area {
+
+    img {
+        max-width:100%;
+    }
+
+}
+
+.link-pages {
+    text-align: center;
+    margin-bottom: 70px;
+
+    .page-numbers {
+        height: 100%;
+        width: 80px;
+        font-size: 12px;
+        padding: 6px 9px;
+        margin: 10px;
+        background-color: @dark-color;
+        border-radius: unset;
+        text-align: center;
+        border:none;
+        &:hover {
+            background-color: @primary-color;
+            letter-spacing: 0px;
+            border-radius: unset;
+        }
+    }
+    .current {
+        .page-numbers {
+            background-color: @primary-color;
+        }
+    }
+}
+
+/* Skip link */
+.skip-link {
+    position: absolute;
+    top: -50px !important;
+    left: 10px;
+
+    background-color: @white-color;
+    color: @primary-color;
+
+    border: 2px solid @primary-color;
+    border-radius: 3px;
+    padding: 6px 10px;
+    z-index: 9999999999;
+
+    &:focus {
+        top: 0 !important;
+    }
+}
+
+.widgetarea {
+    margin-bottom: @font-size * 2;
+}
+
+.widgetarea:nth-of-type(1) {
+    margin-top: @font-size*2.4;
+}
+
+.prr-footer .widgetarea:nth-of-type(1) {
+    margin-top: 0;
+}
+
+.prr-footer .widgetarea {
+    margin-bottom: 0;
+}
+
+#respond {
+    margin-bottom: @theme-margin;
+}
+
+@media print {
+    .widgetarea,
+    .main-nav,
+    .mobile-navigation,
+    .menubar-right,
+    .top-bar,
+    .layout-center .nav-button,
+    #respond {
+        display: none;
+    }
+
+    .ct-content-area {
+        width: 100%;
+    }
+}
+
+.thumbnail-image {
+    img {
+        width: 100%;
+        height: auto;
+    }
+}
+
+.admin-bar {
+    .site-header {
+        top: 3.2rem;
+    }
+}
+
+@media screen and (max-width: 782px) {
+    .admin-bar {
+        .site-header {
+            top: 4.6rem;
+        }
+    }
+}
+
+/* For devices smaller than 991.98px */
+@media (max-width: 991.98px) {
+    .site-header {
+        .site-branding {
+            float: none;
+        }
+    }
+}
+
+
+
+.post-content a.mejs-horizontal-volume-slider{
+    background-image:none;
+}
+
+iframe,
+object {
+    max-width: 100%;
+}
+
+* {
+    word-break: break-word;
+    word-wrap: break-word;
+}
+
+.link-pages a{
+    background-image:none;
+}
+.link-pages .page-numbers{
+    color:@white-color;
+}
+
+.post-content,
+.post-single {
+    ol,
+    ul {
+        margin: 0 0 3rem 3rem;
+    }
+}
+
+.wp-block-gallery ul {
+    margin: 0;
+}
+
+.post-content a.post-page-numbers {
+    background-image: unset;
+}
+
+#comments ol ol {
+    list-style-type: decimal;
+}
+
+#comments ol.children {
+    list-style-type: none;
+}
+
+
+#comments ul ul {
+    margin: 0 0 3rem 3rem;
+}
+
+.post_format-post-format-image .post-content a {
+    background-image: none;
+}
+
+.post-content a,
+.post-single a,
+.comment-content a,
+.widgetarea a {
+    background-image: none !important;
+    text-decoration: underline;
+}
+
+.prr-excerpt a,
+.footer-site-info a,
+.display-tag a,
+.prr-post-meta a{
+    text-decoration: underline;
+}
+.comment-form-cookies-consent label {
+   display: inline;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.post-content ul ul, 
+.post-content ol ol,
+ul ul,
+ol ol {
+    margin-bottom: 0 !important;
+}
+
+@media only screen and (min-width: 993px){
+    body .ct-home-widget {
+    position: sticky;
+    position: -webkit-sticky;
+    top: 20px; /* required */
+    }
+}

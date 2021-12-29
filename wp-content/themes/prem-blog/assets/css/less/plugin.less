@@ -1,0 +1,79 @@
+// out:false
+/**
+ * --------------------------------------------------------------------------------
+ * Plugin Style
+ * --------------------------------------------------------------------------------
+*/
+.ct-home-widget{
+    .widgetarea:nth-of-type(1) {
+        margin-top: 0;
+    }
+   .wpt_widget_content{
+        background: #fff;
+        padding: 30px 30px 15px 30px;
+        border:none !important;
+        .entry-title {
+            margin-top: 3px!important;
+            font-size: 15px;
+            line-height: 18px;
+            a{
+                text-decoration: none;
+            }
+
+        }
+        .tab_title{
+            a{
+                background:@white-color;
+                border-bottom:0;
+                line-height:1;
+            }
+        }
+
+        .tab-content li{
+            border-bottom: 1px solid #f5f5f5;
+            padding: 0px 15px 0px 15px;
+        }
+        li.selected a{
+            color:@primary-color;
+            &:before {
+                position: absolute;
+                bottom: -2px;
+                left: 50%;
+                content: "";
+                background: @primary-color;
+                width: 80%;
+                height: 2px;
+                margin-left: -40%;
+            }
+        }
+
+
+        .wpt-postmeta {
+            display: none;
+        }
+    }
+
+    .apsc-each-profile{
+        font-family: inherit;
+        font-size: 14px;
+        font-weight: 700;
+        margin: 0;
+        a{
+            width: 154px;
+            padding: 18px 9px 18px 9px;
+            border-radius: 3px;
+            font-size: 14px;
+            font-weight: 800;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+    }
+    .wpt-pagination{
+        a{
+            text-decoration:none;
+            font-size: 14px;
+        }
+    }
+}
+
+
