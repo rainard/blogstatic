@@ -117,15 +117,20 @@ require get_template_directory() . '/includes/customizer-info.php';
 
 
 
-
+function console_log( $data ){
+  echo '<script>';
+  echo 'console.log('. json_encode( $data ) .')';
+  echo '</script>';
+}
 
 
 
 /******************************************* start self **/
 function iknowledgebase_home_panel_tabs_filter($tabs) {
-	
+	console_log($tabs);
 	return $tabs;
 }
+
 
 add_filter('iknowledgebase_home_panel_tabs','iknowledgebase_home_panel_tabs_filter');
 
