@@ -127,7 +127,7 @@ function console_log( $data ){
 
 /******************************************* start self **/
 function iknowledgebase_home_panel_tabs_filter($tabs) {
-	console_log($tabs);
+	console_log("$tabs");
 	return $tabs;
 }
 
