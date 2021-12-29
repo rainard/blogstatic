@@ -1,0 +1,171 @@
+/*
+Theme Name: Story Hub 
+Theme URI:  https://www.thememiles.com/themes/story-hub/
+Description: Story Hub is a responsive WordPress theme, its the child theme of Log Book. This is one best ever crafted free WordPress themes for Blog, News, and Magazine with WooCommerce Compatible. It has list layout, its is a simple, easy to use, modern and creative, user-friendly WordPress theme.With the help of its live customizer, you can modify the theme with ease like setting a new header and footer and many others. The theme has some amazing features to offer to its users. It has good compatibility with all kinds of web browsers like Google Chrome, Firefox, and Safari etc.
+Story Hub works with any of your favorite page builder like Elementor, Visual Composer, Beaver Builder, SiteOrigin, Divi, Brizy etc.In addition, It comes with added custom widgets for author,Recent post,sidebar options, copyright option, etc.
+Author: thememiles
+Author URI: https://www.thememiles.com
+Template: log-book
+Requires PHP: 5.2
+Tested up to: 5.8
+Version: 0.0.3
+License: GNU General Public License v2 or later
+License URI:  http://www.gnu.org/licenses/gpl-2.0.html
+Tags:         two-columns, right-sidebar, custom-background, custom-colors, custom-menu, featured-images, sticky-post, theme-options, threaded-comments, translation-ready, blog
+Text Domain:  story-hub 
+*/
+
+/* Text meant only for screen readers. */
+
+.screen-reader-text {
+    border: 0;
+    clip: rect(1px, 1px, 1px, 1px);
+    clip-path: inset(50%);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute !important;
+    width: 1px;
+
+    word-wrap: normal !important; /* Many screen reader and browser combinations announce broken words as they would appear visually. */
+}
+
+.footer-wrapper a,.footer-wrapper p{ color: #FFF; }
+.footer-wrapper .widget .recent-posts ul li{border-bottom:none;}
+
+.footer-wrapper .widget_categories ul li, .footer-wrapper ul li  {
+    list-style-type: none;
+    margin-bottom: 8px;
+    padding-bottom: 8px;
+    border-bottom: none;
+}
+caption{color:#FFF;}
+table#wp-calendar{width: 100%;}
+
+.footer-wrapper a:hover{color:#e73e3b;}
+
+.tm-blog-grid .blog-post .post-content .post-title {
+    font-size: 20px;
+}
+
+.hentry ul, .hentry ol {
+     margin: 0 0; 
+}
+
+button, input[type="button"], input[type="submit"]{color: #FFF !important;}
+
+form.search-form button {
+    font-size: 15px;
+    height: 59px;
+    width: 54px;
+    top: 0;
+    right: 0;
+    padding: 0px;
+    margin-left: -3px;
+}
+
+.tm-comments h2.comments-title {
+    margin-bottom: 22px;
+    font-size: 24px;
+}
+
+.tm-breadcrumb { padding: 40px 0; }
+
+.menu-bar .header-menu {
+    background-color: #fff;
+    border-bottom: 1px solid #efefef;
+    border-top: 1px solid #efefef;
+    padding: 10px;
+}
+
+.menu-bar .header-menu ul.main-menu {
+    margin-top: 10px;
+    margin-bottom: -25px;
+}
+
+.btn-colored, .menu-bar .sub-menu li a:hover, .tagline, .post-tag, .owl-nav .owl-prev, .owl-nav .owl-next, .owl-carousel.style2 .share-post, .owl-carousel.style3 .owl-dots .owl-dot.active, .owl-carousel.style3 .owl-dots .owl-dot:hover, .menu-bar.style-3, .menu-bar.style-4 .sub-menu, .owl-carousel.style4 .slide-content .indata .p-link, .img-caption, .blog-detail .post-meta, .menu-bar.style-5 .sub-menu, .blog-inner-gallery .slide .overlay-data .icon-magnifying-glass, .blog-tags ul li a:hover, .tm-post-nav .arrow, .btn-dark:hover, .tm-pagination ul li.active a, .tm-pagination ul li:hover a, #backTop, .dl-menuwrapper button, .tm-modal .modal-heading,span.current,.submit, button, input[type='button'], input[type='submit'],:root .has-vivid-red-background-color
+            
+            { 
+                background-color: #098c1b; 
+                
+            }
+   .tm-bottom-bar .social-icons a{font-size: 0px;}        
+   
+   .tm-bottom-bar .bottom-nav .social-icons li {
+    display: inline-block;
+    font-size: 13px;
+    list-style-type: none;
+    margin: 0px 5px;
+    text-transform: uppercase;
+    font-weight: 600;
+} 
+
+.copyright  a, .copyright  a:hover{ color: #098c1b;}
+
+a:hover, .tm-topbar.white .social-icons ul li a:hover, 
+.widget.twitter-feeds .feeds-list li a, 
+.widget.twitter-feeds .feeds-list li p span, 
+.tm-blog-list.full .con .share-post .icon-share, 
+.widget.recent-comments .comment-posts .comment-content a:hover, 
+.tm-author-detail .full-detail a, h1.site-title a,.single-post .blog-detail p a,
+.current-menu-item a,.page-inner-wrap .entry-content p a
+{
+    color: #098c1b;
+}
+
+.btn-colored, .menu-bar .sub-menu li a:hover, .tagline, .post-tag, 
+.owl-nav .owl-prev, .owl-nav .owl-next, 
+.owl-carousel.style2 .share-post, .owl-carousel.style3 .owl-dots .owl-dot.active, 
+.owl-carousel.style3 .owl-dots .owl-dot:hover, 
+.menu-bar.style-3, .menu-bar.style-4 .sub-menu, 
+.owl-carousel.style4 .slide-content .indata .p-link, 
+.img-caption, .blog-detail .post-meta, .menu-bar.style-5 .sub-menu, 
+.blog-inner-gallery .slide .overlay-data .icon-magnifying-glass, 
+.blog-tags ul li a:hover, .tm-post-nav .arrow, .btn-dark:hover, 
+.tm-pagination ul li.active a, .tm-pagination ul li:hover a, #backTop, 
+.dl-menuwrapper button, .tm-modal .modal-heading,span.current,.submit,
+ button, input[type='button'], input[type='submit'],:root .has-vivid-red-background-color
+ {
+     background-color: #098c1b;
+ }
+
+ .tm-breadcrumb:before{ 
+                background-color :#098c1b; 
+                opacity: 0.6;
+            }
+
+ blockquote, a.btn-colored:focus
+             { 
+                border-color : #098c1b; 
+            }
+
+.about-me.text-center img {
+    max-width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 100%;
+}
+
+.about-author .author {
+    margin: 0 auto 1em;
+    width: 200px;
+    height: 200px;
+    overflow: hidden;
+}
+.about-author .social-icons ul li a {
+    font-weight: bold;
+    font-size: 25px;
+}
+
+.social-links ul li a[href*="vk.com"]:before {
+    content: "\f189";
+}
+
+.hentry .blog-post .blog-post-meta ul {padding-left: 0px;}
+
+.entry-content h1 a, .entry-content h2 a, .entry-content h3 a,.entry-content h4 a, .entry-content h5 a,
+.entry-content h6 a, .entry-content a{ text-decoration: underline !important; }
+
+.blog-detail h1 a, .blog-detail h2 a, .blog-detail h3 a,.blog-detail h4 a, .blog-detail h5 a,
+.blog-detail h6 a, .blog-detail a{ text-decoration: underline !important; }
