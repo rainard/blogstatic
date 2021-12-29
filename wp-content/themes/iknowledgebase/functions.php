@@ -127,7 +127,9 @@ function console_log( $data ){
 
 /******************************************* start self **/
 function iknowledgebase_home_panel_tabs_filter($tabs) {
-	$tabs = array();
+	$tabs = array(
+		'python' => esc_attr__('Python','iknowledgebase')
+	);
 	return $tabs;
 }
 
