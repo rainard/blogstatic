@@ -117,7 +117,7 @@ require get_template_directory() . '/includes/customizer-info.php';
 
 
 
-/******************************************* start self **/
+/******************************************* start self 
 function iknowledgebase_home_panel_tabs_filter($tabs) {
 	
 	return $tabs;
@@ -126,4 +126,4 @@ function iknowledgebase_home_panel_tabs_filter($tabs) {
 
 add_filter('iknowledgebase_home_panel_tabs','iknowledgebase_home_panel_tabs_filter');
 
-/**=========================================end self ***/
+ =========================================end self ***/
