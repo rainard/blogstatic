@@ -1,4 +1,4 @@
-/*! elementor - v3.5.3 - 28-12-2021 */
+/*! elementor - v3.5.3 - 29-12-2021 */
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
@@ -2697,7 +2697,15 @@ __webpack_require__(/*! core-js/modules/es6.array.iterator.js */ "../node_module
 
 __webpack_require__(/*! core-js/modules/web.dom.iterable.js */ "../node_modules/core-js/modules/web.dom.iterable.js");
 
+__webpack_require__(/*! core-js/modules/es6.array.find.js */ "../node_modules/core-js/modules/es6.array.find.js");
+
+__webpack_require__(/*! core-js/modules/es6.string.includes.js */ "../node_modules/core-js/modules/es6.string.includes.js");
+
+__webpack_require__(/*! core-js/modules/es7.array.includes.js */ "../node_modules/core-js/modules/es7.array.includes.js");
+
 __webpack_require__(/*! core-js/modules/es6.array.filter.js */ "../node_modules/core-js/modules/es6.array.filter.js");
+
+__webpack_require__(/*! core-js/modules/es6.regexp.replace.js */ "../node_modules/core-js/modules/es6.regexp.replace.js");
 
 var _controlsPopover = _interopRequireDefault(__webpack_require__(/*! ./controls-popover */ "../assets/dev/js/editor/views/controls-popover.js"));
 
@@ -2708,6 +2716,7 @@ ControlsStack = Marionette.CompositeView.extend({
   },
   activeTab: null,
   activeSection: null,
+  isFiltered: false,
   className: function className() {
     return 'elementor-controls-stack';
   },
@@ -2725,12 +2734,14 @@ ControlsStack = Marionette.CompositeView.extend({
   ui: function ui() {
     return {
       tabs: '.elementor-panel-navigation-tab',
-      reloadButton: '.elementor-update-preview-button'
+      reloadButton: '.elementor-update-preview-button',
+      searchControls: '#elementor-panel-controls-search-input'
     };
   },
   events: function events() {
     return {
-      'click @ui.reloadButton': 'onReloadButtonClick'
+      'click @ui.reloadButton': 'onReloadButtonClick',
+      'keyup @ui.searchControls': 'onSearchControlsKeyUp'
     };
   },
   modelEvents: {
@@ -2754,7 +2765,50 @@ ControlsStack = Marionette.CompositeView.extend({
   initCollection: function initCollection() {
     this.collection = new Backbone.Collection(_.values(elementor.mergeControlsSettings(this.getOption('controls'))));
   },
+  // Override Backbone's base function.
+  _filteredSortedModels: function _filteredSortedModels(addedAt) {
+    var models = Marionette.CompositeView.prototype._filteredSortedModels.apply(this, [addedAt]); // If the user has filtered the controls.
+
+
+    if (this.isFiltered) {
+      var withSections = []; // Iterate over the filtered models.
+
+      models.forEach(function (model) {
+        // Get the section that contains the current model.
+        var sectionName = 'section' === model.get('type') ? model.get('name') : model.get('section');
+        var section = model.collection.find({
+          name: sectionName
+        }); // Add the section and its child-models to the output.
+
+        if (section && !withSections.includes(section)) {
+          withSections.push(section);
+          var sectionControls = model.collection.filter({
+            section: sectionName
+          });
+          withSections = withSections.concat(sectionControls);
+        }
+      });
+      return withSections;
+    }
+
+    return models;
+  },
   filter: function filter(controlModel) {
+    // Remove underscore / hyphen, lower case & trim a string.
+    var normalizeString = function normalizeString(str) {
+      return str.replace(/[-_]/ig, ' ').toLowerCase().trim();
+    };
+
+    if (this.ui.searchControls) {
+      var searchTerm = normalizeString(this.ui.searchControls.val() || ''); // Filter the controls by the user input if present.
+
+      if (searchTerm) {
+        var show = normalizeString(controlModel.get('label')).includes(searchTerm);
+        this.isFiltered = show || this.isFiltered;
+        return show;
+      }
+    }
+
     if (controlModel.get('tab') !== this.activeTab) {
       return false;
     }
@@ -2830,7 +2884,14 @@ ControlsStack = Marionette.CompositeView.extend({
       return activeSection === view.model.get('name');
     });
 
-    if (activeSectionView[0]) {
+    if (this.isFiltered) {
+      this.children.forEach(function (view) {
+        if ('section' === view.model.get('type')) {
+          view.$el.addClass('elementor-open');
+        }
+      });
+      this.isFiltered = false;
+    } else if (activeSectionView[0]) {
       activeSectionView[0].$el.addClass('elementor-open');
       var eventNamespace = this.getNamespaceArray();
       eventNamespace.push(activeSection, 'activated');
@@ -2846,6 +2907,15 @@ ControlsStack = Marionette.CompositeView.extend({
   },
   onReloadButtonClick: function onReloadButtonClick() {
     elementor.reloadPreview();
+  },
+  onSearchControlsKeyUp: function onSearchControlsKeyUp() {
+    var _this = this;
+
+    // Debounce the render to improve performance.
+    clearTimeout(this.keyUpTimeout);
+    this.keyUpTimeout = setTimeout(function () {
+      _this._renderChildren();
+    }, 100);
   },
   onDeviceModeChange: function onDeviceModeChange() {
     if ('desktop' === elementor.channels.deviceMode.request('currentMode')) {
@@ -2917,6 +2987,10 @@ _Object$defineProperty(exports, "__esModule", {
 });
 
 exports["default"] = void 0;
+
+__webpack_require__(/*! core-js/modules/es6.object.to-string.js */ "../node_modules/core-js/modules/es6.object.to-string.js");
+
+__webpack_require__(/*! core-js/modules/es6.regexp.to-string.js */ "../node_modules/core-js/modules/es6.regexp.to-string.js");
 
 var _typeof2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime-corejs2/helpers/typeof */ "../node_modules/@babel/runtime-corejs2/helpers/typeof.js"));
 
@@ -3037,9 +3111,10 @@ var ArgsObject = /*#__PURE__*/function (_InstanceType) {
     key: "requireArgumentConstructor",
     value: function requireArgumentConstructor(property, type) {
       var args = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : this.args;
-      this.requireArgument(property, args);
+      this.requireArgument(property, args); // Note: Converting the constructor to string in order to avoid equation issues
+      // due to different memory addresses between iframes (window.Object !== window.top.Object).
 
-      if (args[property].constructor !== type) {
+      if (args[property].constructor.toString() !== type.prototype.constructor.toString()) {
         throw Error("".concat(property, " invalid constructor type."));
       }
     }
@@ -7922,6 +7997,29 @@ if (__webpack_require__(/*! ./_fails */ "../node_modules/core-js/modules/_fails.
     return $toString.call(this);
   });
 }
+
+
+/***/ }),
+
+/***/ "../node_modules/core-js/modules/es6.string.includes.js":
+/*!**************************************************************!*\
+  !*** ../node_modules/core-js/modules/es6.string.includes.js ***!
+  \**************************************************************/
+/***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+// 21.1.3.7 String.prototype.includes(searchString, position = 0)
+
+var $export = __webpack_require__(/*! ./_export */ "../node_modules/core-js/modules/_export.js");
+var context = __webpack_require__(/*! ./_string-context */ "../node_modules/core-js/modules/_string-context.js");
+var INCLUDES = 'includes';
+
+$export($export.P + $export.F * __webpack_require__(/*! ./_fails-is-regexp */ "../node_modules/core-js/modules/_fails-is-regexp.js")(INCLUDES), 'String', {
+  includes: function includes(searchString /* , position = 0 */) {
+    return !!~context(this, searchString, INCLUDES)
+      .indexOf(searchString, arguments.length > 1 ? arguments[1] : undefined);
+  }
+});
 
 
 /***/ }),

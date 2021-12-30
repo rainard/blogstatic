@@ -1,4 +1,4 @@
-/*! elementor - v3.5.3 - 28-12-2021 */
+/*! elementor - v3.5.3 - 29-12-2021 */
 @import "//fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap";
 :root {
   --color-box-shadow-color: rgba(0, 0, 0, 0.05); }
@@ -175,8 +175,7 @@ Auto-import is designed for CSS that not dependent on the loading order.
     padding: var(--button-padding-y) var(--button-padding-x);
     border: 1px solid var(--button-background-color); }
   .eps-button--contained, .eps-button--outlined {
-    -webkit-border-radius: 0.1875rem;
-            border-radius: 0.1875rem; }
+    border-radius: 0.1875rem; }
   .eps-button--underlined {
     text-decoration: underline; }
   .eps-button--sm {
@@ -407,8 +406,7 @@ svg {
   vertical-align: middle; }
 
 button {
-  -webkit-border-radius: 0;
-          border-radius: 0; }
+  border-radius: 0; }
 
 button:focus {
   outline: 1px dotted;
@@ -611,8 +609,7 @@ h6,
 
 .eps-input {
   border: 1px solid var(--hr-color);
-  -webkit-border-radius: 0.1875rem;
-          border-radius: 0.1875rem;
+  border-radius: 0.1875rem;
   background: transparent;
   color: inherit;
   height: 1.875rem;
@@ -632,8 +629,7 @@ h6,
   color: var(--body-color);
   background-color: var(--app-background-color);
   position: absolute;
-  -webkit-border-radius: 0;
-          border-radius: 0;
+  border-radius: 0;
   -webkit-box-shadow: 2px 8px 23px 3px var(--color-box-shadow-color);
           box-shadow: 2px 8px 23px 3px var(--color-box-shadow-color);
   overflow: hidden;
@@ -707,8 +703,7 @@ h6,
     line-height: 1.75rem;
     text-align: center;
     font-size: calc(0.4 * 1.75rem);
-    -webkit-border-radius: 50%;
-            border-radius: 50%;
+    border-radius: 50%;
     color: #fff;
     background-color: #93003F; }
     .eps-app__logo:not(:last-child) {
@@ -821,8 +816,7 @@ h6,
           justify-content: center; }
 
 .elementor-loader {
-  -webkit-border-radius: 50%;
-          border-radius: 50%;
+  border-radius: 50%;
   padding: 40px;
   height: 150px;
   width: 150px;
@@ -955,7 +949,6 @@ h6,
     margin-bottom: 1.25rem; }
   .e-app-import-export-wizard-step__notice {
     display: block;
-    position: -webkit-sticky;
     position: sticky;
     top: 100%;
     /* Will prevent text overlapping when window height is too short. */
@@ -1054,8 +1047,7 @@ h6,
   background-color: var(--card-background-color);
   -webkit-box-shadow: 0 4px 10px var(--color-box-shadow-color);
           box-shadow: 0 4px 10px var(--color-box-shadow-color);
-  -webkit-border-radius: 0.1875rem;
-          border-radius: 0.1875rem;
+  border-radius: 0.1875rem;
   -webkit-transition: 0.3s;
   -o-transition: 0.3s;
   transition: 0.3s;
@@ -1942,8 +1934,7 @@ h6,
 .eps-modal {
   max-width: 43.75rem;
   background: var(--eps-modal-background-color);
-  -webkit-border-radius: 0.1875rem;
-          border-radius: 0.1875rem;
+  border-radius: 0.1875rem;
   -webkit-animation: eps-animation-pop 0.15s cubic-bezier(0.57, 0.53, 0.71, 1.47) forwards;
           animation: eps-animation-pop 0.15s cubic-bezier(0.57, 0.53, 0.71, 1.47) forwards; }
   .eps-modal__overlay {
@@ -1968,8 +1959,7 @@ h6,
     background: var(--eps-modal-header-background-color);
     height: 2.75rem;
     padding: 0.625rem 1rem;
-    -webkit-border-radius: 0.1875rem;
-            border-radius: 0.1875rem; }
+    border-radius: 0.1875rem; }
     .eps-modal__header,
     .eps-modal__header .title {
       color: #fff; }
@@ -2007,8 +1997,7 @@ h6,
     color: #fff;
     width: var(--eps-add-new-button-size);
     height: var(--eps-add-new-button-size);
-    -webkit-border-radius: 100%;
-            border-radius: 100%;
+    border-radius: 100%;
     font-size: calc(var(--eps-add-new-button-size) * 0.75);
     text-align: center;
     line-height: var(--eps-add-new-button-size); }
@@ -2181,8 +2170,7 @@ h6,
       -ms-flex-direction: column;
           flex-direction: column;
   min-width: 120px;
-  -webkit-border-radius: 0.1875rem;
-          border-radius: 0.1875rem;
+  border-radius: 0.1875rem;
   position: absolute;
   z-index: 1050;
   margin-top: 9px;
@@ -2246,8 +2234,7 @@ h6,
   --eps-box-color: #495157;
   --eps-box-input-color: #495157;
   padding: 0;
-  -webkit-border-radius: 0.1875rem;
-          border-radius: 0.1875rem;
+  border-radius: 0.1875rem;
   background-color: var(--eps-box-background-color);
   color: var(--eps-box-color); }
   .eps-box--padding {
@@ -2279,8 +2266,7 @@ h6,
 
 .eps-checkbox {
   -webkit-appearance: none;
-  -webkit-border-radius: 0.1875rem;
-          border-radius: 0.1875rem;
+  border-radius: 0.1875rem;
   width: 15px;
   height: 15px;
   outline: 0;
@@ -2321,8 +2307,7 @@ h6,
       --checkbox-background-color: var(--checkbox-checked-active-background-color);
       --checkbox-border-color: var(--checkbox-checked-active-background-color); }
   .eps-checkbox--rounded {
-    -webkit-border-radius: 50%;
-            border-radius: 50%; }
+    border-radius: 50%; }
 
 :root {
   --e-app-drag-drop-background-color: #fff;
@@ -2343,8 +2328,7 @@ h6,
     outline-color: #58d0f5; }
 
 .eps-dialog {
-  -webkit-border-radius: 3px;
-          border-radius: 3px;
+  border-radius: 3px;
   width: 375px; }
   .eps-dialog__close-button {
     position: absolute;
@@ -2420,8 +2404,7 @@ h6,
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale; }
   .eps-text-field--outlined {
-    -webkit-border-radius: 0.1875rem;
-            border-radius: 0.1875rem;
+    border-radius: 0.1875rem;
     border: 1px solid var(--eps-text-field-outlined-border-color);
     padding: 0.625rem; }
     .eps-text-field--outlined:focus {
@@ -2561,12 +2544,10 @@ h6,
     background-color: initial; }
   .e-app-import-export-panel__header {
     background-color: var(--e-app-import-export-panel-header-background-color);
-    -webkit-border-radius: 0.1875rem;
-            border-radius: 0.1875rem; }
+    border-radius: 0.1875rem; }
   .e-app-import-export-panel__body {
     background-color: var(--e-app-import-export-panel-body-background-color);
-    -webkit-border-radius: 0 0 0.1875rem 0.1875rem;
-            border-radius: 0 0 0.1875rem 0.1875rem; }
+    border-radius: 0 0 0.1875rem 0.1875rem; }
 
 .eps-theme-dark .e-app-import-export-panel {
   --e-app-import-export-panel-header-background-color: #404349;
@@ -2608,13 +2589,11 @@ h6,
   line-height: 1.8;
   -webkit-box-shadow: 0 3px 6px var(--color-box-shadow-color);
           box-shadow: 0 3px 6px var(--color-box-shadow-color);
-  -webkit-border-radius: 4px;
-          border-radius: 4px;
+  border-radius: 4px;
   font-size: 0.75rem; }
   .eps-badge--sm {
     font-size: 0.625rem;
-    -webkit-border-radius: 3px;
-            border-radius: 3px;
+    border-radius: 3px;
     padding: 0 0.3125rem;
     line-height: 1.5; }
 
@@ -2685,8 +2664,7 @@ h6,
   -webkit-transition: 0.3s all;
   -o-transition: 0.3s all;
   transition: 0.3s all;
-  -webkit-border-radius: 4px;
-          border-radius: 4px; }
+  border-radius: 4px; }
   .e-kit-library__kit-favorite-actions--active {
     color: #b01b1b; }
   .e-kit-library__kit-favorite-actions--loading {
@@ -2981,8 +2959,7 @@ h6,
     -moz-appearance: none;
          appearance: none;
     -webkit-appearance: none;
-    -webkit-border-radius: 0;
-            border-radius: 0; }
+    border-radius: 0; }
   .eps-sort-select__button {
     padding: 0.75rem 0.75rem;
     background: var(--eps-sort-select-button-background-color);
@@ -3046,7 +3023,6 @@ h6,
 
 .e-kit-library__index-layout-top-area {
   padding: 1.875rem 2.75rem;
-  position: -webkit-sticky;
   position: sticky;
   top: -1px;
   width: 100%;
@@ -3151,8 +3127,7 @@ h6,
     padding: 0.3125rem; }
     .e-kit-library__preview-responsive-controls-item:hover {
       background: rgba(88, 208, 245, 0.1);
-      -webkit-border-radius: 3px;
-              border-radius: 3px;
+      border-radius: 3px;
       -webkit-transition: all 0.3s;
       -o-transition: all 0.3s;
       transition: all 0.3s; }

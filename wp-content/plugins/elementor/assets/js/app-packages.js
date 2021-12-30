@@ -1,4 +1,4 @@
-/*! elementor - v3.5.3 - 28-12-2021 */
+/*! elementor - v3.5.3 - 29-12-2021 */
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
@@ -10839,7 +10839,7 @@ var SiteEditor = /*#__PURE__*/function () {
       }, {
         type: 'search-results',
         icon: 'eicon-search-results',
-        title: __('Search Results', 'elementor'),
+        title: __('search results page', 'elementor'),
         urls: {
           thumbnail: elementorAppConfig.assets_url + '/images/app/site-editor/search-results.svg'
         },
@@ -10881,7 +10881,7 @@ var SiteEditor = /*#__PURE__*/function () {
       }, {
         type: 'error-404',
         icon: 'eicon-error-404',
-        title: __('Error 404', 'elementor'),
+        title: __('404 page', 'elementor'),
         urls: {
           thumbnail: elementorAppConfig.assets_url + '/images/app/site-editor/error-404.svg'
         },

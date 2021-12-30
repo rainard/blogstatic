@@ -1,4 +1,4 @@
-/*! elementor - v3.5.3 - 28-12-2021 */
+/*! elementor - v3.5.3 - 29-12-2021 */
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
@@ -3865,6 +3865,8 @@ var components = _interopRequireWildcard(__webpack_require__(/*! ./ */ "../asset
 
 var hooks = _interopRequireWildcard(__webpack_require__(/*! ./hooks/ */ "../assets/dev/js/editor/document/hooks/index.js"));
 
+var uiStates = _interopRequireWildcard(__webpack_require__(/*! ./ui-states */ "../assets/dev/js/editor/document/ui-states/index.js"));
+
 var Component = /*#__PURE__*/function (_ComponentBase) {
   (0, _inherits2.default)(Component, _ComponentBase);
 
@@ -3899,6 +3901,11 @@ var Component = /*#__PURE__*/function (_ComponentBase) {
     key: "defaultHooks",
     value: function defaultHooks() {
       return this.importHooks(hooks);
+    }
+  }, {
+    key: "defaultUiStates",
+    value: function defaultUiStates() {
+      return this.importUiStates(uiStates);
     }
   }, {
     key: "defaultUtils",
@@ -4430,6 +4437,13 @@ _Object$defineProperty(exports, "__esModule", {
   value: true
 });
 
+_Object$defineProperty(exports, "ScrollToView", {
+  enumerable: true,
+  get: function get() {
+    return _scrollToView.ScrollToView;
+  }
+});
+
 _Object$defineProperty(exports, "SetSettings", {
   enumerable: true,
   get: function get() {
@@ -4437,7 +4451,118 @@ _Object$defineProperty(exports, "SetSettings", {
   }
 });
 
+var _scrollToView = __webpack_require__(/*! ./scroll-to-view */ "../assets/dev/js/editor/document/elements/commands-internal/scroll-to-view.js");
+
 var _setSettings = __webpack_require__(/*! ./set-settings */ "../assets/dev/js/editor/document/elements/commands-internal/set-settings.js");
+
+/***/ }),
+
+/***/ "../assets/dev/js/editor/document/elements/commands-internal/scroll-to-view.js":
+/*!*************************************************************************************!*\
+  !*** ../assets/dev/js/editor/document/elements/commands-internal/scroll-to-view.js ***!
+  \*************************************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+var _Object$defineProperty = __webpack_require__(/*! @babel/runtime-corejs2/core-js/object/define-property */ "../node_modules/@babel/runtime-corejs2/core-js/object/define-property.js");
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime-corejs2/helpers/interopRequireDefault */ "../node_modules/@babel/runtime-corejs2/helpers/interopRequireDefault.js");
+
+_Object$defineProperty(exports, "__esModule", {
+  value: true
+});
+
+exports["default"] = exports.ScrollToView = void 0;
+
+__webpack_require__(/*! core-js/modules/es6.array.find.js */ "../node_modules/core-js/modules/es6.array.find.js");
+
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime-corejs2/helpers/classCallCheck */ "../node_modules/@babel/runtime-corejs2/helpers/classCallCheck.js"));
+
+var _createClass2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime-corejs2/helpers/createClass */ "../node_modules/@babel/runtime-corejs2/helpers/createClass.js"));
+
+var _inherits2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime-corejs2/helpers/inherits */ "../node_modules/@babel/runtime-corejs2/helpers/inherits.js"));
+
+var _createSuper2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime-corejs2/helpers/createSuper */ "../node_modules/@babel/runtime-corejs2/helpers/createSuper.js"));
+
+var _commandInternalBase = _interopRequireDefault(__webpack_require__(/*! elementor-api/modules/command-internal-base */ "../core/common/assets/js/api/modules/command-internal-base.js"));
+
+var ScrollToView = /*#__PURE__*/function (_CommandInternal) {
+  (0, _inherits2.default)(ScrollToView, _CommandInternal);
+
+  var _super = (0, _createSuper2.default)(ScrollToView);
+
+  function ScrollToView() {
+    (0, _classCallCheck2.default)(this, ScrollToView);
+    return _super.apply(this, arguments);
+  }
+
+  (0, _createClass2.default)(ScrollToView, [{
+    key: "validateArgs",
+    value: function validateArgs() {
+      var args = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+      // Support containers.
+      if (args.container) {
+        this.requireContainer();
+        args.$element = args.container.view.$el;
+      }
+
+      this.requireArgumentInstance('$element', jQuery);
+    }
+  }, {
+    key: "apply",
+    value: function apply() {
+      var args = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+      var $element = args.$element,
+          $parent = args.$parent,
+          timeout = args.timeout;
+      this.scrollToView($element, timeout, $parent);
+    }
+  }, {
+    key: "scrollToView",
+    value: function scrollToView($element, timeout, $parent) {
+      if (undefined === timeout) {
+        timeout = 500;
+      }
+
+      var $scrolled = $parent;
+      var $elementorFrontendWindow = elementorFrontend.elements.$window;
+
+      if (!$parent) {
+        $parent = $elementorFrontendWindow;
+        $scrolled = elementor.$previewContents.find('html, body');
+      }
+
+      setTimeout(function () {
+        // Sometimes element removed during the timeout.
+        if (!$element[0].isConnected) {
+          return;
+        }
+
+        var parentHeight = $parent.height(),
+            parentScrollTop = $parent.scrollTop(),
+            elementTop = $parent === $elementorFrontendWindow ? $element.offset().top : $element[0].offsetTop,
+            topToCheck = elementTop - parentScrollTop;
+
+        if (topToCheck > 0 && topToCheck < parentHeight) {
+          return;
+        }
+
+        var scrolling = elementTop - parentHeight / 2;
+        $scrolled.stop(true).animate({
+          scrollTop: scrolling
+        }, 1000);
+      }, timeout);
+    }
+  }]);
+  return ScrollToView;
+}(_commandInternalBase.default);
+
+exports.ScrollToView = ScrollToView;
+var _default = ScrollToView;
+exports["default"] = _default;
 
 /***/ }),
 
@@ -6439,9 +6564,17 @@ var Select = /*#__PURE__*/function (_CommandBase) {
     value: function apply(args) {
       var _args$containers = args.containers,
           containers = _args$containers === void 0 ? [args.container] : _args$containers,
-          _args$append = args.append,
-          append = _args$append === void 0 ? false : _args$append;
+          _args$options = args.options,
+          options = _args$options === void 0 ? {} : _args$options,
+          _options$append = options.append,
+          append = _options$append === void 0 ? false : _options$append;
       elementor.selection.add(containers, append);
+
+      if (options.scrollIntoView && !append && 1 === containers.length) {
+        $e.internal('document/elements/scroll-to-view', {
+          container: containers[0]
+        });
+      }
     }
   }]);
   return Select;
@@ -6698,8 +6831,10 @@ var ToggleSelection = /*#__PURE__*/function (_CommandBase) {
     value: function apply(args) {
       var _args$containers = args.containers,
           containers = _args$containers === void 0 ? [args.container] : _args$containers,
-          _args$append = args.append,
-          append = _args$append === void 0 ? false : _args$append;
+          _args$options = args.options,
+          options = _args$options === void 0 ? {} : _args$options,
+          _options$append = options.append,
+          append = _options$append === void 0 ? false : _options$append;
       containers.forEach(function (container) {
         $e.run(elementor.selection.has(container) && append ? 'document/elements/deselect' : 'document/elements/select', args);
       });
@@ -6798,9 +6933,10 @@ var Component = /*#__PURE__*/function (_ComponentBase) {
 
           if (draggedIsInner && 'section' === draggedElType && parentIsInner && 'column' === parentElType) {
             return false;
-          }
+          } // Allow only nested containers.
 
-          if (draggedElType === parentElType) {
+
+          if (draggedElType === parentElType && 'container' !== draggedElType) {
             return false;
           }
 
@@ -9204,7 +9340,7 @@ var SectionColumns = /*#__PURE__*/function (_After) {
   }, {
     key: "getConditions",
     value: function getConditions(args) {
-      return !args.model.elements;
+      return !args.model.elements && 'section' === args.model.elType;
     }
     /**
      * @inheritDoc
@@ -9531,9 +9667,12 @@ var Helper = /*#__PURE__*/function () {
         /* Container */
         container) {
           return container.view.resetLayout();
-        }); // Focus on last container.
+        }); // On widget creation there is no need to call 'request:edit' for column(s).
 
-        containers[containers.length - 1].model.trigger('request:edit');
+        if (false !== options.edit) {
+          // Focus on last container.
+          containers[containers.length - 1].model.trigger('request:edit');
+        }
       }
     }
   }]);
@@ -10779,6 +10918,128 @@ exports["default"] = _default;
 
 /***/ }),
 
+/***/ "../assets/dev/js/editor/document/hooks/ui/document/elements/create/index.js":
+/*!***********************************************************************************!*\
+  !*** ../assets/dev/js/editor/document/hooks/ui/document/elements/create/index.js ***!
+  \***********************************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+var _Object$defineProperty = __webpack_require__(/*! @babel/runtime-corejs2/core-js/object/define-property */ "../node_modules/@babel/runtime-corejs2/core-js/object/define-property.js");
+
+_Object$defineProperty(exports, "__esModule", {
+  value: true
+});
+
+_Object$defineProperty(exports, "MoveResizeableHandle", {
+  enumerable: true,
+  get: function get() {
+    return _moveResizeableHandle.MoveResizeableHandle;
+  }
+});
+
+var _moveResizeableHandle = __webpack_require__(/*! ./move-resizeable-handle */ "../assets/dev/js/editor/document/hooks/ui/document/elements/create/move-resizeable-handle.js");
+
+/***/ }),
+
+/***/ "../assets/dev/js/editor/document/hooks/ui/document/elements/create/move-resizeable-handle.js":
+/*!****************************************************************************************************!*\
+  !*** ../assets/dev/js/editor/document/hooks/ui/document/elements/create/move-resizeable-handle.js ***!
+  \****************************************************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+var _Object$defineProperty = __webpack_require__(/*! @babel/runtime-corejs2/core-js/object/define-property */ "../node_modules/@babel/runtime-corejs2/core-js/object/define-property.js");
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime-corejs2/helpers/interopRequireDefault */ "../node_modules/@babel/runtime-corejs2/helpers/interopRequireDefault.js");
+
+_Object$defineProperty(exports, "__esModule", {
+  value: true
+});
+
+exports["default"] = exports.MoveResizeableHandle = void 0;
+
+__webpack_require__(/*! core-js/modules/es6.array.find.js */ "../node_modules/core-js/modules/es6.array.find.js");
+
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime-corejs2/helpers/classCallCheck */ "../node_modules/@babel/runtime-corejs2/helpers/classCallCheck.js"));
+
+var _createClass2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime-corejs2/helpers/createClass */ "../node_modules/@babel/runtime-corejs2/helpers/createClass.js"));
+
+var _inherits2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime-corejs2/helpers/inherits */ "../node_modules/@babel/runtime-corejs2/helpers/inherits.js"));
+
+var _createSuper2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime-corejs2/helpers/createSuper */ "../node_modules/@babel/runtime-corejs2/helpers/createSuper.js"));
+
+var _after = _interopRequireDefault(__webpack_require__(/*! elementor-api/modules/hooks/ui/after */ "../core/common/assets/js/api/modules/hooks/ui/after.js"));
+
+/**
+ * Move jQuery UI Resizeable handle to the end each time an element is created inside
+ * a Container, since it causes UI issues and breaks some CSS selectors.
+ */
+var MoveResizeableHandle = /*#__PURE__*/function (_After) {
+  (0, _inherits2.default)(MoveResizeableHandle, _After);
+
+  var _super = (0, _createSuper2.default)(MoveResizeableHandle);
+
+  function MoveResizeableHandle() {
+    (0, _classCallCheck2.default)(this, MoveResizeableHandle);
+    return _super.apply(this, arguments);
+  }
+
+  (0, _createClass2.default)(MoveResizeableHandle, [{
+    key: "getCommand",
+    value: function getCommand() {
+      return 'document/elements/create';
+    }
+  }, {
+    key: "getId",
+    value: function getId() {
+      return 'move-resizeable-handle';
+    }
+  }, {
+    key: "getConditions",
+    value: function getConditions(args) {
+      var _args$containers = args.containers,
+          containers = _args$containers === void 0 ? [args.container] : _args$containers; // If the element was created in a Container.
+
+      return containers.some(function (
+      /**Container*/
+      container) {
+        return 'container' === container.model.get('elType');
+      });
+    }
+  }, {
+    key: "apply",
+    value: function apply(args) {
+      var _args$containers2 = args.containers,
+          containers = _args$containers2 === void 0 ? [args.container] : _args$containers2;
+      containers.forEach(function (
+      /* Container */
+      container) {
+        var $el = container.view.$el,
+            $resizeHandle = $el.find('> .ui-resizable-handle').first();
+
+        if (!$resizeHandle) {
+          return;
+        } // Move the handle to the end.
+
+
+        $el.append($resizeHandle);
+      });
+    }
+  }]);
+  return MoveResizeableHandle;
+}(_after.default);
+
+exports.MoveResizeableHandle = MoveResizeableHandle;
+var _default = MoveResizeableHandle;
+exports["default"] = _default;
+
+/***/ }),
+
 /***/ "../assets/dev/js/editor/document/hooks/ui/index.js":
 /*!**********************************************************!*\
   !*** ../assets/dev/js/editor/document/hooks/ui/index.js ***!
@@ -10820,6 +11081,20 @@ _Object$keys(_delete).forEach(function (key) {
     enumerable: true,
     get: function get() {
       return _delete[key];
+    }
+  });
+});
+
+var _create2 = __webpack_require__(/*! ./document/elements/create/ */ "../assets/dev/js/editor/document/hooks/ui/document/elements/create/index.js");
+
+_Object$keys(_create2).forEach(function (key) {
+  if (key === "default" || key === "__esModule") return;
+  if (key in exports && exports[key] === _create2[key]) return;
+
+  _Object$defineProperty(exports, key, {
+    enumerable: true,
+    get: function get() {
+      return _create2[key];
     }
   });
 });
@@ -11119,6 +11394,13 @@ _Object$defineProperty(exports, "Resizeable", {
   }
 });
 
+_Object$defineProperty(exports, "SetDirectionMode", {
+  enumerable: true,
+  get: function get() {
+    return _setDirectionMode.SetDirectionMode;
+  }
+});
+
 var _changePostTitle = __webpack_require__(/*! ./change-post-title */ "../assets/dev/js/editor/document/hooks/ui/settings/change-post-title.js");
 
 var _columnChangeSize = __webpack_require__(/*! ./column-change-size */ "../assets/dev/js/editor/document/hooks/ui/settings/column-change-size.js");
@@ -11128,6 +11410,8 @@ var _draggable = __webpack_require__(/*! ./draggable */ "../assets/dev/js/editor
 var _resizeable = __webpack_require__(/*! ./resizeable */ "../assets/dev/js/editor/document/hooks/ui/settings/resizeable.js");
 
 var _reloadPreview = __webpack_require__(/*! ./reload-preview */ "../assets/dev/js/editor/document/hooks/ui/settings/reload-preview.js");
+
+var _setDirectionMode = __webpack_require__(/*! ./set-direction-mode */ "../assets/dev/js/editor/document/hooks/ui/settings/set-direction-mode.js");
 
 /***/ }),
 
@@ -11284,6 +11568,103 @@ var Resizeable = /*#__PURE__*/function (_After) {
 
 exports.Resizeable = Resizeable;
 var _default = Resizeable;
+exports["default"] = _default;
+
+/***/ }),
+
+/***/ "../assets/dev/js/editor/document/hooks/ui/settings/set-direction-mode.js":
+/*!********************************************************************************!*\
+  !*** ../assets/dev/js/editor/document/hooks/ui/settings/set-direction-mode.js ***!
+  \********************************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+var _Object$defineProperty = __webpack_require__(/*! @babel/runtime-corejs2/core-js/object/define-property */ "../node_modules/@babel/runtime-corejs2/core-js/object/define-property.js");
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime-corejs2/helpers/interopRequireDefault */ "../node_modules/@babel/runtime-corejs2/helpers/interopRequireDefault.js");
+
+_Object$defineProperty(exports, "__esModule", {
+  value: true
+});
+
+exports["default"] = exports.SetDirectionMode = void 0;
+
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime-corejs2/helpers/classCallCheck */ "../node_modules/@babel/runtime-corejs2/helpers/classCallCheck.js"));
+
+var _createClass2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime-corejs2/helpers/createClass */ "../node_modules/@babel/runtime-corejs2/helpers/createClass.js"));
+
+var _inherits2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime-corejs2/helpers/inherits */ "../node_modules/@babel/runtime-corejs2/helpers/inherits.js"));
+
+var _createSuper2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime-corejs2/helpers/createSuper */ "../node_modules/@babel/runtime-corejs2/helpers/createSuper.js"));
+
+var _after = _interopRequireDefault(__webpack_require__(/*! elementor-api/modules/hooks/ui/after */ "../core/common/assets/js/api/modules/hooks/ui/after.js"));
+
+/**
+ * UI hook to set direction mode when changing element's settings.
+ * Currently used to determine the direction of the flex icons in the Container element.
+ * It should be generic and work with any element, and since each element might use a different
+ * setting to determine its direction mode, the hook should listen to any setting change.
+ * Therefore, there isn't a `getConditions()` method.
+ */
+var SetDirectionMode = /*#__PURE__*/function (_After) {
+  (0, _inherits2.default)(SetDirectionMode, _After);
+
+  var _super = (0, _createSuper2.default)(SetDirectionMode);
+
+  function SetDirectionMode() {
+    (0, _classCallCheck2.default)(this, SetDirectionMode);
+    return _super.apply(this, arguments);
+  }
+
+  (0, _createClass2.default)(SetDirectionMode, [{
+    key: "getCommand",
+    value: function getCommand() {
+      return 'document/elements/settings';
+    }
+  }, {
+    key: "getId",
+    value: function getId() {
+      return 'set-direction-mode--document/elements/settings';
+    }
+  }, {
+    key: "apply",
+    value: function apply(args) {
+      SetDirectionMode.set(args.container);
+    }
+    /**
+     * Get the direction mode from the Container's view & set the UI state accordingly.
+     *
+     * @param {Container} container
+     *
+     * @return {void}
+     */
+
+  }], [{
+    key: "set",
+    value: function set(container) {
+      var _view$getCurrentUiSta;
+
+      // Determine if the direction mode should be set by the parent.
+      var useParent = 'panel/editor/advanced' === $e.routes.getCurrent('panel');
+      container = useParent ? container.parent : container;
+      var view = container.renderer.view,
+          direction = (_view$getCurrentUiSta = view.getCurrentUiStates) === null || _view$getCurrentUiSta === void 0 ? void 0 : _view$getCurrentUiSta.call(view).directionMode;
+
+      if (direction) {
+        $e.uiStates.set('document/direction-mode', direction);
+        return;
+      }
+
+      $e.uiStates.remove('document/direction-mode');
+    }
+  }]);
+  return SetDirectionMode;
+}(_after.default);
+
+exports.SetDirectionMode = SetDirectionMode;
+var _default = SetDirectionMode;
 exports["default"] = _default;
 
 /***/ }),
@@ -13785,6 +14166,107 @@ exports["default"] = _default;
 
 /***/ }),
 
+/***/ "../assets/dev/js/editor/document/ui-states/direction-mode.js":
+/*!********************************************************************!*\
+  !*** ../assets/dev/js/editor/document/ui-states/direction-mode.js ***!
+  \********************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+var _Object$defineProperty = __webpack_require__(/*! @babel/runtime-corejs2/core-js/object/define-property */ "../node_modules/@babel/runtime-corejs2/core-js/object/define-property.js");
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime-corejs2/helpers/interopRequireDefault */ "../node_modules/@babel/runtime-corejs2/helpers/interopRequireDefault.js");
+
+_Object$defineProperty(exports, "__esModule", {
+  value: true
+});
+
+exports.DirectionMode = exports.DIRECTION_ROW_REVERSE = exports.DIRECTION_ROW = exports.DIRECTION_COLUMN_REVERSE = exports.DIRECTION_COLUMN = void 0;
+
+var _defineProperty2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime-corejs2/helpers/defineProperty */ "../node_modules/@babel/runtime-corejs2/helpers/defineProperty.js"));
+
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime-corejs2/helpers/classCallCheck */ "../node_modules/@babel/runtime-corejs2/helpers/classCallCheck.js"));
+
+var _createClass2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime-corejs2/helpers/createClass */ "../node_modules/@babel/runtime-corejs2/helpers/createClass.js"));
+
+var _inherits2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime-corejs2/helpers/inherits */ "../node_modules/@babel/runtime-corejs2/helpers/inherits.js"));
+
+var _createSuper2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime-corejs2/helpers/createSuper */ "../node_modules/@babel/runtime-corejs2/helpers/createSuper.js"));
+
+var _uiStateBase = _interopRequireDefault(__webpack_require__(/*! elementor-api/core/states/ui-state-base */ "../core/common/assets/js/api/core/states/ui-state-base.js"));
+
+var DIRECTION_ROW = 'row';
+exports.DIRECTION_ROW = DIRECTION_ROW;
+var DIRECTION_ROW_REVERSE = 'row-reverse';
+exports.DIRECTION_ROW_REVERSE = DIRECTION_ROW_REVERSE;
+var DIRECTION_COLUMN = 'column';
+exports.DIRECTION_COLUMN = DIRECTION_COLUMN;
+var DIRECTION_COLUMN_REVERSE = 'column-reverse';
+exports.DIRECTION_COLUMN_REVERSE = DIRECTION_COLUMN_REVERSE;
+
+var DirectionMode = /*#__PURE__*/function (_UiStateBase) {
+  (0, _inherits2.default)(DirectionMode, _UiStateBase);
+
+  var _super = (0, _createSuper2.default)(DirectionMode);
+
+  function DirectionMode() {
+    (0, _classCallCheck2.default)(this, DirectionMode);
+    return _super.apply(this, arguments);
+  }
+
+  (0, _createClass2.default)(DirectionMode, [{
+    key: "getId",
+    value: function getId() {
+      return 'direction-mode';
+    }
+  }, {
+    key: "getOptions",
+    value: function getOptions() {
+      var _ref;
+
+      return _ref = {}, (0, _defineProperty2.default)(_ref, DIRECTION_ROW, ''), (0, _defineProperty2.default)(_ref, DIRECTION_ROW_REVERSE, ''), (0, _defineProperty2.default)(_ref, DIRECTION_COLUMN, ''), (0, _defineProperty2.default)(_ref, DIRECTION_COLUMN_REVERSE, ''), _ref;
+    }
+  }, {
+    key: "getScopes",
+    value: function getScopes() {
+      return [window.document.body, elementor.$previewContents[0].body];
+    }
+  }]);
+  return DirectionMode;
+}(_uiStateBase.default);
+
+exports.DirectionMode = DirectionMode;
+
+/***/ }),
+
+/***/ "../assets/dev/js/editor/document/ui-states/index.js":
+/*!***********************************************************!*\
+  !*** ../assets/dev/js/editor/document/ui-states/index.js ***!
+  \***********************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+var _Object$defineProperty = __webpack_require__(/*! @babel/runtime-corejs2/core-js/object/define-property */ "../node_modules/@babel/runtime-corejs2/core-js/object/define-property.js");
+
+_Object$defineProperty(exports, "__esModule", {
+  value: true
+});
+
+_Object$defineProperty(exports, "DirectionMode", {
+  enumerable: true,
+  get: function get() {
+    return _directionMode.DirectionMode;
+  }
+});
+
+var _directionMode = __webpack_require__(/*! ./direction-mode */ "../assets/dev/js/editor/document/ui-states/direction-mode.js");
+
+/***/ }),
+
 /***/ "../assets/dev/js/editor/document/ui/commands/copy.js":
 /*!************************************************************!*\
   !*** ../assets/dev/js/editor/document/ui/commands/copy.js ***!
@@ -14704,12 +15186,22 @@ BaseElementView = BaseContainer.extend({
     var ChildView;
     var elType = model.get('elType');
 
-    if ('section' === elType) {
-      ChildView = __webpack_require__(/*! elementor-elements/views/section */ "../assets/dev/js/editor/elements/views/section.js");
-    } else if ('column' === elType) {
-      ChildView = __webpack_require__(/*! elementor-elements/views/column */ "../assets/dev/js/editor/elements/views/column.js");
-    } else {
-      ChildView = elementor.modules.elements.views.Widget;
+    switch (elType) {
+      case 'section':
+        ChildView = __webpack_require__(/*! elementor-elements/views/section */ "../assets/dev/js/editor/elements/views/section.js");
+        break;
+
+      case 'column':
+        ChildView = __webpack_require__(/*! elementor-elements/views/column */ "../assets/dev/js/editor/elements/views/column.js");
+        break;
+
+      case 'container':
+        ChildView = __webpack_require__(/*! elementor-elements/views/container */ "../assets/dev/js/editor/elements/views/container.js");
+        break;
+
+      default:
+        ChildView = elementor.modules.elements.views.Widget;
+        break;
     }
 
     return elementor.hooks.applyFilters('element/view', ChildView, model, this);
@@ -14878,7 +15370,7 @@ BaseElementView = BaseContainer.extend({
       this.listenTo(editModel.get('settings'), 'change', this.onSettingsChanged);
     }
 
-    this.listenTo(editModel.get('editSettings'), 'change', this.onEditSettingsChanged).listenTo(this.model, 'request:edit', this.onEditRequest).listenTo(this.model, 'request:toggleVisibility', this.toggleVisibility);
+    this.listenTo(editModel.get('editSettings'), 'change', this.onEditSettingsChanged).listenTo(this.model, 'request:edit', this.onEditRequest);
     this.initControlsCSSParser();
 
     _.defer(function () {
@@ -15024,7 +15516,8 @@ BaseElementView = BaseContainer.extend({
       model.widgetType = elementView.model.get('widgetType');
     } else if ('section' === model.elType) {
       model.isInner = true;
-    } else {
+    } else if ('container' !== model.elType) {
+      // Don't allow adding anything other than widget, inner-section or a container.
       return;
     }
 
@@ -15032,8 +15525,10 @@ BaseElementView = BaseContainer.extend({
 
     if (customData) {
       jQuery.extend(model, customData);
-    }
+    } // Reset the selected element cache.
 
+
+    elementor.channels.panelElements.reply('element:selected', null);
     return $e.run('document/elements/create', {
       container: this.getContainer(),
       model: model,
@@ -15178,10 +15673,16 @@ BaseElementView = BaseContainer.extend({
     this.$el.attr('id', customElementID);
   },
   renderUI: function renderUI() {
-    this.renderStyles();
+    var _this3 = this;
+
     this.renderCustomClasses();
     this.renderCustomElementID();
     this.enqueueFonts();
+
+    _.defer(function () {
+      // Defer the styles render to make sure that the global colors are ready.
+      _this3.renderStyles();
+    });
   },
   runReadyTrigger: function runReadyTrigger() {
     var self = this;
@@ -15294,6 +15795,8 @@ BaseElementView = BaseContainer.extend({
     this.renderAttributes = {};
   },
   onRender: function onRender() {
+    var _this4 = this;
+
     this.renderUI();
     this.runReadyTrigger();
 
@@ -15309,7 +15812,12 @@ BaseElementView = BaseContainer.extend({
           timeout: 500
         });
       }
-    }
+    } // Defer to wait for all of the children to render.
+
+
+    setTimeout(function () {
+      return _this4.initDraggable();
+    }, 0);
   },
   onEditSettingsChanged: function onEditSettingsChanged(changedModel) {
     elementor.channels.editor.trigger('change:editSettings', changedModel, this);
@@ -15333,13 +15841,9 @@ BaseElementView = BaseContainer.extend({
       return;
     }
 
-    if (options.scrollIntoView) {
-      elementor.helpers.scrollToView(this.$el, 200);
-    }
-
     $e.run('document/elements/toggle-selection', {
       container: this.getContainer(),
-      append: options.append
+      options: options
     });
   },
 
@@ -15383,6 +15887,82 @@ BaseElementView = BaseContainer.extend({
     this.controlsCSSParser.removeStyleFromDocument();
     this.getEditModel().get('settings').validators = {};
     elementor.channels.data.trigger('element:destroy', this.model);
+  },
+
+  /**
+   * On `$el` drag start event.
+   * Used inside `Draggable` and can be overridden by the extending views.
+   *
+   * @return void
+   */
+  onDragStart: function onDragStart() {// TODO: Override if needed.
+  },
+
+  /**
+   * On `$el` drag end event.
+   * Used inside `Draggable` and can be overridden by the extending views.
+   *
+   * @return void
+   */
+  onDragEnd: function onDragEnd() {// TODO: Override if needed.
+  },
+
+  /**
+   * Create a drag helper element.
+   * Copied from `behaviors/sortable.js` with some refactor.
+   *
+   * @return {HTMLDivElement}
+   */
+  getDraggableHelper: function getDraggableHelper() {
+    var model = this.getEditModel();
+    var helper = document.createElement('div');
+    helper.classList.add('elementor-sortable-helper', "elementor-sortable-helper-".concat(model.get('elType')));
+    helper.innerHTML = "\n\t\t\t<div class=\"icon\">\n\t\t\t\t<i class=\"".concat(model.getIcon(), "\"></i>\n\t\t\t</div>\n\t\t\t<div class=\"elementor-element-title-wrapper\">\n\t\t\t\t<div class=\"title\">").concat(model.getTitle(), "</div>\n\t\t\t</div>\n\t\t");
+    return helper;
+  },
+
+  /**
+   * Initialize the Droppable instance.
+   *
+   * @return void
+   */
+  initDraggable: function initDraggable() {
+    var _this5 = this;
+
+    // Init the draggable only for Containers and their children.
+    if (!this.$el.hasClass('.e-container') && !this.$el.parents('.e-container').length) {
+      return;
+    }
+
+    this.$el.html5Draggable({
+      onDragStart: function onDragStart(e) {
+        e.stopPropagation();
+
+        var helper = _this5.getDraggableHelper();
+
+        _this5.$el[0].appendChild(helper); // Set the x & y coordinates of the helper the same as the legacy jQuery sortable.
+
+
+        e.originalEvent.dataTransfer.setDragImage(helper, 25, 20); // Remove the helper element as soon as it's set as a drag image, since the element must be
+        // rendered for at least a fraction of a second in order to set it as a drag image.
+
+        setTimeout(function () {
+          helper.remove();
+        });
+
+        _this5.onDragStart(e);
+
+        var container = _this5.getContainer();
+
+        elementor.channels.editor.reply('element:dragged', container.view);
+      },
+      onDragEnd: function onDragEnd(e) {
+        e.stopPropagation();
+
+        _this5.onDragEnd(e);
+      },
+      groups: ['elementor-element']
+    });
   }
 });
 module.exports = BaseElementView;
@@ -15619,10 +16199,18 @@ module.exports = Marionette.Behavior.extend({
 /*!********************************************************************!*\
   !*** ../assets/dev/js/editor/elements/views/behaviors/sortable.js ***!
   \********************************************************************/
-/***/ ((module) => {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
 
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime-corejs2/helpers/interopRequireDefault */ "../node_modules/@babel/runtime-corejs2/helpers/interopRequireDefault.js");
+
+var _values = _interopRequireDefault(__webpack_require__(/*! @babel/runtime-corejs2/core-js/object/values */ "../node_modules/@babel/runtime-corejs2/core-js/object/values.js"));
+
+__webpack_require__(/*! core-js/modules/es6.array.find.js */ "../node_modules/core-js/modules/es6.array.find.js");
+
+var _objectSpread2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime-corejs2/helpers/objectSpread2 */ "../node_modules/@babel/runtime-corejs2/helpers/objectSpread2.js"));
 
 var SortableBehavior;
 SortableBehavior = Marionette.Behavior.extend({
@@ -15652,6 +16240,58 @@ SortableBehavior = Marionette.Behavior.extend({
   onDestroy: function onDestroy() {
     this.deactivate();
   },
+
+  /**
+   * Create an item placeholder in order to avoid UI jumps due to flex.
+   *
+   * @param {Object} $element - jQuery element instance to create placeholder for.
+   * @param {string} className - Placeholder class.
+   * @param {boolean} hide - Whether to hide the original element.
+   *
+   * @returns {void}
+   */
+  createPlaceholder: function createPlaceholder($element) {
+    var className = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
+    var hide = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
+    // Get the actual item size.
+    $element.css('display', '');
+    var _$element$ = $element[0],
+        width = _$element$.clientWidth,
+        height = _$element$.clientHeight;
+
+    if (hide) {
+      $element.css('display', 'none');
+    }
+
+    jQuery('<div />').css((0, _objectSpread2.default)((0, _objectSpread2.default)({}, $element.css(['flex-basis', 'flex-grow', 'flex-shrink', 'position'])), {}, {
+      width: width,
+      height: height
+    })).addClass(className).insertAfter($element);
+  },
+
+  /**
+   * Return a settings object for jQuery UI sortable to make it swappable.
+   *
+   * @returns {{stop: stop, start: start}}
+   */
+  getSwappableOptions: function getSwappableOptions() {
+    var _this = this;
+
+    var $childViewContainer = this.getChildViewContainer(),
+        placeholderClass = 'e-swappable--item-placeholder';
+    return {
+      start: function start(event, ui) {
+        $childViewContainer.sortable('refreshPositions'); // TODO: Find a better solution than this hack.
+        // Used in order to prevent dragging a container into itself.
+
+        _this.createPlaceholder(ui.item, placeholderClass);
+      },
+      stop: function stop() {
+        // Cleanup.
+        $childViewContainer.find(".".concat(placeholderClass)).remove();
+      }
+    };
+  },
   onToggleSortMode: function onToggleSortMode(isActive) {
     if (isActive) {
       this.activate();
@@ -15677,8 +16317,21 @@ SortableBehavior = Marionette.Behavior.extend({
       start: function start() {
         $childViewContainer.sortable('refreshPositions');
       }
-    },
-        sortableOptions = _.extend(defaultSortableOptions, this.view.getSortableOptions());
+    };
+
+    var sortableOptions = _.extend(defaultSortableOptions, this.view.getSortableOptions()); // Add a swappable behavior (used for flex containers).
+
+
+    if (this.isSwappable()) {
+      $childViewContainer.addClass('e-swappable');
+      sortableOptions = _.extend(sortableOptions, this.getSwappableOptions());
+    } // TODO: Temporary hack for Container.
+    //  Will be removed in the future when the Navigator will use React.
+
+
+    if (sortableOptions.preventInit) {
+      return;
+    }
 
     $childViewContainer.sortable(sortableOptions);
   },
@@ -15705,19 +16358,11 @@ SortableBehavior = Marionette.Behavior.extend({
   getChildViewContainer: function getChildViewContainer() {
     return this.view.getChildViewContainer(this.view);
   },
-  // This method is used to fix widgets index detection when dragging or sorting using the preview interface,
-  // The natural widget index in the column is wrong, since there is a `.elementor-background-overlay` element
-  // at the beginning of the column
+  // The natural widget index in the column is wrong, since there are other elements
+  // at the beginning of the column (background-overlay, element-overlay, resizeable-handle)
   getSortedElementNewIndex: function getSortedElementNewIndex($element) {
-    var draggedModel = elementor.channels.data.request('dragging:model'),
-        draggedElType = draggedModel.get('elType');
-    var newIndex = $element.index();
-
-    if ('widget' === draggedElType && elementorCommon.config.experimentalFeatures['e_dom_optimization']) {
-      newIndex--;
-    }
-
-    return newIndex;
+    var widgets = (0, _values.default)($element.parent().find('> .elementor-element'));
+    return widgets.indexOf($element[0]);
   },
 
   /**
@@ -15731,6 +16376,15 @@ SortableBehavior = Marionette.Behavior.extend({
       childViewContainer.sortable('disable');
     }
   },
+
+  /**
+   * Determine if the current instance of Sortable is swappable.
+   *
+   * @returns {boolean}
+   */
+  isSwappable: function isSwappable() {
+    return !!this.view.getSortableOptions().swappable;
+  },
   startSort: function startSort(event, ui) {
     event.stopPropagation();
     var container = elementor.getContainer(ui.item.attr('data-id'));
@@ -15742,13 +16396,8 @@ SortableBehavior = Marionette.Behavior.extend({
       newIndex = ui.item.index();
     }
 
-    $e.run('document/elements/move', {
-      container: elementor.channels.data.request('dragging:view').getContainer(),
-      target: this.view.getContainer(),
-      options: {
-        at: newIndex
-      }
-    });
+    var child = elementor.channels.data.request('dragging:view').getContainer();
+    this.moveChild(child, newIndex);
   },
   // On receiving element from another container
   receiveSort: function receiveSort(event, ui, newIndex) {
@@ -15773,13 +16422,8 @@ SortableBehavior = Marionette.Behavior.extend({
       newIndex = ui.item.index();
     }
 
-    $e.run('document/elements/move', {
-      container: elementor.channels.data.request('dragging:view').getContainer(),
-      target: this.view.getContainer(),
-      options: {
-        at: newIndex
-      }
-    });
+    var child = elementor.channels.data.request('dragging:view').getContainer();
+    this.moveChild(child, newIndex);
   },
   onSortStart: function onSortStart(event, ui) {
     if ('column' === this.options.elChildType) {
@@ -15825,9 +16469,247 @@ SortableBehavior = Marionette.Behavior.extend({
   },
   onAddChild: function onAddChild(view) {
     view.$el.attr('data-model-cid', view.model.cid);
+  },
+
+  /**
+   * Move a child container to another position.
+   *
+   * @param {Container} child - The child container to move.
+   * @param {int|string} index - New index.
+   *
+   * @returns {void}
+   */
+  moveChild: function moveChild(child, index) {
+    $e.run('document/elements/move', {
+      container: child,
+      target: this.view.getContainer(),
+      options: {
+        at: index
+      }
+    });
   }
 });
 module.exports = SortableBehavior;
+
+/***/ }),
+
+/***/ "../assets/dev/js/editor/elements/views/behaviors/widget-resizeable.js":
+/*!*****************************************************************************!*\
+  !*** ../assets/dev/js/editor/elements/views/behaviors/widget-resizeable.js ***!
+  \*****************************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+var _Object$defineProperty = __webpack_require__(/*! @babel/runtime-corejs2/core-js/object/define-property */ "../node_modules/@babel/runtime-corejs2/core-js/object/define-property.js");
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime-corejs2/helpers/interopRequireDefault */ "../node_modules/@babel/runtime-corejs2/helpers/interopRequireDefault.js");
+
+_Object$defineProperty(exports, "__esModule", {
+  value: true
+});
+
+exports["default"] = void 0;
+
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime-corejs2/helpers/classCallCheck */ "../node_modules/@babel/runtime-corejs2/helpers/classCallCheck.js"));
+
+var _createClass2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime-corejs2/helpers/createClass */ "../node_modules/@babel/runtime-corejs2/helpers/createClass.js"));
+
+var _get2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime-corejs2/helpers/get */ "../node_modules/@babel/runtime-corejs2/helpers/get.js"));
+
+var _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime-corejs2/helpers/getPrototypeOf */ "../node_modules/@babel/runtime-corejs2/helpers/getPrototypeOf.js"));
+
+var _inherits2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime-corejs2/helpers/inherits */ "../node_modules/@babel/runtime-corejs2/helpers/inherits.js"));
+
+var _createSuper2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime-corejs2/helpers/createSuper */ "../node_modules/@babel/runtime-corejs2/helpers/createSuper.js"));
+
+var _default = /*#__PURE__*/function (_Marionette$Behavior) {
+  (0, _inherits2.default)(_default, _Marionette$Behavior);
+
+  var _super = (0, _createSuper2.default)(_default);
+
+  function _default() {
+    (0, _classCallCheck2.default)(this, _default);
+    return _super.apply(this, arguments);
+  }
+
+  (0, _createClass2.default)(_default, [{
+    key: "events",
+    value: function events() {
+      return {
+        resizestart: 'onResizeStart',
+        resizestop: 'onResizeStop',
+        resize: 'onResize'
+      };
+    }
+  }, {
+    key: "initialize",
+    value: function initialize() {
+      (0, _get2.default)((0, _getPrototypeOf2.default)(_default.prototype), "initialize", this).call(this);
+      this.listenTo(elementor.channels.dataEditMode, 'switch', this.toggle); // Save this instance for external use eg: ( hooks ).
+
+      this.view.options.resizeable = this;
+    }
+    /**
+     * Get the resizable options object.
+     *
+     * @return {Object}
+     */
+
+  }, {
+    key: "getOptions",
+    value: function getOptions() {
+      // jQuery UI handles are using Cardinal Directions (n, e, s, w, etc.).
+      var handles = 'e, w'; // If it's a container item, add resize handles only at the end of the element in order to prevent UI
+      // glitches when resizing from start.
+
+      if (this.isContainerItem()) {
+        handles = elementorCommon.config.isRTL ? 'w' : 'e';
+      }
+
+      return {
+        handles: handles
+      };
+    }
+  }, {
+    key: "activate",
+    value: function activate() {
+      this.$el.resizable(this.getOptions());
+    }
+  }, {
+    key: "deactivate",
+    value: function deactivate() {
+      if (!this.$el.resizable('instance')) {
+        return;
+      }
+
+      this.$el.resizable('destroy');
+    }
+  }, {
+    key: "toggle",
+    value: function toggle() {
+      var editModel = this.view.getEditModel(),
+          isAbsolute = editModel.getSetting('_position'),
+          isInline = 'initial' === editModel.getSetting('_element_width');
+      this.deactivate();
+
+      if ((isAbsolute || isInline) && this.view.container.isDesignable() || this.isContainerItem()) {
+        this.activate();
+      }
+    }
+    /**
+     * Determine if the current element is a flex container item.
+     *
+     * @returns {boolean}
+     */
+
+  }, {
+    key: "isContainerItem",
+    value: function isContainerItem() {
+      var _this$view$getContain, _this$view$getContain2;
+
+      return 'container' === ((_this$view$getContain = this.view.getContainer().parent) === null || _this$view$getContain === void 0 ? void 0 : (_this$view$getContain2 = _this$view$getContain.model) === null || _this$view$getContain2 === void 0 ? void 0 : _this$view$getContain2.get('elType'));
+    }
+    /**
+     * Get the parent container flex direction.
+     *
+     * @returns {null|string}
+     */
+
+  }, {
+    key: "getParentFlexDirection",
+    value: function getParentFlexDirection() {
+      var _this$view$getContain3, _this$view$getContain4;
+
+      if (!this.isContainerItem()) {
+        return null;
+      }
+
+      var currentDeviceMode = elementorFrontend.getCurrentDeviceMode(),
+          deviceSuffix = 'desktop' === currentDeviceMode ? '' : '_' + currentDeviceMode;
+      return (_this$view$getContain3 = this.view.getContainer().parent) === null || _this$view$getContain3 === void 0 ? void 0 : (_this$view$getContain4 = _this$view$getContain3.model) === null || _this$view$getContain4 === void 0 ? void 0 : _this$view$getContain4.getSetting("flex_direction".concat(deviceSuffix));
+    }
+  }, {
+    key: "onRender",
+    value: function onRender() {
+      var _this = this;
+
+      _.defer(function () {
+        return _this.toggle();
+      });
+    }
+  }, {
+    key: "onDestroy",
+    value: function onDestroy() {
+      this.deactivate();
+    }
+  }, {
+    key: "onResizeStart",
+    value: function onResizeStart(event) {
+      event.stopPropagation(); // Don't open edit mode when the item is a Container item ( for UX ).
+
+      if (!this.isContainerItem()) {
+        this.view.model.trigger('request:edit');
+      }
+    }
+  }, {
+    key: "onResizeStop",
+    value: function onResizeStop(event, ui) {
+      event.stopPropagation();
+      var currentDeviceMode = elementorFrontend.getCurrentDeviceMode(),
+          deviceSuffix = 'desktop' === currentDeviceMode ? '' : '_' + currentDeviceMode,
+          editModel = this.view.getEditModel(),
+          widthKey = 'container' === this.view.model.get('elType') ? 'width' : '_element_custom_width',
+          unit = editModel.getSetting(widthKey + deviceSuffix).unit,
+          width = elementor.helpers.elementSizeToUnit(this.$el, ui.size.width, unit),
+          settingToChange = {}; // TODO: For BC controls.
+
+      if (!elementorCommon.config.experimentalFeatures.container) {
+        settingToChange['_element_width' + deviceSuffix] = 'initial';
+      }
+
+      settingToChange[widthKey + deviceSuffix] = {
+        unit: unit,
+        size: width
+      };
+      $e.run('document/elements/settings', {
+        container: this.view.container,
+        settings: settingToChange,
+        options: {
+          external: true
+        }
+      });
+      this.$el.css({
+        width: '',
+        height: '',
+        left: '',
+        flexBasis: ''
+      });
+    }
+  }, {
+    key: "onResize",
+    value: function onResize(event, ui) {
+      event.stopPropagation();
+
+      if (!this.isContainerItem()) {
+        return;
+      } // Set grow & shrink to 0 in order to set a specific size and prevent UI glitches.
+
+
+      this.$el.css({
+        left: '',
+        right: '',
+        'flex-shrink': 0,
+        'flex-grow': 0,
+        'flex-basis': ui.size.width + 'px'
+      });
+    }
+  }]);
+  return _default;
+}(Marionette.Behavior);
+
+exports["default"] = _default;
 
 /***/ }),
 
@@ -16001,6 +16883,10 @@ ColumnView = BaseElementView.extend({
 
     var elType = elementView.model.get('elType');
 
+    if ('container' === elType) {
+      return true;
+    }
+
     if ('section' === elType) {
       return !this.isInner();
     }
@@ -16097,16 +16983,7 @@ ColumnView = BaseElementView.extend({
       getDropContainer: function getDropContainer() {
         return _this.getContainer();
       },
-      getDropIndex: getDropIndex,
-      onDropping: function onDropping(side, event) {
-        event.stopPropagation(); // Triggering drag end manually, since it won't fired above iframe
-
-        elementor.getPreviewView().onPanelElementDragEnd();
-
-        _this.addElementFromPanel({
-          at: getDropIndex(side, event)
-        });
-      }
+      getDropIndex: getDropIndex
     });
   },
   onAddButtonClick: function onAddButtonClick(event) {
@@ -16115,6 +16992,306 @@ ColumnView = BaseElementView.extend({
   }
 });
 module.exports = ColumnView;
+
+/***/ }),
+
+/***/ "../assets/dev/js/editor/elements/views/container.js":
+/*!***********************************************************!*\
+  !*** ../assets/dev/js/editor/elements/views/container.js ***!
+  \***********************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+/* provided dependency */ var __ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n")["__"];
+/* provided dependency */ var sprintf = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n")["sprintf"];
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime-corejs2/helpers/interopRequireDefault */ "../node_modules/@babel/runtime-corejs2/helpers/interopRequireDefault.js");
+
+var _values = _interopRequireDefault(__webpack_require__(/*! @babel/runtime-corejs2/core-js/object/values */ "../node_modules/@babel/runtime-corejs2/core-js/object/values.js"));
+
+__webpack_require__(/*! core-js/modules/es6.string.includes.js */ "../node_modules/core-js/modules/es6.string.includes.js");
+
+__webpack_require__(/*! core-js/modules/es7.array.includes.js */ "../node_modules/core-js/modules/es7.array.includes.js");
+
+__webpack_require__(/*! core-js/modules/es6.array.find.js */ "../node_modules/core-js/modules/es6.array.find.js");
+
+var _inline = _interopRequireDefault(__webpack_require__(/*! elementor-views/add-section/inline */ "../assets/dev/js/editor/views/add-section/inline.js"));
+
+var _widgetResizeable = _interopRequireDefault(__webpack_require__(/*! ./behaviors/widget-resizeable */ "../assets/dev/js/editor/elements/views/behaviors/widget-resizeable.js"));
+
+var _directionMode = __webpack_require__(/*! elementor-document/ui-states/direction-mode */ "../assets/dev/js/editor/document/ui-states/direction-mode.js");
+
+// Most of the code has been copied from `section.js`.
+var BaseElementView = __webpack_require__(/*! elementor-elements/views/base */ "../assets/dev/js/editor/elements/views/base.js"),
+    ColumnEmptyView = __webpack_require__(/*! elementor-elements/views/column-empty */ "../assets/dev/js/editor/elements/views/column-empty.js");
+
+var ContainerView = BaseElementView.extend({
+  template: Marionette.TemplateCache.get('#tmpl-elementor-container-content'),
+  emptyView: ColumnEmptyView,
+  // Child view is empty in order to use the parent element.
+  childViewContainer: '',
+  className: function className() {
+    return "".concat(BaseElementView.prototype.className.apply(this), " e-container");
+  },
+  tagName: function tagName() {
+    return this.model.getSetting('html_tag') || 'div';
+  },
+  getCurrentUiStates: function getCurrentUiStates() {
+    var currentDirection = this.container.settings.get('flex_direction');
+    return {
+      directionMode: currentDirection || _directionMode.DIRECTION_ROW
+    };
+  },
+  behaviors: function behaviors() {
+    var behaviors = BaseElementView.prototype.behaviors.apply(this, arguments);
+
+    _.extend(behaviors, {
+      // TODO: Remove. It's a temporary solution for the Navigator sortable.
+      Sortable: {
+        behaviorClass: __webpack_require__(/*! elementor-behaviors/sortable */ "../assets/dev/js/editor/elements/views/behaviors/sortable.js"),
+        elChildType: 'widget'
+      },
+      Resizable: {
+        behaviorClass: _widgetResizeable.default
+      }
+    });
+
+    return elementor.hooks.applyFilters('elements/container/behaviors', behaviors, this);
+  },
+  initialize: function initialize() {
+    BaseElementView.prototype.initialize.apply(this, arguments);
+    this.model.get('editSettings').set('defaultEditRoute', 'layout');
+  },
+
+  /**
+   * TODO: Remove. It's a temporary solution for the Navigator sortable.
+   *
+   * @return {{}}
+   */
+  getSortableOptions: function getSortableOptions() {
+    // TODO: Temporary hack.
+    return {
+      preventInit: true
+    };
+  },
+
+  /**
+   * Get the Container nesting level recursively.
+   * The farthest parent Container is level 0.
+   *
+   * @return {number}
+   */
+  getNestingLevel: function getNestingLevel() {
+    // Use the memoized value if present, to prevent too many calculations.
+    if (this.nestingLevel) {
+      return this.nestingLevel;
+    }
+
+    var parent = this.container.parent; // Start counting nesting level only from the closest Container parent.
+
+    if ('container' !== parent.type) {
+      return 0;
+    }
+
+    return parent.view.getNestingLevel() + 1;
+  },
+  getDroppableOptions: function getDroppableOptions() {
+    var _this = this;
+
+    // Determine the axis based on the flex direction.
+    var axis = this.getContainer().settings.get('flex_direction').includes('column') ? ['vertical'] : ['horizontal'];
+    return {
+      axis: axis,
+      items: '> .elementor-element, > .elementor-empty-view .elementor-first-add',
+      groups: ['elementor-element'],
+      horizontalThreshold: 5,
+      // TODO: Stop the magic.
+      isDroppingAllowed: this.isDroppingAllowed.bind(this),
+      currentElementClass: 'elementor-html5dnd-current-element',
+      placeholderClass: 'elementor-sortable-placeholder elementor-widget-placeholder',
+      hasDraggingOnChildClass: 'e-dragging-over',
+      getDropContainer: function getDropContainer() {
+        return _this.getContainer();
+      },
+      onDropping: function onDropping(side, event) {
+        event.stopPropagation(); // Triggering drag end manually, since it won't fired above iframe
+
+        elementor.getPreviewView().onPanelElementDragEnd();
+        var widgets = (0, _values.default)(jQuery(event.currentTarget.parentElement).find('> .elementor-element'));
+        var newIndex = widgets.indexOf(event.currentTarget); // Plus one in order to insert it after the current target element.
+
+        if (['bottom', 'right'].includes(side)) {
+          newIndex++;
+        }
+
+        var draggedView = elementor.channels.editor.request('element:dragged'); // User is sorting inside a Container.
+
+        if (draggedView) {
+          // Reset the dragged element cache.
+          elementor.channels.editor.reply('element:dragged', null);
+
+          if (draggedView.parent === _this) {
+            newIndex++;
+          }
+
+          $e.run('document/elements/move', {
+            container: draggedView.getContainer(),
+            target: _this.getContainer(),
+            options: {
+              at: newIndex
+            }
+          });
+          return;
+        } // User is dragging an element from the panel.
+
+
+        _this.addElementFromPanel({
+          at: newIndex
+        });
+      }
+    };
+  },
+  changeContainerClasses: function changeContainerClasses() {
+    var emptyClass = 'e-element-empty',
+        populatedClass = 'e-element-populated',
+        state = this.collection.isEmpty();
+    this.$el.toggleClass(populatedClass, !state).toggleClass(emptyClass, state);
+  },
+
+  /**
+   * Save container as a template.
+   *
+   * @returns {void}
+   */
+  saveAsTemplate: function saveAsTemplate() {
+    $e.route('library/save-template', {
+      model: this.model
+    });
+  },
+
+  /**
+   * Add a `Save as Template` button to the context menu.
+   *
+   * @return {object}
+   *
+   */
+  getContextMenuGroups: function getContextMenuGroups() {
+    var groups = BaseElementView.prototype.getContextMenuGroups.apply(this, arguments),
+        transferGroupIndex = groups.indexOf(_.findWhere(groups, {
+      name: 'clipboard'
+    }));
+    groups.splice(transferGroupIndex + 1, 0, {
+      name: 'save',
+      actions: [{
+        name: 'save',
+        title: __('Save as Template', 'elementor'),
+        callback: this.saveAsTemplate.bind(this)
+      }]
+    });
+    return groups;
+  },
+  isDroppingAllowed: function isDroppingAllowed() {
+    // Don't allow dragging items to document which is not editable.
+    if (!this.getContainer().isEditable()) {
+      return false;
+    }
+
+    var elementView = elementor.channels.panelElements.request('element:selected') || elementor.channels.editor.request('element:dragged');
+
+    if (!elementView) {
+      return false;
+    }
+
+    return ['widget', 'container'].includes(elementView.model.get('elType'));
+  },
+
+  /**
+   * Determine if the current container is a nested container.
+   *
+   * @returns {boolean}
+   */
+  isNested: function isNested() {
+    return 'document' !== this.getContainer().parent.model.get('elType');
+  },
+  getEditButtons: function getEditButtons() {
+    var elementData = elementor.getElementData(this.model),
+        editTools = {};
+    editTools.add = {
+      /* translators: %s: Element Name. */
+      title: sprintf(__('Add %s', 'elementor'), elementData.title),
+      icon: 'plus'
+    };
+    editTools.edit = {
+      /* translators: %s: Element Name. */
+      title: sprintf(__('Edit %s', 'elementor'), elementData.title),
+      icon: 'handle'
+    };
+
+    if (elementor.getPreferences('edit_buttons')) {
+      editTools.duplicate = {
+        /* translators: %s: Element Name. */
+        title: sprintf(__('Duplicate %s', 'elementor'), elementData.title),
+        icon: 'clone'
+      };
+    }
+
+    editTools.remove = {
+      /* translators: %s: Element Name. */
+      title: sprintf(__('Delete %s', 'elementor'), elementData.title),
+      icon: 'close'
+    };
+    return editTools;
+  },
+
+  /**
+   * Toggle the `New Section` view when clicking the `add` button in the edit tools.
+   *
+   * @returns {void}
+   *
+   */
+  onAddButtonClick: function onAddButtonClick() {
+    if (this.addSectionView && !this.addSectionView.isDestroyed) {
+      this.addSectionView.fadeToDeath();
+      return;
+    }
+
+    var addSectionView = new _inline.default({
+      at: this.model.collection.indexOf(this.model)
+    });
+    addSectionView.render();
+    this.$el.before(addSectionView.$el);
+    addSectionView.$el.hide(); // Delaying the slide down for slow-render browsers (such as FF)
+
+    setTimeout(function () {
+      addSectionView.$el.slideDown(null, function () {
+        // Remove inline style, for preview mode.
+        jQuery(this).css('display', '');
+      });
+    });
+    this.addSectionView = addSectionView;
+  },
+  onRender: function onRender() {
+    var _this2 = this;
+
+    BaseElementView.prototype.onRender.apply(this, arguments);
+    this.changeContainerClasses(); // Defer to wait for everything to render.
+
+    setTimeout(function () {
+      _this2.nestingLevel = _this2.getNestingLevel();
+      _this2.$el[0].dataset.nestingLevel = _this2.nestingLevel;
+
+      _this2.$el.html5Droppable(_this2.getDroppableOptions());
+    });
+  },
+  onDragStart: function onDragStart() {
+    this.$el.html5Droppable('destroy');
+  },
+  onDragEnd: function onDragEnd() {
+    this.$el.html5Droppable(this.getDroppableOptions());
+  }
+});
+module.exports = ContainerView;
 
 /***/ }),
 
@@ -16421,6 +17598,312 @@ module.exports = SectionView;
 module.exports.DEFAULT_INNER_SECTION_COLUMNS = DEFAULT_INNER_SECTION_COLUMNS;
 module.exports.DEFAULT_MIN_COLUMN_SIZE = DEFAULT_MIN_COLUMN_SIZE;
 module.exports.DEFAULT_MAX_COLUMNS = DEFAULT_MAX_COLUMNS;
+
+/***/ }),
+
+/***/ "../assets/dev/js/editor/utils/container-helper.js":
+/*!*********************************************************!*\
+  !*** ../assets/dev/js/editor/utils/container-helper.js ***!
+  \*********************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+/* provided dependency */ var __ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n")["__"];
+
+
+var _Object$defineProperty = __webpack_require__(/*! @babel/runtime-corejs2/core-js/object/define-property */ "../node_modules/@babel/runtime-corejs2/core-js/object/define-property.js");
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime-corejs2/helpers/interopRequireDefault */ "../node_modules/@babel/runtime-corejs2/helpers/interopRequireDefault.js");
+
+_Object$defineProperty(exports, "__esModule", {
+  value: true
+});
+
+exports["default"] = exports.ContainerHelper = void 0;
+
+__webpack_require__(/*! core-js/modules/es6.regexp.split.js */ "../node_modules/core-js/modules/es6.regexp.split.js");
+
+var _parseInt2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime-corejs2/core-js/parse-int */ "../node_modules/@babel/runtime-corejs2/core-js/parse-int.js"));
+
+var _objectSpread2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime-corejs2/helpers/objectSpread2 */ "../node_modules/@babel/runtime-corejs2/helpers/objectSpread2.js"));
+
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime-corejs2/helpers/classCallCheck */ "../node_modules/@babel/runtime-corejs2/helpers/classCallCheck.js"));
+
+var _createClass2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime-corejs2/helpers/createClass */ "../node_modules/@babel/runtime-corejs2/helpers/createClass.js"));
+
+var _defineProperty2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime-corejs2/helpers/defineProperty */ "../node_modules/@babel/runtime-corejs2/helpers/defineProperty.js"));
+
+/**
+ * Container element helper functions.
+ */
+var ContainerHelper = /*#__PURE__*/function () {
+  function ContainerHelper() {
+    (0, _classCallCheck2.default)(this, ContainerHelper);
+  }
+
+  (0, _createClass2.default)(ContainerHelper, null, [{
+    key: "createContainers",
+    value: // Flex directions.
+
+    /**
+     * Create multiple container elements.
+     *
+     * @param {Number} count - Count of Containers to create.
+     * @param {Object} settings - Settings to set to each Container.
+     * @param {Container} target - The Container object to create the new Container elements inside.
+     * @param {Object} options - Additional command options.
+     *
+     * @return {Container[]} - Array of the newly created Containers.
+     */
+    function createContainers(count, settings) {
+      var target = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+      var options = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : {};
+      var containers = [];
+
+      for (var i = 0; i < count; i++) {
+        containers.push(this.createContainer(settings, target, options));
+      }
+
+      return containers;
+    }
+    /**
+     * Create a Container element.
+     *
+     * @param {Object} settings - Settings to set to each Container.
+     * @param {Container} target - The Container object to create the new Container elements inside.
+     * @param {Object} options - Additional command options.
+     *
+     * @return {Container} - The newly created Container.
+     */
+
+  }, {
+    key: "createContainer",
+    value: function createContainer() {
+      var settings = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+      var target = arguments.length > 1 ? arguments[1] : undefined;
+      var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+      return $e.run('document/elements/create', {
+        container: target,
+        model: {
+          elType: 'container',
+          settings: settings
+        },
+        options: options
+      });
+    }
+    /**
+     * Change Container settings.
+     *
+     * @param {Object} settings - New settings.
+     * @param {Container} container - Container to set the settings to.
+     *
+     * @return {void}
+     */
+
+  }, {
+    key: "setContainerSettings",
+    value: function setContainerSettings(settings, container) {
+      $e.run('document/elements/settings', {
+        container: container,
+        settings: settings,
+        options: {
+          external: true
+        }
+      });
+    }
+    /**
+     * Create a Container element based on a sizes.
+     *
+     * @param {array} sizes - Preset sizes.
+     * @param {Container} target - The target of new created element.
+     * @param {Object} options - Additional command options.
+     * @param {Boolean} [options.createWrapper=true] - Create a wrapper container for the preset.
+     *
+     * @returns {Container} - Container created on.
+     */
+
+  }, {
+    key: "createContainerFromSizes",
+    value: function createContainerFromSizes(sizes, target) {
+      var _this = this;
+
+      var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+      var _options$createWrappe = options.createWrapper,
+          createWrapper = _options$createWrappe === void 0 ? true : _options$createWrappe,
+          sizesMap = {
+        33: '33.3333',
+        66: '66.6666'
+      },
+          sizesSum = sizes.reduce(function (sum, size) {
+        return sum + (0, _parseInt2.default)(size);
+      }, 0),
+          shouldWrap = sizesSum > 100,
+          settings = (0, _objectSpread2.default)((0, _objectSpread2.default)({
+        flex_direction: this.DIRECTION_ROW
+      }, shouldWrap ? {
+        flex_wrap: 'wrap'
+      } : {}), {}, {
+        flex_gap: {
+          unit: 'px',
+          size: 0 // Set the gap to 0 to override the default inherited from `Site Settings`.
+
+        }
+      }); // Create a parent container to contain all of the sub containers.
+
+      var parentContainer; // The `createWrapper` false option is used in nested-modules for creating containers from preset for custom target(s).
+
+      if (!createWrapper) {
+        $e.run('document/elements/settings', {
+          container: target,
+          settings: settings
+        });
+        parentContainer = target;
+      } else {
+        parentContainer = this.createContainer(settings, target, options);
+      } // Create all sub containers using the sizes array.
+      // Use flex basis to make the sizes explicit.
+
+
+      sizes.forEach(function (size) {
+        size = sizesMap[size] || size;
+
+        _this.createContainer({
+          flex_direction: _this.DIRECTION_COLUMN,
+          width: {
+            unit: '%',
+            size: size
+          }
+        }, parentContainer, {
+          edit: false
+        });
+      });
+      return parentContainer;
+    }
+    /**
+     * Create a Container element based on a preset.
+     *
+     * @param {string} preset - Preset structure of the sub containers (e.g. `33-66-66-33`).
+     * @param {Container} target - The target container of the newly created Container.
+     * @param {Object} options - Additional command options.
+     * @param {Boolean} [options.createWrapper=true] - Create a wrapper container for the preset.
+     *
+     * @returns {Container} - Container created on.
+     */
+
+  }, {
+    key: "createContainerFromPreset",
+    value: function createContainerFromPreset(preset) {
+      var target = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : elementor.getPreviewContainer();
+      var options = arguments.length > 2 ? arguments[2] : undefined;
+      var historyId = $e.internal('document/history/start-log', {
+        type: 'add',
+        title: __('Container', 'elementor')
+      }),
+          _options$createWrappe2 = options.createWrapper,
+          createWrapper = _options$createWrappe2 === void 0 ? true : _options$createWrappe2;
+      var newContainer, settings;
+
+      try {
+        switch (preset) {
+          // Single Container without sub Containers.
+          case '100':
+            newContainer = ContainerHelper.createContainer({}, target, options);
+            break;
+          // Exceptional preset.
+
+          case 'c100-c50-50':
+            settings = {
+              flex_direction: ContainerHelper.DIRECTION_ROW,
+              flex_wrap: 'wrap',
+              flex_gap: {
+                unit: 'px',
+                size: 0 // Set the gap to 0 to override the default inherited from `Site Settings`.
+
+              }
+            };
+
+            if (!createWrapper) {
+              $e.run('document/elements/settings', {
+                container: target,
+                settings: settings
+              });
+              newContainer = target;
+            } else {
+              newContainer = ContainerHelper.createContainer(settings, target, options);
+            }
+
+            settings = {
+              width: {
+                unit: '%',
+                size: '50'
+              }
+            };
+            ContainerHelper.createContainer(settings, newContainer, {
+              edit: false
+            });
+            var rightContainer = ContainerHelper.createContainer((0, _objectSpread2.default)((0, _objectSpread2.default)({}, settings), {}, {
+              padding: {
+                size: ''
+              },
+              // Create the right Container with 0 padding (default is 10px) to fix UI (ED-4900).
+              flex_gap: {
+                unit: 'px',
+                size: 0 // Set the gap to 0 to override the default inherited from `Site Settings`.
+
+              }
+            }), newContainer, {
+              edit: false
+            });
+            ContainerHelper.createContainers(2, {}, rightContainer, {
+              edit: false
+            });
+            break;
+          // Containers by preset.
+
+          default:
+            var sizes = preset.split('-');
+            newContainer = ContainerHelper.createContainerFromSizes(sizes, target, options);
+        }
+
+        $e.internal('document/history/end-log', {
+          id: historyId
+        });
+      } catch (e) {
+        $e.internal('document/history/delete-log', {
+          id: historyId
+        });
+      }
+
+      return newContainer;
+    }
+    /**
+     * Open edit mode of a Container.
+     *
+     * @param {Container} container - Container to open edit mode for.
+     *
+     * @return void
+     */
+
+  }, {
+    key: "openEditMode",
+    value: function openEditMode(container) {
+      $e.run('panel/editor/open', {
+        model: container.model,
+        view: container.view,
+        container: container
+      });
+    }
+  }]);
+  return ContainerHelper;
+}();
+
+exports.ContainerHelper = ContainerHelper;
+(0, _defineProperty2.default)(ContainerHelper, "DIRECTION_ROW", 'row');
+(0, _defineProperty2.default)(ContainerHelper, "DIRECTION_COLUMN", 'column');
+(0, _defineProperty2.default)(ContainerHelper, "DIRECTION_ROW_REVERSED", 'row-reverse');
+(0, _defineProperty2.default)(ContainerHelper, "DIRECTION_COLUMN_REVERSED", 'column-reverse');
+var _default = ContainerHelper;
+exports["default"] = _default;
 
 /***/ }),
 
@@ -17283,6 +18766,10 @@ var _inherits2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime-c
 
 var _createSuper2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime-corejs2/helpers/createSuper */ "../node_modules/@babel/runtime-corejs2/helpers/createSuper.js"));
 
+var _defineProperty2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime-corejs2/helpers/defineProperty */ "../node_modules/@babel/runtime-corejs2/helpers/defineProperty.js"));
+
+var _containerHelper = _interopRequireDefault(__webpack_require__(/*! elementor-editor-utils/container-helper */ "../assets/dev/js/editor/utils/container-helper.js"));
+
 var AddSectionBase = /*#__PURE__*/function (_Marionette$ItemView) {
   (0, _inherits2.default)(AddSectionBase, _Marionette$ItemView);
 
@@ -17295,14 +18782,15 @@ var AddSectionBase = /*#__PURE__*/function (_Marionette$ItemView) {
 
   (0, _createClass2.default)(AddSectionBase, [{
     key: "template",
-    value: function template() {
+    value: // Views.
+    function template() {
       return Marionette.TemplateCache.get('#tmpl-elementor-add-section');
     }
   }, {
     key: "attributes",
     value: function attributes() {
       return {
-        'data-view': 'choose-action'
+        'data-view': AddSectionBase.VIEW_CHOOSE_ACTION
       };
     }
   }, {
@@ -17314,7 +18802,8 @@ var AddSectionBase = /*#__PURE__*/function (_Marionette$ItemView) {
         addSectionButton: '.elementor-add-section-button',
         addTemplateButton: '.elementor-add-template-button',
         selectPreset: '.elementor-select-preset',
-        presets: '.elementor-preset'
+        presets: '.elementor-preset',
+        containerPresets: '.e-container-preset'
       };
     }
   }, {
@@ -17324,7 +18813,8 @@ var AddSectionBase = /*#__PURE__*/function (_Marionette$ItemView) {
         'click @ui.addSectionButton': 'onAddSectionButtonClick',
         'click @ui.addTemplateButton': 'onAddTemplateButtonClick',
         'click @ui.closeButton': 'onCloseButtonClick',
-        'click @ui.presets': 'onPresetSelected'
+        'click @ui.presets': 'onPresetSelected',
+        'click @ui.containerPresets': 'onContainerPresetSelected'
       };
     }
   }, {
@@ -17350,12 +18840,12 @@ var AddSectionBase = /*#__PURE__*/function (_Marionette$ItemView) {
   }, {
     key: "showSelectPresets",
     value: function showSelectPresets() {
-      this.setView('select-preset');
+      this.setView(AddSectionBase.VIEW_SELECT_PRESET);
     }
   }, {
     key: "closeSelectPresets",
     value: function closeSelectPresets() {
-      this.setView('choose-action');
+      this.setView(AddSectionBase.VIEW_CHOOSE_ACTION);
     }
   }, {
     key: "getTemplatesModalOptions",
@@ -17433,8 +18923,7 @@ var AddSectionBase = /*#__PURE__*/function (_Marionette$ItemView) {
         groups: ['elementor-element'],
         placeholder: false,
         currentElementClass: 'elementor-html5dnd-current-element',
-        hasDraggingOnChildClass: 'elementor-dragging-on-child',
-        onDropping: this.onDropping.bind(this)
+        hasDraggingOnChildClass: 'elementor-dragging-on-child'
       });
     }
   }, {
@@ -17453,6 +18942,20 @@ var AddSectionBase = /*#__PURE__*/function (_Marionette$ItemView) {
         options: (0, _assign.default)({}, this.options)
       });
     }
+    /**
+     * Create a Container preset when the user chooses a preset.
+     *
+     * @param {MouseEvent} e - Click event.
+     *
+     * @return {Container}
+     */
+
+  }, {
+    key: "onContainerPresetSelected",
+    value: function onContainerPresetSelected(e) {
+      this.closeSelectPresets();
+      return _containerHelper.default.createContainerFromPreset(e.currentTarget.dataset.preset, elementor.getPreviewContainer(), this.options);
+    }
   }, {
     key: "onDropping",
     value: function onDropping() {
@@ -17465,9 +18968,9 @@ var AddSectionBase = /*#__PURE__*/function (_Marionette$ItemView) {
         type: 'add',
         title: elementor.helpers.getModelLabel(selectedElement.model)
       }),
-          eSection = $e.run('document/elements/create', {
+          containingElement = $e.run('document/elements/create', {
         model: {
-          elType: 'section'
+          elType: AddSectionBase.IS_CONTAINER_ACTIVE ? 'container' : 'section'
         },
         container: elementor.getPreviewContainer(),
         columns: 1,
@@ -17479,9 +18982,16 @@ var AddSectionBase = /*#__PURE__*/function (_Marionette$ItemView) {
             afterAdd: 'section:after:drop'
           }
         }
-      }); // Create the element in column.
+      });
 
-      eSection.view.children.findByIndex(0).addElementFromPanel();
+      if (!AddSectionBase.IS_CONTAINER_ACTIVE) {
+        // Create the element in column.
+        containingElement.view.children.findByIndex(0).addElementFromPanel();
+      } else if ('container' !== selectedElement.model.get('elType')) {
+        // Create the element in a Container, only if the dragged element is not a Container already.
+        containingElement.view.addElementFromPanel();
+      }
+
       $e.internal('document/history/end-log', {
         id: historyId
       });
@@ -17493,6 +19003,9 @@ var AddSectionBase = /*#__PURE__*/function (_Marionette$ItemView) {
   return AddSectionBase;
 }(Marionette.ItemView);
 
+(0, _defineProperty2.default)(AddSectionBase, "IS_CONTAINER_ACTIVE", !!elementorCommon.config.experimentalFeatures.container);
+(0, _defineProperty2.default)(AddSectionBase, "VIEW_CHOOSE_ACTION", 'choose-action');
+(0, _defineProperty2.default)(AddSectionBase, "VIEW_SELECT_PRESET", AddSectionBase.IS_CONTAINER_ACTIVE ? 'select-container-preset' : 'select-preset');
 var _default = AddSectionBase;
 exports["default"] = _default;
 
@@ -17569,6 +19082,12 @@ var AddSectionView = /*#__PURE__*/function (_BaseAddSectionView) {
     key: "onPresetSelected",
     value: function onPresetSelected(event) {
       (0, _get2.default)((0, _getPrototypeOf2.default)(AddSectionView.prototype), "onPresetSelected", this).call(this, event);
+      this.destroy();
+    }
+  }, {
+    key: "onContainerPresetSelected",
+    value: function onContainerPresetSelected(e) {
+      (0, _get2.default)((0, _getPrototypeOf2.default)(AddSectionView.prototype), "onContainerPresetSelected", this).call(this, e);
       this.destroy();
     }
   }, {
@@ -17740,7 +19259,9 @@ module.exports = Marionette.CompositeView.extend({
           trigger: {
             beforeAdd: 'section:before:drop',
             afterAdd: 'section:after:drop'
-          }
+          },
+          edit: false // Avoid useless element selection.
+
         }
       }); // Since wrapping an element with container doesn't produce a column, we shouldn't try to access it.
 
@@ -17841,6 +19362,10 @@ _Object$defineProperty(exports, "__esModule", {
 });
 
 exports["default"] = void 0;
+
+__webpack_require__(/*! core-js/modules/es6.object.to-string.js */ "../node_modules/core-js/modules/es6.object.to-string.js");
+
+__webpack_require__(/*! core-js/modules/es6.regexp.to-string.js */ "../node_modules/core-js/modules/es6.regexp.to-string.js");
 
 var _typeof2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime-corejs2/helpers/typeof */ "../node_modules/@babel/runtime-corejs2/helpers/typeof.js"));
 
@@ -17961,9 +19486,10 @@ var ArgsObject = /*#__PURE__*/function (_InstanceType) {
     key: "requireArgumentConstructor",
     value: function requireArgumentConstructor(property, type) {
       var args = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : this.args;
-      this.requireArgument(property, args);
+      this.requireArgument(property, args); // Note: Converting the constructor to string in order to avoid equation issues
+      // due to different memory addresses between iframes (window.Object !== window.top.Object).
 
-      if (args[property].constructor !== type) {
+      if (args[property].constructor.toString() !== type.prototype.constructor.toString()) {
         throw Error("".concat(property, " invalid constructor type."));
       }
     }
@@ -18349,6 +19875,170 @@ _Object$defineProperty(exports, "Error404", {
 var _defaultError = __webpack_require__(/*! ./default-error */ "../core/common/assets/js/api/core/data/errors/default-error.js");
 
 var _error = __webpack_require__(/*! ./error-404 */ "../core/common/assets/js/api/core/data/errors/error-404.js");
+
+/***/ }),
+
+/***/ "../core/common/assets/js/api/core/states/ui-state-base.js":
+/*!*****************************************************************!*\
+  !*** ../core/common/assets/js/api/core/states/ui-state-base.js ***!
+  \*****************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+var _Object$defineProperty = __webpack_require__(/*! @babel/runtime-corejs2/core-js/object/define-property */ "../node_modules/@babel/runtime-corejs2/core-js/object/define-property.js");
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime-corejs2/helpers/interopRequireDefault */ "../node_modules/@babel/runtime-corejs2/helpers/interopRequireDefault.js");
+
+_Object$defineProperty(exports, "__esModule", {
+  value: true
+});
+
+exports["default"] = void 0;
+
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime-corejs2/helpers/classCallCheck */ "../node_modules/@babel/runtime-corejs2/helpers/classCallCheck.js"));
+
+var _createClass2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime-corejs2/helpers/createClass */ "../node_modules/@babel/runtime-corejs2/helpers/createClass.js"));
+
+var UiStateBase = /*#__PURE__*/function () {
+  /**
+   * Initialize the state object.
+   *
+   * @param {ComponentBase} component - Optional. The component that the state belongs to.
+   *
+   * @return {void}
+   */
+  function UiStateBase(component) {
+    (0, _classCallCheck2.default)(this, UiStateBase);
+    this.component = component;
+    this.id = this.getId();
+    this.options = this.getOptions();
+    this.currentState = null;
+  }
+  /**
+   * Set the current state.
+   *
+   * @param {string} newValue - The new value to set as state. Has to be one of `this.options`.
+   *
+   * @return {void}
+   */
+
+
+  (0, _createClass2.default)(UiStateBase, [{
+    key: "set",
+    value: function set(newValue) {
+      if (newValue && !this.options.hasOwnProperty(newValue)) {
+        throw "Option '".concat(newValue, "' for state '").concat(this.id, "' is invalid.");
+      }
+
+      var callback = this.options[newValue],
+          oldValue = this.currentState; // Change the current state.
+
+      this.currentState = newValue; // Trigger the `onChange` method before the option's callback.
+
+      this.onChange(oldValue, newValue); // Run the callback if it's callable.
+
+      if ('function' === typeof callback) {
+        callback(oldValue, newValue);
+      }
+    }
+    /**
+     * Get current state value.
+     *
+     * @return {string}
+     */
+
+  }, {
+    key: "getCurrent",
+    value: function getCurrent() {
+      return this.currentState;
+    }
+    /**
+     * Get state ID.
+     *
+     * @return {string}
+     */
+
+  }, {
+    key: "getId",
+    value: function getId() {
+      elementorModules.forceMethodImplementation();
+    }
+    /**
+     * Return the state ID prefix.
+     *
+     * @return {string}
+     */
+
+  }, {
+    key: "getPrefix",
+    value: function getPrefix() {
+      var _this$component;
+
+      return ((_this$component = this.component) === null || _this$component === void 0 ? void 0 : _this$component.getNamespace()) || '';
+    }
+    /**
+     * Get the prefixed state ID.
+     *
+     * @return {string}
+     */
+
+  }, {
+    key: "getPrefixedId",
+    value: function getPrefixedId() {
+      var prefix = this.getPrefix();
+
+      if (!prefix) {
+        return this.getId();
+      }
+
+      return "".concat(prefix, "/").concat(this.getId());
+    }
+    /**
+     * Get state options.
+     * Each option should have unique ID as key and a callback if needed (should be an inner class method).
+     *
+     * @return {object}
+     */
+
+  }, {
+    key: "getOptions",
+    value: function getOptions() {
+      return {
+        on: '',
+        off: ''
+      };
+    }
+    /**
+     * Triggered on every UI state change.
+     *
+     * @param {string} oldValue - Previous UI state value.
+     * @param {string} newValue - New UI state value.
+     *
+     * @return {void}
+     */
+
+  }, {
+    key: "onChange",
+    value: function onChange(oldValue, newValue) {// Override this method if needed.
+    }
+    /**
+     * Retrieve an array of scopes that the state will be applied to.
+     *
+     * @return {HTMLElement[]}
+     */
+
+  }, {
+    key: "getScopes",
+    value: function getScopes() {
+      return [window.document.body];
+    }
+  }]);
+  return UiStateBase;
+}();
+
+exports["default"] = UiStateBase;
 
 /***/ }),
 

@@ -6,6 +6,7 @@ use Elementor\Core\Base\Elements_Iteration_Actions\Base as Elements_Iteration_Ac
 use Elementor\Core\Files\CSS\Post as Post_CSS;
 use Elementor\Core\Settings\Page\Model as Page_Model;
 use Elementor\Core\Utils\Exceptions;
+use Elementor\Includes\Elements\Container;
 use Elementor\Plugin;
 use Elementor\Controls_Manager;
 use Elementor\Controls_Stack;
@@ -312,7 +313,10 @@ abstract class Document extends Controls_Stack {
 		if ( Plugin::$instance->preview->is_preview() ) {
 			$attributes['data-elementor-title'] = static::get_title();
 		} else {
-			$attributes['data-elementor-settings'] = wp_json_encode( $this->get_frontend_settings() );
+			$elementor_settings = $this->get_frontend_settings();
+			if ( ! empty( $elementor_settings ) ) {
+				$attributes['data-elementor-settings'] = wp_json_encode( $elementor_settings );
+			}
 		}
 
 		return $attributes;
@@ -550,8 +554,17 @@ abstract class Document extends Controls_Stack {
 		do_action( 'elementor/document/before_get_config', $this );
 
 		if ( static::get_property( 'has_elements' ) ) {
+			$container = [];
+			$experiments_manager = Plugin::$instance->experiments;
+
+			if ( $experiments_manager->is_feature_active( 'container' ) ) {
+				$container = [
+					'container' => ( new Container() )->get_config(),
+				];
+			}
+
 			$config['elements'] = $this->get_elements_raw_data( null, true );
-			$config['widgets'] = Plugin::$instance->widgets_manager->get_widget_types_config();
+			$config['widgets'] = $container + Plugin::$instance->widgets_manager->get_widget_types_config();
 		}
 
 		$additional_config = [];
@@ -995,15 +1008,15 @@ abstract class Document extends Controls_Stack {
 		$is_dom_optimization_active = Plugin::$instance->experiments->is_feature_active( 'e_dom_optimization' );
 		?>
 		<div <?php Utils::print_html_attributes( $this->get_container_attributes() ); ?>>
-			<?php if ( ! $is_dom_optimization_active ) { ?>
+			<?php if ( ! $is_dom_optimization_active ) : ?>
 			<div class="elementor-inner">
-			<?php } ?>
 				<div class="elementor-section-wrap">
-					<?php $this->print_elements( $elements_data ); ?>
+			<?php endif; ?>
+				<?php $this->print_elements( $elements_data ); ?>
+			<?php if ( ! $is_dom_optimization_active ) : ?>
 				</div>
-			<?php if ( ! $is_dom_optimization_active ) { ?>
 			</div>
-			<?php } ?>
+			<?php endif; ?>
 		</div>
 		<?php
 	}

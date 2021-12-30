@@ -1,4 +1,4 @@
-/*! elementor - v3.5.3 - 28-12-2021 */
+/*! elementor - v3.5.3 - 29-12-2021 */
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
@@ -2553,7 +2553,7 @@ var FilesUploadHandler = /*#__PURE__*/function () {
         return true;
       }
 
-      return elementor.config.filesUpload.unfilteredFiles;
+      return elementorCommon.config.filesUpload.unfilteredFiles;
     }
   }, {
     key: "setUploadTypeCaller",
@@ -2565,11 +2565,40 @@ var FilesUploadHandler = /*#__PURE__*/function () {
     value: function getUnfilteredFilesNotEnabledDialog(callback) {
       var onConfirm = function onConfirm() {
         elementorCommon.ajax.addRequest('enable_unfiltered_files_upload', {}, true);
-        elementor.config.filesUpload.unfilteredFiles = true;
+        elementorCommon.config.filesUpload.unfilteredFiles = true;
         callback();
       };
 
-      return elementor.helpers.getSimpleDialog('e-enable-unfiltered-files-dialog', __('Enable Unfiltered File Uploads', 'elementor'), __('Before you enable unfiltered files upload, note that this kind of files include a security risk. Elementor does run a process to remove possible malicious code, but there is still risk involved when using such files.', 'elementor'), __('Enable', 'elementor'), onConfirm);
+      return elementor.helpers.getSimpleDialog('e-enable-unfiltered-files-dialog', __('Enable Unfiltered File Uploads', 'elementor'), __('Before you enable unfiltered files upload, note that such files include a security risk. Elementor does run a process to remove possible malicious code, but there is still risk involved when using such files.', 'elementor'), __('Enable', 'elementor'), onConfirm);
+    }
+  }, {
+    key: "getUnfilteredFilesNotEnabledImportTemplateDialog",
+    value: function getUnfilteredFilesNotEnabledImportTemplateDialog(callback) {
+      return elementorCommon.dialogsManager.createWidget('confirm', {
+        id: 'e-enable-unfiltered-files-dialog-import-template',
+        headerMessage: __('Enable Unfiltered File Uploads', 'elementor'),
+        message: __('Before you enable unfiltered files upload, note that such files include a security risk. Elementor does run a process to remove possible malicious code, but there is still risk involved when using such files.', 'elementor') + '<br /><br />' + __('If you do not enable uploading unfiltered files, any SVG or JSON (including lottie) files used in the uploaded template will not be imported.', 'elementor'),
+        position: {
+          my: 'center center',
+          at: 'center center'
+        },
+        strings: {
+          confirm: __('Enable and Import', 'elementor'),
+          cancel: __('Import Without Enabling', 'elementor')
+        },
+        onConfirm: function onConfirm() {
+          elementorCommon.ajax.addRequest('enable_unfiltered_files_upload', {
+            success: function success() {
+              // This utility is used in both the admin and the Editor.
+              elementorCommon.config.filesUpload.unfilteredFiles = true;
+              callback();
+            }
+          }, true);
+        },
+        onCancel: function onCancel() {
+          return callback();
+        }
+      });
     }
   }]);
   return FilesUploadHandler;
@@ -2660,6 +2689,10 @@ _Object$defineProperty(exports, "__esModule", {
 });
 
 exports["default"] = void 0;
+
+__webpack_require__(/*! core-js/modules/es6.object.to-string.js */ "../node_modules/core-js/modules/es6.object.to-string.js");
+
+__webpack_require__(/*! core-js/modules/es6.regexp.to-string.js */ "../node_modules/core-js/modules/es6.regexp.to-string.js");
 
 var _typeof2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime-corejs2/helpers/typeof */ "../node_modules/@babel/runtime-corejs2/helpers/typeof.js"));
 
@@ -2780,9 +2813,10 @@ var ArgsObject = /*#__PURE__*/function (_InstanceType) {
     key: "requireArgumentConstructor",
     value: function requireArgumentConstructor(property, type) {
       var args = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : this.args;
-      this.requireArgument(property, args);
+      this.requireArgument(property, args); // Note: Converting the constructor to string in order to avoid equation issues
+      // due to different memory addresses between iframes (window.Object !== window.top.Object).
 
-      if (args[property].constructor !== type) {
+      if (args[property].constructor.toString() !== type.prototype.constructor.toString()) {
         throw Error("".concat(property, " invalid constructor type."));
       }
     }

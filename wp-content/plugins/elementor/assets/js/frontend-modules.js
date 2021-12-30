@@ -1,4 +1,4 @@
-/*! elementor - v3.5.3 - 28-12-2021 */
+/*! elementor - v3.5.3 - 29-12-2021 */
 (self["webpackChunkelementor"] = self["webpackChunkelementor"] || []).push([["frontend-modules"],{
 
 /***/ "../node_modules/@babel/runtime/helpers/interopRequireDefault.js":
@@ -646,9 +646,10 @@ class ArgsObject extends _instanceType.default {
 
 
   requireArgumentConstructor(property, type, args = this.args) {
-    this.requireArgument(property, args);
+    this.requireArgument(property, args); // Note: Converting the constructor to string in order to avoid equation issues
+    // due to different memory addresses between iframes (window.Object !== window.top.Object).
 
-    if (args[property].constructor !== type) {
+    if (args[property].constructor.toString() !== type.prototype.constructor.toString()) {
       throw Error(`${property} invalid constructor type.`);
     }
   }

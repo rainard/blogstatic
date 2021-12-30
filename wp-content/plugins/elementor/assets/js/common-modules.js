@@ -1,4 +1,4 @@
-/*! elementor - v3.5.3 - 28-12-2021 */
+/*! elementor - v3.5.3 - 29-12-2021 */
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
@@ -2585,6 +2585,10 @@ _Object$defineProperty(exports, "__esModule", {
 
 exports["default"] = void 0;
 
+__webpack_require__(/*! core-js/modules/es6.object.to-string.js */ "../node_modules/core-js/modules/es6.object.to-string.js");
+
+__webpack_require__(/*! core-js/modules/es6.regexp.to-string.js */ "../node_modules/core-js/modules/es6.regexp.to-string.js");
+
 var _typeof2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime-corejs2/helpers/typeof */ "../node_modules/@babel/runtime-corejs2/helpers/typeof.js"));
 
 var _classCallCheck2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime-corejs2/helpers/classCallCheck */ "../node_modules/@babel/runtime-corejs2/helpers/classCallCheck.js"));
@@ -2704,9 +2708,10 @@ var ArgsObject = /*#__PURE__*/function (_InstanceType) {
     key: "requireArgumentConstructor",
     value: function requireArgumentConstructor(property, type) {
       var args = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : this.args;
-      this.requireArgument(property, args);
+      this.requireArgument(property, args); // Note: Converting the constructor to string in order to avoid equation issues
+      // due to different memory addresses between iframes (window.Object !== window.top.Object).
 
-      if (args[property].constructor !== type) {
+      if (args[property].constructor.toString() !== type.prototype.constructor.toString()) {
         throw Error("".concat(property, " invalid constructor type."));
       }
     }
@@ -10887,6 +10892,21 @@ __webpack_require__(/*! ./_export */ "../node_modules/core-js/modules/_export.js
 
 /***/ }),
 
+/***/ "../node_modules/core-js/modules/es6.regexp.flags.js":
+/*!***********************************************************!*\
+  !*** ../node_modules/core-js/modules/es6.regexp.flags.js ***!
+  \***********************************************************/
+/***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
+
+// 21.2.5.3 get RegExp.prototype.flags()
+if (__webpack_require__(/*! ./_descriptors */ "../node_modules/core-js/modules/_descriptors.js") && /./g.flags != 'g') __webpack_require__(/*! ./_object-dp */ "../node_modules/core-js/modules/_object-dp.js").f(RegExp.prototype, 'flags', {
+  configurable: true,
+  get: __webpack_require__(/*! ./_flags */ "../node_modules/core-js/modules/_flags.js")
+});
+
+
+/***/ }),
+
 /***/ "../node_modules/core-js/modules/es6.regexp.replace.js":
 /*!*************************************************************!*\
   !*** ../node_modules/core-js/modules/es6.regexp.replace.js ***!
@@ -11157,6 +11177,42 @@ __webpack_require__(/*! ./_fix-re-wks */ "../node_modules/core-js/modules/_fix-r
     }
   ];
 });
+
+
+/***/ }),
+
+/***/ "../node_modules/core-js/modules/es6.regexp.to-string.js":
+/*!***************************************************************!*\
+  !*** ../node_modules/core-js/modules/es6.regexp.to-string.js ***!
+  \***************************************************************/
+/***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+
+__webpack_require__(/*! ./es6.regexp.flags */ "../node_modules/core-js/modules/es6.regexp.flags.js");
+var anObject = __webpack_require__(/*! ./_an-object */ "../node_modules/core-js/modules/_an-object.js");
+var $flags = __webpack_require__(/*! ./_flags */ "../node_modules/core-js/modules/_flags.js");
+var DESCRIPTORS = __webpack_require__(/*! ./_descriptors */ "../node_modules/core-js/modules/_descriptors.js");
+var TO_STRING = 'toString';
+var $toString = /./[TO_STRING];
+
+var define = function (fn) {
+  __webpack_require__(/*! ./_redefine */ "../node_modules/core-js/modules/_redefine.js")(RegExp.prototype, TO_STRING, fn, true);
+};
+
+// 21.2.5.14 RegExp.prototype.toString()
+if (__webpack_require__(/*! ./_fails */ "../node_modules/core-js/modules/_fails.js")(function () { return $toString.call({ source: 'a', flags: 'b' }) != '/a/b'; })) {
+  define(function toString() {
+    var R = anObject(this);
+    return '/'.concat(R.source, '/',
+      'flags' in R ? R.flags : !DESCRIPTORS && R instanceof RegExp ? $flags.call(R) : undefined);
+  });
+// FF44- RegExp#toString has a wrong name
+} else if ($toString.name != TO_STRING) {
+  define(function toString() {
+    return $toString.call(this);
+  });
+}
 
 
 /***/ }),

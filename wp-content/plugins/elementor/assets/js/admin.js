@@ -1,4 +1,4 @@
-/*! elementor - v3.5.3 - 28-12-2021 */
+/*! elementor - v3.5.3 - 29-12-2021 */
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
@@ -790,6 +790,101 @@ module.exports = elementorModules.ViewModule.extend({
     elementorCommon.elements.$window.on('elementor/admin/init', this.onAdminInit);
   }
 });
+
+/***/ }),
+
+/***/ "../assets/dev/js/editor/utils/files-upload-handler.js":
+/*!*************************************************************!*\
+  !*** ../assets/dev/js/editor/utils/files-upload-handler.js ***!
+  \*************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+/* provided dependency */ var __ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n")["__"];
+
+
+var _Object$defineProperty = __webpack_require__(/*! @babel/runtime-corejs2/core-js/object/define-property */ "../node_modules/@babel/runtime-corejs2/core-js/object/define-property.js");
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime-corejs2/helpers/interopRequireDefault */ "../node_modules/@babel/runtime-corejs2/helpers/interopRequireDefault.js");
+
+_Object$defineProperty(exports, "__esModule", {
+  value: true
+});
+
+exports["default"] = void 0;
+
+__webpack_require__(/*! core-js/modules/es7.array.includes.js */ "../node_modules/core-js/modules/es7.array.includes.js");
+
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime-corejs2/helpers/classCallCheck */ "../node_modules/@babel/runtime-corejs2/helpers/classCallCheck.js"));
+
+var _createClass2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime-corejs2/helpers/createClass */ "../node_modules/@babel/runtime-corejs2/helpers/createClass.js"));
+
+var FilesUploadHandler = /*#__PURE__*/function () {
+  function FilesUploadHandler() {
+    (0, _classCallCheck2.default)(this, FilesUploadHandler);
+  }
+
+  (0, _createClass2.default)(FilesUploadHandler, null, [{
+    key: "isUploadEnabled",
+    value: function isUploadEnabled(mediaType) {
+      var unfilteredFilesTypes = ['svg', 'application/json'];
+
+      if (!unfilteredFilesTypes.includes(mediaType)) {
+        return true;
+      }
+
+      return elementorCommon.config.filesUpload.unfilteredFiles;
+    }
+  }, {
+    key: "setUploadTypeCaller",
+    value: function setUploadTypeCaller(frame) {
+      frame.uploader.uploader.param('uploadTypeCaller', 'elementor-wp-media-upload');
+    }
+  }, {
+    key: "getUnfilteredFilesNotEnabledDialog",
+    value: function getUnfilteredFilesNotEnabledDialog(callback) {
+      var onConfirm = function onConfirm() {
+        elementorCommon.ajax.addRequest('enable_unfiltered_files_upload', {}, true);
+        elementorCommon.config.filesUpload.unfilteredFiles = true;
+        callback();
+      };
+
+      return elementor.helpers.getSimpleDialog('e-enable-unfiltered-files-dialog', __('Enable Unfiltered File Uploads', 'elementor'), __('Before you enable unfiltered files upload, note that such files include a security risk. Elementor does run a process to remove possible malicious code, but there is still risk involved when using such files.', 'elementor'), __('Enable', 'elementor'), onConfirm);
+    }
+  }, {
+    key: "getUnfilteredFilesNotEnabledImportTemplateDialog",
+    value: function getUnfilteredFilesNotEnabledImportTemplateDialog(callback) {
+      return elementorCommon.dialogsManager.createWidget('confirm', {
+        id: 'e-enable-unfiltered-files-dialog-import-template',
+        headerMessage: __('Enable Unfiltered File Uploads', 'elementor'),
+        message: __('Before you enable unfiltered files upload, note that such files include a security risk. Elementor does run a process to remove possible malicious code, but there is still risk involved when using such files.', 'elementor') + '<br /><br />' + __('If you do not enable uploading unfiltered files, any SVG or JSON (including lottie) files used in the uploaded template will not be imported.', 'elementor'),
+        position: {
+          my: 'center center',
+          at: 'center center'
+        },
+        strings: {
+          confirm: __('Enable and Import', 'elementor'),
+          cancel: __('Import Without Enabling', 'elementor')
+        },
+        onConfirm: function onConfirm() {
+          elementorCommon.ajax.addRequest('enable_unfiltered_files_upload', {
+            success: function success() {
+              // This utility is used in both the admin and the Editor.
+              elementorCommon.config.filesUpload.unfilteredFiles = true;
+              callback();
+            }
+          }, true);
+        },
+        onCancel: function onCancel() {
+          return callback();
+        }
+      });
+    }
+  }]);
+  return FilesUploadHandler;
+}();
+
+exports["default"] = FilesUploadHandler;
 
 /***/ }),
 
@@ -5245,6 +5340,8 @@ var _environment = _interopRequireDefault(__webpack_require__(/*! ../../../../co
 
 var _events = _interopRequireDefault(__webpack_require__(/*! elementor-utils/events */ "../assets/dev/js/utils/events.js"));
 
+var _filesUploadHandler = _interopRequireDefault(__webpack_require__(/*! ../editor/utils/files-upload-handler */ "../assets/dev/js/editor/utils/files-upload-handler.js"));
+
 (function ($) {
   var ElementorAdmin = elementorModules.ViewModule.extend({
     maintenanceMode: null,
@@ -5258,7 +5355,10 @@ var _events = _interopRequireDefault(__webpack_require__(/*! elementor-utils/eve
         $elementorLoader: $('.elementor-loader'),
         $builderEditor: $('#elementor-editor'),
         $importButton: $('#elementor-import-template-trigger'),
+        $importNowButton: $('#e-import-template-action'),
         $importArea: $('#elementor-import-template-area'),
+        $importForm: $('#elementor-import-template-form'),
+        $importFormFileInput: $('#elementor-import-template-form input[type="file"]'),
         $settingsForm: $('#elementor-settings-form'),
         $settingsTabsWrapper: $('#elementor-settings-tabs-wrapper'),
         $menuGetHelpLink: $('a[href="admin.php?page=go_knowledge_base_site"]'),
@@ -5531,12 +5631,24 @@ var _events = _interopRequireDefault(__webpack_require__(/*! elementor-utils/eve
 
       var self = this,
           $importButton = self.elements.$importButton,
-          $importArea = self.elements.$importArea;
+          $importArea = self.elements.$importArea,
+          $importNowButton = self.elements.$importNowButton;
       self.elements.$formAnchor = $('.wp-header-end');
       $('#wpbody-content').find('.page-title-action').last().after($importButton);
       self.elements.$formAnchor.after($importArea);
       $importButton.on('click', function () {
         $('#elementor-import-template-area').toggle();
+      });
+      $importNowButton.on('click', function (event) {
+        if (self.elements.$importFormFileInput[0].files.length && !elementorCommon.config.filesUpload.unfilteredFiles) {
+          event.preventDefault();
+
+          var enableUnfilteredFilesModal = _filesUploadHandler.default.getUnfilteredFilesNotEnabledImportTemplateDialog(function () {
+            self.elements.$importForm.trigger('submit');
+          });
+
+          enableUnfilteredFilesModal.show();
+        }
       });
     },
     initMaintenanceMode: function initMaintenanceMode() {
