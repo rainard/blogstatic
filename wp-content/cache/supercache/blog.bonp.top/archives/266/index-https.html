@@ -1,0 +1,1395 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+	        <link rel="pingback" href="https://blog.bonp.top/xmlrpc.php">
+		<title>elasticsearch 查询语法 &#8211; Monk IT</title>
+<meta name='robots' content='max-image-preview:large' />
+<link rel='dns-prefetch' href='//cdn.jsdelivr.net' />
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel="alternate" type="application/rss+xml" title="Monk IT &raquo; Feed" href="https://blog.bonp.top/feed" />
+<link rel="alternate" type="application/rss+xml" title="Monk IT &raquo; 评论Feed" href="https://blog.bonp.top/comments/feed" />
+<link rel="alternate" type="application/rss+xml" title="Monk IT &raquo; elasticsearch 查询语法评论Feed" href="https://blog.bonp.top/archives/266/feed" />
+<link rel='stylesheet' id='wp-block-library-css'  href='https://cdn.jsdelivr.net/gh/rainard/blogstatic@main/wp-includes/css/dist/block-library/style.min.css?ver=5.8.2' type='text/css' media='all' />
+<link rel='stylesheet' id='toc-screen-css'  href='https://cdn.jsdelivr.net/gh/rainard/blogstatic@main/wp-content/plugins/table-of-contents-plus/screen.min.css?ver=2106' type='text/css' media='all' />
+<style id='md-style-inline-css' type='text/css'>
+ code.kb-btn { display: inline-block; color: #666; font: bold 9pt arial; text-decoration: none; text-align: center; padding: 2px 5px; margin: 0 5px; background: #eff0f2; -moz-border-radius: 4px; border-radius: 4px; border-top: 1px solid #f5f5f5; -webkit-box-shadow: inset 0 0 20px #e8e8e8, 0 1px 0 #c3c3c3, 0 1px 0 #c9c9c9, 0 1px 2px #333; -moz-box-shadow: inset 0 0 20px #e8e8e8, 0 1px 0 #c3c3c3, 0 1px 0 #c9c9c9, 0 1px 2px #333; box-shadow: inset 0 0 20px #e8e8e8, 0 1px 0 #c3c3c3, 0 1px 0 #c9c9c9, 0 1px 2px #333; text-shadow: 0px 1px 0px #f5f5f5; } 
+</style>
+<link rel='stylesheet' id='google-font-css'  href='https://fonts.googleapis.com/css2?family=Raleway%3Awght%40400%3B700&#038;display=swap&#038;ver=5.8.2' type='text/css' media='all' />
+<link rel='stylesheet' id='iknowledgebase-css'  href='https://cdn.jsdelivr.net/gh/rainard/blogstatic@main/wp-content/themes/iknowledgebase/assets/css/style.min.css?ver=1.3.1' type='text/css' media='all' />
+<link rel='stylesheet' id='emojify-css'  href='https://cdn.jsdelivr.net/npm/emojify.js@1.1.0/dist/css/basic/emojify.min.css?ver=1.1.0' type='text/css' media='all' />
+<script type='text/javascript' src='https://cdn.jsdelivr.net/gh/rainard/blogstatic@main/wp-includes/js/jquery/jquery.min.js?ver=3.6.0' id='jquery-core-js'></script>
+<script type='text/javascript' src='https://cdn.jsdelivr.net/gh/rainard/blogstatic@main/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.3.2' id='jquery-migrate-js'></script>
+<script type='text/javascript' src='https://cdn.jsdelivr.net/gh/rainard/blogstatic@main/wp-content/plugins/alx-extensions/js/jquery.sharrre.min.js?ver=1.0.1' id='alx-ext-sharrre-js'></script>
+<link rel="https://api.w.org/" href="https://blog.bonp.top/wp-json/" /><link rel="alternate" type="application/json" href="https://blog.bonp.top/wp-json/wp/v2/posts/266" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://blog.bonp.top/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://cdn.jsdelivr.net/gh/rainard/blogstatic@main/wp-includes/wlwmanifest.xml" /> 
+<meta name="generator" content="WordPress 5.8.2" />
+<link rel="canonical" href="https://blog.bonp.top/archives/266" />
+<link rel='shortlink' href='https://blog.bonp.top/?p=266' />
+<link rel="alternate" type="application/json+oembed" href="https://blog.bonp.top/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fblog.bonp.top%2Farchives%2F266" />
+<link rel="alternate" type="text/xml+oembed" href="https://blog.bonp.top/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fblog.bonp.top%2Farchives%2F266&#038;format=xml" />
+<style type="text/css">div#toc_container ul li {font-size: 5px;}</style><link rel="icon" href="https://cdn.jsdelivr.net/gh/rainard/blogstatic@main/wp-content/uploads/2021/12/cropped-cropped-cropped-mjlog-150x150.png" sizes="32x32" />
+<link rel="icon" href="https://cdn.jsdelivr.net/gh/rainard/blogstatic@main/wp-content/uploads/2021/12/cropped-cropped-cropped-mjlog-300x300.png" sizes="192x192" />
+<link rel="apple-touch-icon" href="https://cdn.jsdelivr.net/gh/rainard/blogstatic@main/wp-content/uploads/2021/12/cropped-cropped-cropped-mjlog-300x300.png" />
+<meta name="msapplication-TileImage" content="https://cdn.jsdelivr.net/gh/rainard/blogstatic@main/wp-content/uploads/2021/12/cropped-cropped-cropped-mjlog-300x300.png" />
+		<style type="text/css" id="wp-custom-css">
+			.menu-list  { 
+	 
+    font-size: 1rem;
+    height: 200px;
+    overflow-y: auto;
+} 
+.toc_widget_list {
+	font-size: 1rem;
+    height: 200px;
+    overflow-y: auto;
+}		</style>
+		
+</head>
+
+<body class="post-template-default single single-post postid-266 single-format-standard wp-custom-logo has-navbar-fixed-top has-spaced-navbar-fixed-top elementor-default elementor-kit-4">
+<header class="header">
+    <a class="skip-link screen-reader-text" href="#content">Skip to content</a>
+		    <nav class="navbar  is-spaced has-shadow is-fixed-top" role="navigation"
+         aria-label="Main Navigation">
+        <div class="container">
+            <div class="navbar-brand">
+				<a href="https://blog.bonp.top/" class="navbar-item brand-logo" rel="home"><img width="270" height="69" src="https://cdn.jsdelivr.net/gh/rainard/blogstatic@main/wp-content/uploads/2021/12/cropped-logo.png" class="custom-logo" alt="Monk IT" /></a>                <a href="#" role="button" class="navbar-burger burger" id="navigation-burger"
+                   aria-label="Menu" aria-expanded="false"
+                   data-target="main-menu" >
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                </a>
+            </div>
+            <div id="main-menu" class="navbar-menu" >
+                <div class="navbar-start">
+					                </div>
+
+                <div class="navbar-end">
+					<a class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-72 navbar-item" title="首页" href="https://blog.bonp.top"><span>首页</span></a>
+<a class="menu-item menu-item-type-taxonomy menu-item-object-post_tag menu-item-62 navbar-item" title="Ansible" href="https://blog.bonp.top/archives/tag/ansible"><span>Ansible</span></a>
+<div class="navbar-item has-dropdown is-hoverable" data-target="dropdown"><!-- START DROPDOWN-->
+<a class="menu-item menu-item-type-taxonomy menu-item-object-post_tag menu-item-has-children menu-item-70 navbar-item dropdown navbar-link" title="python" href="https://blog.bonp.top/archives/tag/python" id="menu-item-70"><span>python</span></a><div class="navbar-dropdown"><a class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-74 navbar-item" title="Xadmin" href="https://blog.bonp.top/archives/category/xadmin"><span>Xadmin</span></a>
+</div><!-- END LEVEL -->
+</div><!-- END DROPDOWN-->
+<a class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-100 navbar-item" title="Linux命令详解" href="https://blog.bonp.top/archives/category/linux%e5%91%bd%e4%bb%a4%e8%af%a6%e8%a7%a3"><span>Linux命令详解</span></a>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
+<main class="main is-relative is-flex-shrink-0" id="content">
+		        <svg class="intersect" viewBox="0 0 1441 279" xmlns="http://www.w3.org/2000/svg"
+             xmlns:xlink="http://www.w3.org/1999/xlink">
+            <g id="intersect" transform="translate(0.178955, 0.820312)" fill-rule="nonzero">
+                <path d="M0,177.850479 L0,0 L1440.00104,0 L1440.00104,177.850479 C1268.57105,239.085479 1021.55925,277.43899 731.888245,277.43899 C442.215245,277.43899 171.433045,239.085479 0,177.850479 Z"
+                      id="Path"></path>
+            </g>
+        </svg>
+	
+
+<section class="section">
+    <div class="container">
+        <div class="level">
+            <div class="level-left"><nav class="breadcrumb is-size-7 is-hidden-mobile" aria-label="breadcrumbs"><ul> <li><a href="https://blog.bonp.top"><span>Home</span></a></li><li><a href="https://blog.bonp.top/archives/category/elasticsearch" rel="category tag">Elasticsearch</a><li class="is-active"><a href="https://blog.bonp.top/archives/266" aria-current="page">elasticsearch 查询语法</a> </li></ul></nav></div>
+            <div class="level-right"><form method="get" id="searchform" class="search-form is-relative" action="https://blog.bonp.top/">
+    <div class="field has-addons m-0">
+        <div class="control is-expanded">
+            <label class="screen-reader-text"
+                   for="s">Search for:</label>
+            <input type="text" value="" name="s" id="s"
+                   placeholder="How can we help you?"
+                   class="input live-search is-primary" autocomplete="off"/>
+        </div>
+        <div class="control">
+            <button type="submit" class="button is-primary">
+                <span class="icon is-small">
+                    <span class="icon-search"></span>
+                </span>
+            </button>
+        </div>
+
+    </div>
+    <div class="search-result panel"></div>
+</form>
+</div>
+        </div>
+        <div class="columns is-multiline pt-5">
+            <div class="column is-full-touch">
+
+
+<aside id="sidebar">
+	<div id="iknowledgebase_widget_current_nav-3" class="widget iknowledgebase_widget_current_nav menu box"><p class="menu-label">Elasticsearch</p><ul class="menu-list"><li><ul class="mx-0 my-2 px-0"><li><a href="https://blog.bonp.top/archives/268" class="is-radiusless is-size-7"><span class="icon icon-book"></span>elasticsearch python开发</a></li><li><a href="https://blog.bonp.top/archives/266" class="is-radiusless is-size-7 has-background-light"><span class="icon icon-book"></span>elasticsearch 查询语法</a></li><li><a href="https://blog.bonp.top/archives/193" class="is-radiusless is-size-7"><span class="icon icon-book"></span>Elasticsearch原理</a></li></ul></li></ul></div><div id="block-2" class="widget widget_block widget_search box"><form role="search" method="get" action="https://blog.bonp.top/" class="wp-block-search__button-outside wp-block-search__text-button wp-block-search"><label for="wp-block-search__input-1" class="wp-block-search__label">搜索</label><div class="wp-block-search__inside-wrapper"><input type="search" id="wp-block-search__input-1" class="wp-block-search__input" name="s" value="" placeholder=""  required /><button type="submit" class="wp-block-search__button ">搜索</button></div></form></div><div id="toc-widget-2" class="widget toc_widget box"><h4 class="title is-size-4">目录</h4><ul class="toc_widget_list no_bullets"><li><a href="#i"><span class="toc_number toc_depth_1">1</span> 核心简单域类型</a></li><li><a href="#Query_DSL"><span class="toc_number toc_depth_1">2</span> 查询表达式(Query DSL)</a><ul><li><a href="#query"><span class="toc_number toc_depth_2">2.1</span> query 参数</a><ul><li><a href="#i-2"><span class="toc_number toc_depth_3">2.1.1</span> 结构</a></li><li><a href="#i-3"><span class="toc_number toc_depth_3">2.1.2</span> 实例</a></li></ul></li></ul></li><li><a href="#sort"><span class="toc_number toc_depth_1">3</span> sort参数 排序</a><ul><li><a href="#i-4"><span class="toc_number toc_depth_2">3.1</span> 多级排序</a></li><li><a href="#i-5"><span class="toc_number toc_depth_2">3.2</span> 将多值字段减为单值</a></li></ul></li><li><a href="#term"><span class="toc_number toc_depth_1">4</span> term单条件查询</a><ul><li><a href="#i-6"><span class="toc_number toc_depth_2">4.1</span> 用途</a></li><li><a href="#_1"><span class="toc_number toc_depth_2">4.2</span> 例子 1 查询数值</a></li><li><a href="#2"><span class="toc_number toc_depth_2">4.3</span> 例子2 查询文本</a></li></ul></li><li><a href="#terms"><span class="toc_number toc_depth_1">5</span> terms 多值精确查询</a></li><li><a href="#constant_score"><span class="toc_number toc_depth_1">6</span> constant_score 所有文档评分都设置为１, 只关系单词是否出现,不关心评分</a><ul><li><a href="#i-7"><span class="toc_number toc_depth_2">6.1</span> 用途</a></li><li><a href="#1"><span class="toc_number toc_depth_2">6.2</span> 示例1</a></li><li><a href="#2-2"><span class="toc_number toc_depth_2">6.3</span> 实例2</a></li></ul></li><li><a href="#bool"><span class="toc_number toc_depth_1">7</span> bool 多条件查询</a><ul><li><a href="#i-8"><span class="toc_number toc_depth_2">7.1</span> 语法:</a></li><li><a href="#_1-2"><span class="toc_number toc_depth_2">7.2</span> 例子 1</a></li><li><a href="#boolshould_bool"><span class="toc_number toc_depth_2">7.3</span> 例子２嵌套条件.bool里面的should 再嵌套bool</a></li></ul></li><li><a href="#range"><span class="toc_number toc_depth_1">8</span> range 范围查找</a><ul><li><a href="#range-2"><span class="toc_number toc_depth_2">8.1</span> range　选项</a></li><li><a href="#i-9"><span class="toc_number toc_depth_2">8.2</span> 例子　１</a></li><li><a href="#i-10"><span class="toc_number toc_depth_2">8.3</span> 例子２ 数值范围，精确匹配</a></li><li><a href="#i-11"><span class="toc_number toc_depth_2">8.4</span> 例子３　日期</a></li><li><a href="#_AISSC"><span class="toc_number toc_depth_2">8.5</span> 例子４　字符串 AISSC码</a></li></ul></li><li><a href="#exists"><span class="toc_number toc_depth_1">9</span> exists 非空值判断</a></li><li><a href="#missing"><span class="toc_number toc_depth_1">10</span> missing 空值判断</a></li><li><a href="#match"><span class="toc_number toc_depth_1">11</span> match 全文查询</a><ul><li><a href="#i-12"><span class="toc_number toc_depth_2">11.1</span> 参数</a></li><li><a href="#i-13"><span class="toc_number toc_depth_2">11.2</span> 例子１</a></li><li><a href="#i-14"><span class="toc_number toc_depth_2">11.3</span> 例子２　多值搜索</a></li><li><a href="#_operatoror_and"><span class="toc_number toc_depth_2">11.4</span> 例子３ 参数operator：　or , and 提高精确度</a></li><li><a href="#4_minimum_should_match"><span class="toc_number toc_depth_2">11.5</span> 例子4 minimum_should_match　最小匹配参数</a></li><li><a href="#5"><span class="toc_number toc_depth_2">11.6</span> 例子5 组合查询</a></li><li><a href="#_minimum_should_match"><span class="toc_number toc_depth_2">11.7</span> 例子６ minimum_should_match 满足其中两个条件即可</a></li><li><a href="#boostboost"><span class="toc_number toc_depth_2">11.8</span> 例子６　boost　提升查询条件权重，其实就是评分后，用评分*boost算出新评分</a></li><li><a href="#i-15"><span class="toc_number toc_depth_2">11.9</span> 例子７　多字段搜索</a></li></ul></li><li><a href="#dis_max_bool"><span class="toc_number toc_depth_1">12</span> dis_max 分离查询 (影响评分)　相对于bool查询来说</a><ul><li><a href="#i-16"><span class="toc_number toc_depth_2">12.1</span> 例子１</a></li><li><a href="#_tie_breaker"><span class="toc_number toc_depth_2">12.2</span> 例子２ tie_breaker 如果两个条件都满足，同时考虑两个条件评分</a></li></ul></li><li><a href="#multi_match"><span class="toc_number toc_depth_1">13</span> multi_match　多字段查询同一值</a><ul><li><a href="#i-17"><span class="toc_number toc_depth_2">13.1</span> 参数</a></li><li><a href="#i-18"><span class="toc_number toc_depth_2">13.2</span> 例子２　字段名称可以用模糊匹配</a></li><li><a href="#3"><span class="toc_number toc_depth_2">13.3</span> 例子3 提升单个字段权重　^ 符号</a></li><li><a href="#4"><span class="toc_number toc_depth_2">13.4</span> 例子4 精确字段值</a></li></ul></li><li><a href="#match_phrase"><span class="toc_number toc_depth_1">14</span> match_phrase  精确短语匹配</a><ul><li><a href="#1-2"><span class="toc_number toc_depth_2">14.1</span> 例子1</a></li><li><a href="#2_slop"><span class="toc_number toc_depth_2">14.2</span> 例子2 slop 邻近度配置</a></li></ul></li><li><a href="#prefix"><span class="toc_number toc_depth_1">15</span> prefix 前缀索引</a><ul><li><a href="#_1-3"><span class="toc_number toc_depth_2">15.1</span> 例子 1</a></li></ul></li><li><a href="#wildcard"><span class="toc_number toc_depth_1">16</span> wildcard 通配符查询</a></li><li><a href="#regexp"><span class="toc_number toc_depth_1">17</span> regexp 正则式查询允许写出这样更复杂的模式</a><ul><li><a href="#_prefix_wildcard_regexp"><span class="toc_number toc_depth_2">17.1</span> 注意问题: prefix 、 wildcard 和 regexp 查询是基于词操作的</a><ul><li><a href="#1-3"><span class="toc_number toc_depth_3">17.1.1</span> 例子1</a></li></ul></li></ul></li><li><a href="#match_phrase_prefix"><span class="toc_number toc_depth_1">18</span> match_phrase_prefix 短语开头查询</a><ul><li><a href="#i-19"><span class="toc_number toc_depth_2">18.1</span> 参数</a></li><li><a href="#1-4"><span class="toc_number toc_depth_2">18.2</span> 例子1</a></li></ul></li><li><a href="#aggs_aggregations"><span class="toc_number toc_depth_1">19</span> aggs / aggregations 聚合操作</a><ul><li><a href="#1-5"><span class="toc_number toc_depth_2">19.1</span> 实例1</a></li><li><a href="#2-3"><span class="toc_number toc_depth_2">19.2</span> 实例2</a></li><li><a href="#2-4"><span class="toc_number toc_depth_2">19.3</span> 实例2 嵌套桶</a></li></ul></li><li><a href="#i-20"><span class="toc_number toc_depth_1">20</span> 范围查询</a><ul><li><a href="#1-6"><span class="toc_number toc_depth_2">20.1</span> 实例1 福特在售车有多少种颜色</a></li></ul></li><li><a href="#i-21"><span class="toc_number toc_depth_1">21</span> 全局桶</a></li><li><a href="#i-22"><span class="toc_number toc_depth_1">22</span> 过滤</a><ul><li><a href="#2-5"><span class="toc_number toc_depth_2">22.1</span> 实例2 过滤桶</a></li></ul></li><li><a href="#post_filter"><span class="toc_number toc_depth_1">23</span> post_filter 后过滤器,只过滤搜索结果，不过滤聚合结果</a><ul><li><a href="#1-7"><span class="toc_number toc_depth_2">23.1</span> 实例1</a></li></ul></li><li><a href="#i-23"><span class="toc_number toc_depth_1">24</span> 桶排序</a><ul><li><a href="#1__count"><span class="toc_number toc_depth_2">24.1</span> 实例1  _count 排序</a></li><li><a href="#i-24"><span class="toc_number toc_depth_2">24.2</span> 按度量(聚合后的字段)排序</a></li></ul></li><li><a href="#cardinality"><span class="toc_number toc_depth_1">25</span> cardinality 统计去重后的数量</a><ul><li><a href="#2-6"><span class="toc_number toc_depth_2">25.1</span> 实例2</a></li></ul></li><li><a href="#percentiles"><span class="toc_number toc_depth_1">26</span> percentiles百分比度量</a></li></ul></div><div id="block-3" class="widget widget_block content box">
+<div class="wp-block-group"><div class="wp-block-group__inner-container">
+<h2 id="近期文章">近期文章</h2>
+
+
+<ul class="wp-block-latest-posts__list wp-block-latest-posts"><li><a href="https://blog.bonp.top/archives/286">杂项：语言学习资料</a></li>
+<li><a href="https://blog.bonp.top/archives/268">elasticsearch python开发</a></li>
+<li><a href="https://blog.bonp.top/archives/266">elasticsearch 查询语法</a></li>
+<li><a href="https://blog.bonp.top/archives/255">xadmin 增加自定义字段</a></li>
+<li><a href="https://blog.bonp.top/archives/250">xadmin 插件开发</a></li>
+</ul></div></div>
+</div></aside>
+	
+
+</div>
+            <div class="column is-full-touch is-two-thirds-desktop">
+	            		            <article id="post-266" class="post-266 post type-post status-publish format-standard hentry category-elasticsearch">
+    <div class="box">
+        <header class="entry-header mb-5">
+            <h1 class="title is-2 is-spaced">elasticsearch 查询语法</h1>
+			                <div class="entry-meta level is-mobile has-border-top has-border-bottom py-3 is-size-7">
+                    <div class="level-left">
+                        <div class="level-item">
+                        <span class="icon-text">
+                          <span class="icon has-text-primary">
+                            <span class="icon-clock"></span>
+                          </span>
+                          <span>2天 ago</span>
+                        </span>
+                        </div>
+                    </div>
+                    <div class="level-right">
+                        <div class="level-item is-hidden-touch">
+                        <span class="icon-text">
+                          <span class="icon has-text-primary">
+                            <span class="icon-user-alt"></span>
+                          </span>
+                          <span><a class="" href="https://blog.bonp.top/archives/author/mojak">mojak</a></span>
+                        </span>
+                        </div>
+                        <div class="level-item">
+                        <span class="icon-text">
+                          <span class="icon has-text-primary">
+                            <span class="icon-hourglass"></span>
+                          </span>
+                          <span>7 minutes</span>
+                        </span>
+                        </div>
+                    </div>
+                </div>
+	                </header>
+		        <div class="content">
+			<h1><span id="i">核心简单域类型</span></h1>
+<p>Elasticsearch 支持如下简单域类型：</p>
+<ul>
+<li>字符串: string</li>
+<li>整数 : byte, short, integer, long</li>
+<li>浮点数: float, double</li>
+<li>布尔型: boolean</li>
+<li>日期: date</li>
+</ul>
+<h1><span id="Query_DSL">查询表达式(Query DSL)</span></h1>
+<h2><span id="query">query 参数</span></h2>
+<h3><span id="i-2">结构</span></h3>
+<pre><code>{
+    QUERY_NAME: {
+        FIELD_NAME: {
+            ARGUMENT: VALUE,
+            ARGUMENT: VALUE,...
+        }
+    }
+}</code></pre>
+<h3><span id="i-3">实例</span></h3>
+<pre><code>GET /_search
+{
+    "query": {
+        "match_all": {}
+    }
+}
+
+GET /_search
+{
+    "query": {
+        "match": {
+            "tweet": "elasticsearch"
+        }
+    }
+}</code></pre>
+<h1><span id="sort">sort参数 排序</span></h1>
+<pre><code>GET /_search
+{
+    "query" : {
+        "bool" : {
+            "filter" : { "term" : { "user_id" : 1 }}
+        }
+    },
+    "sort": { "date": { "order": "desc" }}
+}</code></pre>
+<ul>
+<li>按照<code>date</code>字段降序排序</li>
+</ul>
+<h2><span id="i-4">多级排序</span></h2>
+<pre><code>GET /_search
+{
+    "query" : {
+        "bool" : {
+            "must":   { "match": { "tweet": "manage text search" }},
+            "filter" : { "term" : { "user_id" : 2 }}
+        }
+    },
+    "sort": [
+        { "date":   { "order": "desc" }},
+        { "_score": { "order": "desc" }}
+    ]
+}</code></pre>
+<p>首先按第一个条件排序，仅当结果集的第一个 sort 值完全相同时才会按照第二个条件进行排序，以此类推</p>
+<h2><span id="i-5">将多值字段减为单值</span></h2>
+<ul>
+<li>min 选择数组中最小值</li>
+<li>max 选择数组中最大值</li>
+<li>avg 计算数组平均值</li>
+<li>sum 计算数组值和作为排序值</li>
+</ul>
+<p>数字或日期，你可以将<code>多值字段减为单值</code>，这可以通过使用 min 、 max 、 avg 或是 sum 排序模式 。 例如你可以按照每个 date 字段中的最早日期进行排序</p>
+<pre><code>"sort": {
+    "dates": {
+        "order": "asc",
+        "mode":  "min"
+    }
+}</code></pre>
+<h1><span id="term">term单条件查询</span></h1>
+<h2><span id="i-6">用途</span></h2>
+<ul>
+<li>term 查询， 可以用它处理数字（numbers）、布尔值（Booleans）、日期（dates）以及文本（text）</li>
+<li>term 和 terms 是 包含（contains） 操作，而非 等值（equals） （判断）.<br />
+例如　<code>{ &quot;term&quot; : { &quot;tags&quot; : &quot;search&quot; } }</code> 命中:</p>
+<pre><code>{ "tags" : ["search"] }
+{ "tags" : ["search", "open_source"] }  #注意值是个数组</code></pre>
+</li>
+</ul>
+<h2><span id="_1">例子 1 查询数值</span></h2>
+<p>SQL 形式表达:</p>
+<pre><code># SQL
+SELECT document
+FROM   products
+WHERE  price = 20
+</code></pre>
+<p>query DSL 形式表达:</p>
+<pre><code>
+{
+    "term" : {
+        "price" : 20
+    }
+}
+</code></pre>
+<h2><span id="2">例子2 查询文本</span></h2>
+<p>SQL:</p>
+<pre><code>SELECT product
+FROM   products
+WHERE  productID = "XHDK-A-1293-#fJ3"</code></pre>
+<p>DSL:</p>
+<pre><code>"constant_score" : {
+    "filter" : {
+        "term" : {
+            "productID" : "XHDK-A-1293-#fJ3"
+        }
+    }
+}</code></pre>
+<p>上面例子能获得正确结果的前提是索引指定了，不进行分析模式，就是text文本不切割.创建索引方式如下:</p>
+<pre><code>
+PUT /my_store 
+{
+    "mappings" : {
+        "products" : {
+            "properties" : {
+                "productID" : {
+                    "type" : "string",
+                    "index" : "not_analyzed" 
+                }
+            }
+        }
+    }
+
+}</code></pre>
+<ul>
+<li>这里我们告诉 Elasticsearch ，我们不想对 productID 做任何分析。</li>
+</ul>
+<h1><span id="terms">terms 多值精确查询</span></h1>
+<p>查找价格字段值为 $20 或 $30 的文档</p>
+<pre><code>"constant_score" : {
+    "filter" : {
+        "terms" : { 
+            "price" : [20, 30]
+        }
+    }
+}</code></pre>
+<h1><span id="constant_score">constant_score 所有文档评分都设置为１, 只关系单词是否出现,不关心评分</span></h1>
+<h2><span id="i-7">用途</span></h2>
+<pre><code>constant_score 查询以非评分模式来执行</code></pre>
+<p>通常当查找一个精确值的时候，我们不希望对查询进行评分计算,只希望对文档进行包括或排除的计算</p>
+<h2><span id="1">示例1</span></h2>
+<pre><code>{
+    "constant_score" : { 
+        "filter" : {
+            "term" : { 
+                "price" : 20
+            }
+        }
+    }
+}</code></pre>
+<ul>
+<li>我们用 constant_score 将 term 查询转化成为过滤器</li>
+<li>查询置于 filter 语句内不进行评分或相关度的计算，所以所有的结果都会返回一个默认评分 1 。</li>
+</ul>
+<h2><span id="2-2">实例2</span></h2>
+<p>内容如下</p>
+<pre><code>{ "description": "A delightful four-bedroomed house with ... " }</code></pre>
+<p>DSL</p>
+<pre><code>"bool": {
+  "should": [
+    { "constant_score": {
+      "query": { "match": { "description": "wifi" }}
+    }},
+    { "constant_score": {
+      "query": { "match": { "description": "garden" }}
+    }},
+    { "constant_score": {
+      "query": { "match": { "description": "pool" }}
+      "boost":   2
+    }}
+  ]
+}</code></pre>
+<p>搜索文档中是否出现过三个单词之一,boost设置权重,可以让用户更关心泳池,则泳池的结果居前</p>
+<hr />
+<h1><span id="bool">bool 多条件查询</span></h1>
+<ul>
+<li>bool 查询采取 more-matches-is-better 匹配越多越好的方式，所以每条 match 语句的评分结果会被加在一起，从而为每个文档提供最终的分数 _score.</li>
+<li>能与两条语句同时匹配的文档比只与一条语句匹配的文档得分要高。<br />
+<h2><span id="i-8">语法:</span></h2>
+<pre><code>{
+"bool" : {
+  "must" :     [],
+  "should" :   [],
+  "must_not" : [],
+}
+}</code></pre>
+</li>
+<li>must:所有的语句都 必须（must） 匹配，与 AND 等价。</li>
+<li>must_not:所有的语句都 不能（must not） 匹配，与 NOT 等价。</li>
+<li>should 至少有一个语句要匹配，与 OR 等价。</li>
+</ul>
+<h2><span id="_1-2">例子 1</span></h2>
+<p>SQL:</p>
+<pre><code>SELECT product
+FROM   products
+WHERE  (price = 20 OR productID = "XHDK-A-1293-#fJ3")
+  AND  (price != 30)</code></pre>
+<p>DSL:</p>
+<pre><code>"filtered" : { 
+     "filter" : {
+        "bool" : {
+          "should" : [
+             { "term" : {"price" : 20}}, 
+             { "term" : {"productID" : "XHDK-A-1293-#fJ3"}} 
+          ],
+          "must_not" : {
+             "term" : {"price" : 30} 
+          }
+       }
+     }
+    }</code></pre>
+<ul>
+<li>需要一个 <code>filtered</code> 查询将所有的东西包起来</li>
+<li>在 should 语句块里面的两个 term 过滤器与 bool 过滤器是父子关系，两个 term 条件需要匹配其一</li>
+<li>如果一个产品的价格是 30 ，那么它会自动被排除，因为它处于 must_not 语句里面</li>
+</ul>
+<h2><span id="boolshould_bool">例子２嵌套条件.bool里面的should 再嵌套bool</span></h2>
+<p>SQL:</p>
+<pre><code>SELECT document
+FROM   products
+WHERE  productID      = "KDKE-B-9947-#kL5"
+  OR (     productID = "JODL-X-1937-#pV7"
+       AND price     = 30 )</code></pre>
+<p>DSL:</p>
+<pre><code>"filtered" : {
+     "filter" : {
+        "bool" : {
+          "should" : [
+            { "term" : {"productID" : "KDKE-B-9947-#kL5"}}, 
+            { "bool" : { 
+              "must" : [
+                { "term" : {"productID" : "JODL-X-1937-#pV7"}}, 
+                { "term" : {"price" : 30}} 
+              ]
+            }}
+          ]
+       }
+     }
+    }</code></pre>
+<h1><span id="range">range 范围查找</span></h1>
+<h2><span id="range-2">range　选项</span></h2>
+<ul>
+<li>gt: &gt; 大于（greater than）</li>
+<li>lt: &lt; 小于（less than）</li>
+<li>gte: &gt;= 大于或等于（greater than or equal to）</li>
+<li>lte: &lt;= 小于或等于（less than or equal to）</li>
+</ul>
+<h2><span id="i-9">例子　１</span></h2>
+<p>SQL:</p>
+<pre><code>SELECT document
+FROM   products
+WHERE  price BETWEEN 20 AND 40</code></pre>
+<p>DSL:</p>
+<pre><code>"range" : {
+    "price" : {
+        "gte" : 20,
+        "lte" : 40
+    }
+}</code></pre>
+<h2><span id="i-10">例子２ 数值范围，精确匹配</span></h2>
+<pre><code>"constant_score" : {
+            "filter" : {
+                "range" : {
+                    "price" : {
+                        "gte" : 20,
+                        "lt"  : 40
+                    }
+                }
+            }
+        }</code></pre>
+<h2><span id="i-11">例子３　日期</span></h2>
+<pre><code>"range" : {
+    "timestamp" : {
+        "gt" : "2014-01-01 00:00:00",
+        "lt" : "2014-01-07 00:00:00"
+    }
+}</code></pre>
+<p>查找时间戳在过去一小时内的所有文档</p>
+<pre><code>"range" : {
+    "timestamp" : {
+        "gt" : "now-1h"
+    }
+}</code></pre>
+<p>日期计算还可以被应用到某个具体的时间,某个日期后加上一个双管符号 (||) 并紧跟一个日期数学表达式</p>
+<pre><code>"range" : {
+    "timestamp" : {
+        "gt" : "2014-01-01 00:00:00",
+        "lt" : "2014-01-01 00:00:00||+1M"  #早于 2014 年 1 月 1 日加 1 月（2014 年 2 月 1 日 零时）
+    }
+}</code></pre>
+<ul>
+<li>+1M 是一个月前</li>
+</ul>
+<h2><span id="_AISSC">例子４　字符串 AISSC码</span></h2>
+<pre><code>"range" : {
+    "title" : {
+        "gte" : "a",
+        "lt" :  "b"
+    }
+}</code></pre>
+<h1><span id="exists">exists 非空值判断</span></h1>
+<p>SQL</p>
+<pre><code>SELECT tags
+FROM   posts
+WHERE  tags IS NOT NULL</code></pre>
+<p>DSL</p>
+<pre><code>"constant_score" : {
+    "filter" : {
+        "exists" : { "field" : "tags" }
+    }
+}</code></pre>
+<h1><span id="missing">missing 空值判断</span></h1>
+<p>SQL</p>
+<pre><code>SELECT tags
+FROM   posts
+WHERE  tags IS NULL</code></pre>
+<p>DSL</p>
+<pre><code>"constant_score" : {
+    "filter": {
+        "missing" : { "field" : "tags" }
+    }
+}</code></pre>
+<hr />
+<h1><span id="match">match 全文查询</span></h1>
+<p>它是一个高级 全文查询 ，这表示它既能处理全文字段，又能处理精确字段。</p>
+<h2><span id="i-12">参数</span></h2>
+<ul>
+<li>query</li>
+<li>operator</li>
+<li>type</li>
+<li>minimum_should_match</li>
+<li>boost</li>
+</ul>
+<h2><span id="i-13">例子１</span></h2>
+<p>假设elsaticsearch有以下内容</p>
+<pre><code>{ "index": { "_id": 1 }}
+{ "title": "The quick brown fox" }
+{ "index": { "_id": 2 }}
+{ "title": "The quick brown fox jumps over the lazy dog" }
+{ "index": { "_id": 3 }}
+{ "title": "The quick brown fox jumps over the quick dog" }
+{ "index": { "_id": 4 }}
+{ "title": "Brown fox brown dog" }</code></pre>
+<p>DSL</p>
+<pre><code>GET /my_index/my_type/_search
+{
+    "query": {
+        "match": {
+            "title": "QUICK!"
+        }
+    }
+}</code></pre>
+<p>匹配结果</p>
+<pre><code>"hits": [
+ {
+    "_id":      "1",
+    "_score":   0.5, 
+    "_source": {
+       "title": "The quick brown fox"
+    }
+ },
+ {
+    "_id":      "3",
+    "_score":   0.44194174, 
+    "_source": {
+       "title": "The quick brown fox jumps over the quick dog"
+    }
+ },
+ {
+    "_id":      "2",
+    "_score":   0.3125, 
+    "_source": {
+       "title": "The quick brown fox jumps over the lazy dog"
+    }
+ }
+]</code></pre>
+<p>分析：</p>
+<ul>
+<li>title 只有一个单词<code>quick</code>，所以整个作为字符串搜索</li>
+<li>匹配结果总第一个匹配分最高，因为｀quick｀在它ｔｉｔｌｅ中占用的比例最高</li>
+</ul>
+<h2><span id="i-14">例子２　多值搜索</span></h2>
+<pre><code>GET /my_index/my_type/_search
+{
+    "query": {
+        "match": {
+            "title": "BROWN DOG!"
+        }
+    }
+}</code></pre>
+<ul>
+<li>这里title 的值会拆分成两个单词 brown 和 dog　，然后elasticsearch再去查找各个数据中title的匹配值，再根据查找的结果判断评分这两个单词出现的次数，频率，再title的值中占比，高分排前面显示．</li>
+</ul>
+<h2><span id="_operatoror_and">例子３ 参数operator：　or , and 提高精确度</span></h2>
+<pre><code>"match": {
+    "title": {      
+        "query":    "BROWN DOG!",
+        "operator": "and"
+    }
+}</code></pre>
+<pre><code>默认是or，就是title中包含其中一个单词都可以满足.指定and后，title中必须同时包含brown和dog两个单词才能命中</code></pre>
+<h2><span id="4_minimum_should_match">例子4 minimum_should_match　最小匹配参数</span></h2>
+<pre><code>"match": {
+  "title": {
+    "query":                "quick brown dog",
+    "minimum_should_match": "75%"
+  }
+}</code></pre>
+<ul>
+<li>minimum_should_match　这里设置75%相当于三分之二，也就是<code>quick</code>,<code>brown</code>,<code>dog</code>三个单词只要命中其中两个就可以满足</li>
+</ul>
+<h2><span id="5">例子5 组合查询</span></h2>
+<pre><code>"bool": {
+  "must":     { "match": { "title": "quick" }}, 
+  "must_not": { "match": { "title": "lazy"  }},
+  "should": [
+              { "match": { "title": "brown" }},
+              { "match": { "title": "dog"   }}
+  ]
+}</code></pre>
+<ul>
+<li>must:     查询包含<code>quick</code></li>
+<li>must_not: 但不包含<code>lazy</code></li>
+<li>should  : 文档不必包含<code>brown</code>或<code>dog</code>这两个词项，如果包含，认为它们更相关，评分更高</li>
+</ul>
+<h2><span id="_minimum_should_match">例子６ minimum_should_match 满足其中两个条件即可</span></h2>
+<pre><code>"bool": {
+  "should": [
+    { "match": { "title": "brown" }},
+    { "match": { "title": "fox"   }},
+    { "match": { "title": "dog"   }}
+  ],
+  "minimum_should_match": 2 
+}</code></pre>
+<h2><span id="boostboost">例子６　boost　提升查询条件权重，其实就是评分后，用评分*boost算出新评分</span></h2>
+<p>boost 值比较合理的区间处于 1 到 10 之间</p>
+<pre><code>"bool": {
+        "must": {
+            "match": {  
+                "content": {
+                    "query":    "full text search",
+                    "operator": "and"
+                }
+            }
+        },
+        "should": [
+            { "match": {
+                "content": {
+                    "query": "Elasticsearch",
+                    "boost": 3 
+                }
+            }},
+            { "match": {
+                "content": {
+                    "query": "Lucene",
+                    "boost": 2 
+                }
+            }}
+        ]
+    }
+}</code></pre>
+<ul>
+<li>这里<code>Elasticsearch</code>的权重最高3，boost如果不设置，默认为１</li>
+</ul>
+<h2><span id="i-15">例子７　多字段搜索</span></h2>
+<pre><code>"bool": {
+  "should": [
+    { "match": { "title":  "War and Peace" }},
+    { "match": { "author": "Leo Tolstoy"   }}
+  ]
+}</code></pre>
+<p>搜索title有War and Peace三个单词中的一个　<code>或</code> author 有leo tolstoy　中一个单词的数据　</p>
+<pre><code>"bool": {
+      "should": [
+        { "match": { "title":  "War and Peace" }},
+        { "match": { "author": "Leo Tolstoy"   }},
+        { "bool":  {
+          "should": [
+            { "match": { "translator": "Constance Garnett" }},
+            { "match": { "translator": "Louise Maude"      }}
+          ]
+        }}
+      ]
+    }</code></pre>
+<h1><span id="dis_max_bool">dis_max 分离查询 (影响评分)　相对于bool查询来说</span></h1>
+<p>将任何与任一查询匹配的文档作为结果返回，但只将最佳匹配的评分作为查询的评分结果返回 </p>
+<h2><span id="i-16">例子１</span></h2>
+<pre><code>
+"dis_max": {
+    "queries": [
+        { "match": { "title": "Brown fox" }},
+        { "match": { "body":  "Brown fox" }}
+    ]
+}
+</code></pre>
+<ul>
+<li>分离匹配，各个条件独立评分，不合并加起来．</li>
+<li>上面查询条件意思是: 满足条件一或是条件二就可以返回，评分根据满足的单一条件计算，不需用考虑另一个条件</li>
+</ul>
+<h2><span id="_tie_breaker">例子２ tie_breaker 如果两个条件都满足，同时考虑两个条件评分</span></h2>
+<p>tie_breaker 可以是 0 到 1 之间的浮点数，其中 0 代表使用 dis_max 最佳匹配语句的普通逻辑， 1 表示所有匹配语句同等重要。</p>
+<pre><code>
+"dis_max": {
+    "queries": [
+        { "match": { "title": "Quick pets" }},
+        { "match": { "body":  "Quick pets" }}
+    ],
+    "tie_breaker": 0.3
+}
+</code></pre>
+<ul>
+<li>获得最佳匹配语句的评分 _score 。</li>
+<li>将其他匹配语句的评分结果与 tie_breaker 相乘。</li>
+<li>对以上评分求和并规范化。</li>
+</ul>
+<h1><span id="multi_match">multi_match　多字段查询同一值</span></h1>
+<h2><span id="i-17">参数</span></h2>
+<ul>
+<li>
+<p>&quot;query&quot;: &quot;Quick brown fox&quot; </p>
+<ul>
+<li>query参数指定查询的内容</li>
+</ul>
+</li>
+<li>
+<p>&quot;type&quot;:&quot;best_fields&quot;  </p>
+<ul>
+<li>best_fields 默认值　 最佳字段匹配  匹配条件中选最高评分的作为总评分</li>
+<li>most_fields 多数字段匹配　　　　　　说有匹配条件的和作为总评分</li>
+<li>cross_fields 跨字段　　　         逐个词在所有查找字段中检索，单个词(的字段评分和)评分高的作为总评分　　　　　　</li>
+</ul>
+</li>
+<li>
+<p>&quot;fields&quot;: [ &quot;title&quot;, &quot;body&quot; ]</p>
+<ul>
+<li>指定搜索字段</li>
+</ul>
+</li>
+<li>
+<p>&quot;tie_breaker&quot;: 0.3</p>
+<ul>
+<li>指定关联度例如这里相当于title或是body只要有Quick brown fox三个单词中一个就可以</li>
+</ul>
+</li>
+<li>
+<p>&quot;minimum_should_match&quot;: &quot;30%&quot;</p>
+</li>
+<li>
+<p>&quot;operator&quot; : </p>
+<ul>
+<li>&quot;or&quot;　匹配其中一个单词</li>
+<li>&quot;and&quot; 匹配所有单词</li>
+</ul>
+</li>
+</ul>
+<h2><span id="i-18">例子２　字段名称可以用模糊匹配</span></h2>
+<pre><code>{
+    "multi_match": {
+        "query":  "Quick brown fox",
+        "fields": "*_title"
+    }
+}</code></pre>
+<ul>
+<li>同时匹配 book_title 、 chapter_title 和 section_title （书名、章名、节名）这三个字段</li>
+</ul>
+<h2><span id="3">例子3 提升单个字段权重　<code>^</code> 符号</span></h2>
+<pre><code>{
+    "multi_match": {
+        "query":  "Quick brown fox",
+        "fields": [ "*_title", "chapter_title^2" ] 
+    }
+}</code></pre>
+<p>这里其它字段的权重为１　,chapter_title的权重为2</p>
+<h2><span id="4">例子4 精确字段值</span></h2>
+<p>提前将 <code>title</code> 字段设置成 <code>not_analyzed</code></p>
+<pre><code>"multi_match": {
+    "query":       "peter smith",
+    "type":        "cross_fields",
+    "fields":      [ "title", "first_name", "last_name" ]
+}</code></pre>
+<p>explain =&gt; </p>
+<pre><code>title:peter smith
+(
+    blended("peter", fields: [first_name, last_name])
+    blended("smith", fields: [first_name, last_name])
+)
+
+可以看到title把<code>peter smith</code>作为整体字符串进行查询</code></pre>
+<h1><span id="match_phrase">match_phrase  精确短语匹配</span></h1>
+<p>match_phrase 查询首先将查询字符串解析成一个词项列表，然后对这些词项进行搜索，但只保留那些包含 全部 搜索词项，且 位置 与搜索词项相同的文档</p>
+<h2><span id="1-2">例子1</span></h2>
+<pre><code>"match_phrase": {
+    "title": "quick brown fox"
+}</code></pre>
+<p>类似于:</p>
+<pre><code>"match": {
+    "title": {
+        "query": "quick brown fox",
+        "type":  "phrase"
+    }
+}</code></pre>
+<pre><code>会搜索title 中包含完整<code>quick brown fox</code>词条的内容</code></pre>
+<p>结果必须满足以下这些要求：</p>
+<ul>
+<li>quick 、 brown 和 fox 需要全部出现在域中。</li>
+<li>brown 的位置应该比 quick 的位置大 1 。</li>
+<li>fox 的位置应该比 quick 的位置大 2 。</li>
+</ul>
+<h2><span id="2_slop">例子2 slop 邻近度配置</span></h2>
+<p>slop 短语匹配中所有的单词都需要出现， 但是这些单词也不必为了匹配而按相同的序列排列</p>
+<pre><code>"match_phrase": {
+    "title": {
+        "query": "quick fox",
+        "slop":  1
+    }
+}</code></pre>
+<h1><span id="prefix">prefix 前缀索引</span></h1>
+<ul>
+<li>不会在搜索之前分析查询字符串，它假定传入前缀就正是要查找的前缀。</li>
+<li>prefix 查询不做相关度评分计算,它只是将所有匹配的文档返回，并为每条结果赋予评分值 1</li>
+</ul>
+<h2><span id="_1-3">例子 1</span></h2>
+<pre><code>"prefix": {
+    "postcode": "W1"
+}</code></pre>
+<p>为了支持前缀匹配，查询会做以下事情：</p>
+<ul>
+<li>扫描词列表并查找到第一个以 W1 开始的词。</li>
+<li>搜集关联的文档 ID 。</li>
+<li>移动到下一个词。</li>
+<li>如果这个词也是以 W1 开头，查询跳回到第二步再重复执行，直到下一个词不以 W1 为止。</li>
+</ul>
+<h1><span id="wildcard">wildcard 通配符查询</span></h1>
+<pre><code>"wildcard": {
+    "postcode": "W?F*HW" 
+}</code></pre>
+<ul>
+<li>? 匹配 1 和 2 ， * 与空格及 7 和 8 匹配。</li>
+<li>这个查询会匹配包含 W1F 7HW 和 W2F 8HW 的文档</li>
+</ul>
+<h1><span id="regexp">regexp 正则式查询允许写出这样更复杂的模式</span></h1>
+<pre><code>"regexp": {
+    "postcode": "W[0-9].+" 
+}</code></pre>
+<ul>
+<li>这个正则表达式要求词必须以 W 开头，紧跟 0 至 9 之间的任何一个数字，然后接一或多个其他字符。</li>
+<li>wildcard 和 regexp 查询的工作方式与 prefix 查询完全一样</li>
+</ul>
+<h2><span id="_prefix_wildcard_regexp">注意问题: prefix 、 wildcard 和 regexp 查询是基于词操作的</span></h2>
+<h3><span id="1-3">例子1</span></h3>
+<p>内容</p>
+<pre><code>{"title":"Quick brown fox"}</code></pre>
+<p>成功的正则匹配</p>
+<pre><code>{ "regexp": { "title": "br.*" }}</code></pre>
+<p>失败的正则匹配</p>
+<pre><code>{ "regexp": { "title": "Qu.*" }}    
+{ "regexp": { "title": "quick br*" }} </code></pre>
+<ul>
+<li>第一个: regexp 索引会变成小写,所以失败</li>
+<li>第二个: title 会被拆分成 Quick,brown,fox 三个词,所以无法匹配正则表达式</li>
+</ul>
+<h1><span id="match_phrase_prefix">match_phrase_prefix 短语开头查询</span></h1>
+<h2><span id="i-19">参数</span></h2>
+<ul>
+<li>&quot;slop&quot;:  设置邻近值</li>
+<li>max_expansions 参数来限制前缀扩展的影响，一个合理的值是可能是 50</li>
+</ul>
+<h2><span id="1-4">例子1</span></h2>
+<pre><code>"match_phrase_prefix" : {
+    "brand" : "johnnie walker bl"
+}</code></pre>
+<p>例子看成如下这样：</p>
+<ul>
+<li>johnnie</li>
+<li>跟着 walker</li>
+<li>跟着以 bl 开始的词</li>
+</ul>
+<p>类似 <code>&quot;johnnie walker bl*&quot;</code></p>
+<h1><span id="aggs_aggregations">aggs / aggregations 聚合操作</span></h1>
+<h2><span id="1-5">实例1</span></h2>
+<pre><code>"aggs" : { 
+    "popular_colors" : { 
+        "terms" : { 
+          "field" : "color"
+        }
+    }
+}</code></pre>
+<p>类似于SQL</p>
+<pre><code>GROUP BY color </code></pre>
+<ul>
+<li>聚合操作被置于顶层参数 aggs 之下（如果你愿意，完整形式 aggregations 同样有效）。</li>
+<li>然后，可以为聚合指定一个我们想要名称，本例中是： popular_colors 。</li>
+<li>最后，定义单个桶的类型 terms 。</li>
+</ul>
+<h2><span id="2-3">实例2</span></h2>
+<p>DSL</p>
+<pre><code>"aggs": {
+  "colors": {
+     "terms": {
+        "field": "color"
+     },
+     "aggs": { 
+        "avg_price": { 
+           "avg": {
+              "field": "price" 
+           }
+        }
+     }
+  }
+}</code></pre>
+<p>SQL </p>
+<pre><code>SELECT avg(price) GROUP BY color</code></pre>
+<ul>
+<li>为度量新增 aggs 层。</li>
+<li>为度量指定名字： avg_price 。</li>
+<li>最后，为 price 字段定义 avg 度量</li>
+</ul>
+<p>命中类似</p>
+<pre><code>{
+...
+   "aggregations": {
+      "colors": {
+         "buckets": [
+            {
+               "key": "red",
+               "doc_count": 4,
+               "avg_price": { 
+                  "value": 32500
+               }
+            },
+            {
+               "key": "blue",
+               "doc_count": 2,
+               "avg_price": {
+                  "value": 20000
+               }
+            },
+            {
+               "key": "green",
+               "doc_count": 2,
+               "avg_price": {
+                  "value": 21000
+               }
+            }
+         ]
+      }
+   }
+...
+}</code></pre>
+<h2><span id="2-4">实例2 嵌套桶</span></h2>
+<p>DSL</p>
+<pre><code>{
+   "size" : 0,
+   "aggs": {
+      "colors": {
+         "terms": {
+            "field": "color"
+         },
+         "aggs": {
+            "avg_price": { 
+               "avg": {
+                  "field": "price"
+               }
+            },
+            "make": { 
+                "terms": {
+                    "field": "make" 
+                }
+            }
+         }
+      }
+   }
+}</code></pre>
+<p>SQL</p>
+<pre><code>(SELECT color,make,avg(price) as avg_price FROM tablename GROUP BY make) group by color</code></pre>
+<ul>
+<li>正如期望的那样，新的聚合嵌入在每个颜色桶中。</li>
+<li>现在我们看见按不同制造商分解的每种颜色下车辆信息。</li>
+<li>最终，我们看到前例中的 avg_price 度量仍然维持不变。</li>
+</ul>
+<p>响应结果</p>
+<pre><code>{
+...
+   "aggregations": {
+      "colors": {
+         "buckets": [
+            {
+               "key": "red",
+               "doc_count": 4,
+               "make": { 
+                  "buckets": [
+                     {
+                        "key": "honda", 
+                        "doc_count": 3
+                     },
+                     {
+                        "key": "bmw",
+                        "doc_count": 1
+                     }
+                  ]
+               },
+               "avg_price": {
+                  "value": 32500 
+               }
+            },
+
+...
+}</code></pre>
+<p>响应结果告诉我们以下几点：</p>
+<ul>
+<li>红色车有四辆。</li>
+<li>红色车的平均售价是 $32，500 美元。</li>
+<li>其中三辆是 Honda 本田制造，一辆是 BMW 宝马制造。</li>
+</ul>
+<h1><span id="i-20">范围查询</span></h1>
+<h2><span id="1-6">实例1 福特在售车有多少种颜色</span></h2>
+<pre><code>GET /cars/transactions/_search
+{
+    "query" : {
+        "match" : {
+            "make" : "ford"
+        }
+    },
+    "aggs" : {
+        "colors" : {
+            "terms" : {
+              "field" : "color"
+            }
+        }
+    }
+}</code></pre>
+<p>没有指定 <code>size</code> : 0 ，所以搜索结果和聚合结果都被返回了</p>
+<pre><code>{
+...
+   "hits": {
+      "total": 2,
+      "max_score": 1.6931472,
+      "hits": [
+         {
+            "_source": {
+               "price": 25000,
+               "color": "blue",
+               "make": "ford",
+               "sold": "2014-02-12"
+            }
+         },
+         {
+            "_source": {
+               "price": 30000,
+               "color": "green",
+               "make": "ford",
+               "sold": "2014-05-18"
+            }
+         }
+      ]
+   },
+   "aggregations": {
+      "colors": {
+         "buckets": [
+            {
+               "key": "blue",
+               "doc_count": 1
+            },
+            {
+               "key": "green",
+               "doc_count": 1
+            }
+         ]
+      }
+   }
+}</code></pre>
+<h1><span id="i-21">全局桶</span></h1>
+<pre><code>GET /cars/transactions/_search
+{
+    "size" : 0,
+    "query" : {
+        "match" : {
+            "make" : "ford"
+        }
+    },
+    "aggs" : {
+        "single_avg_price": {
+            "avg" : { "field" : "price" } 
+        },
+        "all": {
+            "global" : {}, 
+            "aggs" : {
+                "avg_price": {
+                    "avg" : { "field" : "price" } 
+                }
+
+            }
+        }
+    }
+}</code></pre>
+<ul>
+<li>聚合操作在查询范围内（例如：所有文档匹配 ford ）</li>
+<li>global 全局桶没有参数。</li>
+<li>聚合操作针对所有文档，忽略汽车品牌。</li>
+</ul>
+<p><code>single_avg_price</code> 度量计算是基于查询范围内所有文档，即所有 福特 汽车。avg_price 度量是嵌套在 全局 桶下的，这意味着它完全忽略了范围并对所有文档进行计算。聚合返回的平均值是所有汽车的平均售价</p>
+<h1><span id="i-22">过滤</span></h1>
+<pre><code>GET /cars/transactions/_search
+{
+    "size" : 0,
+    "query" : {
+        "constant_score": {
+            "filter": {
+                "range": {
+                    "price": {
+                        "gte": 10000
+                    }
+                }
+            }
+        }
+    },
+    "aggs" : {
+        "single_avg_price": {
+            "avg" : { "field" : "price" }
+        }
+    }
+}</code></pre>
+<ul>
+<li>售价在 $10,000 美元之上的所有汽车同时也为这些车计算平均售价</li>
+</ul>
+<h2><span id="2-5">实例2 过滤桶</span></h2>
+<p>SQL</p>
+<p><code>SELECT avg(price) as average_price WHERE ford AND sold &gt; now - 1M GROUP BY ford</code> </p>
+<p>DSL</p>
+<pre><code>GET /cars/transactions/_search
+{
+   "size" : 0,
+   "query":{
+      "match": {
+         "make": "ford"
+      }
+   },
+   "aggs":{
+      "recent_sales": {
+         "filter": { 
+            "range": {
+               "sold": {
+                  "from": "now-1M"
+               }
+            }
+         },
+         "aggs": {
+            "average_price":{
+               "avg": {
+                  "field": "price" 
+               }
+            }
+         }
+      }
+   }
+}</code></pre>
+<ul>
+<li>query 匹配品牌福特</li>
+<li>聚合中 注意这里利用<code>filter</code>来过滤上个月售出的汽车</li>
+<li>嵌入聚合aggs 根据过滤后的文档用<code>price</code>字段算平均价格</li>
+</ul>
+<h1><span id="post_filter">post_filter 后过滤器,只过滤搜索结果，不过滤聚合结果</span></h1>
+<h2><span id="1-7">实例1</span></h2>
+<p>用户搜索汽车同时可以根据颜色来过滤。颜色的选项是通过聚合获得的</p>
+<pre><code>GET /cars/transactions/_search
+{
+    "size" : 0,
+    "query": {
+        "match": {
+            "make": "ford"
+        }
+    },
+    "post_filter": {    
+        "term" : {
+            "color" : "green"
+        }
+    },
+    "aggs" : {
+        "all_colors": {
+            "terms" : { "field" : "color" }
+        }
+    }
+}
+</code></pre>
+<h1><span id="i-23">桶排序</span></h1>
+<p>聚合引入了一个 order 对象， 它允许我们可以根据以下几个值中的一个值进行排序：</p>
+<ul>
+<li>_count<br />
+<code>按文档数排序。对 terms 、 histogram 、 date_histogram 有效。</code></li>
+<li>_term<br />
+<code>按词项的字符串值的字母顺序排序。只在 terms 内使用。</code></li>
+<li>_key<br />
+<code>按每个桶的键值数值排序（理论上与 _term 类似）。 只在 histogram 和 date_histogram 内使用。</code></li>
+</ul>
+<h2><span id="1__count">实例1  _count 排序</span></h2>
+<p>用关键字 _count ，我们可以按 doc_count 值的升序排序。</p>
+<pre><code>GET /cars/transactions/_search
+{
+    "size" : 0,
+    "aggs" : {
+        "colors" : {
+            "terms" : {
+              "field" : "color",
+              "order": {
+                "_count" : "asc" 
+              }
+            }
+        }
+    }
+}</code></pre>
+<h2><span id="i-24">按度量(聚合后的字段)排序</span></h2>
+<p>聚合后的字段为 <code>avg_price</code></p>
+<pre><code>GET /cars/transactions/_search
+{
+    "size" : 0,
+    "aggs" : {
+        "colors" : {
+            "terms" : {
+              "field" : "color",
+              "order": {
+                "avg_price" : "asc" 
+              }
+            },
+            "aggs": {
+                "avg_price": {
+                    "avg": {"field": "price"} 
+                }
+            }
+        }
+    }
+}</code></pre>
+<ul>
+<li>算每个桶的平均售价。</li>
+<li>
+<p>桶按照计算平均值的升序排序</p>
+</li>
+</ul>
+<h1><span id="cardinality">cardinality 统计去重后的数量</span></h1>
+<p>SQL </p>
+<pre><code>SELECT COUNT(DISTINCT color)
+FROM cars</code></pre>
+<p>DST</p>
+<pre><code>GET /cars/transactions/_search
+{
+    "size" : 0,
+    "aggs" : {
+        "distinct_colors" : {
+            "cardinality" : {
+              "field" : "color"
+            }
+        }
+    }
+}</code></pre>
+<p>返回</p>
+<pre><code>...
+"aggregations": {
+  "distinct_colors": {
+     "value": 3
+  }
+}
+...</code></pre>
+<h2><span id="2-6">实例2</span></h2>
+<p>每个月有多少颜色汽车被售出</p>
+<pre><code>GET /cars/transactions/_search
+{
+  "size" : 0,
+  "aggs" : {
+      "months" : {
+        "date_histogram": {
+          "field": "sold",
+          "interval": "month"
+        },
+        "aggs": {
+          "distinct_colors" : {
+              "cardinality" : {
+                "field" : "color"
+              }
+          }
+        }
+      }
+  }
+}</code></pre>
+<h1><span id="percentiles">percentiles百分比度量</span></h1>
+<pre><code>GET /website/logs/_search
+{
+    "size" : 0,
+    "aggs" : {
+        "load_times" : {
+            "percentiles" : {
+                "field" : "latency" 
+            }
+        },
+        "avg_load_time" : {
+            "avg" : {
+                "field" : "latency" 
+            }
+        }
+    }
+}</code></pre>
+<ul>
+<li><code>percentiles</code> 度量被应用到 <code>latency</code> 延时字段。</li>
+<li>为了比较，我们对相同字段使用 avg 度量。</li>
+</ul>
+<p>返回</p>
+<pre><code>...
+"aggregations": {
+  "load_times": {
+     "values": {
+        "1.0": 75.55,
+        "5.0": 77.75,
+        "25.0": 94.75,
+        "50.0": 101,
+        "75.0": 289.75,
+        "95.0": 489.34999999999985,
+        "99.0": 596.2700000000002
+     }
+  },
+  "avg_load_time": {
+     "value": 199.58333333333334
+  }
+}</code></pre>
+<div id="toc_container" class="no_bullets"><ul class="toc_list"><li><a href="#i"><span class="toc_number toc_depth_1">1</span> 核心简单域类型</a></li><li><a href="#Query_DSL"><span class="toc_number toc_depth_1">2</span> 查询表达式(Query DSL)</a><ul><li><a href="#query"><span class="toc_number toc_depth_2">2.1</span> query 参数</a><ul><li><a href="#i-2"><span class="toc_number toc_depth_3">2.1.1</span> 结构</a></li><li><a href="#i-3"><span class="toc_number toc_depth_3">2.1.2</span> 实例</a></li></ul></li></ul></li><li><a href="#sort"><span class="toc_number toc_depth_1">3</span> sort参数 排序</a><ul><li><a href="#i-4"><span class="toc_number toc_depth_2">3.1</span> 多级排序</a></li><li><a href="#i-5"><span class="toc_number toc_depth_2">3.2</span> 将多值字段减为单值</a></li></ul></li><li><a href="#term"><span class="toc_number toc_depth_1">4</span> term单条件查询</a><ul><li><a href="#i-6"><span class="toc_number toc_depth_2">4.1</span> 用途</a></li><li><a href="#_1"><span class="toc_number toc_depth_2">4.2</span> 例子 1 查询数值</a></li><li><a href="#2"><span class="toc_number toc_depth_2">4.3</span> 例子2 查询文本</a></li></ul></li><li><a href="#terms"><span class="toc_number toc_depth_1">5</span> terms 多值精确查询</a></li><li><a href="#constant_score"><span class="toc_number toc_depth_1">6</span> constant_score 所有文档评分都设置为１, 只关系单词是否出现,不关心评分</a><ul><li><a href="#i-7"><span class="toc_number toc_depth_2">6.1</span> 用途</a></li><li><a href="#1"><span class="toc_number toc_depth_2">6.2</span> 示例1</a></li><li><a href="#2-2"><span class="toc_number toc_depth_2">6.3</span> 实例2</a></li></ul></li><li><a href="#bool"><span class="toc_number toc_depth_1">7</span> bool 多条件查询</a><ul><li><a href="#i-8"><span class="toc_number toc_depth_2">7.1</span> 语法:</a></li><li><a href="#_1-2"><span class="toc_number toc_depth_2">7.2</span> 例子 1</a></li><li><a href="#boolshould_bool"><span class="toc_number toc_depth_2">7.3</span> 例子２嵌套条件.bool里面的should 再嵌套bool</a></li></ul></li><li><a href="#range"><span class="toc_number toc_depth_1">8</span> range 范围查找</a><ul><li><a href="#range-2"><span class="toc_number toc_depth_2">8.1</span> range　选项</a></li><li><a href="#i-9"><span class="toc_number toc_depth_2">8.2</span> 例子　１</a></li><li><a href="#i-10"><span class="toc_number toc_depth_2">8.3</span> 例子２ 数值范围，精确匹配</a></li><li><a href="#i-11"><span class="toc_number toc_depth_2">8.4</span> 例子３　日期</a></li><li><a href="#_AISSC"><span class="toc_number toc_depth_2">8.5</span> 例子４　字符串 AISSC码</a></li></ul></li><li><a href="#exists"><span class="toc_number toc_depth_1">9</span> exists 非空值判断</a></li><li><a href="#missing"><span class="toc_number toc_depth_1">10</span> missing 空值判断</a></li><li><a href="#match"><span class="toc_number toc_depth_1">11</span> match 全文查询</a><ul><li><a href="#i-12"><span class="toc_number toc_depth_2">11.1</span> 参数</a></li><li><a href="#i-13"><span class="toc_number toc_depth_2">11.2</span> 例子１</a></li><li><a href="#i-14"><span class="toc_number toc_depth_2">11.3</span> 例子２　多值搜索</a></li><li><a href="#_operatoror_and"><span class="toc_number toc_depth_2">11.4</span> 例子３ 参数operator：　or , and 提高精确度</a></li><li><a href="#4_minimum_should_match"><span class="toc_number toc_depth_2">11.5</span> 例子4 minimum_should_match　最小匹配参数</a></li><li><a href="#5"><span class="toc_number toc_depth_2">11.6</span> 例子5 组合查询</a></li><li><a href="#_minimum_should_match"><span class="toc_number toc_depth_2">11.7</span> 例子６ minimum_should_match 满足其中两个条件即可</a></li><li><a href="#boostboost"><span class="toc_number toc_depth_2">11.8</span> 例子６　boost　提升查询条件权重，其实就是评分后，用评分*boost算出新评分</a></li><li><a href="#i-15"><span class="toc_number toc_depth_2">11.9</span> 例子７　多字段搜索</a></li></ul></li><li><a href="#dis_max_bool"><span class="toc_number toc_depth_1">12</span> dis_max 分离查询 (影响评分)　相对于bool查询来说</a><ul><li><a href="#i-16"><span class="toc_number toc_depth_2">12.1</span> 例子１</a></li><li><a href="#_tie_breaker"><span class="toc_number toc_depth_2">12.2</span> 例子２ tie_breaker 如果两个条件都满足，同时考虑两个条件评分</a></li></ul></li><li><a href="#multi_match"><span class="toc_number toc_depth_1">13</span> multi_match　多字段查询同一值</a><ul><li><a href="#i-17"><span class="toc_number toc_depth_2">13.1</span> 参数</a></li><li><a href="#i-18"><span class="toc_number toc_depth_2">13.2</span> 例子２　字段名称可以用模糊匹配</a></li><li><a href="#3"><span class="toc_number toc_depth_2">13.3</span> 例子3 提升单个字段权重　^ 符号</a></li><li><a href="#4"><span class="toc_number toc_depth_2">13.4</span> 例子4 精确字段值</a></li></ul></li><li><a href="#match_phrase"><span class="toc_number toc_depth_1">14</span> match_phrase  精确短语匹配</a><ul><li><a href="#1-2"><span class="toc_number toc_depth_2">14.1</span> 例子1</a></li><li><a href="#2_slop"><span class="toc_number toc_depth_2">14.2</span> 例子2 slop 邻近度配置</a></li></ul></li><li><a href="#prefix"><span class="toc_number toc_depth_1">15</span> prefix 前缀索引</a><ul><li><a href="#_1-3"><span class="toc_number toc_depth_2">15.1</span> 例子 1</a></li></ul></li><li><a href="#wildcard"><span class="toc_number toc_depth_1">16</span> wildcard 通配符查询</a></li><li><a href="#regexp"><span class="toc_number toc_depth_1">17</span> regexp 正则式查询允许写出这样更复杂的模式</a><ul><li><a href="#_prefix_wildcard_regexp"><span class="toc_number toc_depth_2">17.1</span> 注意问题: prefix 、 wildcard 和 regexp 查询是基于词操作的</a><ul><li><a href="#1-3"><span class="toc_number toc_depth_3">17.1.1</span> 例子1</a></li></ul></li></ul></li><li><a href="#match_phrase_prefix"><span class="toc_number toc_depth_1">18</span> match_phrase_prefix 短语开头查询</a><ul><li><a href="#i-19"><span class="toc_number toc_depth_2">18.1</span> 参数</a></li><li><a href="#1-4"><span class="toc_number toc_depth_2">18.2</span> 例子1</a></li></ul></li><li><a href="#aggs_aggregations"><span class="toc_number toc_depth_1">19</span> aggs / aggregations 聚合操作</a><ul><li><a href="#1-5"><span class="toc_number toc_depth_2">19.1</span> 实例1</a></li><li><a href="#2-3"><span class="toc_number toc_depth_2">19.2</span> 实例2</a></li><li><a href="#2-4"><span class="toc_number toc_depth_2">19.3</span> 实例2 嵌套桶</a></li></ul></li><li><a href="#i-20"><span class="toc_number toc_depth_1">20</span> 范围查询</a><ul><li><a href="#1-6"><span class="toc_number toc_depth_2">20.1</span> 实例1 福特在售车有多少种颜色</a></li></ul></li><li><a href="#i-21"><span class="toc_number toc_depth_1">21</span> 全局桶</a></li><li><a href="#i-22"><span class="toc_number toc_depth_1">22</span> 过滤</a><ul><li><a href="#2-5"><span class="toc_number toc_depth_2">22.1</span> 实例2 过滤桶</a></li></ul></li><li><a href="#post_filter"><span class="toc_number toc_depth_1">23</span> post_filter 后过滤器,只过滤搜索结果，不过滤聚合结果</a><ul><li><a href="#1-7"><span class="toc_number toc_depth_2">23.1</span> 实例1</a></li></ul></li><li><a href="#i-23"><span class="toc_number toc_depth_1">24</span> 桶排序</a><ul><li><a href="#1__count"><span class="toc_number toc_depth_2">24.1</span> 实例1  _count 排序</a></li><li><a href="#i-24"><span class="toc_number toc_depth_2">24.2</span> 按度量(聚合后的字段)排序</a></li></ul></li><li><a href="#cardinality"><span class="toc_number toc_depth_1">25</span> cardinality 统计去重后的数量</a><ul><li><a href="#2-6"><span class="toc_number toc_depth_2">25.1</span> 实例2</a></li></ul></li><li><a href="#percentiles"><span class="toc_number toc_depth_1">26</span> percentiles百分比度量</a></li></ul></div>
+        </div>
+
+        
+        <div class="tags are-medium">
+			        </div>
+    </div>
+
+	</article>
+
+
+		            
+<section id="comments" class="comments-area">
+
+		<div id="respond" class="comment-respond">
+		<div class="is-flex is-justify-content-space-between is-size-5 mt-6">  发表评论 <small><a rel="nofollow" id="cancel-comment-reply-link" class="is-size-7 has-text-danger " href="/archives/266#respond" style="display:none;">取消回复</a></small><span class="tag is-light has-text-primary is-medium comment-number">0</span> </div><hr/><form action="https://blog.bonp.top/wp-comments-post.php" method="post" id="commentform" class="" novalidate><p class="comment-notes help pb-3">Your email address will not be published.</p><div class="field"><div class="control"><textarea name="comment" class="textarea" aria-required="true" placeholder="Add Comment"></textarea></div></div><div class="field is-horizontal"><div class="field-label is-normal"><label class="label" for="author">Name</label></div> <div class="field-body"><div class="field"><div class="control"><input id="author" class="input " name="author" type="text" value="" size="30" /></div></div></div></div>
+<div class="field is-horizontal"><div class="field-label is-normal"><label class="label" for="email">Email</label> </div><div class="field-body"><div class="field"><div class="control"><input id="email" class="input " name="email" type="email" value="" size="30" /></div></div></div></div>
+<div class="field is-horizontal"><div class="field-label is-normal"><label class="label" for="url">Website</label> </div><div class="field-body"><div class="field"><div class="control"><input class="input" id="url" name="url" type="url" value="" size="30" /></div></div></div></div>
+<div class="field is-horizontal"><div class="field-label"><label class="label"></label></div><div class="field-body"><div class="field"><div class="control"><label class="checkbox is-size-7"><input id="wp-comment-cookies-consent" name="wp-comment-cookies-consent" type="checkbox" value="yes"> Save my name and email in this browser for the next time I comment.</label></div></div></div></div>
+<p class="form-submit has-text-right"><button name="submit" type="submit" id="submit" class="button is-primary hvr-icon-bob"><span>发表评论</span><span class="icon"><span class="hvr-icon icon-chevron-up"></span></span></button>  <input type='hidden' name='comment_post_ID' value='266' id='comment_post_ID' />
+<input type='hidden' name='comment_parent' id='comment_parent' value='0' />
+</p><hr/></form>	</div><!-- #respond -->
+	
+
+	
+	</section>
+	                        </div>
+        </div>
+
+    </div>
+
+</section>
+
+
+
+</main>
+<footer class="footer mt-6 py-4">
+
+    <div class="navbar is-transparent">
+        <div class="container">
+            <div class="navbar-item copyright pl-0">
+				&copy; 2021 Monk IT            </div>
+
+            <div id="main-menu" class="navbar-menu is-active">
+                <div class="navbar-end">
+					                    <div class="navbar-item copyright pr-0 is-hidden-desktop">
+		                                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</footer>
+
+<script type='text/javascript' id='toc-front-js-extra'>
+/* <![CDATA[ */
+var tocplus = {"smooth_scroll":"1"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://cdn.jsdelivr.net/gh/rainard/blogstatic@main/wp-content/plugins/table-of-contents-plus/front.min.js?ver=2106' id='toc-front-js'></script>
+<script type='text/javascript' src='https://cdn.jsdelivr.net/gh/rainard/blogstatic@main/wp-content/themes/iknowledgebase/assets/js/script.min.js?ver=1.3.1' id='iknowledgebase-js'></script>
+<script type='text/javascript' src='https://cdn.jsdelivr.net/gh/rainard/blogstatic@main/wp-includes/js/comment-reply.min.js?ver=5.8.2' id='comment-reply-js'></script>
+<script type='text/javascript' src='https://cdn.jsdelivr.net/gh/rainard/blogstatic@main/wp-content/plugins/q2w3-fixed-widget/js/q2w3-fixed-widget.min.js?ver=5.3.0' id='q2w3_fixed_widget-js'></script>
+<script type='text/javascript' src='https://cdn.jsdelivr.net/npm/emojify.js@1.1.0/dist/js/emojify.min.js?ver=1.1.0' id='emojify-js'></script>
+<script type='text/javascript' src='https://cdn.jsdelivr.net/gh/rainard/blogstatic@main/wp-includes/js/wp-embed.min.js?ver=5.8.2' id='wp-embed-js'></script>
+ <script id="preference-link-target"> (function($) { $(function() { $(".post").find("a").each(function() { var link_href = $(this).attr("href"); if (link_href.indexOf("#") == -1) { $(this).attr("target", "_blank"); } }); }); })(jQuery); </script>  <script id="module-highlight-js"> (function($) { $(function() { $("pre code").each(function(i, e) { var thisclass = $(this).attr("class"); if (typeof thisclass !== "undefined") { if ( thisclass.indexOf("katex") === -1 && thisclass.indexOf("mermaid") === -1 && thisclass.indexOf("seq") === -1 && thisclass.indexOf("flow") === -1 ) { if (typeof hljs !== "undefined") { $(this).closest("pre").addClass("hljs"); hljs.highlightBlock(e); } else { console.log("%c WP Githuber MD %c You have enabled highlight.js modules already, but you have to update this post to take effect, identifying which file should be loaded.\nGithuber MD does not load a whole-fat-packed file for every post.", "background: #222; color: #bada55", "color: #637338"); } } } }); }); })(jQuery); </script> 
+			<script id="module-emojify">
+				(function($) {
+					$(function() {
+						if (typeof emojify !== "undefined") {
+							emojify.setConfig({
+								img_dir: "https://cdn.jsdelivr.net/npm/emojify.js@1.1.0/dist/images/basic",
+								blacklist: {
+									"classes": ["no-emojify"],
+									"elements": ["script", "textarea", "pre", "code"]
+								}
+							});
+							emojify.run();
+						} else {
+							console.log("[wp-githuber-md] emogify is undefined.");
+						}
+					});
+				})(jQuery);
+			</script>
+		</body></html>
+
+<!-- Dynamic page generated in 0.407 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2021-12-31 14:53:24 -->
+
+<!-- super cache -->
