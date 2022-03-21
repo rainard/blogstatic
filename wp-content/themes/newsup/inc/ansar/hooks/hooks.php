@@ -91,14 +91,14 @@ if (!function_exists('newsup_banner_tabbed_posts')):
                         <li class="nav-item">
                             <a class="nav-link active" data-toggle="tab" href="#<?php echo esc_attr($tab_id); ?>-recent"
                                aria-controls="<?php esc_attr_e('Recent', 'newsup'); ?>">
-                               <i class="fa fa-clock-o"></i><?php echo esc_html($latest_title); ?>
+                               <i class="fas fa-clock"></i><?php echo esc_html($latest_title); ?>
                             </a>
                         </li>
 
                         <li class="nav-item">
                             <a class="nav-link" data-toggle="tab" href="#<?php echo esc_attr($tab_id); ?>-popular"
                                aria-controls="<?php esc_attr_e('Popular', 'newsup'); ?>">
-                                <i class="fa fa-fire"></i> <?php echo esc_html($popular_title); ?>
+                                <i class="fas fa-fire"></i> <?php echo esc_html($popular_title); ?>
                             </a>
                         </li>
 
@@ -106,7 +106,7 @@ if (!function_exists('newsup_banner_tabbed_posts')):
                         <li class="nav-item">
                             <a class="nav-link" data-toggle="tab" href="#<?php echo esc_attr($tab_id); ?>-categorised"
                                aria-controls="<?php esc_attr_e('Categorised', 'newsup'); ?>">
-                                <i class="fa fa-bolt"></i> <?php echo esc_html($categorised_title); ?>
+                                <i class="fas fa-bolt"></i> <?php echo esc_html($categorised_title); ?>
                             </a>
                         </li>
 
@@ -135,6 +135,7 @@ if (!function_exists('newsup_banner_tabbed_posts')):
 
                 </div>
             </div>
+        </div> 
         <?php
 
     }
@@ -302,12 +303,26 @@ if (!function_exists('newsup_front_page_banner_section')) :
             <div class="overlay">
                 <div class="container-fluid">
                     <div class="row">
+                        <?php $newsup_select_slider_setting = get_theme_mod('newsup_select_slider_setting','left'); 
+                            if($newsup_select_slider_setting == 'left')
+                            {
+                        ?>
                         <div class="col-md-8">
                             <div id="homemain"class="homemain owl-carousel mr-bot60 pd-r-10"> 
                                 <?php newsup_get_block('list', 'banner'); ?>
                             </div>
                         </div> 
                         <?php do_action('newsup_action_banner_tabbed_posts');?>
+                    <?php } elseif($newsup_select_slider_setting == 'right') { ?>
+
+                        <?php do_action('newsup_action_banner_tabbed_posts');?>
+
+                        <div class="col-md-8">
+                            <div id="homemain"class="homemain owl-carousel mr-bot60 pd-r-10"> 
+                                <?php newsup_get_block('list', 'banner'); ?>
+                            </div>
+                        </div>
+                    <?php } ?>
                     </div>
                 </div>
             </div>

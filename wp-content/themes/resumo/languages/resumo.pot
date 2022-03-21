@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Fotofly\n"
-"POT-Creation-Date: 2021-12-09 10:49+0500\n"
-"PO-Revision-Date: 2021-12-09 10:49+0500\n"
+"POT-Creation-Date: 2022-01-12 14:23+0500\n"
+"PO-Revision-Date: 2022-01-12 14:23+0500\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en_US\n"
@@ -106,7 +106,7 @@ msgstr ""
 #: ../footer.php:35
 #, php-format
 msgid ""
-"Copyright &copy; 2021. All rights reserved. %1$s Designed &amp; Developed by "
+"Copyright &copy; 2022. All rights reserved. %1$s Designed &amp; Developed by "
 "%2$sFrenify%3$s"
 msgstr ""
 
@@ -122,91 +122,95 @@ msgstr ""
 msgid "Skip to content"
 msgstr ""
 
-#: ../inc/resumo_fn_functions.php:25
+#: ../inc/resumo_fn_functions.php:37
 msgid "Menu"
 msgstr ""
 
-#: ../inc/resumo_fn_functions.php:37
+#: ../inc/resumo_fn_functions.php:49
 msgid "Hi There! I am"
 msgstr ""
 
-#: ../inc/resumo_fn_functions.php:43
+#: ../inc/resumo_fn_functions.php:55
 msgid "Bruce Wilson"
 msgstr ""
 
-#: ../inc/resumo_fn_functions.php:44
+#: ../inc/resumo_fn_functions.php:56
 msgid "Web Developer"
 msgstr ""
 
-#: ../inc/resumo_fn_functions.php:45
+#: ../inc/resumo_fn_functions.php:57
 msgid "Freelancer"
 msgstr ""
 
-#: ../inc/resumo_fn_functions.php:46
+#: ../inc/resumo_fn_functions.php:58
 msgid "Photographer"
 msgstr ""
 
-#: ../inc/resumo_fn_functions.php:146
+#: ../inc/resumo_fn_functions.php:85
+msgid "I am available for a freelance job. Hire me"
+msgstr ""
+
+#: ../inc/resumo_fn_functions.php:177
 msgid "(p) Prev Post"
 msgstr ""
 
-#: ../inc/resumo_fn_functions.php:147
+#: ../inc/resumo_fn_functions.php:178
 msgid "(n) Next Post"
 msgstr ""
 
-#: ../inc/resumo_fn_functions.php:148
+#: ../inc/resumo_fn_functions.php:179
 msgid "No Image"
 msgstr ""
 
-#: ../inc/resumo_fn_functions.php:278
+#: ../inc/resumo_fn_functions.php:309
 msgid "Read More"
 msgstr ""
 
-#: ../inc/resumo_fn_functions.php:534
+#: ../inc/resumo_fn_functions.php:565
 msgid "Protected Page"
 msgstr ""
 
-#: ../inc/resumo_fn_functions.php:535
+#: ../inc/resumo_fn_functions.php:566
 msgid "Please, enter the password to have access to this page."
 msgstr ""
 
-#: ../inc/resumo_fn_functions.php:553
+#: ../inc/resumo_fn_functions.php:584
 msgid "In "
 msgstr ""
 
-#: ../inc/resumo_fn_functions.php:745
+#: ../inc/resumo_fn_functions.php:776
 msgid ""
 "This content is password protected. To view it please enter your password "
 "below:"
 msgstr ""
 
-#: ../inc/resumo_fn_functions.php:761
+#: ../inc/resumo_fn_functions.php:792
 msgid "Home"
 msgstr ""
 
-#: ../inc/resumo_fn_functions.php:790 ../inc/resumo_fn_functions.php:793
+#: ../inc/resumo_fn_functions.php:821 ../inc/resumo_fn_functions.php:824
 msgid "Archive"
 msgstr ""
 
-#: ../inc/resumo_fn_functions.php:940 ../inc/resumo_fn_functions.php:944
-#: ../inc/resumo_fn_functions.php:948 ../inc/resumo_fn_functions.php:955
-#: ../inc/resumo_fn_functions.php:959 ../inc/resumo_fn_functions.php:964
+#: ../inc/resumo_fn_functions.php:971 ../inc/resumo_fn_functions.php:975
+#: ../inc/resumo_fn_functions.php:979 ../inc/resumo_fn_functions.php:986
+#: ../inc/resumo_fn_functions.php:990 ../inc/resumo_fn_functions.php:995
 msgid " Archives"
 msgstr ""
 
-#: ../inc/resumo_fn_functions.php:975
+#: ../inc/resumo_fn_functions.php:1006
 msgid "Author: "
 msgstr ""
 
-#: ../inc/resumo_fn_functions.php:980
+#: ../inc/resumo_fn_functions.php:1011
 msgid "Page"
 msgstr ""
 
-#: ../inc/resumo_fn_functions.php:985
+#: ../inc/resumo_fn_functions.php:1016
 msgid "Search results for: "
 msgstr ""
 
-#: ../inc/resumo_fn_functions.php:990
+#: ../inc/resumo_fn_functions.php:1021
 msgid "Error 404"
 msgstr ""
 
@@ -256,11 +260,11 @@ msgstr ""
 msgid "%1$sDeveloped by Frenify%2$s"
 msgstr ""
 
-#: ../template-parts/desktop-navigation.php:58
+#: ../template-parts/desktop-navigation.php:59
 msgid "Type your search terms and press enter."
 msgstr ""
 
-#: ../template-parts/desktop-navigation.php:70
+#: ../template-parts/desktop-navigation.php:71
 msgid "Show More"
 msgstr ""
 

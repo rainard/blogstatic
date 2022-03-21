@@ -1,7 +1,7 @@
 /******/ (function() { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ 3787:
+/***/ 7308:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_RESULT__;;/*! showdown v 1.9.1 - 02-11-2019 */
@@ -5141,7 +5141,7 @@ if (true) {
 } else {}
 }).call(this);
 
-//# sourceMappingURL=showdown.js.map
+
 
 
 /***/ })
@@ -5633,7 +5633,7 @@ function collections() {
   categories,
   collections
 }));
-//# sourceMappingURL=reducer.js.map
+
 ;// CONCATENATED MODULE: ./node_modules/rememo/es/rememo.js
 
 
@@ -6231,7 +6231,7 @@ const hasChildBlocksWithInserterSupport = (state, blockName) => {
     return hasBlockSupport(state, childBlockName, 'inserter', true);
   });
 };
-//# sourceMappingURL=selectors.js.map
+
 ;// CONCATENATED MODULE: external ["wp","hooks"]
 var external_wp_hooks_namespaceObject = window["wp"]["hooks"];
 ;// CONCATENATED MODULE: ./packages/blocks/node_modules/colord/index.mjs
@@ -6340,7 +6340,8 @@ const __EXPERIMENTAL_STYLE_PROPERTY = {
       paddingRight: 'right',
       paddingBottom: 'bottom',
       paddingLeft: 'left'
-    }
+    },
+    useEngine: true
   },
   textDecoration: {
     value: ['typography', 'textDecoration'],
@@ -6375,7 +6376,7 @@ const __EXPERIMENTAL_PATHS_WITH_MERGE = {
   'typography.fontFamilies': true,
   'typography.fontSizes': true
 };
-//# sourceMappingURL=constants.js.map
+
 ;// CONCATENATED MODULE: ./packages/blocks/build-module/api/registration.js
 /* eslint no-console: [ 'error', { allow: [ 'error', 'warn' ] } ] */
 
@@ -6948,7 +6949,7 @@ const registerBlockVariation = (blockName, variation) => {
 const unregisterBlockVariation = (blockName, variationName) => {
   (0,external_wp_data_namespaceObject.dispatch)(store).removeBlockVariations(blockName, variationName);
 };
-//# sourceMappingURL=registration.js.map
+
 ;// CONCATENATED MODULE: ./node_modules/uuid/dist/esm-browser/rng.js
 // Unique ID creation requires a high quality random # generator. In the browser we therefore
 // require the crypto API and do not support built-in fallback to lower quality random number
@@ -7452,7 +7453,7 @@ function switchToBlockType(blocks, name) {
     return null;
   }
 
-  const ret = transformationResults.map(result => {
+  const ret = transformationResults.map((result, index, results) => {
     /**
      * Filters an individual transform result from block transformation.
      * All of the original blocks are passed, since transformations are
@@ -7460,8 +7461,10 @@ function switchToBlockType(blocks, name) {
      *
      * @param {Object}   transformedBlock The transformed block.
      * @param {Object[]} blocks           Original blocks transformed.
+     * @param {Object[]} index            Index of the transformed block on the array of results.
+     * @param {Object[]} results          An array all the blocks that resulted from the transformation.
      */
-    return (0,external_wp_hooks_namespaceObject.applyFilters)('blocks.switchToBlockType.transformedBlock', result, blocks);
+    return (0,external_wp_hooks_namespaceObject.applyFilters)('blocks.switchToBlockType.transformedBlock', result, blocks, index, results);
   });
   return ret;
 }
@@ -7477,7 +7480,7 @@ function switchToBlockType(blocks, name) {
 const getBlockFromExample = (name, example) => {
   return createBlock(name, example.attributes, (0,external_lodash_namespaceObject.map)(example.innerBlocks, innerBlock => getBlockFromExample(innerBlock.name, innerBlock)));
 };
-//# sourceMappingURL=factory.js.map
+
 ;// CONCATENATED MODULE: ./packages/blocks/build-module/api/utils.js
 /**
  * External dependencies
@@ -7741,7 +7744,7 @@ function __experimentalGetBlockAttributesNamesByRole(name, role) {
     return ((_attributes$attribute = attributes[attributeName]) === null || _attributes$attribute === void 0 ? void 0 : _attributes$attribute.__experimentalRole) === role;
   });
 }
-//# sourceMappingURL=utils.js.map
+
 ;// CONCATENATED MODULE: ./packages/blocks/build-module/store/actions.js
 /**
  * External dependencies
@@ -8136,10 +8139,10 @@ function removeBlockCollection(namespace) {
     namespace
   };
 }
-//# sourceMappingURL=actions.js.map
+
 ;// CONCATENATED MODULE: ./packages/blocks/build-module/store/constants.js
 const STORE_NAME = 'core/blocks';
-//# sourceMappingURL=constants.js.map
+
 ;// CONCATENATED MODULE: ./packages/blocks/build-module/store/index.js
 /**
  * WordPress dependencies
@@ -8164,11 +8167,10 @@ const STORE_NAME = 'core/blocks';
 const store = (0,external_wp_data_namespaceObject.createReduxStore)(STORE_NAME, {
   reducer: reducer,
   selectors: selectors_namespaceObject,
-  actions: actions_namespaceObject,
-  __experimentalUseThunks: true
+  actions: actions_namespaceObject
 });
 (0,external_wp_data_namespaceObject.register)(store);
-//# sourceMappingURL=index.js.map
+
 ;// CONCATENATED MODULE: external ["wp","blockSerializationDefaultParser"]
 var external_wp_blockSerializationDefaultParser_namespaceObject = window["wp"]["blockSerializationDefaultParser"];
 ;// CONCATENATED MODULE: external ["wp","autop"]
@@ -8503,7 +8505,7 @@ function __unstableSerializeAndClean(blocks) {
 function serializer_serialize(blocks, options) {
   return (0,external_lodash_namespaceObject.castArray)(blocks).map(block => serializeBlock(block, options)).join('\n\n');
 }
-//# sourceMappingURL=serializer.js.map
+
 ;// CONCATENATED MODULE: ./node_modules/simple-html-tokenizer/dist/es6/index.js
 /**
  * generated from https://raw.githubusercontent.com/w3c/html/26b5126f96f736f796b9e29718138919dd513744/entities.json
@@ -9143,7 +9145,7 @@ function tokenize(input, options) {
 }
 
 
-//# sourceMappingURL=index.js.map
+
 ;// CONCATENATED MODULE: external ["wp","htmlEntities"]
 var external_wp_htmlEntities_namespaceObject = window["wp"]["htmlEntities"];
 ;// CONCATENATED MODULE: ./packages/blocks/build-module/api/validation/logger.js
@@ -9222,7 +9224,7 @@ function createQueuedLogger() {
 
   };
 }
-//# sourceMappingURL=logger.js.map
+
 ;// CONCATENATED MODULE: ./packages/blocks/build-module/api/validation/index.js
 /**
  * External dependencies
@@ -9855,7 +9857,7 @@ function isValidBlockContent(blockTypeOrName, attributes, originalBlockContent) 
   const [isValid] = validateBlock(block, blockType);
   return isValid;
 }
-//# sourceMappingURL=index.js.map
+
 ;// CONCATENATED MODULE: ./packages/blocks/build-module/api/parser/convert-legacy-block.js
 /**
  * Convert legacy blocks to their canonical form. This function is used
@@ -9929,7 +9931,7 @@ function convertLegacyBlockNameAndAttributes(name, attributes) {
 
   return [name, newAttributes];
 }
-//# sourceMappingURL=convert-legacy-block.js.map
+
 ;// CONCATENATED MODULE: ./packages/blocks/build-module/api/parser/serialize-raw-block.js
 /**
  * Internal dependencies
@@ -9973,7 +9975,7 @@ function serializeRawBlock(rawBlock) {
   item !== null ? item : serializeRawBlock(innerBlocks[childIndex++], options)).join('\n').replace(/\n+/g, '\n').trim();
   return isCommentDelimited ? getCommentDelimitedContent(blockName, attrs, content) : content;
 }
-//# sourceMappingURL=serialize-raw-block.js.map
+
 ;// CONCATENATED MODULE: ./node_modules/hpq/es/get-path.js
 /**
  * Given object and string of dot-delimited path segments, returns value at
@@ -10196,7 +10198,7 @@ function matchers_html(selector, multilineTag) {
     return match.innerHTML;
   };
 }
-//# sourceMappingURL=matchers.js.map
+
 ;// CONCATENATED MODULE: ./packages/blocks/build-module/api/node.js
 /**
  * Internal dependencies
@@ -10331,7 +10333,7 @@ function node_matcher(selector) {
   toHTML,
   matcher: node_matcher
 });
-//# sourceMappingURL=node.js.map
+
 ;// CONCATENATED MODULE: ./packages/blocks/build-module/api/children.js
 /**
  * External dependencies
@@ -10490,7 +10492,7 @@ function children_matcher(selector) {
   toHTML: children_toHTML,
   matcher: children_matcher
 });
-//# sourceMappingURL=children.js.map
+
 ;// CONCATENATED MODULE: ./packages/blocks/build-module/api/parser/get-block-attributes.js
 /**
  * External dependencies
@@ -10739,7 +10741,7 @@ function getBlockAttributes(blockTypeOrName, innerHTML) {
   });
   return (0,external_wp_hooks_namespaceObject.applyFilters)('blocks.getBlockAttributes', blockAttributes, blockType, innerHTML, attributes);
 }
-//# sourceMappingURL=get-block-attributes.js.map
+
 ;// CONCATENATED MODULE: ./packages/blocks/build-module/api/parser/fix-custom-classname.js
 /**
  * External dependencies
@@ -10805,7 +10807,7 @@ function fixCustomClassname(blockAttributes, blockType, innerHTML) {
 
   return blockAttributes;
 }
-//# sourceMappingURL=fix-custom-classname.js.map
+
 ;// CONCATENATED MODULE: ./packages/blocks/build-module/api/parser/apply-built-in-validation-fixes.js
 /**
  * Internal dependencies
@@ -10829,7 +10831,7 @@ function applyBuiltInValidationFixes(block, blockType) {
     attributes: updatedBlockAttributes
   };
 }
-//# sourceMappingURL=apply-built-in-validation-fixes.js.map
+
 ;// CONCATENATED MODULE: ./packages/blocks/build-module/api/parser/apply-block-deprecated-versions.js
 /**
  * External dependencies
@@ -10893,13 +10895,13 @@ function applyBlockDeprecatedVersions(block, rawBlock, blockType) {
       attributes: getBlockAttributes(deprecatedBlockType, block.originalContent, parsedAttributes)
     }; // Ignore the deprecation if it produces a block which is not valid.
 
-    let [isValid] = validateBlock(migratedBlock, deprecatedBlockType); // If the migrated block is not valid intiailly, try the built-in fixes.
+    let [isValid] = validateBlock(migratedBlock, deprecatedBlockType); // If the migrated block is not valid initially, try the built-in fixes.
 
     if (!isValid) {
       migratedBlock = applyBuiltInValidationFixes(migratedBlock, deprecatedBlockType);
       [isValid] = validateBlock(migratedBlock, deprecatedBlockType);
     } // An invalid block does not imply incorrect HTML but the fact block
-    // source information could be lost on reserialization.
+    // source information could be lost on re-serialization.
 
 
     if (!isValid) {
@@ -10928,7 +10930,7 @@ function applyBlockDeprecatedVersions(block, rawBlock, blockType) {
 
   return block;
 }
-//# sourceMappingURL=apply-block-deprecated-versions.js.map
+
 ;// CONCATENATED MODULE: ./packages/blocks/build-module/api/parser/index.js
 /**
  * WordPress dependencies
@@ -11058,6 +11060,38 @@ function createMissingBlockType(rawBlock) {
   };
 }
 /**
+ * Validates a block and wraps with validation meta.
+ *
+ * The name here is regrettable but `validateBlock` is already taken.
+ *
+ * @param {WPBlock}                               unvalidatedBlock
+ * @param {import('../registration').WPBlockType} blockType
+ * @return {WPBlock}                              validated block, with auto-fixes if initially invalid
+ */
+
+
+function applyBlockValidation(unvalidatedBlock, blockType) {
+  // Attempt to validate the block.
+  const [isValid] = validateBlock(unvalidatedBlock, blockType);
+
+  if (isValid) {
+    return { ...unvalidatedBlock,
+      isValid,
+      validationIssues: []
+    };
+  } // If the block is invalid, attempt some built-in fixes
+  // like custom classNames handling.
+
+
+  const fixedBlock = applyBuiltInValidationFixes(unvalidatedBlock, blockType); // Attempt to validate the block once again after the built-in fixes.
+
+  const [isFixedValid, validationIssues] = validateBlock(unvalidatedBlock, blockType);
+  return { ...fixedBlock,
+    isValid: isFixedValid,
+    validationIssues
+  };
+}
+/**
  * Given a raw block returned by grammar parsing, returns a fully parsed block.
  *
  * @param {WPRawBlock} rawBlock The raw block object.
@@ -11095,45 +11129,35 @@ function parseRawBlock(rawBlock) {
   const parsedInnerBlocks = normalizedBlock.innerBlocks.map(parseRawBlock) // See https://github.com/WordPress/gutenberg/pull/17164.
   .filter(innerBlock => !!innerBlock); // Get the fully parsed block.
 
-  let parsedBlock = createBlock(normalizedBlock.blockName, getBlockAttributes(blockType, normalizedBlock.innerHTML, normalizedBlock.attrs), parsedInnerBlocks);
-  parsedBlock.originalContent = normalizedBlock.innerHTML; // Attempt to validate the block.
-
-  let [isValid, validationIssues] = validateBlock(parsedBlock, blockType); // If the block is invalid, attempt some built-in fixes
-  // like custom classNames handling.
-
-  if (!isValid) {
-    parsedBlock = applyBuiltInValidationFixes(parsedBlock, blockType); // Attempt to validate the block once again after the built-in fixes.
-
-    [isValid, validationIssues] = validateBlock(parsedBlock, blockType);
-  }
-
-  parsedBlock.isValid = isValid;
-  parsedBlock.validationIssues = validationIssues; // Run the block deprecation and migrations.
+  const parsedBlock = createBlock(normalizedBlock.blockName, getBlockAttributes(blockType, normalizedBlock.innerHTML, normalizedBlock.attrs), parsedInnerBlocks);
+  parsedBlock.originalContent = normalizedBlock.innerHTML;
+  const validatedBlock = applyBlockValidation(parsedBlock, blockType);
+  const {
+    validationIssues
+  } = validatedBlock; // Run the block deprecation and migrations.
   // This is performed on both invalid and valid blocks because
   // migration using the `migrate` functions should run even
   // if the output is deemed valid.
 
-  parsedBlock = applyBlockDeprecatedVersions(parsedBlock, normalizedBlock, blockType);
+  const updatedBlock = applyBlockDeprecatedVersions(validatedBlock, normalizedBlock, blockType);
 
-  if (validationIssues && validationIssues.length > 0) {
-    if (parsedBlock.isValid) {
-      /* eslint-disable no-console */
-      console.groupCollapsed('Updated Block: %s', blockType.name);
-      console.info('Block successfully updated for `%s` (%o).\n\nNew content generated by `save` function:\n\n%s\n\nContent retrieved from post body:\n\n%s', blockType.name, blockType, getSaveContent(blockType, parsedBlock.attributes), parsedBlock.originalContent);
-      console.groupEnd();
-      /* eslint-enable no-console */
-    } else {
-      validationIssues.forEach(_ref => {
-        let {
-          log,
-          args
-        } = _ref;
-        return log(...args);
-      });
-    }
+  if (!validatedBlock.isValid && updatedBlock.isValid) {
+    /* eslint-disable no-console */
+    console.groupCollapsed('Updated Block: %s', blockType.name);
+    console.info('Block successfully updated for `%s` (%o).\n\nNew content generated by `save` function:\n\n%s\n\nContent retrieved from post body:\n\n%s', blockType.name, blockType, getSaveContent(blockType, updatedBlock.attributes), updatedBlock.originalContent);
+    console.groupEnd();
+    /* eslint-enable no-console */
+  } else if (!validatedBlock.isValid && !updatedBlock.isValid) {
+    validationIssues.forEach(_ref => {
+      let {
+        log,
+        args
+      } = _ref;
+      return log(...args);
+    });
   }
 
-  return parsedBlock;
+  return updatedBlock;
 }
 /**
  * Utilizes an optimized token-driven parser based on the Gutenberg grammar spec
@@ -11167,7 +11191,7 @@ function parser_parse(content) {
     return accumulator;
   }, []);
 }
-//# sourceMappingURL=index.js.map
+
 ;// CONCATENATED MODULE: external ["wp","deprecated"]
 var external_wp_deprecated_namespaceObject = window["wp"]["deprecated"];
 var external_wp_deprecated_default = /*#__PURE__*/__webpack_require__.n(external_wp_deprecated_namespaceObject);
@@ -11190,7 +11214,7 @@ function getRawTransforms() {
     };
   });
 }
-//# sourceMappingURL=get-raw-transforms.js.map
+
 ;// CONCATENATED MODULE: ./packages/blocks/build-module/api/raw-handling/html-to-blocks.js
 /**
  * Internal dependencies
@@ -11236,7 +11260,7 @@ function htmlToBlocks(html) {
     return createBlock(blockName, getBlockAttributes(blockName, node.outerHTML));
   });
 }
-//# sourceMappingURL=html-to-blocks.js.map
+
 ;// CONCATENATED MODULE: ./packages/blocks/build-module/api/raw-handling/normalise-blocks.js
 /**
  * WordPress dependencies
@@ -11300,7 +11324,7 @@ function normaliseBlocks(HTML) {
 
   return accu.innerHTML;
 }
-//# sourceMappingURL=normalise-blocks.js.map
+
 ;// CONCATENATED MODULE: ./packages/blocks/build-module/api/raw-handling/special-comment-converter.js
 /**
  * WordPress dependencies
@@ -11378,7 +11402,7 @@ function createNextpage(doc) {
   node.dataset.block = 'core/nextpage';
   return node;
 }
-//# sourceMappingURL=special-comment-converter.js.map
+
 ;// CONCATENATED MODULE: ./packages/blocks/build-module/api/raw-handling/list-reducer.js
 /**
  * WordPress dependencies
@@ -11444,7 +11468,7 @@ function listReducer(node) {
     }
   }
 }
-//# sourceMappingURL=list-reducer.js.map
+
 ;// CONCATENATED MODULE: ./packages/blocks/build-module/api/raw-handling/blockquote-normaliser.js
 /**
  * Internal dependencies
@@ -11457,7 +11481,7 @@ function blockquoteNormaliser(node) {
 
   node.innerHTML = normaliseBlocks(node.innerHTML);
 }
-//# sourceMappingURL=blockquote-normaliser.js.map
+
 ;// CONCATENATED MODULE: ./packages/blocks/build-module/api/raw-handling/figure-content-reducer.js
 /**
  * External dependencies
@@ -11556,7 +11580,7 @@ function figureContentReducer(node, doc, schema) {
     wrapFigureContent(nodeToInsert);
   }
 }
-//# sourceMappingURL=figure-content-reducer.js.map
+
 ;// CONCATENATED MODULE: external ["wp","shortcode"]
 var external_wp_shortcode_namespaceObject = window["wp"]["shortcode"];
 ;// CONCATENATED MODULE: ./packages/blocks/build-module/api/raw-handling/shortcode-converter.js
@@ -11637,7 +11661,7 @@ function segmentHTMLToShortcodeBlock(HTML) {
 }
 
 /* harmony default export */ var shortcode_converter = (segmentHTMLToShortcodeBlock);
-//# sourceMappingURL=shortcode-converter.js.map
+
 ;// CONCATENATED MODULE: ./packages/blocks/build-module/api/raw-handling/utils.js
 /**
  * External dependencies
@@ -11813,7 +11837,7 @@ function getSibling(node, which) {
 
   return getSibling(parentNode, which);
 }
-//# sourceMappingURL=utils.js.map
+
 ;// CONCATENATED MODULE: ./packages/blocks/build-module/api/raw-handling/index.js
 /**
  * External dependencies
@@ -11889,7 +11913,7 @@ function rawHandler(_ref) {
     return htmlToBlocks(piece);
   }));
 }
-//# sourceMappingURL=index.js.map
+
 ;// CONCATENATED MODULE: ./packages/blocks/build-module/api/raw-handling/comment-remover.js
 /**
  * WordPress dependencies
@@ -11907,7 +11931,7 @@ function commentRemover(node) {
     (0,external_wp_dom_namespaceObject.remove)(node);
   }
 }
-//# sourceMappingURL=comment-remover.js.map
+
 ;// CONCATENATED MODULE: ./packages/blocks/build-module/api/raw-handling/is-inline-content.js
 /**
  * External dependencies
@@ -11956,7 +11980,7 @@ function isInlineContent(HTML, contextTag) {
   const nodes = Array.from(doc.body.children);
   return !nodes.some(isDoubleBR) && deepCheck(nodes, contextTag);
 }
-//# sourceMappingURL=is-inline-content.js.map
+
 ;// CONCATENATED MODULE: ./packages/blocks/build-module/api/raw-handling/phrasing-content-reducer.js
 /**
  * External dependencies
@@ -12024,7 +12048,7 @@ function phrasingContentReducer(node, doc) {
     }
   }
 }
-//# sourceMappingURL=phrasing-content-reducer.js.map
+
 ;// CONCATENATED MODULE: ./packages/blocks/build-module/api/raw-handling/head-remover.js
 function headRemover(node) {
   if (node.nodeName !== 'SCRIPT' && node.nodeName !== 'NOSCRIPT' && node.nodeName !== 'TEMPLATE' && node.nodeName !== 'STYLE') {
@@ -12033,7 +12057,7 @@ function headRemover(node) {
 
   node.parentNode.removeChild(node);
 }
-//# sourceMappingURL=head-remover.js.map
+
 ;// CONCATENATED MODULE: ./packages/blocks/build-module/api/raw-handling/ms-list-converter.js
 /**
  * Browser dependencies
@@ -12114,7 +12138,7 @@ function msListConverter(node, doc) {
 
   node.parentNode.removeChild(node);
 }
-//# sourceMappingURL=ms-list-converter.js.map
+
 ;// CONCATENATED MODULE: external ["wp","blob"]
 var external_wp_blob_namespaceObject = window["wp"]["blob"];
 ;// CONCATENATED MODULE: ./packages/blocks/build-module/api/raw-handling/image-corrector.js
@@ -12176,9 +12200,22 @@ function imageCorrector(node) {
     node.parentNode.removeChild(node);
   }
 }
-//# sourceMappingURL=image-corrector.js.map
+
+;// CONCATENATED MODULE: ./packages/blocks/build-module/api/raw-handling/div-normaliser.js
+/**
+ * Internal dependencies
+ */
+
+function divNormaliser(node) {
+  if (node.nodeName !== 'DIV') {
+    return;
+  }
+
+  node.innerHTML = normaliseBlocks(node.innerHTML);
+}
+
 // EXTERNAL MODULE: ./node_modules/showdown/dist/showdown.js
-var showdown = __webpack_require__(3787);
+var showdown = __webpack_require__(7308);
 var showdown_default = /*#__PURE__*/__webpack_require__.n(showdown);
 ;// CONCATENATED MODULE: ./packages/blocks/build-module/api/raw-handling/markdown-converter.js
 /**
@@ -12221,7 +12258,7 @@ function slackMarkdownVariantCorrector(text) {
 function markdownConverter(text) {
   return converter.makeHtml(slackMarkdownVariantCorrector(text));
 }
-//# sourceMappingURL=markdown-converter.js.map
+
 ;// CONCATENATED MODULE: ./packages/blocks/build-module/api/raw-handling/iframe-remover.js
 /**
  * Removes iframes.
@@ -12236,7 +12273,7 @@ function iframeRemover(node) {
     node.parentNode.replaceChild(text, node);
   }
 }
-//# sourceMappingURL=iframe-remover.js.map
+
 ;// CONCATENATED MODULE: ./packages/blocks/build-module/api/raw-handling/google-docs-uid-remover.js
 /**
  * WordPress dependencies
@@ -12249,7 +12286,7 @@ function googleDocsUIdRemover(node) {
 
   (0,external_wp_dom_namespaceObject.unwrap)(node);
 }
-//# sourceMappingURL=google-docs-uid-remover.js.map
+
 ;// CONCATENATED MODULE: ./packages/blocks/build-module/api/raw-handling/html-formatting-remover.js
 /**
  * Internal dependencies
@@ -12321,7 +12358,7 @@ function htmlFormattingRemover(node) {
     node.data = newData;
   }
 }
-//# sourceMappingURL=html-formatting-remover.js.map
+
 ;// CONCATENATED MODULE: ./packages/blocks/build-module/api/raw-handling/br-remover.js
 /**
  * Internal dependencies
@@ -12344,7 +12381,7 @@ function brRemover(node) {
 
   node.parentNode.removeChild(node);
 }
-//# sourceMappingURL=br-remover.js.map
+
 ;// CONCATENATED MODULE: ./packages/blocks/build-module/api/raw-handling/empty-paragraph-remover.js
 /**
  * Removes empty paragraph elements.
@@ -12362,7 +12399,7 @@ function emptyParagraphRemover(node) {
 
   node.parentNode.removeChild(node);
 }
-//# sourceMappingURL=empty-paragraph-remover.js.map
+
 ;// CONCATENATED MODULE: ./packages/blocks/build-module/api/raw-handling/paste-handler.js
 /**
  * External dependencies
@@ -12376,6 +12413,7 @@ function emptyParagraphRemover(node) {
 /**
  * Internal dependencies
  */
+
 
 
 
@@ -12525,7 +12563,7 @@ function pasteHandler(_ref) {
       return piece;
     }
 
-    const filters = [googleDocsUIdRemover, msListConverter, headRemover, listReducer, imageCorrector, phrasingContentReducer, specialCommentConverter, commentRemover, iframeRemover, figureContentReducer, blockquoteNormaliser];
+    const filters = [googleDocsUIdRemover, msListConverter, headRemover, listReducer, imageCorrector, phrasingContentReducer, specialCommentConverter, commentRemover, iframeRemover, figureContentReducer, blockquoteNormaliser, divNormaliser];
     const schema = { ...blockContentSchema,
       // Keep top-level phrasing content, normalised by `normaliseBlocks`.
       ...phrasingContentSchema
@@ -12552,7 +12590,7 @@ function pasteHandler(_ref) {
 
   return blocks;
 }
-//# sourceMappingURL=paste-handler.js.map
+
 ;// CONCATENATED MODULE: ./packages/blocks/build-module/api/categories.js
 /**
  * WordPress dependencies
@@ -12594,7 +12632,7 @@ function categories_setCategories(categories) {
 function categories_updateCategory(slug, category) {
   (0,external_wp_data_namespaceObject.dispatch)(store).updateCategory(slug, category);
 }
-//# sourceMappingURL=categories.js.map
+
 ;// CONCATENATED MODULE: ./packages/blocks/build-module/api/templates.js
 /**
  * External dependencies
@@ -12696,11 +12734,22 @@ function synchronizeBlocksWithTemplate() {
     };
 
     const normalizedAttributes = normalizeAttributes((0,external_lodash_namespaceObject.get)(blockType, ['attributes'], {}), attributes);
-    const [blockName, blockAttributes] = convertLegacyBlockNameAndAttributes(name, normalizedAttributes);
+    let [blockName, blockAttributes] = convertLegacyBlockNameAndAttributes(name, normalizedAttributes); // If a Block is undefined at this point, use the core/missing block as
+    // a placeholder for a better user experience.
+
+    if (undefined === registration_getBlockType(blockName)) {
+      blockAttributes = {
+        originalName: name,
+        originalContent: '',
+        originalUndelimitedContent: ''
+      };
+      blockName = 'core/missing';
+    }
+
     return createBlock(blockName, blockAttributes, synchronizeBlocksWithTemplate([], innerBlocksTemplate));
   });
 }
-//# sourceMappingURL=templates.js.map
+
 ;// CONCATENATED MODULE: ./packages/blocks/build-module/api/index.js
 // The blocktype is the most important concept within the block API. It defines
 // all aspects of the block configuration and its interfaces, including `edit`
@@ -12791,7 +12840,7 @@ function synchronizeBlocksWithTemplate() {
 
 
 
-//# sourceMappingURL=index.js.map
+
 ;// CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/extends.js
 function _extends() {
   _extends = Object.assign || function (target) {
@@ -12885,7 +12934,7 @@ const withBlockContentContext = (0,external_wp_compose_namespaceObject.createHig
   })));
 }, 'withBlockContentContext');
 /* harmony default export */ var block_content_provider = ((/* unused pure expression or super */ null && (BlockContentProvider)));
-//# sourceMappingURL=index.js.map
+
 ;// CONCATENATED MODULE: ./packages/blocks/build-module/index.js
 // A "block" is the abstract term used to describe units of markup that,
 // when composed together, form the content or layout of a page.
@@ -12899,7 +12948,7 @@ const withBlockContentContext = (0,external_wp_compose_namespaceObject.createHig
 
 
 
-//# sourceMappingURL=index.js.map
+
 }();
 (window.wp = window.wp || {}).blocks = __webpack_exports__;
 /******/ })()

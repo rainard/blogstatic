@@ -32,10 +32,11 @@ if(isset($resumo_fn_option['footer_copyright__switcher']) && $resumo_fn_option['
 		$linkS = '<a class="fn__link" href="https://frenify.com/" target="_blank">';
 		$linkE = '</a>';
 		$br = '<br />';
-		$copyright = sprintf( esc_html__( 'Copyright &copy; 2021. All rights reserved. %1$s Designed &amp; Developed by %2$sFrenify%3$s', 'resumo' ), $br,$linkS, $linkE );
+		$copyright = sprintf( esc_html__( 'Copyright &copy; 2022. All rights reserved. %1$s Designed &amp; Developed by %2$sFrenify%3$s', 'resumo' ), $br,$linkS, $linkE );
 	}
 }
 if($copyright != ''){
+	$copyright = do_shortcode( shortcode_unautop( $copyright ) );
 	$copyright = '<div class="desc"><p>'.$copyright.'</p></div>';
 }
 ?>

@@ -27,6 +27,7 @@ get_header(); ?>
     </div>
 </section>
 
+ 
 <section class="section" id="content">
     <div class="container">
         <div class="columns is-centered">
@@ -54,6 +55,5 @@ get_header(); ?>
         </div>
     </div>
 </section>
-
 
 <?php get_footer(); ?>

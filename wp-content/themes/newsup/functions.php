@@ -17,7 +17,7 @@
 	$newsup_theme_start = wp_get_theme();
 	if (( 'Newsup' == $newsup_theme_start->name) || ( 'Newsberg' == $newsup_theme_start->name) || ( 'Newsbulk' == $newsup_theme_start->name) || 
 		( 'Newslay' == $newsup_theme_start->name) || ( 'Foodup' == $newsup_theme_start->name) || ( 'News Live' == $newsup_theme_start->name) || 
-		( 'Mag Dark' == $newsup_theme_start->name) || ( 'News Talk' == $newsup_theme_start->name) || ( 'News Way' == $newsup_theme_start->name) || ( 'News Bit' == $newsup_theme_start->name))  {
+		( 'Mag Dark' == $newsup_theme_start->name) || ( 'News Talk' == $newsup_theme_start->name) || ( 'News Way' == $newsup_theme_start->name) || ( 'News Bit' == $newsup_theme_start->name) || ( 'News Maz' == $newsup_theme_start->name))  {
 	if ( is_admin() ) {
 		require ($newsup_theme_path . '/admin/getting-started.php');
 	}
@@ -249,7 +249,7 @@ add_editor_style( array( 'css/editor-style.css') );
 add_filter('wp_nav_menu_items', 'newsup_add_home_link', 1, 2);
 function newsup_add_home_link($items, $args){
     if( $args->theme_location == 'primary' ){
-		$item = '<li class="active home"><a class="homebtn" href="'. esc_url( home_url() ) .'">' . "<span class='fa fa-home'></span>" . '</a></li>';
+		$item = '<li class="active home"><a class="homebtn" href="'. esc_url( home_url() ) .'">' . "<span class='fas fa-home'></span>" . '</a></li>';
         $items = $item . $items;
     }
     return $items;

@@ -1,0 +1,482 @@
+*{
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	text-decoration: none;
+}
+@font-face {
+	font-family: "socialshare";
+	src: url("../fonts/iconfont.eot");
+	src: url("../fonts/iconfont.eot") format("embedded-opentype"), url("../fonts/iconfont.woff") format("woff"), url("../fonts/iconfont.ttf") format("truetype"), url("../fonts/iconfont.svg#iconfont") format("svg")
+}
+.bbxsocial-share {
+	font-family: "socialshare" !important;
+	font-size: 16px;
+	font-style: normal;
+	-webkit-font-smoothing: antialiased;
+	-webkit-text-stroke-width: 0.2px;
+	-moz-osx-font-smoothing: grayscale
+}
+
+.bbxsocial-share * {
+	font-family: "socialshare" !important
+}
+
+.websitebox_box1-1 .bbxsocial-share .icon-tencent:before {
+	content: "\f07a"
+}
+
+.websitebox_box1-1 .bbxsocial-share .icon-qq:before {
+	content: "\f11a"
+}
+
+.websitebox_box1-1 .bbxsocial-share .icon-weibo:before {
+	content: "\f12a"
+}
+
+.websitebox_box1-1 .bbxsocial-share .icon-wechat:before {
+	content: "\f09a"
+}
+
+.websitebox_box1-1 .bbxsocial-share .icon-douban:before {
+	content: "\f10a"
+}
+
+.websitebox_box1-1 .bbxsocial-share .icon-heart:before {
+	content: "\f20a"
+}
+
+.websitebox_box1-1 .bbxsocial-share .icon-like:before {
+	content: "\f00a"
+}
+
+.websitebox_box1-1 .bbxsocial-share .icon-qzone:before {
+	content: "\f08a"
+}
+
+.websitebox_box1-1 .bbxsocial-share .icon-linkedin:before {
+	content: "\f01a"
+}
+
+.websitebox_box1-1 .bbxsocial-share .icon-diandian:before {
+	content: "\f05a"
+}
+
+.websitebox_box1-1 .bbxsocial-share .icon-facebook:before {
+	content: "\f03a"
+}
+
+.websitebox_box1-1 .bbxsocial-share .icon-google:before {
+	content: "\f04a"
+}
+
+.websitebox_box1-1 .bbxsocial-share .icon-twitter:before {
+	content: "\f06a"
+}
+
+.websitebox_box1-1 .bbxsocial-share a {
+	position: relative;
+	text-decoration: none;
+	margin: 4px;
+	display: inline-block;
+	outline: none
+}
+
+.websitebox_box1-1 .bbxsocial-share .bbxsocial-share-icon {
+	position: relative;
+	display: inline-block;
+	width: 32px;
+	height: 32px;
+	font-size: 20px;
+	border-radius: 50%;
+	line-height: 32px;
+	border: 1px solid #666;
+	color: #666;
+	text-align: center;
+	vertical-align: middle;
+	transition: background 0.6s ease-out 0s
+}
+
+.websitebox_box1-1 .bbxsocial-share .bbxsocial-share-icon:hover {
+	background: #666;
+	color: #fff
+}
+
+.websitebox_box1-1 .bbxsocial-share .icon-weibo {
+	color: #ff763b;
+	border-color: #ff763b
+}
+
+.websitebox_box1-1 .bbxsocial-share .icon-weibo:hover {
+	background: #ff763b
+}
+
+.websitebox_box1-1 .bbxsocial-share .icon-tencent {
+	color: #56b6e7;
+	border-color: #56b6e7
+}
+
+.websitebox_box1-1 .bbxsocial-share .icon-tencent:hover {
+	background: #56b6e7
+}
+
+.websitebox_box1-1 .bbxsocial-share .icon-qq {
+	color: #56b6e7;
+	border-color: #56b6e7
+}
+
+.websitebox_box1-1 .bbxsocial-share .icon-qq:hover {
+	background: #56b6e7
+}
+
+.websitebox_box1-1 .bbxsocial-share .icon-qzone {
+	color: #FDBE3D;
+	border-color: #FDBE3D
+}
+
+.websitebox_box1-1 .bbxsocial-share .icon-qzone:hover {
+	background: #FDBE3D
+}
+
+.websitebox_box1-1 .bbxsocial-share .icon-douban {
+	color: #33b045;
+	border-color: #33b045
+}
+
+.websitebox_box1-1 .bbxsocial-share .icon-douban:hover {
+	background: #33b045
+}
+
+.websitebox_box1-1 .bbxsocial-share .icon-linkedin {
+	color: #0077B5;
+	border-color: #0077B5
+}
+
+.websitebox_box1-1 .bbxsocial-share .icon-linkedin:hover {
+	background: #0077B5
+}
+
+.websitebox_box1-1 .bbxsocial-share .icon-facebook {
+	color: #44619D;
+	border-color: #44619D
+}
+
+.websitebox_box1-1 .bbxsocial-share .icon-facebook:hover {
+	background: #44619D
+}
+
+.websitebox_box1-1 .bbxsocial-share .icon-google {
+	color: #db4437;
+	border-color: #db4437
+}
+
+.websitebox_box1-1 .bbxsocial-share .icon-google:hover {
+	background: #db4437
+}
+
+.websitebox_box1-1 .bbxsocial-share .icon-twitter {
+	color: #55acee;
+	border-color: #55acee
+}
+
+.websitebox_box1-1 .bbxsocial-share .icon-twitter:hover {
+	background: #55acee
+}
+
+.websitebox_box1-1 .bbxsocial-share .icon-diandian {
+	color: #307DCA;
+	border-color: #307DCA
+}
+
+.websitebox_box1-1 .bbxsocial-share .icon-diandian:hover {
+	background: #307DCA
+}
+
+.websitebox_box1-1 .bbxsocial-share .icon-wechat {
+	position: relative;
+	color: #7bc549;
+	border-color: #7bc549
+}
+
+.websitebox_box1-1 .bbxsocial-share .icon-wechat:hover {
+	background: #7bc549
+}
+
+.websitebox_box1-1 .bbxsocial-share .icon-wechat .wechat-qrcode {
+	display: none;
+	border: 1px solid #eee;
+	position: absolute;
+	z-index: 9;
+	top: -205px;
+	left: -84px;
+	width: 200px;
+	height: 192px;
+	color: #666;
+	font-size: 12px;
+	text-align: center;
+	background-color: #fff;
+	box-shadow: 0 2px 10px #aaa;
+	transition: all 200ms;
+	-webkit-tansition: all 350ms;
+	-moz-transition: all 350ms
+}
+.websitebox_box1-1 .bbxsocial-share .icon-wechat .wechat-qrcode.bottom {
+	top: 40px;
+	left: -84px
+}
+
+.websitebox_box1-1 .bbxsocial-share .icon-wechat .wechat-qrcode.bottom:after {
+	display: none
+}
+
+.websitebox_box1-1 .bbxsocial-share .icon-wechat .wechat-qrcode h4 {
+	font-weight: normal;
+	height: 26px;
+	line-height: 26px;
+	font-size: 12px;
+	background-color: #f3f3f3;
+	margin: 0!important;
+	padding: 0;
+	color: #777
+}
+
+.websitebox_box1-1 .bbxsocial-share .icon-wechat .wechat-qrcode .qrcode {
+	width: 105px;
+	margin: 10px auto
+}
+
+.websitebox_box1-1 .bbxsocial-share .icon-wechat .wechat-qrcode .qrcode table {
+	margin: 0 !important
+}
+
+.websitebox_box1-1 .bbxsocial-share .icon-wechat .wechat-qrcode .help p {
+	font-weight: normal;
+	line-height: 16px;
+	padding: 0;
+	font-size: 12px;
+	margin: 0
+}
+
+.websitebox_box1-1 .bbxsocial-share .icon-wechat .wechat-qrcode:after {
+	content: '';
+	position: absolute;
+	left: 50%;
+	margin-left: -6px;
+	bottom: -13px;
+	width: 0;
+	height: 0;
+	border-width: 8px 6px 6px 6px;
+	border-style: solid;
+	border-color: #fff transparent transparent transparent
+}
+
+.websitebox_box1-1 .bbxsocial-share .icon-wechat:hover .wechat-qrcode {
+	display: block
+}
+.websitebox_wy{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.websitebox_wy ul li:before {
+    display: none;
+    content: " ";
+}
+body .websitebox_wy li{
+	width: 70px!important;
+	height:36px!important;
+	/*border-radius:50%;*/
+	border:1px solid #0066cc;
+	color: #0066cc;
+	float: left;
+	text-align: center;
+	line-height:36px;
+	margin:20px 5px;
+	font-size:12px;
+/* 	font-weight:600; */
+    cursor: pointer;
+    list-style:none ;
+    padding: 0;
+}
+.websitebox_wy li:hover{
+	background-color: #0066CC;
+	color:#fff;
+	transition: all 0.3s;
+	
+}
+.websitebox_box_shy,.websitebox_box-1,.websitebox_box-2{
+	position:fixed;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	background:rgba(0,0,0,0.6);
+	display: none;
+	z-index: 99999;
+	max-width: 100%!important;
+    height: 100%;
+    color: #111;
+}
+.websitebox_box1,.websitebox_box1-1,.websitebox_box1-2{
+	width:350px;
+	height:auto;
+	background-color:#fff;
+	position:fixed;
+	text-align: center;
+	top: 50%;
+	left:50%;
+    transform: translate(-50%,-50%);
+	border-radius:5px;
+	/*box-shadow: 10px 10px 10px;*/
+	box-shadow: 0px 0px 20px;
+}
+.websitebox_box1-1,.websitebox_box1-2 {
+    padding: 10px;
+}
+.websitebox_box1-1 {
+    margin-top: 0!important;
+}
+.websitebox_box1 span,.websitebox_box1-1 span,.websitebox_box1-2 span{
+	float: right;
+	cursor: pointer;
+}
+.websitebox_box1 h3,.websitebox_box1-1 h3,.websitebox_box1-2 h3{
+	display: inline-block;
+	width:100%;
+	line-height:40px;
+	border-bottom:1px solid #ccc;
+	font-size:18px;
+}
+.websitebox_box2,.websitebox_box2-1,.websitebox_box2-2{
+	font-size:14px;
+}
+.websitebox_wenben{
+	width:60%;
+	height:100px;
+}
+
+.websitebox_box2img img{
+	width:100%;
+	display: none;
+	box-sizing: border-box;
+	padding:5px;
+	border:1px solid #ccc;
+	margin:10px 0px;
+}
+body .websitebox_box2ul{
+	width:100%;
+	overflow: hidden;
+	margin: 0;
+}
+.websitebox_box2ul {
+	width:80%;
+	margin:0 auto;
+}
+body .websitebox_box2-2 .websitebox_box2ul li{
+	float: left;
+	padding:3px 12px;
+	border:1px solid #0066CC;
+	border-radius:3px;
+	margin-right:5px;
+	margin-bottom: 0;
+	margin-left: 0;
+	margin-top: 0;
+	margin: 0 5px 0 0;
+    list-style: none;
+    position: initial;
+}
+body .websitebox_box2ul li:before {
+    display: none;
+    content: " ";
+}
+.websitebox_box2ul1{
+	background-color: #0066CC;
+	color:#fff;
+}
+.websitebox_wenzitishi {
+    text-align: center;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translateX(-50%);
+}
+.websitebox_wzt_chahao {
+    position: absolute;
+    overflow: hidden;
+    bottom: -52px;
+    left: 50%;
+    width: 32px;
+    height: 32px;
+    padding: 5px;
+    background-color: #fff;
+    border-radius: 50%;
+    transform: translate(-50%);
+}
+.websitebox_wzt_box1-1chahao {
+    overflow: hidden;
+    padding: 5px 0;
+}
+.websitebox_wzt_box1-1chahao>div {
+    float: left;
+}
+.websitebox_wzt_box1-1chahao>img {
+    float: right;
+    width: 25px;
+}
+.websitebox_wzt_box1-2chahao {
+    overflow: hidden;
+    padding: 5px 0;
+}
+.websitebox_wzt_box1-2chahao>div {
+    float: left;
+}
+.websitebox_wzt_box1-2chahao>img {
+    float: right;
+    width: 25px;
+    margin: 0;
+}
+.websitebox_box1-1 ,
+.websitebox_box1-2 {
+    padding: 10px 8px;
+}
+.websitebox_box1 {
+    min-height: 340px;
+    width: 500px;
+}
+.websitebox_box1 img {
+    height: auto;
+    vertical-align: top;
+}
+.websitebox_haibaoxuanze {
+    display: none;
+    margin-top: 4px;
+    margin-bottom: 12px;
+}
+.websitebox_haibaoxuanze a {
+    padding: 5px 10px;
+    margin-right: 10px;
+    color: #0066cc;
+    font-size: 13px;
+    display: inline-block;
+    border: 1px solid #0066cc;
+}
+.websitebox_box2-1 >div > div {
+	width: 30px;
+	height: 30px;
+	float: left;
+	cursor: pointer;
+	border-radius: 4px;
+	background-size: contain;
+	margin: 0 10px;
+}
+#share-qrcode { background-image: url(../images/wechat_fx.png); }
+#share-douban { background-image: url(../images/db_fx.png); }
+#share-qzone { background-image: url(../images/qzone_fx.png); }
+#share-sina { background-image: url(../images/sina_fx.png); }
+#share-qq { background-image: url(../images/qq_fx.png); }
+@media screen and (max-width:750px){
+	.websitebox_box1,.websitebox_box1-1,.websitebox_box1-2{
+		width:80%;
+		left:50%;
+	}
+}

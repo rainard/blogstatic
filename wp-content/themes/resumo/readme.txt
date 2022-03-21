@@ -3,7 +3,7 @@ Contributors: frenify
 Requires at least: 5.0
 Tested up to: 5.8
 Requires PHP: 5.6
-Stable tag: 1.0.0
+Stable tag: 1.0.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Tags: wide-blocks, block-styles, custom-logo, one-column, two-columns, grid-layout, sticky-post, custom-background, custom-colors, custom-header, custom-menu, featured-images, flexible-header, threaded-comments, theme-options, left-sidebar, right-sidebar, full-width-template, editor-style, rtl-language-support, blog
@@ -19,9 +19,13 @@ Resumo - Personal WordPress Theme is for many purposes. It’s a creative, minim
 2. Click Upload Theme and Choose File, then select the theme's .zip file. Click Install Now.
 3. Click Activate to use your new theme right away.
 
+== How to update Resumo Core ==
+
+If you are using free version of the theme, just remove Resumo Core from your plugins, download and install new core plugin from our official website (https://frenify.com/project/resumo/). If you are using PRO version of the theme, it can be updated in one click
+
 == Copyright ==
 
-Resumo WordPress Theme, Copyright 2021 frenify
+Resumo WordPress Theme, Copyright 2022 frenify
 Resumo is distributed under the terms of the GNU GPL.
 
 This program is free software: you can redistribute it and/or modify
@@ -73,5 +77,15 @@ Source: https://mystock.themeisle.com/photo/path/
 
 == Changelog ==
 
-= 1.0 =
+= 1.0.2 =
+* Now contact link (in the right bar) can be changed and disabled in Theme Options -> Desktop Navigation
+* Now footer copyright can be changed in Theme Options -> Footer
+* Added [current_year] shortcode
+* Fixed some issues
+* Please don't forget to update Resumo Core (it is important). Read How to update Resumo Core section about how to do it.
+
+= 1.0.1 =
+* Fixed some issues
+
+= 1.0.0 =
 * INITIAL

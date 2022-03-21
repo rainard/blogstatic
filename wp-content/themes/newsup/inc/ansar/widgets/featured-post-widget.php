@@ -15,6 +15,7 @@
 			array(
 				'widget_title' => '',
 				'category' => '',
+				'style' => '',
 				'type' => 1,
 			)
 		);
@@ -51,7 +52,7 @@
 	function update($new_instance, $old_instance) {
 		$instance = $old_instance;
 		$instance['category'] = absint($new_instance['category']);
-		$instance['style'] = absint($new_instance['style']);
+		$instance['style'] = isset($new_instance['style']);
 		$instance['widget_title'] = sanitize_text_field($new_instance['widget_title']);
 		$instance['type'] = ( isset($new_instance['type']) && $new_instance['type'] > 0 && $new_instance['type'] < 3 ) ? (int) $new_instance['type'] : 1;
 		return $instance;

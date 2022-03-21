@@ -1,0 +1,159 @@
+/*! ========= INFORMATION ============================
+	- document:  Side Menu Pro
+	- author:    Wow-Company
+	- url:       https://wow-estore.com/item/side-menu-pro/
+======================================================
+*/
+/*--------------------------------------------------------------
+		Reset
+--------------------------------------------------------------*/
+.side-menu, .side-menu * {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: none;
+  text-decoration: none;
+  background: none;
+  line-height: 1;
+}
+
+/*--------------------------------------------------------------
+		Main Style
+--------------------------------------------------------------*/
+.side-menu {
+  position: fixed;
+  z-index: 999;
+}
+.side-menu.-list-show .sm-list {
+  position: relative;
+  -webkit-transition: 0.4s all linear;
+  -o-transition: 0.4s all linear;
+  transition: 0.4s all linear;
+}
+.side-menu.-list-show .sm-list .sm-item {
+  position: inherit;
+}
+.side-menu .sm-item {
+  position: relative;
+  -webkit-transition: 0.4s all linear;
+  -o-transition: 0.4s all linear;
+  transition: 0.4s all linear;
+}
+.side-menu .sm-item a {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+.side-menu .sm-icon {
+  text-align: center;
+}
+
+.side-menu .sm-label {
+  padding: 0 5px;
+}
+
+.side-menu.-shadow .sm-item a {
+  -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+          box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+}
+.side-menu.-shadow.-list-show .sm-list {
+  -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+          box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+}
+.side-menu.-shadow.-list-show .sm-list .sm-item a {
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+/*--------------------------------------------------------------
+		Position
+--------------------------------------------------------------*/
+.side-menu.--center {
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+      -ms-transform: translateY(-50%);
+          transform: translateY(-50%);
+}
+.side-menu.--top {
+  top: 0;
+}
+.side-menu.--bottom {
+  bottom: 0;
+}
+.side-menu.-right {
+  right: 0;
+}
+.side-menu.-right.-list-show .sm-list .sm-item {
+  right: auto !important;
+}
+
+.side-menu.-right.-list-show .sm-list.-visible,
+.side-menu.-right .sm-item.-visible {
+  right: auto !important;
+}
+.side-menu.-right.-list-show .sm-list:hover,
+.side-menu.-right .sm-item:hover {
+  right: 0 !important;
+}
+.side-menu.-left {
+  left: 0;
+}
+.side-menu.-left.-list-show .sm-list .sm-item {
+  left: auto !important;
+}
+
+.side-menu.-left .sm-list a {
+  -webkit-box-pack: end;
+  -webkit-justify-content: flex-end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+}
+.side-menu.-left .sm-label {
+  -webkit-box-ordinal-group: 0;
+  -webkit-order: -1;
+      -ms-flex-order: -1;
+          order: -1;
+}
+
+.side-menu.-left.-list-show .sm-list.-visible,
+.side-menu.-left .sm-item.-visible {
+  left: auto !important;
+}
+.side-menu.-left.-list-show .sm-list:hover,
+.side-menu.-left .sm-item:hover {
+  left: 0 !important;
+}
+
+.side-menu .sm-list .sm-item a {
+  background: #00494f;
+}
+
+.side-menu .sm-list .sm-item a .sm-icon {
+  color: #ffffff;
+}
+
+.side-menu .sm-list .sm-item a .sm-label {
+  color: #ffffff;
+}
+
+.side-menu .sm-list .sm-item:hover a {
+  background: #80b719 ;
+}
+
+@media print {
+  .side-menu {
+    display: none;
+  }
+}
+
+.side-menu .sm-list .sm-label {
+  width: 0;
+  opacity: 0;
+}
+
+.side-menu .sm-list:hover .sm-label {
+  width: auto;
+  opacity: 1;
+}

@@ -18,6 +18,7 @@
 		}
 	}
 	if($copyright != ''){
+		$copyright = do_shortcode( shortcode_unautop( $copyright ) );
 		$copyright = '<div class="desc"><p>'.$copyright.'</p></div>';
 	}
 ?>

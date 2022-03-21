@@ -6,7 +6,7 @@ Description: Resumo – Personal WordPress Theme is for many purpose.
 Text Domain: resumo
 Author: frenify
 Author URI: https://frenify.com/
-Version: 1.0.1
+Version: 1.0.2
 Tested up to: 5.8
 Requires at least: 4.8
 Requires PHP: 5.6
@@ -1676,6 +1676,15 @@ body.open_search_popup .resumo_fn_searchpopup{
 	line-height: 30px;
 	margin: 0;
 	padding: 0;
+}
+#footer .footer_content a{
+	text-decoration: none;
+	border-bottom: 1px solid var(--bc);
+	color: var(--hc);
+	font-weight: 500;
+}
+#footer .footer_content a:hover{
+	border-bottom-color: var(--hc);
 }
 #footer .footer_content{
 	padding: 62px 0 61px;

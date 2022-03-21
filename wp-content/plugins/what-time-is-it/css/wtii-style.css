@@ -1,0 +1,93 @@
+/**
+* What Time Is It
+* Stylesheet
+*/
+
+/* Global style */
+.wtii-date {
+	color: inherit;
+	text-align: center;
+}
+
+/* Analog clock */
+.wtii-clock-circle {
+	width: 180px;
+	height: 180px;
+	margin: 0 auto 2em;
+	position: relative;
+	border: 8px solid;
+	border-radius: 50%;
+	-webkit-box-shadow: 0 1px 8px rgba(34, 34, 34, 0.3),inset 0 1px 8px rgba(34, 34, 34, 0.3);
+	box-shadow: 0 1px 8px rgba(34, 34, 34, 0.3),inset 0 1px 8px rgba(34, 34, 34, 0.3);
+}
+.wtii-clock-face {
+	width: 100%;
+	height: 100%;
+}
+.wtii-clock-hour{
+	width:0;
+	height:0;
+	position:absolute;
+	top:50%;
+	left:50%;
+	margin:-4px 0 -4px -25%;
+	padding:4px 0 4px 25%;
+	-webkit-transform-origin:100% 50%;
+	-ms-transform-origin:100% 50%;
+	transform-origin:100% 50%;
+	border-radius:4px 0 0 4px;
+}
+.wtii-clock-minute{
+	width:0;
+	height:0;
+	position:absolute;
+	top:50%;
+	left:50%;
+	margin:-40% -3px 0;
+	padding:40% 3px 0;
+	-webkit-transform-origin:50% 100%;
+	-ms-transform-origin:50% 100%;
+	transform-origin:50% 100%;
+	border-radius:3px 3px 0 0;
+}
+.wtii-clock-second{
+	width:0;
+	height:0;
+	position:absolute;
+	top:50%;
+	left:50%;
+	margin:-40% -1px 0 0;
+	padding:40% 1px 0;
+	-webkit-transform-origin:50% 100%;
+	-ms-transform-origin:50% 100%;
+	transform-origin:50% 100%;
+}
+.wtii-clock-face:after {
+	position:absolute;
+	top:50%;
+	left:50%;
+	width:12px;
+	height:12px;
+	margin:-6px 0 0 -6px;
+	border-radius:6px;
+	content:"";
+	display:block;
+}
+
+/* Digital clock */
+.wtii-clock-digital {
+	margin: 0 auto;
+}
+.wtii-clock-digital ul {
+	margin: 0 auto;
+	padding: 0px;
+	list-style: none;
+	text-align: center;
+}
+.wtii-clock-digital ul li {
+	display: inline;
+	font-size: 3em;
+	text-align: center;
+	-webkit-text-shadow: 0px 1px 5px rgba(34, 34, 34, 0.3);
+	text-shadow: 0px 1px 5px rgba(34, 34, 34, 0.3);
+}

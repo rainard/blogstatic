@@ -249,7 +249,7 @@ add_action( 'after_setup_theme', 'twentysixteen_content_width', 0 );
 function twentysixteen_resource_hints( $urls, $relation_type ) {
 	if ( wp_style_is( 'twentysixteen-fonts', 'queue' ) && 'preconnect' === $relation_type ) {
 		$urls[] = array(
-			'href' => 'https://fonts-gstatic.lug.ustc.edu.cn',
+			'href' => 'https://fonts.gstatic.com',
 			'crossorigin',
 		);
 	}
@@ -350,7 +350,7 @@ if ( ! function_exists( 'twentysixteen_fonts_url' ) ) :
 					'subset'  => urlencode( $subsets ),
 					'display' => urlencode( 'fallback' ),
 				),
-				'https://fonts.lug.ustc.edu.cn/css'
+				'https://fonts.googleapis.com/css'
 			);
 		}
 
@@ -559,10 +559,12 @@ add_filter( 'wp_calculate_image_sizes', 'twentysixteen_content_image_sizes_attr'
  *
  * @since Twenty Sixteen 1.0
  *
- * @param array $attr Attributes for the image markup.
- * @param int   $attachment Image attachment ID.
- * @param array $size Registered image size or flat array of height and width dimensions.
- * @return array The filtered attributes for the image markup.
+ * @param string[]     $attr       Array of attribute values for the image markup, keyed by attribute name.
+ *                                 See wp_get_attachment_image().
+ * @param WP_Post      $attachment Image attachment post.
+ * @param string|int[] $size       Requested image size. Can be any registered image size name, or
+ *                                 an array of width and height values in pixels (in that order).
+ * @return string[] The filtered attributes for the image markup.
  */
 function twentysixteen_post_thumbnail_sizes_attr( $attr, $attachment, $size ) {
 	if ( 'post-thumbnail' === $size ) {
@@ -594,23 +596,3 @@ function twentysixteen_widget_tag_cloud_args( $args ) {
 	return $args;
 }
 add_filter( 'widget_tag_cloud_args', 'twentysixteen_widget_tag_cloud_args' );
-add_filter('get_avatar', function ($avatar) {
-    return str_replace([
-        'www.gravatar.com/avatar/',
-        '0.gravatar.com/avatar/',
-        '1.gravatar.com/avatar/',
-        '2.gravatar.com/avatar/',
-        'secure.gravatar.com/avatar/',
-        'cn.gravatar.com/avatar/'
-    ], 'sdn.geekzu.org/avatar/', $avatar);
-});
-
-
-/** ------------ my code -------------**/
-// wordpress上传文件重命名
-function git_upload_filter($file) {
-	$time = date("YmdHis");
-	$file['name'] = $file['name'].".".$time . "" . mt_rand(1, 100) . "." . pathinfo($file['name'], PATHINFO_EXTENSION);
-	return $file;
-}
-add_filter('wp_handle_upload_prefilter', 'git_upload_filter');

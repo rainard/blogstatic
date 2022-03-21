@@ -115,7 +115,7 @@ function gutenberg_block_core_home_link_build_li_wrapper_attributes( $context ) 
  * Renders the `core/home-link` block.
  *
  * @param array    $attributes The block attributes.
- * @param array    $content    The saved content.
+ * @param string   $content    The saved content.
  * @param WP_Block $block      The parsed block.
  *
  * @return string Returns the post content with the home url added.
@@ -138,25 +138,7 @@ function gutenberg_render_block_core_home_link( $attributes, $content, $block ) 
 	$html .= '>';
 
 	if ( isset( $attributes['label'] ) ) {
-		$html .= wp_kses(
-			$attributes['label'],
-			array(
-				'code'   => array(),
-				'em'     => array(),
-				'img'    => array(
-					'scale' => array(),
-					'class' => array(),
-					'style' => array(),
-					'src'   => array(),
-					'alt'   => array(),
-				),
-				's'      => array(),
-				'span'   => array(
-					'style' => array(),
-				),
-				'strong' => array(),
-			)
-		);
+		$html .= wp_kses_post( $attributes['label'] );
 	}
 
 	$html .= '</a></li>';

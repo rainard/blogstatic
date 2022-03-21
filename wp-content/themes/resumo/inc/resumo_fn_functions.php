@@ -16,7 +16,6 @@ use Frel\Frel_Helper;
 
 if ( class_exists( 'Resumo_Block_Patterns_Registry' ) ) {register_block_pattern();}
 
-
 function resumo_fn_right_part(){
 	$html = '';
 	global $post,$resumo_fn_option;
@@ -61,6 +60,29 @@ function resumo_fn_right_part(){
 		$animatedTitle .= '</span>';
 		
 		
+		// since v1.0.2
+		$rb_bottom_link = 'enabled';
+		if(isset($resumo_fn_option['rb_bottom_link'])){
+			$rb_bottom_link = $resumo_fn_option['rb_bottom_link'];
+		}
+		$rb_link_url = '#contact';
+		if(isset($resumo_fn_option['rb_link_url'])){
+			$rb_link_url = $resumo_fn_option['rb_link_url'];
+		}
+		$rb_link_text = esc_html__('I am available for a freelance job. Hire me', 'resumo');
+		if(isset($resumo_fn_option['rb_link_text'])){
+			$rb_link_text = $resumo_fn_option['rb_link_text'];
+		}
+		$bottom = '';
+		if($rb_bottom_link == 'enabled'){
+			$bottom = '<div class="right_bottom">
+							<a href="'.$rb_link_url.'">
+								<span class="circle"></span>
+								<span class="text">'.$rb_link_text.'</span>
+							</a>
+						</div>';
+		}
+		
 		$contentHTML = '<div class="resumo_fn_ava"><div class="right_top">
 							<div class="border1"></div><div class="border2"></div>
 							<div class="img_holder">
@@ -72,12 +94,8 @@ function resumo_fn_right_part(){
 								<h3>'.$animatedTitle.'</h3>
 							</div>
 						</div>
-						<div class="right_bottom">
-							<a href="#contact">
-								<span class="circle"></span>
-								<span class="text">I’m available for a freelance job. Hire me</span>
-							</a>
-						</div></div>';
+						'.$bottom.'
+						</div>';
 	}
 	
 	$content = '<div class="right_in">';

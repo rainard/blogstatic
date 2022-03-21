@@ -2,9 +2,9 @@
 Contributors: Themeansar
 Author: Themeansar
 Requires at least: WordPress 4.7
-Tested up to: 5.7
+Tested up to: 5.9
 Requires PHP: 5.6
-Stable tag: 2.9.9.86
+Stable tag: 3.0
 Version: 3.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -44,8 +44,9 @@ License: MIT
 https://github.com/twittem/wp-bootstrap-navwalker
 
 == Font Awesome license ==
-https://github.com/FortAwesome/Font-Awesome FontAwesome 4.7.0 Copyright 2012 Dave Gandy 
-Font License: SIL OFL 1.1 Code License: MIT License http://fontawesome.io/license/
+======================================
+https://github.com/FortAwesome/Font-Awesome FontAwesome 5.15.1 Copyright 2012 Dave Gandy, Travis Chase, Rob Madole, Brian Talbot, Jory Raphael, Mike Wilkerson, Trevor Chase, Jason Lundien, Jason Otero, Edward Emanuel, Geremia Taglialatela
+Font License: SIL OFL 1.1 Code License: MIT License https://github.com/FortAwesome/Font-Awesome/blob/master/LICENSE.txt
 
 * Customizer Pro *
 Author: Justin Tadlock
@@ -464,3 +465,47 @@ License: CC0 Public Domain
 
 = Version 2.9.9.86
 * Fixed escaping issue.
+
+= Version 2.9.9.87
+* Update Font-Awesome Library 5.14.0
+
+= Version 2.9.9.88
+* Fixed Font-Awesome Icon Issue.
+
+= Version 2.9.9.89
+* Added Webfonts for Font Awesome.
+
+= Version 2.9.9.90
+* Fixed Tabbed Widget Issue.
+
+= Version 2.9.9.91
+* Added Featured image support on page.
+
+= Version 2.9.9.92
+* Fixed Footer menu and boolen php issue.
+
+= Version 2.9.9.93
+* Fixed menu issue.
+
+= Version 2.9.9.94
+* Fixed styling issue.
+
+= Version 2.9.9.95
+* Fixed styling issue.
+
+= Version 2.9.9.96
+* Fixed styling responsive issue.
+
+= Version 2.9.9.97
+* Fixed unclosed div issue.
+
+= Version 2.9.9.98
+* Added Child theme & Fixed responsive issues.
+
+= Version 2.9.9.99
+* Added slider position setting.
+* Fixed Responsive js issue.
+
+= Version 3.0
+* Fixed unclosed div issue.
+* Fixed featured post widget issue.

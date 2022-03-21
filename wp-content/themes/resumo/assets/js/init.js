@@ -403,7 +403,7 @@ var ResumoSiteURL 	= fn_object.siteurl;
 				if(minH < rightH){minH = rightH;}
 			}
 			minH = minH-mobileH-adminBarH-footerH;
-			$('.resumo-fn-content_archive, .resumo_fn_index_wrap, .resumo_fn_single_template, .resumo_fn_full_page_template, .resumo_fn_404, .resumo-fn-protected').css({minHeight: minH + 'px'});
+			$('.resumo-fn-content_archive, .resumo_fn_index_wrap, .resumo_fn_single_template, .resumo_fn_full_page_template, .resumo_fn_404, .resumo-fn-protected, .fn_page_blog').css({minHeight: minH + 'px'});
 		},
 		
 		url_fixer: function(){
