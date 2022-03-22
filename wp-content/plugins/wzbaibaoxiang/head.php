@@ -123,7 +123,7 @@ jQuery(document).ready(function($){
                 });
                 $.ajax({
                     url:"",
-    		  	    data:{data:'{"websitebox":"20","nonce":"<?php echo wp_create_nonce('websitebox');?>","action":"websitebox","website_key":"'+website_key+'"}'},
+    		  	    data:{data:'{"websitebox":"20","nonce":"<?php echo esc_attr(wp_create_nonce('websitebox'));?>","action":"websitebox","website_key":"'+website_key+'"}'},
     		  		type:"post",
     		  		dataType:"json",
     		  		success:function(data){

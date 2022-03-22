@@ -3,34 +3,33 @@
 			
 			<div class="websitebox_news">
 				<ul>
-					<a href="<?php echo admin_url( 'admin.php?page=websitebox' ); ?>" ><li>常规设置</li></a>
-					<a href="<?php echo admin_url( 'admin.php?page=websitebox&book=11' ); ?>" ><li>WP优化</li></a>
-					<a href="<?php echo admin_url( 'admin.php?page=websitebox&book=1' ); ?>" class="websitebox_adm"><li>侧边客服</li></a>
-					<a href="<?php echo admin_url( 'admin.php?page=websitebox&book=9' ); ?>" ><li>手机客服</li></a>
-					<a href="<?php echo admin_url( 'admin.php?page=websitebox&book=3' ); ?>"><li>留言板</li></a>
-					<a href="<?php echo admin_url( 'admin.php?page=websitebox&book=4' ); ?>"><li>网站背景</li></a>
-					<a href="<?php echo admin_url( 'admin.php?page=websitebox&book=5' ); ?>"><li>提示框</li></a>
-					<a href="<?php echo admin_url( 'admin.php?page=websitebox&book=6' ); ?>"><li>滚动公告</li></a>
-					<a href="<?php echo admin_url( 'admin.php?page=websitebox&book=7' ); ?>"><li>图片水印</li></a>
-					<a href="<?php echo admin_url( 'admin.php?page=websitebox&book=8' ); ?>"><li>三合一</li></a>
-					<a href="<?php echo admin_url( 'admin.php?page=websitebox&book=10' ); ?>"><li>鼠标特效</li></a>
-					<!--<a href="<?php echo admin_url( 'admin.php?page=websitebox&book=12' ); ?>"><li>常见问题</li></a>-->
+					<a href="<?php echo esc_url(admin_url( 'admin.php?page=websitebox&nonce='.esc_attr(wp_create_nonce('websitebox')))); ?>" ><li>常规设置</li></a>
+        			<a href="<?php echo esc_url(admin_url( 'admin.php?page=websitebox&book=11&nonce='.esc_attr(wp_create_nonce('websitebox')))); ?>" ><li>WP优化</li></a>
+        			<a href="<?php echo esc_url(admin_url( 'admin.php?page=websitebox&book=1&nonce='.esc_attr(wp_create_nonce('websitebox')))); ?>" class="websitebox_adm"><li>侧边客服</li></a>
+        			<a href="<?php echo esc_url(admin_url( 'admin.php?page=websitebox&book=9&nonce='.esc_attr(wp_create_nonce('websitebox')))); ?>" ><li>手机客服</li></a>
+        			<a href="<?php echo esc_url(admin_url( 'admin.php?page=websitebox&book=3&nonce='.esc_attr(wp_create_nonce('websitebox')))); ?>"><li>留言板</li></a>
+        			<a href="<?php echo esc_url(admin_url( 'admin.php?page=websitebox&book=4&nonce='.esc_attr(wp_create_nonce('websitebox')))); ?>"><li>网站背景</li></a>
+        			<a href="<?php echo esc_url(admin_url( 'admin.php?page=websitebox&book=5&nonce='.esc_attr(wp_create_nonce('websitebox')))); ?>"><li>提示框</li></a>
+        			<a href="<?php echo esc_url(admin_url( 'admin.php?page=websitebox&book=6&nonce='.esc_attr(wp_create_nonce('websitebox')))); ?>"><li>滚动公告</li></a>
+        			<a href="<?php echo esc_url(admin_url( 'admin.php?page=websitebox&book=7&nonce='.esc_attr(wp_create_nonce('websitebox')))); ?>"><li>图片水印</li></a>
+        			<a href="<?php echo esc_url(admin_url( 'admin.php?page=websitebox&book=8&nonce='.esc_attr(wp_create_nonce('websitebox')))); ?>"><li>三合一</li></a>
+        			<a href="<?php echo esc_url(admin_url( 'admin.php?page=websitebox&book=10&nonce='.esc_attr(wp_create_nonce('websitebox')))); ?>" class="websitebox_adm"><li>鼠标特效</li></a>
 				</ul>
 			</div>
 			<div class="websitebox_centen">
-			    <form class="layui-form" action="" lay-filter="example">
+			    <form class="layui-form" action="" lay-filter="example" onsubmit="return false">
 				<div class="websitebox_cenh3">
 					<span>侧边风格</span>
 					<input type="hidden" name="websitebox" value="2">
 				  	 <input type="hidden" name="action" value="websitebox">
-				  	 <input type="hidden" name="phone_cls" value="<?php if(isset($websitebox_phone['cls'])){echo $websitebox_phone['cls'];}?>">
-				  	 <input type="hidden" name="qq_cls" value="<?php if(isset($websitebox_qq['cls'])){echo $websitebox_qq['cls'];}?>">
-				  	 <input type="hidden" name="qqqun_cls" value="<?php if(isset($websitebox_qqqun['cls'])){echo $websitebox_qqqun['cls'];}?>">
-				  	 <input type="hidden" name="mail_cls" value="<?php if(isset($websitebox_mail['cls'])){echo $websitebox_mail['cls'];}?>">
-				  	 <input type="hidden" name="wb_cls" value="<?php if(isset($websitebox_wb['cls'])){echo $websitebox_wb['cls'];}?>">
-				  	 <input type="hidden" name="qrcode_cls" value="<?php if(isset($websitebox_qrcode['cls'])){echo $websitebox_qrcode['cls'];}?>">
-				  	 <input type="hidden" name="qrcode" value="<?php if(isset($websitebox_qrcode['qrcode']) && $websitebox_qrcode['qrcode']){echo $websitebox_qrcode['qrcode'];} ?>">
-				  	 <input type="hidden" name="nonce" value="<?php echo wp_create_nonce('websitebox');?>">
+				  	 <input type="hidden" name="phone_cls" value="<?php if(isset($websitebox_phone['cls'])){echo esc_attr($websitebox_phone['cls']);}?>">
+				  	 <input type="hidden" name="qq_cls" value="<?php if(isset($websitebox_qq['cls'])){echo esc_attr($websitebox_qq['cls']);}?>">
+				  	 <input type="hidden" name="qqqun_cls" value="<?php if(isset($websitebox_qqqun['cls'])){echo esc_attr($websitebox_qqqun['cls']);}?>">
+				  	 <input type="hidden" name="mail_cls" value="<?php if(isset($websitebox_mail['cls'])){echo esc_attr($websitebox_mail['cls']);}?>">
+				  	 <input type="hidden" name="wb_cls" value="<?php if(isset($websitebox_wb['cls'])){echo esc_attr($websitebox_wb['cls']);}?>">
+				  	 <input type="hidden" name="qrcode_cls" value="<?php if(isset($websitebox_qrcode['cls'])){echo esc_attr($websitebox_qrcode['cls']);}?>">
+				  	 <input type="hidden" name="qrcode" value="<?php if(isset($websitebox_qrcode['qrcode']) && $websitebox_qrcode['qrcode']){echo esc_url($websitebox_qrcode['qrcode']);} ?>">
+				  	 <input type="hidden" name="nonce" value="<?php echo esc_attr(wp_create_nonce('websitebox'));?>">
 					 <button type="submit" class="layui-btn websitebox_bot" lay-submit="" lay-filter="demo1">保存设置</button>
 				</div>
 				
@@ -53,7 +52,7 @@
 						 			<span>设置背景颜色</span>
 						 	 </div>
 						 	  <div class="layui-input-inline" style="width: 120px;">
-                                    <input type="text" name="bg" placeholder="请选择颜色" class="layui-input" id="test-form-input1" value="<?php if(isset($websitebox_kefu['bg']) && $websitebox_kefu['bg']){echo $websitebox_kefu['bg'];} ?>">
+                                <input type="text" name="bg" placeholder="请选择颜色" class="layui-input" id="test-form-input1" value="<?php if(isset($websitebox_kefu['bg']) && $websitebox_kefu['bg']){echo esc_attr($websitebox_kefu['bg']);} ?>">
                                   </div>
                                   <div class="layui-inline" style="left: 10px;">
                                     <div id="test1"></div>
@@ -64,7 +63,7 @@
 						 			<span>设置图标颜色</span>
 						 	 </div>
 						 	<div class="layui-input-inline" style="width: 120px;">
-                                    <input type="text" name="icon" placeholder="请选择颜色" class="layui-input" id="test-form-input2" value="<?php if(isset($websitebox_kefu['icon']) && $websitebox_kefu['icon']){echo $websitebox_kefu['icon'];} ?>">
+                                    <input type="text" name="icon" placeholder="请选择颜色" class="layui-input" id="test-form-input2" value="<?php if(isset($websitebox_kefu['icon']) && $websitebox_kefu['icon']){echo esc_attr($websitebox_kefu['icon']);} ?>">
                                   </div>
                                   <div class="layui-inline" style="left: 10px;">
                                     <div id="test2"></div>
@@ -112,27 +111,27 @@
 				
 				<div class="websitebox_myfengge clearfix">
 					<div>
-						<img src="<?php echo plugin_dir_url( WEBSITEBOX_FILE ); ?>images/xuanfu1.png" >
+						<img src="<?php echo esc_url(plugins_url('images/xuanfu1.png',__FILE__)); ?>" >
 						<p>风格一</p>
 					</div>
 					<div>
-						<img src="<?php echo plugin_dir_url( WEBSITEBOX_FILE ); ?>images/xuanfu2.png" >
+						<img src="<?php echo esc_url(plugins_url('images/xuanfu2.png',__FILE__)); ?>" >
 						<p>风格二</p>
 					</div>
 					<div>
-						<img src="<?php echo plugin_dir_url( WEBSITEBOX_FILE ); ?>images/xuanfu3.png" >
+						<img src="<?php echo esc_url(plugins_url('images/xuanfu3.png',__FILE__)); ?>" >
 						<p>风格三</p>
 					</div>
 					<div>
-				       <img src="<?php echo plugin_dir_url( WEBSITEBOX_FILE ); ?>images/xuanfu4.png" >
+				       <img src="<?php echo esc_url(plugins_url('images/xuanfu4.png',__FILE__)); ?>" >
 				       <p>风格四</p>
 					</div>
 					<div>
-				       <img src="<?php echo plugin_dir_url( WEBSITEBOX_FILE ); ?>images/xuanfu5.jpg" >
+				       <img src="<?php echo esc_url(plugins_url('images/xuanfu5.jpg',__FILE__)); ?>" >
 				       <p>风格五</p>
 					</div>
 					<div>
-				       <img src="<?php echo plugin_dir_url( WEBSITEBOX_FILE ); ?>images/xuanfu6.png" >
+				       <img src="<?php echo esc_url(plugins_url('images/xuanfu6.png',__FILE__)); ?>" >
 				       <p>风格六</p>
 					</div>
 				</div>
@@ -148,7 +147,7 @@
     						 <div class="layui-form-item">
     						     <label class="layui-form-label">联系号码</label>
     						     <div class="layui-input-inline">
-    						       <input type="text" name="phone"  placeholder="请输入" autocomplete="off" class="layui-input" value="<?php if(isset($websitebox_phone['phone'])){echo $websitebox_phone['phone'];} ?>">
+    						       <input type="text" name="phone"  placeholder="请输入" autocomplete="off" class="layui-input" value="<?php if(isset($websitebox_phone['phone'])){echo esc_attr($websitebox_phone['phone']);} ?>">
     						     </div>
     						 </div>
     					  </div>
@@ -191,7 +190,7 @@
         						 <div class="layui-form-item">
         						     <label class="layui-form-label">QQ号码</label>
         						     <div class="layui-input-inline">
-        						       <input type="text" name="qq"  placeholder="请输入" autocomplete="off" class="layui-input" value="<?php if(isset($websitebox_qq['qq'])){echo $websitebox_qq['qq'];}?>">
+        						       <input type="text" name="qq"  placeholder="请输入" autocomplete="off" class="layui-input" value="<?php if(isset($websitebox_qq['qq'])){echo esc_attr($websitebox_qq['qq']);}?>">
         						     </div>
         						 </div>
         					</div>
@@ -229,13 +228,13 @@
 						     <div style="display: inline-block;position: relative;margin-top: 10px;margin-left: 110px;border: 1px solid #ccc;width:110px;height:110px;line-height: 100px;">
 						        <?php 
         					        if(isset($websitebox_qrcode['qrcode']) && $websitebox_qrcode['qrcode']){
-        					            echo '<img class="layui-upload-img" id="demo30" style="width:110px;" src="'.$websitebox_qrcode['qrcode'].'">';
+        					            echo '<img class="layui-upload-img" id="demo30" style="width:110px;" src="'.esc_url($websitebox_qrcode['qrcode']).'">';
         					        }else{
         					            echo '<img class="layui-upload-img" id="demo30" style="width:110px;">';
         					        }
     					        ?>
     					        <p class="delete_pic">
-        					        <img src="<?php echo plugin_dir_url( WEBSITEBOX_FILE ); ?>images/wzt_chahao.png">
+        					        <img src="<?php echo esc_url(plugins_url('images/wzt_chahao.png',__FILE__)); ?>">
         					    </p>
     					     </div>
 						     <p id="demoText"></p>
@@ -279,7 +278,7 @@
     						 <div class="layui-form-item">
     						     <label class="layui-form-label">邮箱号码</label>
     						     <div class="layui-input-inline">
-    						       <input type="text" name="mail"  placeholder="请输入" autocomplete="off" class="layui-input" value="<?php if(isset($websitebox_mail['mail']) && $websitebox_mail['mail']){echo $websitebox_mail['mail'];} ?>">
+    						       <input type="text" name="mail"  placeholder="请输入" autocomplete="off" class="layui-input" value="<?php if(isset($websitebox_mail['mail']) && $websitebox_mail['mail']){echo esc_attr($websitebox_mail['mail']);} ?>">
     						     </div>
     						 </div>
     					   </div>
@@ -307,7 +306,7 @@
     						 <div class="layui-form-item">
     						     <label class="layui-form-label">链接</label>
     						     <div class="layui-input-inline">
-    						       <input type="text" name="wb"  placeholder="请输入" autocomplete="off" class="layui-input" value="<?php if(isset($websitebox_wb['wb'])){echo $websitebox_wb['wb'];}?>">
+    						       <input type="text" name="wb"  placeholder="请输入" autocomplete="off" class="layui-input" value="<?php if(isset($websitebox_wb['wb'])){echo esc_attr($websitebox_wb['wb']);}?>">
     						     </div>
     						     
     						    </div>
@@ -585,7 +584,7 @@
 						 <div class="layui-form-item">
 						     <label class="layui-form-label">QQ群号码</label>
 						     <div class="layui-input-inline">
-						       <input type="text" name="qqqun"  placeholder="请输入" autocomplete="off" class="layui-input" value="<?php if(isset($websitebox_qqqun['qqqun'])){echo $websitebox_qqqun['qqqun'];}?>">
+						       <input type="text" name="qqqun"  placeholder="请输入" autocomplete="off" class="layui-input" value="<?php if(isset($websitebox_qqqun['qqqun'])){echo esc_attr($websitebox_qqqun['qqqun']);}?>">
 						     </div>
 						 </div>
 						</div>
@@ -714,9 +713,9 @@
 		  <h2 style="line-height: 40px;font-size: 16px;font-weight: 600;">相关推荐</h2>
 		  <div class="tj_lianjie">
 		  <div class="tj_lianjie1">
-			  <a href="/wp-admin/plugin-install.php?tab=plugin-information&plugin=baiduseo&TB_iframe=true&width=772&height=524">
+			 <a href="<?php echo esc_url_raw(admin_url('plugin-install.php?tab=plugin-information&plugin=baiduseo'));?>">
 				  <div class="tj_neirong">
-					 <img src="<?php echo plugin_dir_url( WEBSITEBOX_FILE ); ?>images/icon-256x256.png" class="tj_logo"> 
+					 <img src="<?php echo esc_url(plugins_url('images/icon-256x256.png',__FILE__)); ?>" class="tj_logo">  
 					   <div>
 						   <h2>百度站长SEO合集</h2>
 						   <p>含百度站长、百度地图sitemap、关键词排名查询监控、网站蜘蛛、robots、图片alt标签、天级推送、死链查询、百度自动推送、批量提交URL到站长、百度收录查询、批量推送未收录、301/404等功能。</p>
@@ -730,9 +729,9 @@
 			  </a>
 		  </div>
 		  <div class="tj_lianjie1">
-			  <a href="/wp-admin/plugin-install.php?tab=plugin-information&plugin=auto-reply-wechat">
+			   <a href="<?php echo esc_url_raw(admin_url('plugin-install.php?tab=plugin-information&plugin=auto-reply-wechat'));?>">
 				  <div class="tj_neirong">
-					 <img src="<?php echo plugin_dir_url( WEBSITEBOX_FILE ); ?>images/icon_weixin.png" class="tj_logo"> 
+					 <img src="<?php echo esc_url(plugins_url('images/icon_weixin.png',__FILE__)); ?>" class="tj_logo">
 					   <div>
 						   <h2>公众号自动回复</h2>
 						   <p>本插件适用于订阅号（未认证也可以）、服务号。根据关键词自动获取网站相关文章：用户通过公众号发送关键词，公众号即可根据用户的关键词读取wordpress网站内相关的内容，推送URL回复用户。</p>
@@ -760,14 +759,14 @@
              //常规使用
 		  colorpicker.render({
 		    elem: '#test1'//绑定元素
-			 ,color: '<?php if(isset($websitebox_kefu['bg']) && $websitebox_kefu['bg']){echo $websitebox_kefu['bg'];} ?>'
+			 ,color: '<?php if(isset($websitebox_kefu['bg']) && $websitebox_kefu['bg']){echo esc_attr($websitebox_kefu['bg']);} ?>'
 		    ,done: function(color){
               $('#test-form-input1').val(color);
             }
 		  });
 		   colorpicker.render({
 		      elem: '#test2'
-		      ,color: '<?php if(isset($websitebox_kefu['icon']) && $websitebox_kefu['icon']){echo $websitebox_kefu['icon'];} ?>'
+		      ,color: '<?php if(isset($websitebox_kefu['icon']) && $websitebox_kefu['icon']){echo esc_attr($websitebox_kefu['icon']);} ?>'
 		      ,done: function(color){
                   $('#test-form-input2').val(color);
                 }
@@ -788,7 +787,7 @@
                     $('.style_title').css('display','block');
                 }
             }); 
-            var phone_cls = "<?php if(isset($websitebox_phone['cls'])){echo $websitebox_phone['cls'];}?>";
+            var phone_cls = "<?php if(isset($websitebox_phone['cls'])){echo esc_attr($websitebox_phone['cls']);}?>";
     		if(phone_cls){
     		    $(".websitebox_tubiao_phone li i").each(function(){
     		        if($(this).attr('class')==phone_cls){
@@ -801,7 +800,7 @@
     			$('input[name="phone_cls"]').val(phone_cls);
     		    $(this).addClass("websitebox_xuanzhong").siblings("li").removeClass("websitebox_xuanzhong");
     		})
-    		var qq_cls = "<?php if(isset($websitebox_qq['cls'])){echo $websitebox_qq['cls'];}?>";
+    		var qq_cls = "<?php if(isset($websitebox_qq['cls'])){echo esc_attr($websitebox_qq['cls']);}?>";
     		if(qq_cls){
     		    $(".websitebox_tubiao_qq li i").each(function(){
     		        if($(this).attr('class')==qq_cls){
@@ -815,7 +814,7 @@
     		    $(this).addClass("websitebox_xuanzhong").siblings("li").removeClass("websitebox_xuanzhong");
     		})
     		
-    		var mail_cls = "<?php if(isset($websitebox_mail['cls'])){echo $websitebox_mail['cls'];}?>";
+    		var mail_cls = "<?php if(isset($websitebox_mail['cls'])){echo esc_attr($websitebox_mail['cls']);}?>";
     		if(mail_cls){
     		    $(".websitebox_tubiao_mail li i").each(function(){
     		        if($(this).attr('class')==mail_cls){
@@ -828,7 +827,7 @@
     			$('input[name="mail_cls"]').val(mail_cls);
     		    $(this).addClass("websitebox_xuanzhong").siblings("li").removeClass("websitebox_xuanzhong");
     		})
-    		var wb_cls = "<?php if(isset($websitebox_wb['cls'])){echo $websitebox_wb['cls'];}?>";
+    		var wb_cls = "<?php if(isset($websitebox_wb['cls'])){echo esc_attr($websitebox_wb['cls']);}?>";
     		if(wb_cls){
     		    $(".websitebox_tubiao_wb li i").each(function(){
     		        if($(this).attr('class')==wb_cls){
@@ -841,7 +840,7 @@
     			$('input[name="wb_cls"]').val(wb_cls);
     		    $(this).addClass("websitebox_xuanzhong").siblings("li").removeClass("websitebox_xuanzhong");
     		})
-    		var qqqun_cls = "<?php if(isset($websitebox_qqqun['cls'])){echo $websitebox_qqqun['cls'];}?>";
+    		var qqqun_cls = "<?php if(isset($websitebox_qqqun['cls'])){echo esc_attr($websitebox_qqqun['cls']);}?>";
     		if(qqqun_cls){
     		    $(".websitebox_tubiao_qqqun li i").each(function(){
     		        if($(this).attr('class')==qqqun_cls){
@@ -854,7 +853,7 @@
     			$('input[name="qqqun_cls"]').val(qqqun_cls);
     		    $(this).addClass("websitebox_xuanzhong").siblings("li").removeClass("websitebox_xuanzhong");
     		})
-    		var qrcode_cls = "<?php if(isset($websitebox_qrcode['cls'])){echo $websitebox_qrcode['cls'];}?>";
+    		var qrcode_cls = "<?php if(isset($websitebox_qrcode['cls'])){echo esc_attr($websitebox_qrcode['cls']);}?>";
     		if(qrcode_cls){
     		    $(".websitebox_tubiao_qrcode li i").each(function(){
     		        if($(this).attr('class')==qrcode_cls){

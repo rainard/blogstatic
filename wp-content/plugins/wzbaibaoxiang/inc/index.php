@@ -1,33 +1,32 @@
 <?php
 class websitebox{
     const book=0;
-    function __construct($book) {
+    function __construct() {
         $websitebox_base = get_option('websitebox_base');
         if(isset($websitebox_base['art_cron']) && $websitebox_base['art_cron']){
             $this->websitebox_art_cron();
         }
-        if($_POST){
-            if(isset($_POST['data']) && is_string($_POST['data'])){
-                $websitebox = json_decode($_POST['data'],true);
-                $website['content'] = sanitize_textarea_field($websitebox['content']);
-                $website['websitebox'] = (int)$websitebox['websitebox'];
-                $website['action'] = sanitize_text_field($websitebox['action']);
-                $website['nonce'] = sanitize_text_field($websitebox['nonce']);
-                if(isset($website['websitebox']) && $website['websitebox']==15){
-                    $websitebox_post = new websitebox_post($website);
-                    add_action('init',[$websitebox_post,'post']);
-                }
+        if(isset($_POST['data']) && is_string($_POST['data'])){
+            $websitebox = sanitize_text_field($_POST['data']);
+            $websitebox = json_decode($websitebox,true);
+            $website['content'] = sanitize_textarea_field($websitebox['content']);
+            $website['websitebox'] = (int)$websitebox['websitebox'];
+            $website['action'] = sanitize_text_field($websitebox['action']);
+            $website['nonce'] = sanitize_text_field($websitebox['nonce']);
+            if(isset($website['websitebox']) && $website['websitebox']==15){
+                $websitebox_post = new websitebox_post($website);
+                add_action('init',[$websitebox_post,'post']);
             }
         }
+        
         if(is_admin()){
-            $this->book = $book;
+           
             add_action( 'admin_enqueue_scripts', [$this,'websitebox_enqueue'] );
             add_filter('plugin_action_links_'.WEBSITEBOX_NAME, [$this,'websitebox_plugin_action_links']);
             add_action('admin_menu',[$this, 'websitebox_addpages']);
-            if($_POST){
                 if(isset($_POST['data']) && is_string($_POST['data'])){
-                    $websitebox = json_decode($_POST['data'],true);
-                    
+                    $websitebox = sanitize_text_field($_POST['data']);
+                    $websitebox = json_decode($websitebox,true);
                     if(isset($websitebox['websitebox'])){
                         $website1['action'] = sanitize_text_field($websitebox['action']);
                         $website1['nonce'] = sanitize_text_field($websitebox['nonce']);
@@ -79,7 +78,7 @@ class websitebox{
                                 $website1['phone_cls'] = sanitize_text_field($websitebox['phone_cls']);
                                 $website1['qq'] = sanitize_text_field($websitebox['qq']);
                                 $website1['qq_cls'] = sanitize_text_field($websitebox['qq_cls']);
-                                $website1['qrcode'] = esc_url($websitebox['qrcode']);
+                                $website1['qrcode'] = sanitize_url($websitebox['qrcode']);
                                 $website1['qrcode_cls'] = sanitize_text_field($websitebox['qrcode_cls']);
                                 $website1['mail'] = sanitize_text_field($websitebox['mail']);
                                 $website1['qqqun'] = sanitize_text_field($websitebox['qqqun']);
@@ -115,7 +114,7 @@ class websitebox{
                                 }
                                 $website1['type'] = (int)$websitebox['type'];
                                 $website1['bg'] = sanitize_text_field($websitebox['bg']);
-                                $website1['back'] = esc_url($websitebox['back']);
+                                $website1['back'] = sanitize_url($websitebox['back']);
                                 $website1['texiao'] = (int)$websitebox['texiao'];
                                
                                 break;
@@ -136,7 +135,7 @@ class websitebox{
                                 $website1['word'] = sanitize_text_field($websitebox['word']);
                                 $website1['content'] = sanitize_textarea_field($websitebox['content']);
                                 $website1['content_color'] = sanitize_text_field($websitebox['content_color']);
-                                $website1['pic'] = esc_url($websitebox['pic']);
+                                $website1['pic'] = sanitize_url($websitebox['pic']);
                                 break;
                             case 7:
                                
@@ -178,8 +177,8 @@ class websitebox{
                                 }else{
                                     $website1['open'] = 0;
                                 }
-                                $website1['wx'] = esc_url($websitebox['wx']);
-                                $website1['ali'] = esc_url($websitebox['ali']);
+                                $website1['wx'] = sanitize_url($websitebox['wx']);
+                                $website1['ali'] = sanitize_url($websitebox['ali']);
                                 
                                 break;
                            
@@ -272,7 +271,7 @@ class websitebox{
                         add_action('init',[$websitebox_post,'post']);
                         
                     }
-                }
+                
             }
             
         }
@@ -292,7 +291,7 @@ class websitebox{
         
     }
     public function websitebox_plugin_action_links ( $links) {
-        $links[] = '<a href="' . admin_url( 'admin.php?page=websitebox' ) . '">设置</a>';
+        $links[] = '<a href="' . esc_url(admin_url( 'admin.php?page=websitebox' )) . '">设置</a>';
         return $links;
     }
     public  function websitebox_addpages(){
@@ -302,7 +301,16 @@ class websitebox{
     public  function websitebox_toplevelpage(){
         global $wpdb;
         require plugin_dir_path( WEBSITEBOX_FILE ) . 'head.php';
-        switch ($this->book) {
+        if(isset($_GET['book'])){
+            $nonce  = sanitize_text_field($_GET['nonce']);
+        	if(!wp_verify_nonce($nonce,'websitebox')){
+        	    return;
+        	}
+            $book = (int)$_GET['book'];
+        }else{
+            $book = 0; 
+        }
+        switch ($book) {
             case 0:
                 $websitebox_base = get_option('websitebox_base');
                 
@@ -326,7 +334,8 @@ class websitebox{
                 $totalpage = ceil($count/35);
                 $page = isset($_GET['pages'])?(int)$_GET['pages']:1;
                 $start = ($page-1)*35;
-                $liuyan = $wpdb->get_results('select * from '.$wpdb->prefix . 'websitebox_liuyan order by id desc limit '.$start.',35',ARRAY_A);
+                
+                $liuyan = $wpdb->get_results($wpdb->prepare('select * from '.$wpdb->prefix . 'websitebox_liuyan order by id desc limit %d,35',$start),ARRAY_A);
                 $websitebox_liuyan = get_option('websitebox_liuyan');
                 require plugin_dir_path( WEBSITEBOX_FILE ) . 'liuyan.php';
                 break;
@@ -454,7 +463,7 @@ class websitebox{
     		}
     	} else {
     		if ( $point == 0 ) {
-    			$point = mt_rand(1, 9);
+    			$point = wp_rand(1, 9);
     		}
     		$position = $this->websitebox_position($point, $imgWidth, $imgHeight, $textWidth, $textLength, $lineHeight, $margin);
     		if ($angle != 0) {

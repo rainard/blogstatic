@@ -8,6 +8,7 @@ class websitebox_head{
     public function websitebox_enqueue(){
         wp_enqueue_script("jquery");
         wp_enqueue_style( 'websitebox_index.css',  plugin_dir_url( WEBSITEBOX_FILE ). 'css/websitebox_index.css',false,'','all');
+        wp_enqueue_script( 'jquery-qrcode', plugin_dir_url( WEBSITEBOX_FILE ).'js/jquery.qrcode.min.js', array('jquery'), '', false);
         $websitebox_base = get_option('websitebox_base');
         //网站宠物
         if(isset($websitebox_base['zoo']) && ($websitebox_base['zoo']==1)){
@@ -50,13 +51,13 @@ class websitebox_head{
                 if($websitebox_sitebg['type']==1){
                     echo '<style>
                         body{
-                            background:'.$websitebox_sitebg['bg'].';
+                            background:'.esc_attr($websitebox_sitebg['bg']).';
                         }
                     </style>';
                 }elseif($websitebox_sitebg['type']==2){
                     echo '<style>
                         body{
-                            background:url('.$websitebox_sitebg['back'].');
+                            background:url('.esc_attr($websitebox_sitebg['back']).');
                             background-size:100%;
                         }
                     </style>';
@@ -137,8 +138,8 @@ class websitebox_head{
 			    </div>
 				<div class="websitebox_box2-2">
 					<div class="websitebox_box2img">
-						<img src="'.$websitebox_sanheyi['wx'].'" alt="" style="display: block;">
-						<img src="'.$websitebox_sanheyi['ali'].'" alt="">
+						<img src="'.esc_url($websitebox_sanheyi['wx']).'" alt="" style="display: block;">
+						<img src="'.esc_url($websitebox_sanheyi['ali']).'" alt="">
 					</div>
 					<ul class="websitebox_box2ul" style="display: flex;justify-content: center;padding:0;margin: 0;">
 						<li class="websitebox_box2ul1">微信</li>
@@ -148,7 +149,7 @@ class websitebox_head{
 			</div>
 		</div>';
 		}
-		$description = strip_tags($content);
+		$description = wp_strip_all_tags($content);
 		$pattern = '/\s/';//去除空白
         $description = get_the_title();  
 	   
@@ -239,8 +240,8 @@ class websitebox_head{
                 ctxhk.fillRect(0,0,350,450);
 		        var imgObj = new Image();
 				var imgObj1 = new Image();
-				var row = "'.$description.'";
-		        imgObj.src = "'.$first_img.'";
+				var row = "'.esc_attr($description).'";
+		        imgObj.src = "'.esc_url($first_img).'";
 		        imgObj.onload = function(){
 		               ctxh.drawImage(this, 20,20,310,190);
 		               ctxhk.drawImage(this, 0,0,500,300);
@@ -255,8 +256,8 @@ class websitebox_head{
 				var wztbbx_wenzi = setInterval(function() {
 				    ctxh.font="14px Arial";
 			    	ctxh.fillStyle="#111";
-				    ctxh.fillText("'.get_option('siteurl').'",110,270);
-				    ctxhk.fillText("'.get_option('siteurl').'",110,225);
+				    ctxh.fillText("'.esc_url(get_option('siteurl')).'",110,270);
+				    ctxhk.fillText("'.esc_url(get_option('siteurl')).'",110,225);
 				    ctxh.fillStyle="#111";
 				    ctxh.fillText("长按即可保存图片",110,305);
 				    ctxhk.fillText("长按即可保存图片",110,260);

@@ -30,17 +30,19 @@ class websitebox_foot{
         }
         //评论弹幕只在内页显示
         if(is_single()){
+            
             if(isset($websitebox_base['barrage']) && ($websitebox_base['barrage']==1)){
                     global $post;
-                    $content = get_comments('status=approve&type=comment&post_id='.$post->ID);
+                    $content = get_comments('status=approve&type=comment&post_id='.(int)$post->ID);
+                    
                     $comment_content = [];
                     foreach($content as $key=>$val){
-                        $comment_content[$key]['text'] = $val->comment_content;
+                        $comment_content[$key]['text'] = esc_attr($val->comment_content);
                     }
                     
                     $str = '';
-                    wp_enqueue_script( 'websitebox_new', plugin_dir_url( WEBSITEBOX_FILE ).'js/websitebox_new.js', array('jquery'), '', true);
-                    $str .= '
+                    wp_enqueue_script( 'websitebox_new', esc_attr(plugin_dir_url( WEBSITEBOX_FILE )).'js/websitebox_new.js', array('jquery'), '', true);
+                    echo '
                                <style type="text/css">
                                     /*组件主样式*/
                                     
@@ -80,7 +82,7 @@ class websitebox_foot{
                                     // 数据初始化
                                     var bodys = document.getElementsByTagName("body");
                                     var Obj = $("body").barrage({
-                                        data: '.json_encode($comment_content).', //数据列表
+                                        data: '.wp_json_encode($comment_content).', //数据列表
                                         row: '.count($comment_content).', //显示行数
                                         time: 2500, //间隔时间
                                         gap: 20, //每一个的间隙
@@ -101,7 +103,7 @@ class websitebox_foot{
                             })
                             </script>
                             ';
-    		        echo $str;
+    		       
             }
         }
         //留言
@@ -110,12 +112,12 @@ class websitebox_foot{
                 echo '
                     <div class="websitebox_cebian4" id="websitebox_cebian4">
                     
-            		  <h3 style="background:'.$websitebox_liuyan['color'].'">'.$websitebox_liuyan['title'].' <span class="websitebox_j1">+</span><span class="websitebox_j2">—</span></h3>
+            		  <h3 style="background:'.esc_attr($websitebox_liuyan['color']).'">'.esc_attr($websitebox_liuyan['title']).' <span class="websitebox_j1">+</span><span class="websitebox_j2">—</span></h3>
             		  <div class="websitebox_cebian4-1">
             		    <textarea id="websitebox_contently" name="websitebox_content" placeholder="请写下您的评价，对他人的帮助很大哦"></textarea>
             		  </div>
             		  <div class="websitebox_cebian4-2">
-            			  <a href="javascript:;" class="websitebox_fasong" style="background:'.$websitebox_liuyan['color'].'">发送</a>
+            			  <a href="javascript:;" class="websitebox_fasong" style="background:'.esc_attr($websitebox_liuyan['color']).'">发送</a>
             		  </div>
             		
             		</div>
@@ -123,14 +125,14 @@ class websitebox_foot{
             		jQuery(document).ready(function($){
             		    $(".websitebox_fasong").click(function(){
             		        var content = $("textarea[name=\'websitebox_content\']").val();
-            		        console.log(content)
+            		       
             		        if(!content) {
             		            alert("留言内容不可为空！！")
             		            return false
             		        }
             		        $.ajax({
                                 url:"/",
-                		  	    data:{data:\'{"websitebox":"15","nonce":"'.wp_create_nonce('websitebox').'","action":"websitebox","content":"\'+content+\'"}\'},
+                		  	    data:{data:\'{"websitebox":"15","nonce":"'.esc_attr(wp_create_nonce('websitebox')).'","action":"websitebox","content":"\'+content+\'"}\'},
                 		  		type:"post",
                 		  		dataType:"json",
                 		  		success:function(data){
@@ -173,14 +175,14 @@ class websitebox_foot{
                 
                     if(isset($websitebox_kefu['bg']) && $websitebox_kefu['bg']){
                         echo '
-                        <div style="right:-230px;background:'.$websitebox_kefu['bg'].'" class="websitebox_contactusdiyou_1" >
+                        <div style="right:-230px;background:'.esc_attr($websitebox_kefu['bg']).'" class="websitebox_contactusdiyou_1" >
                     
-                	    <div class="websitebox_hoverbtn_1" style="background:'.$websitebox_kefu['bg'].'">';
+                	    <div class="websitebox_hoverbtn_1" style="background:'.esc_attr($websitebox_kefu['bg']).'">';
                     }else{
                         echo '<div style="right:-230px;" class="websitebox_contactusdiyou_1" ><div class="websitebox_hoverbtn_1" >';
                     }
                 		echo '<span>联</span><span>系</span><span>我</span><span>们</span>
-                		<img class="websitebox_hoverimg_1" src="'.plugin_dir_url( WEBSITEBOX_FILE ).'images/hoverbtnbg.gif" height="9" width="13">
+                		<img class="websitebox_hoverimg_1" src="'.esc_url(plugins_url('../image/hoverbtnbg.gif',__FILE__)).'" height="9" width="13">
                 	</div>
                 	<div class="websitebox_conter_1">';
                 	    if(!empty($websitebox_phone) && isset($websitebox_phone['phone']) && $websitebox_phone['phone']){
@@ -188,9 +190,9 @@ class websitebox_foot{
                     			<dl class="websitebox_fn_cle_1">';
                     			if(isset($websitebox_phone['cls']) && $websitebox_phone['cls']){
                     			    if(isset($websitebox_kefu['icon']) && $websitebox_kefu['icon']){
-                    			        echo '<dt class="'.$websitebox_phone['cls'].'" style="color:'.$websitebox_kefu['icon'].'"></dt>';
+                    			        echo '<dt class="'.esc_attr($websitebox_phone['cls']).'" style="color:'.esc_attr($websitebox_kefu['icon']).'"></dt>';
                     			    }else{
-                    			        echo '<dt class="'.$websitebox_phone['cls'].'" style="color:#fff;"></dt>';
+                    			        echo '<dt class="'.esc_attr($websitebox_phone['cls']).'" style="color:#fff;"></dt>';
                     			    }
                     			}else{
                     			    echo '<dt></dt>';
@@ -198,7 +200,7 @@ class websitebox_foot{
                     			
                 				echo '<dd class="websitebox_f1_1">咨询热线</dd>';
                 				
-                				echo '<dd class="websitebox_f2_1" ><a class="ph_num_1" style="font-size: 16px;color: #fff;" href="tel:'.$websitebox_phone['phone'].'">'.$websitebox_phone['phone'].'</a></dd>';
+                				echo '<dd class="websitebox_f2_1" ><a class="ph_num_1" style="font-size: 16px;color: #fff;" href="tel:'.esc_attr($websitebox_phone['phone']).'">'.esc_attr($websitebox_phone['phone']).'</a></dd>';
                 				
                     			echo '</dl>
                     		</div>'; 
@@ -209,9 +211,9 @@ class websitebox_foot{
                         			<dl class="websitebox_fn_cle_1">';
                         			    if(isset($websitebox_qq['cls']) && $websitebox_qq['cls']){
                         			        if(isset($websitebox_kefu['icon']) && $websitebox_kefu['icon']){
-                        			            echo '<dt class="'.$websitebox_qq['cls'].'" style="color:'.$websitebox_kefu['icon'].'"></dt>';
+                        			            echo '<dt class="'.esc_attr($websitebox_qq['cls']).'" style="color:'.esc_attr($websitebox_kefu['icon']).'"></dt>';
                         			        }else{
-                        			            echo '<dt class="'.$websitebox_qq['cls'].'" style="color:#fff;"></dt>';
+                        			            echo '<dt class="'.esc_attr($websitebox_qq['cls']).'" style="color:#fff;"></dt>';
                         			        }
                         				    
                         			    }else{
@@ -221,7 +223,7 @@ class websitebox_foot{
                         				<dd class="websitebox_f2_1 websitebox_kefuQQ_1">';
                         					
                         					if(isset($websitebox_qq['qq']) && $websitebox_qq['qq']){
-                        					    echo '<a target="_blank" style="font-size: 16px;color: #fff;" href="http://wpa.qq.com/msgrd?v=3&amp;uin='.$websitebox_qq['qq'].'&amp;site=qq&amp;menu=yes">'.$websitebox_qq['qq'].'</a>';
+                        					    echo '<a target="_blank" style="font-size: 16px;color: #fff;" href="http://wpa.qq.com/msgrd?v=3&amp;uin='.esc_attr($websitebox_qq['qq']).'&amp;site=qq&amp;menu=yes">'.esc_attr($websitebox_qq['qq']).'</a>';
                         					}else{
                         					    echo '<a target="_blank" style="font-size: 16px;color: #fff;" href="http://wpa.qq.com/msgrd?v=3&amp;uin=&amp;site=qq&amp;menu=yes">请在后台设置</a>';
                         					}
@@ -237,9 +239,9 @@ class websitebox_foot{
                     			<dl class="websitebox_fn_cle_1">';
                     			    if(isset($websitebox_qrcode['cls']) && $websitebox_qrcode['cls']){
                     			        if(isset($websitebox_kefu['icon']) && $websitebox_kefu['icon']){
-                    			            echo '<dt class="'.$websitebox_qrcode['cls'].'" style="color:'.$websitebox_kefu['icon'].'"></dt>';
+                    			            echo '<dt class="'.esc_attr($websitebox_qrcode['cls']).'" style="color:'.esc_attr($websitebox_kefu['icon']).'"></dt>';
                     			        }else{
-                    			            echo '<dt class="'.$websitebox_qrcode['cls'].'" style="color:#fff;"></dt>';
+                    			            echo '<dt class="'.esc_attr($websitebox_qrcode['cls']).'" style="color:#fff;"></dt>';
                     			        }
                     				    
                     			    }else{
@@ -247,7 +249,7 @@ class websitebox_foot{
                     			    }
                     				echo '<dd class="websitebox_f1_1">二维码</dd>';
                     				if(isset($websitebox_qrcode['qrcode']) && $websitebox_qrcode['qrcode'] ){
-                    				    echo '<dd class="websitebox_f3_1"><img src="'.$websitebox_qrcode['qrcode'].'" height="73" width="73"></dd>';
+                    				    echo '<dd class="websitebox_f3_1"><img src="'.esc_url($websitebox_qrcode['qrcode']).'" height="73" width="73"></dd>';
                     				}else{
                     				    echo '<dd class="websitebox_f3_1"></dd>';
                     				}
@@ -260,9 +262,9 @@ class websitebox_foot{
                     			<dl class="websitebox_fn_cle_1">';
                     			    if(isset($websitebox_mail['cls']) && $websitebox_mail['cls']){
                     			        if(isset($websitebox_kefu['icon']) && $websitebox_kefu['icon']){
-                    			            echo '<dt class="'.$websitebox_mail['cls'].'" style="color:'.$websitebox_kefu['icon'].'"></dt>';
+                    			            echo '<dt class="'.esc_attr($websitebox_mail['cls']).'" style="color:'.esc_attr($websitebox_kefu['icon']).'"></dt>';
                     			        }else{
-                    			            echo '<dt class="'.$websitebox_mail['cls'].'" style="color:#fff;"></dt>';
+                    			            echo '<dt class="'.esc_attr($websitebox_mail['cls']).'" style="color:#fff;"></dt>';
                     			        }
                     				    
                     			    }else{
@@ -270,7 +272,7 @@ class websitebox_foot{
                     			    }
                     				echo '<dd class="websitebox_f1_1">邮箱</dd>';
                     				if(isset($websitebox_mail['mail']) && $websitebox_mail['mail'] ){
-                    				    echo '<dd class="websitebox_f2_1" style="color:#fff;font-size:16px;text-overflow:ellipsis;overflow:hidden;">'.$websitebox_mail['mail'].'</dd>';
+                    				    echo '<dd class="websitebox_f2_1" style="color:#fff;font-size:16px;text-overflow:ellipsis;overflow:hidden;">'.esc_attr($websitebox_mail['mail']).'</dd>';
                     				}else{
                     				    echo '<dd class="websitebox_f2_1"></dd>';
                     				}
@@ -283,9 +285,9 @@ class websitebox_foot{
                     			<dl class="websitebox_fn_cle_1">';
                     			    if(isset($websitebox_wb['cls']) && $websitebox_wb['cls']){
                     			        if(isset($websitebox_kefu['icon']) && $websitebox_kefu['icon']){
-                    			            echo '<dt class="'.$websitebox_wb['cls'].'" style="color:'.$websitebox_kefu['icon'].'"></dt>';
+                    			            echo '<dt class="'.esc_attr($websitebox_wb['cls']).'" style="color:'.esc_attr($websitebox_kefu['icon']).'"></dt>';
                     			        }else{
-                    			            echo '<dt class="'.$websitebox_wb['cls'].'" style="color:#fff;"></dt>';
+                    			            echo '<dt class="'.esc_attr($websitebox_wb['cls']).'" style="color:#fff;"></dt>';
                     			        }
                     				    
                     			    }else{
@@ -293,7 +295,7 @@ class websitebox_foot{
                     			    }
                     				echo '<dd class="websitebox_f1_1">链接</dd>';
                     				if(isset($websitebox_wb['wb']) && $websitebox_wb['wb'] ){
-                    				    echo '<dd class="websitebox_f2_1" ><a href="'.$websitebox_wb['wb'].'" style="width:100%;color:#fff;font-size:16px;text-overflow:ellipsis;overflow:hidden;display: block;white-space:nowrap;">'.$websitebox_wb['wb'].'</a></dd>';
+                    				    echo '<dd class="websitebox_f2_1" ><a href="'.esc_url($websitebox_wb['wb']).'" style="width:100%;color:#fff;font-size:16px;text-overflow:ellipsis;overflow:hidden;display: block;white-space:nowrap;">'.esc_attr($websitebox_wb['wb']).'</a></dd>';
                     				}else{
                     				    echo '<dd class="websitebox_f2_1"></dd>';
                     				}
@@ -302,7 +304,7 @@ class websitebox_foot{
                 		}
                 		echo '<div class="websitebox_blank0_1"></div>
                 		<div class="websitebox_dytimer_1">
-                			<span><a href="/" style="color:#fff;font-size:16px;overflow:hidden;text-overflow:ellipsis; white-space:nowrap;display: block;" >'.str_replace("https://","",str_replace('http://','',get_option('siteurl'))).'</a></span>
+                			<span><a href="/" style="color:#fff;font-size:16px;overflow:hidden;text-overflow:ellipsis; white-space:nowrap;display: block;" >'.esc_attr(str_replace("https://","",str_replace('http://','',get_option('siteurl')))).'</a></span>
                 		</div>
                 	</div>
                 </div>
@@ -312,11 +314,11 @@ class websitebox_foot{
                 <script type="text/javascript">
                 jQuery(document).ready(function($){
                 	$(".websitebox_contactusdiyou_1").hover(function() {
-                		$(".websitebox_hoverimg_1").attr("src","'.plugin_dir_url( WEBSITEBOX_FILE ).'images/hoverbtnbg1.gif");
+                		$(".websitebox_hoverimg_1").attr("src","'.esc_url(plugins_url('../images/hoverbtnbg1.gif',__FILE__)).'");
                 		$(".websitebox_diyoumask_1").fadeIn();
                 		$(".websitebox_contactusdiyou_1").animate({right:"0"},300); 
                 	}, function() {
-                		$(".websitebox_hoverimg_1").attr("src","'.plugin_dir_url( WEBSITEBOX_FILE ).'images/hoverbtnbg.gif");
+                		$(".websitebox_hoverimg_1").attr("src","'.esc_url(plugins_url('../images/hoverbtnbg.gif',__FILE__)).'");
                 		$(".websitebox_contactusdiyou_1").animate({right:"-230px"},300,function(){});
                 		$(".websitebox_diyoumask_1").fadeOut();
                 	});
@@ -330,20 +332,20 @@ class websitebox_foot{
                                 echo '<div class="websitebox_box_2">';
                                     if(isset($websitebox_phone['phone']) && $websitebox_phone['phone']){
                                         
-                                        echo '<a href="tel:'.$websitebox_phone['phone'].'">                  
+                                        echo '<a href="tel:'.esc_attr($websitebox_phone['phone']).'">                  
                                             <div class="websitebox_card_2 websitebox_bg-01_2" style="color:#fff;">';
                                                 if(isset($websitebox_phone['cls']) && $websitebox_phone['cls']){
                                                 
                     			                    if(isset($websitebox_kefu['icon']) && $websitebox_kefu['icon']){
-                                                        echo '<i class="'.$websitebox_phone['cls'].'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;color:'.$websitebox_kefu['icon'].'" ></i>';
+                                                        echo '<i class="'.esc_attr($websitebox_phone['cls']).'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;color:'.esc_attr($websitebox_kefu['icon']).'" ></i>';
                     			                    }else{
-                    			                        echo '<i class="'.$websitebox_phone['cls'].'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;" ></i>';
+                    			                        echo '<i class="'.esc_attr($websitebox_phone['cls']).'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;" ></i>';
                     			                    }
                                                 }else{
                                                     echo '<i class="websitebox websitebox-iconfontcolor39" icon-class="websitebox-iconfontcolor39" style="font-size:29px;"></i>';
                                                 }
                                                 
-                                                echo '<span class="websitebox_card-content_2">'.$websitebox_phone['phone'].'</span>
+                                                echo '<span class="websitebox_card-content_2">'.esc_attr($websitebox_phone['phone']).'</span>
                                             </div>       
                                         </a>';
                                     }
@@ -352,20 +354,20 @@ class websitebox_foot{
                             if(!empty($websitebox_qq) && isset($websitebox_qq['qq']) && $websitebox_qq['qq']){
                                 echo '<div class="websitebox_box_2">';
                                      if(isset($websitebox_qq['qq']) && $websitebox_qq['qq']){
-                                        echo '<a href="http://wpa.qq.com/msgrd?v=3&amp;uin='.$websitebox_qq['qq'].'&amp;site=qq&amp;menu=yes">                  
+                                        echo '<a href="http://wpa.qq.com/msgrd?v=3&amp;uin='.esc_attr($websitebox_qq['qq']).'&amp;site=qq&amp;menu=yes">                  
                                             <div class="websitebox_card_2 websitebox_bg-02_2" style="color:#fff;">';
                                                 if(isset($websitebox_qq['cls']) && $websitebox_qq['cls']){
                                                 
                     			                    if(isset($websitebox_kefu['icon']) && $websitebox_kefu['icon']){
-                                                        echo '<i class="'.$websitebox_qq['cls'].'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;color:'.$websitebox_kefu['icon'].'" ></i>';
+                                                        echo '<i class="'.esc_attr($websitebox_qq['cls']).'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;color:'.esc_attr($websitebox_kefu['icon']).'" ></i>';
                     			                    }else{
-                    			                        echo '<i class="'.$websitebox_qq['cls'].'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;" ></i>';
+                    			                        echo '<i class="'.esc_attr($websitebox_qq['cls']).'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;" ></i>';
                     			                    }
                                                 }else{
                                                     echo '<i class="websitebox websitebox-qq1" icon-class="websitebox-qq1" style="font-size:29px;"></i>';
                                                 }
                                                 echo '
-                                                <span class="websitebox_card-content_2">'.$websitebox_qq['qq'].'</span>
+                                                <span class="websitebox_card-content_2">'.esc_attr($websitebox_qq['qq']).'</span>
                                             </div>            
                                         </a>';
                                      }else{
@@ -386,15 +388,15 @@ class websitebox_foot{
                                                 if(isset($websitebox_mail['cls']) && $websitebox_mail['cls']){
                                                 
                     			                    if(isset($websitebox_kefu['icon']) && $websitebox_kefu['icon']){
-                                                        echo '<i class="'.$websitebox_mail['cls'].'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;color:'.$websitebox_kefu['icon'].'" ></i>';
+                                                        echo '<i class="'.esc_attr($websitebox_mail['cls']).'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;color:'.esc_attr($websitebox_kefu['icon']).'" ></i>';
                     			                    }else{
-                    			                        echo '<i class="'.$websitebox_mail['cls'].'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;" ></i>';
+                    			                        echo '<i class="'.esc_attr($websitebox_mail['cls']).'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;" ></i>';
                     			                    }
                                                 }else{
                                                     echo '<i class="layui-icon layui-icon-cellphone" style="font-size: 30px;"></i>';
                                                 }
                                                 echo '
-                                                <span class="websitebox_card-content_2">'.$websitebox_mail['mail'].'</span>
+                                                <span class="websitebox_card-content_2">'.esc_attr($websitebox_mail['mail']).'</span>
                                             </div>            
                                         </a>
                                     </div>';
@@ -408,15 +410,15 @@ class websitebox_foot{
                                                 if(isset($websitebox_qqqun['cls']) && $websitebox_qqqun['cls']){
                                                 
                     			                    if(isset($websitebox_kefu['icon']) && $websitebox_kefu['icon']){
-                                                        echo '<i class="'.$websitebox_qqqun['cls'].'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;color:'.$websitebox_kefu['icon'].'" ></i>';
+                                                        echo '<i class="'.esc_attr($websitebox_qqqun['cls']).'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;color:'.esc_attr($websitebox_kefu['icon']).'" ></i>';
                     			                    }else{
-                    			                        echo '<i class="'.$websitebox_qqqun['cls'].'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;" ></i>';
+                    			                        echo '<i class="'.esc_attr($websitebox_qqqun['cls']).'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;" ></i>';
                     			                    }
                                                 }else{
                                                     echo '<i class="websitebox websitebox-qqqun" icon-class="websitebox-qqqun" style="font-size:29px;"></i>';
                                                 }
                                                 echo '
-                                                <span class="websitebox_card-content_2">'.$websitebox_qqqun['qqqun'].'</span>
+                                                <span class="websitebox_card-content_2">'.esc_attr($websitebox_qqqun['qqqun']).'</span>
                                             </div>            
                                         </a>
                                     </div>';
@@ -425,20 +427,20 @@ class websitebox_foot{
                             if(!empty($websitebox_wb)){
                                 if(isset($websitebox_wb['wb']) && $websitebox_wb['wb']){
                                     echo '<div class="websitebox_box_2">
-                                        <a href="'.$websitebox_wb['wb'].'">                  
+                                        <a href="'.esc_url_raw($websitebox_wb['wb']).'">                  
                                             <div class="websitebox_card_2 websitebox_bg-05_2" style="color:#fff;">';
                                                 if(isset($websitebox_wb['cls']) && $websitebox_wb['cls']){
                                                 
                     			                    if(isset($websitebox_kefu['icon']) && $websitebox_kefu['icon']){
-                                                        echo '<i class="'.$websitebox_wb['cls'].'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;color:'.$websitebox_kefu['icon'].'" ></i>';
+                                                        echo '<i class="'.esc_attr($websitebox_wb['cls']).'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;color:'.esc_attr($websitebox_kefu['icon']).'" ></i>';
                     			                    }else{
-                    			                        echo '<i class="'.$websitebox_wb['cls'].'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;" ></i>';
+                    			                        echo '<i class="'.esc_attr($websitebox_wb['cls']).'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;" ></i>';
                     			                    }
                                                 }else{
                                                     echo '<i class="websitebox websitebox-xinlang" icon-class="websitebox-xinlang" style="font-size:29px;"></i>';
                                                 }
                                                 echo '
-                                                <span class="websitebox_card-content_2">'.$websitebox_wb['wb'].'</span>
+                                                <span class="websitebox_card-content_2">'.esc_attr($websitebox_wb['wb']).'</span>
                                             </div>            
                                         </a>
                                     </div>';
@@ -457,10 +459,10 @@ class websitebox_foot{
                     echo '
                         <style>
                             .websitebox_ul_3 li{
-                                background:'.$kefu3_back.';
+                                background:'.esc_attr($kefu3_back).';
                             }
                             .websitebox_li1_3_box{
-                                background:'.$kefu3_back.';
+                                background:'.esc_attr($kefu3_back).';
                             }
                         </style>
                     	<ul class="websitebox_ul_3" >';
@@ -469,17 +471,17 @@ class websitebox_foot{
                         		    if(isset($websitebox_phone['cls']) && $websitebox_phone['cls']){
                                                 
         			                    if(isset($websitebox_kefu['icon']) && $websitebox_kefu['icon']){
-                                            echo '<i class="'.$websitebox_phone['cls'].'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;color:'.$websitebox_kefu['icon'].'" ></i>';
+                                            echo '<i class="'.esc_attr($websitebox_phone['cls']).'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;color:'.esc_attr($websitebox_kefu['icon']).'" ></i>';
         			                    }else{
-        			                        echo '<i class="'.$websitebox_phone['cls'].'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;color:#fff;" ></i>';
+        			                        echo '<i class="'.esc_attr($websitebox_phone['cls']).'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;color:#fff;" ></i>';
         			                    }
                                     }else{
-                                        echo '<i class="websitebox websitebox-iconfontcolor39" icon-class="websitebox-iconfontcolor39" style="font-size:29px;color:'.$websitebox_kefu['icon'].'"></i>';
+                                        echo '<i class="websitebox websitebox-iconfontcolor39" icon-class="websitebox-iconfontcolor39" style="font-size:29px;color:'.esc_attr($websitebox_kefu['icon']).'"></i>';
                                     }
                         		    
                         		    echo '<div class="websitebox_li1_3_box">';
                         		        if(isset($websitebox_phone['phone']) && $websitebox_phone['phone']){
-                            		        echo '<span><a href="tel:'.$websitebox_phone['phone'].'">'.$websitebox_phone['phone'].'</a></span>';
+                            		        echo '<span><a href="tel:'.esc_attr($websitebox_phone['phone']).'">'.esc_attr($websitebox_phone['phone']).'</a></span>';
                         		        }else{
                         		            echo '<span style="width: 140px;display: block;"><a href="javascript:;">请在后台设置</a></span>';
                         		        }
@@ -491,17 +493,17 @@ class websitebox_foot{
                 		            if(isset($websitebox_qq['cls']) && $websitebox_qq['cls']){
                                                 
         			                    if(isset($websitebox_kefu['icon']) && $websitebox_kefu['icon']){
-                                            echo '<i class="'.$websitebox_qq['cls'].'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;color:'.$websitebox_kefu['icon'].'" ></i>';
+                                            echo '<i class="'.esc_attr($websitebox_qq['cls']).'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;color:'.esc_attr($websitebox_kefu['icon']).'" ></i>';
         			                    }else{
-        			                        echo '<i class="'.$websitebox_qq['cls'].'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;color:#fff;" ></i>';
+        			                        echo '<i class="'.esc_attr($websitebox_qq['cls']).'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;color:#fff;" ></i>';
         			                    }
                                     }else{
-                                        echo '<i class="websitebox websitebox-qq1" icon-class="websitebox-qq1" style="font-size:29px;color:'.$websitebox_kefu['icon'].'"></i>';
+                                        echo '<i class="websitebox websitebox-qq1" icon-class="websitebox-qq1" style="font-size:29px;color:'.esc_attr($websitebox_kefu['icon']).'"></i>';
                                     }
                         			
                         		    echo '<div class="websitebox_li1_3_box">';
                         		         if(isset($websitebox_qq['cls']) && $websitebox_qq['cls']){
-                        		             echo '<span><a href="http://wpa.qq.com/msgrd?v=3&amp;uin='.$websitebox_qq['qq'].'&amp;site=qq&amp;menu=yes">'.$websitebox_qq['qq'].'</a></span>';
+                        		             echo '<span><a href="http://wpa.qq.com/msgrd?v=3&amp;uin='.esc_attr($websitebox_qq['qq']).'&amp;site=qq&amp;menu=yes">'.esc_attr($websitebox_qq['qq']).'</a></span>';
                         		         }else{
                         		            echo '<span style="width: 140px;display: block;"><a href="javascript:;">请在后台设置</a></span>';
                         		         }
@@ -514,17 +516,17 @@ class websitebox_foot{
                                     if(isset($websitebox_mail['cls']) && $websitebox_mail['cls']){
                                                 
                                         if(isset($websitebox_kefu['icon']) && $websitebox_kefu['icon']){
-                                            echo '<i class="'.$websitebox_mail['cls'].'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;color:'.$websitebox_kefu['icon'].'" ></i>';
+                                            echo '<i class="'.esc_attr($websitebox_mail['cls']).'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;color:'.esc_attr($websitebox_kefu['icon']).'" ></i>';
                                         }else{
-                                           echo '<i class="'.$websitebox_mail['cls'].'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;color:#fff;" ></i>';
+                                           echo '<i class="'.esc_attr($websitebox_mail['cls']).'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;color:#fff;" ></i>';
                                         }
                                     }else{
-                                        echo '<i class="layui-icon layui-icon-cellphone" style="font-size: 30px;color:'.$websitebox_kefu['icon'].'"></i>';
+                                        echo '<i class="layui-icon layui-icon-cellphone" style="font-size: 30px;color:'.esc_attr($websitebox_kefu['icon']).'"></i>';
                                     }
                                
                                     echo '<div class="websitebox_li1_3_box">';
                                       if(isset($websitebox_mail['mail']) && $websitebox_mail['mail']){
-                                          echo '<span >'.$websitebox_mail['mail'].'</span>';
+                                          echo '<span >'.esc_attr($websitebox_mail['mail']).'</span>';
                                       }else{
                                           echo '<spanstyle="width: 140px;display: block;">请在后台设置</span>';
                                       }
@@ -537,17 +539,17 @@ class websitebox_foot{
                         		    if(isset($websitebox_qqqun['cls']) && $websitebox_qqqun['cls']){
                                                 
                                         if(isset($websitebox_kefu['icon']) && $websitebox_kefu['icon']){
-                                            echo '<i class="'.$websitebox_qqqun['cls'].'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;color:'.$websitebox_kefu['icon'].'" ></i>';
+                                            echo '<i class="'.esc_attr($websitebox_qqqun['cls']).'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;color:'.esc_attr($websitebox_kefu['icon']).'" ></i>';
                                         }else{
-                                           echo '<i class="'.$websitebox_qqqun['cls'].'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;color:#fff;" ></i>';
+                                           echo '<i class="'.esc_attr($websitebox_qqqun['cls']).'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;color:#fff;" ></i>';
                                         }
                                     }else{
-                                        echo '<i class="websitebox websitebox-qqqun" icon-class="websitebox-qqqun" style="font-size:29px;color:'.$websitebox_kefu['icon'].'"></i>';
+                                        echo '<i class="websitebox websitebox-qqqun" icon-class="websitebox-qqqun" style="font-size:29px;color:'.esc_attr($websitebox_kefu['icon']).'"></i>';
                                     }
                         			
                         		    echo '<div class="websitebox_li1_3_box">';
                         		        if(isset($websitebox_qqqun['qqqun']) && $websitebox_qqqun['qqqun']){
-                                          echo '<span>'.$websitebox_qqqun['qqqun'].'</span>';
+                                          echo '<span>'.esc_attr($websitebox_qqqun['qqqun']).'</span>';
                                       }else{
                                           echo '<span style="width: 140px;display: block;">请在后台设置</span>';
                                       }
@@ -559,17 +561,17 @@ class websitebox_foot{
                         		    if(isset($websitebox_wb['cls']) && $websitebox_wb['cls']){
                                                 
                                         if(isset($websitebox_kefu['icon']) && $websitebox_kefu['icon']){
-                                            echo '<i class="'.$websitebox_wb['cls'].'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;color:'.$websitebox_kefu['icon'].'" ></i>';
+                                            echo '<i class="'.esc_attr($websitebox_wb['cls']).'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;color:'.esc_attr($websitebox_kefu['icon']).'" ></i>';
                                         }else{
-                                           echo '<i class="'.$websitebox_wb['cls'].'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;color:#fff;" ></i>';
+                                           echo '<i class="'.esc_attr($websitebox_wb['cls']).'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;color:#fff;" ></i>';
                                         }
                                     }else{
-                                        echo '<i class="websitebox websitebox-xinlang" icon-class="websitebox-xinlang" style="font-size:29px;color:'.$websitebox_kefu['icon'].'"></i>';
+                                        echo '<i class="websitebox websitebox-xinlang" icon-class="websitebox-xinlang" style="font-size:29px;color:'.esc_attr($websitebox_kefu['icon']).'"></i>';
                                     }
                         			
                         		    echo '<div class="websitebox_li1_3_box">';
                         		        if(isset($websitebox_wb['wb']) && $websitebox_wb['wb']){
-                                          echo '<span><a href="'.$websitebox_wb['wb'].'">'.$websitebox_wb['wb'].'</a></span>';
+                                          echo '<span><a href="'.esc_attr($websitebox_wb['wb']).'">'.esc_attr($websitebox_wb['wb']).'</a></span>';
                                         }else{
                                               echo '<span style="width: 140px;display: block;">请在后台设置</span>';
                                         }
@@ -582,23 +584,23 @@ class websitebox_foot{
                         		    if(isset($websitebox_qrcode['cls']) && $websitebox_qrcode['cls']){
                                                 
                                         if(isset($websitebox_kefu['icon']) && $websitebox_kefu['icon']){
-                                            echo '<i class="'.$websitebox_qrcode['cls'].'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;color:'.$websitebox_kefu['icon'].'" ></i>';
+                                            echo '<i class="'.esc_attr($websitebox_qrcode['cls']).'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;color:'.esc_attr($websitebox_kefu['icon']).'" ></i>';
                                         }else{
-                                           echo '<i class="'.$websitebox_qrcode['cls'].'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;color:#fff;" ></i>';
+                                           echo '<i class="'.esc_attr($websitebox_qrcode['cls']).'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;color:#fff;" ></i>';
                                         }
                                     }else{
-                                        echo '<i class="websitebox websitebox-erweima" icon-class="websitebox-erweima" style="font-size:29px;color:'.$websitebox_kefu['icon'].'"></i>';
+                                        echo '<i class="websitebox websitebox-erweima" icon-class="websitebox-erweima" style="font-size:29px;color:'.esc_attr($websitebox_kefu['icon']).'"></i>';
                                     }
                         		    echo '<div class="websitebox_li1_3_box">';
                         		        if(isset($websitebox_qrcode['qrcode']) && $websitebox_qrcode['qrcode']){
-                        		            echo '<img src="'.$websitebox_qrcode['qrcode'].'">';
+                        		            echo '<img src="'.esc_attr($websitebox_qrcode['qrcode']).'">';
                         		        }
                         		    echo '</div>
                         		</li>';
                     		}
                     		 if(isset($websitebox_kefu['icon']) && $websitebox_kefu['icon']){
                     		echo '<li class="websitebox_li7_3">
-                    		    <i class="websitebox websitebox-top" icon-class="websitebox-top" style="font-size:29px;color:'.$websitebox_kefu['icon'].'"></i>
+                    		    <i class="websitebox websitebox-top" icon-class="websitebox-top" style="font-size:29px;color:'.esc_attr($websitebox_kefu['icon']).'"></i>
                     		</li>';
                     		}else{
                     		    echo '<li class="websitebox_li7_3">
@@ -634,15 +636,15 @@ class websitebox_foot{
                     echo '
                         <style>
                             .websitebox_side_4 ul li {
-                                background-color:'.$kefu4_back.';
+                                background-color:'.esc_attr($kefu4_back).';
                             }
                         </style>
                         <script type="text/javascript">
                         jQuery(document).ready(function($){
                         	$(".websitebox_side_4 ul li").hover(function(){
-                        		$(this).find(".websitebox_sidebox_4").stop().animate({"width":"220px"},200).css({"opacity":"1","filter":"Alpha(opacity=100)","background-color":"'.$kefu4_back.'"})	
+                        		$(this).find(".websitebox_sidebox_4").stop().animate({"width":"220px"},200).css({"opacity":"1","filter":"Alpha(opacity=100)","background-color":"'.esc_attr($kefu4_back).'"})	
                         	},function(){
-                        		$(this).find(".websitebox_sidebox_4").stop().animate({"width":"54px"},200).css({"opacity":"1","filter":"Alpha(opacity=100)","background-color":"'.$kefu4_back.'"})
+                        		$(this).find(".websitebox_sidebox_4").stop().animate({"width":"54px"},200).css({"opacity":"1","filter":"Alpha(opacity=100)","background-color":"'.esc_attr($kefu4_back).'"})
                         	});
                         // 	function goTop(){
                         //     	$("html").animate({"scrollTop":0},600);
@@ -668,19 +670,19 @@ class websitebox_foot{
                     	     if(!empty($websitebox_phone)){
                     	         if(isset($websitebox_phone['phone']) && $websitebox_phone['phone']){
                     		        echo '<li>
-                    		                <a href="tel:'.$websitebox_phone['phone'].'">
+                    		                <a href="tel:'.esc_attr($websitebox_phone['phone']).'">
                     		                   <div class="websitebox_sidebox_4">';
                     		                        if(isset($websitebox_phone['cls']) && $websitebox_phone['cls']){
                                                 
                                                         if(isset($websitebox_kefu['icon']) && $websitebox_kefu['icon']){
-                                                            echo '<i class="'.$websitebox_phone['cls'].'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;color:'.$websitebox_kefu['icon'].'" ></i>';
+                                                            echo '<i class="'.esc_attr($websitebox_phone['cls']).'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;color:'.esc_attr($websitebox_kefu['icon']).'" ></i>';
                                                         }else{
-                                                           echo '<i class="'.$websitebox_phone['cls'].'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;color:#fff;" ></i>';
+                                                           echo '<i class="'.esc_attr($websitebox_phone['cls']).'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;color:#fff;" ></i>';
                                                         }
                                                     }else{
                                                         echo '<i class="websitebox websitebox-iconfontcolor39" icon-class="websitebox-iconfontcolor39" style="font-size:29px;"></i>';
                                                     }
-                    		                        echo $websitebox_phone['phone'].'
+                    		                        echo esc_attr($websitebox_phone['phone']).'
                     		                   </div>
                     		                </a>
                     		              </li>';
@@ -692,14 +694,14 @@ class websitebox_foot{
                         		            if(isset($websitebox_mail['cls']) && $websitebox_mail['cls']){
                                                 
                                                 if(isset($websitebox_kefu['icon']) && $websitebox_kefu['icon']){
-                                                    echo '<i class="'.$websitebox_mail['cls'].'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;color:'.$websitebox_kefu['icon'].'" ></i>';
+                                                    echo '<i class="'.esc_attr($websitebox_mail['cls']).'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;color:'.esc_attr($websitebox_kefu['icon']).'" ></i>';
                                                 }else{
-                                                   echo '<i class="'.$websitebox_mail['cls'].'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;color:#fff;" ></i>';
+                                                   echo '<i class="'.esc_attr($websitebox_mail['cls']).'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;color:#fff;" ></i>';
                                                 }
                                             }else{
                                                 echo '<i class="layui-icon layui-icon-cellphone" style="font-size: 30px;"></i>';
                                             }
-                        		            echo $websitebox_mail['mail'].'
+                        		            echo esc_attr($websitebox_mail['mail']).'
                         		           </div>
                         		      </li>';
                     	         }
@@ -710,15 +712,15 @@ class websitebox_foot{
                         		            if(isset($websitebox_qqqun['cls']) && $websitebox_qqqun['cls']){
                                                 
                                                 if(isset($websitebox_kefu['icon']) && $websitebox_kefu['icon']){
-                                                    echo '<i class="'.$websitebox_qqqun['cls'].'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;color:'.$websitebox_kefu['icon'].'" ></i>';
+                                                    echo '<i class="'.esc_attr($websitebox_qqqun['cls']).'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;color:'.esc_attr($websitebox_kefu['icon']).'" ></i>';
                                                 }else{
-                                                   echo '<i class="'.$websitebox_qqqun['cls'].'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;color:#fff;" ></i>';
+                                                   echo '<i class="'.esc_attr($websitebox_qqqun['cls']).'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;color:#fff;" ></i>';
                                                 }
                                             }else{
                                                 echo '<i class="websitebox websitebox-qqqun" icon-class="websitebox-qqqun" style="font-size:29px;"></i>';
                                             }
                         		            
-                        		            echo $websitebox_qqqun['qqqun'].'
+                        		            echo esc_attr($websitebox_qqqun['qqqun']).'
                         		            </div>
                         		          </li>';
                     	         }
@@ -726,18 +728,18 @@ class websitebox_foot{
                     	     if(!empty($websitebox_qq)){
                     	         if(isset($websitebox_qq['qq']) && $websitebox_qq['qq']){
                             		echo '<li>
-                            		        <a href="http://wpa.qq.com/msgrd?v=3&amp;uin='.$websitebox_qq['qq'].'&amp;site=qq&amp;menu=yes" ><div class="websitebox_sidebox_4">';
+                            		        <a href="http://wpa.qq.com/msgrd?v=3&amp;uin='.esc_attr($websitebox_qq['qq']).'&amp;site=qq&amp;menu=yes" ><div class="websitebox_sidebox_4">';
                             		            if(isset($websitebox_qq['cls']) && $websitebox_qq['cls']){
                                                 
                                                     if(isset($websitebox_kefu['icon']) && $websitebox_kefu['icon']){
-                                                        echo '<i class="'.$websitebox_qq['cls'].'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;color:'.$websitebox_kefu['icon'].'" ></i>';
+                                                        echo '<i class="'.esc_attr($websitebox_qq['cls']).'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;color:'.esc_attr($websitebox_kefu['icon']).'" ></i>';
                                                     }else{
-                                                       echo '<i class="'.$websitebox_qq['cls'].'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;color:#fff;" ></i>';
+                                                       echo '<i class="'.esc_attr($websitebox_qq['cls']).'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;color:#fff;" ></i>';
                                                     }
                                                 }else{
                                                     echo '<i class="websitebox websitebox-qq1" icon-class="websitebox-qq1" style="font-size:29px;"></i>';
                                                 }
-                                    		    echo $websitebox_qq['qq'].'
+                                    		    echo esc_attr($websitebox_qq['qq']).'
                                     		    </div>
                             		        </a>
                             		    </li>';
@@ -745,26 +747,26 @@ class websitebox_foot{
                     	     }
                             if(!empty($websitebox_wb)){
                                 if(isset($websitebox_wb['wb']) && $websitebox_wb['wb']){
-                            		echo '<li><a href="'.$websitebox_wb['wb'].'" >
+                            		echo '<li><a href="'.esc_url_raw($websitebox_wb['wb']).'" >
                             		        <div class="websitebox_sidebox_4">';
                             		            if(isset($websitebox_wb['cls']) && $websitebox_wb['cls']){
                                                 
                                                     if(isset($websitebox_kefu['icon']) && $websitebox_kefu['icon']){
-                                                        echo '<i class="'.$websitebox_wb['cls'].'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;color:'.$websitebox_kefu['icon'].'" ></i>';
+                                                        echo '<i class="'.esc_attr($websitebox_wb['cls']).'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;color:'.esc_attr($websitebox_kefu['icon']).'" ></i>';
                                                     }else{
-                                                       echo '<i class="'.$websitebox_wb['cls'].'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;color:#fff;" ></i>';
+                                                       echo '<i class="'.esc_attr($websitebox_wb['cls']).'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;color:#fff;" ></i>';
                                                     }
                                                 }else{
                                                     echo '<i class="websitebox websitebox-xinlang" icon-class="websitebox-xinlang" style="font-size:29px;"></i>';
                                                 }
                             		            
-                            		            echo $websitebox_wb['wb'].'
+                            		            echo esc_attr($websitebox_wb['wb']).'
                             		            </div>
                             		            </a>
                             		        </li>';
                                 }
                             }
-                    		echo '<li style="border:none;" id="goTop4"><a href="javascript:;" class="websitebox_sidetop_4" ><img src="'.plugin_dir_url( WEBSITEBOX_FILE ).'images/side_icon05.png"></a></li>
+                    		echo '<li style="border:none;" id="goTop4"><a href="javascript:;" class="websitebox_sidetop_4" ><img src="'.esc_url(plugins_url('../images/side_icon05.png',__FILE__)).'"></a></li>
                     	</ul>
                     </div> ';
                 }elseif($websitebox_kefu['type']==5){
@@ -776,9 +778,9 @@ class websitebox_foot{
                     echo '
                         <style>
                             .websitebox_right_nav li{
-                                background:'.$kefu5_back.';
+                                background:'.esc_attr($kefu5_back).';
                             }
-                            .websitebox_right_nav li:hover{background:'.$kefu5_back.'}
+                            .websitebox_right_nav li:hover{background:'.esc_attr($kefu5_back).'}
                         </style>
                         <ul class="websitebox_right_nav">';
                         if(!empty($websitebox_qq)){
@@ -789,9 +791,9 @@ class websitebox_foot{
                                     if(isset($websitebox_qq['cls']) && $websitebox_qq['cls']){
                                                 
                                         if(isset($websitebox_kefu['icon']) && $websitebox_kefu['icon']){
-                                            echo '<i class="'.$websitebox_qq['cls'].'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;color:'.$websitebox_kefu['icon'].'" ></i>';
+                                            echo '<i class="'.esc_attr($websitebox_qq['cls']).'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;color:'.esc_attr($websitebox_kefu['icon']).'" ></i>';
                                         }else{
-                                           echo '<i class="'.$websitebox_qq['cls'].'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;" ></i>';
+                                           echo '<i class="'.esc_attr($websitebox_qq['cls']).'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;" ></i>';
                                         }
                                     }else{
                                         echo '<i class="websitebox websitebox-qq1" icon-class="websitebox-qq1" style="font-size:29px;"></i>';
@@ -802,20 +804,20 @@ class websitebox_foot{
                                     <div class="websitebox_hb">
                                        <h5>在线咨询</h5>
                                        <div class="websitebox_qqtalk">
-                                          <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin='.$websitebox_qq['qq'].'&site=qq&menu=yes">
+                                          <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin='.esc_attr($websitebox_qq['qq']).'&site=qq&menu=yes">
                                              <span>';
                                              if(isset($websitebox_qq['cls']) && $websitebox_qq['cls']){
                                                 
                                                 if(isset($websitebox_kefu['icon']) && $websitebox_kefu['icon']){
-                                                    echo '<i class="'.$websitebox_qq['cls'].'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;color:'.$websitebox_kefu['icon'].'" ></i>';
+                                                    echo '<i class="'.esc_attr($websitebox_qq['cls']).'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;color:'.esc_attr($websitebox_kefu['icon']).'" ></i>';
                                                 }else{
-                                                   echo '<i class="'.$websitebox_qq['cls'].'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;" ></i>';
+                                                   echo '<i class="'.esc_attr($websitebox_qq['cls']).'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;" ></i>';
                                                 }
                                             }else{
                                                 echo '<i class="websitebox websitebox-qq1" icon-class="websitebox-qq1" style="font-size:29px;"></i>';
                                             }
                                             echo '</span>
-                                             <p>'.$websitebox_qq['qq'].'</p>
+                                             <p>'.esc_attr($websitebox_qq['qq']).'</p>
                                           </a>
                                        </div>
                                     </div>
@@ -830,9 +832,9 @@ class websitebox_foot{
                                         if(isset($websitebox_phone['cls']) && $websitebox_phone['cls']){
                                                 
                                             if(isset($websitebox_kefu['icon']) && $websitebox_kefu['icon']){
-                                                echo '<i class="'.$websitebox_phone['cls'].'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;color:'.$websitebox_kefu['icon'].'" ></i>';
+                                                echo '<i class="'.esc_attr($websitebox_phone['cls']).'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;color:'.esc_attr($websitebox_kefu['icon']).'" ></i>';
                                             }else{
-                                               echo '<i class="'.$websitebox_phone['cls'].'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;" ></i>';
+                                               echo '<i class="'.esc_attr($websitebox_phone['cls']).'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;" ></i>';
                                             }
                                         }else{
                                             echo '<i class="websitebox websitebox-iconfontcolor39" icon-class="websitebox-iconfontcolor39" style="font-size:29px;"></i>';
@@ -848,15 +850,15 @@ class websitebox_foot{
                                                  if(isset($websitebox_phone['cls']) && $websitebox_phone['cls']){
                                                     
                                                     if(isset($websitebox_kefu['icon']) && $websitebox_kefu['icon']){
-                                                        echo '<i class="'.$websitebox_phone['cls'].'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;color:'.$websitebox_kefu['icon'].'" ></i>';
+                                                        echo '<i class="'.esc_attr($websitebox_phone['cls']).'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;color:'.esc_attr($websitebox_kefu['icon']).'" ></i>';
                                                     }else{
-                                                       echo '<i class="'.$websitebox_phone['cls'].'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;" ></i>';
+                                                       echo '<i class="'.esc_attr($websitebox_phone['cls']).'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;" ></i>';
                                                     }
                                                 }else{
                                                     echo '<i class="websitebox websitebox-qq1" icon-class="websitebox-qq1" style="font-size:29px;"></i>';
                                                 }
                                                 echo '</span>
-                                               <p>'.$websitebox_phone['phone'].'</p>
+                                               <p>'.esc_attr($websitebox_phone['phone']).'</p>
                                             </div>
                                         </div>
                                      </div>
@@ -871,9 +873,9 @@ class websitebox_foot{
                                     if(isset($websitebox_qqqun['cls']) && $websitebox_qqqun['cls']){
                                                 
                                         if(isset($websitebox_kefu['icon']) && $websitebox_kefu['icon']){
-                                            echo '<i class="'.$websitebox_qqqun['cls'].'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;color:'.$websitebox_kefu['icon'].'" ></i>';
+                                            echo '<i class="'.esc_attr($websitebox_qqqun['cls']).'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;color:'.esc_attr($websitebox_kefu['icon']).'" ></i>';
                                         }else{
-                                           echo '<i class="'.$websitebox_qqqun['cls'].'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;" ></i>';
+                                           echo '<i class="'.esc_attr($websitebox_qqqun['cls']).'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;" ></i>';
                                         }
                                     }else{
                                         echo '<i class="websitebox websitebox-qqqun" icon-class="websitebox-qqqun" style="font-size:29px;">';
@@ -889,15 +891,15 @@ class websitebox_foot{
                                             if(isset($websitebox_qqqun['cls']) && $websitebox_qqqun['cls']){
                                                         
                                                 if(isset($websitebox_kefu['icon']) && $websitebox_kefu['icon']){
-                                                    echo '<i class="'.$websitebox_qqqun['cls'].'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;color:'.$websitebox_kefu['icon'].'" ></i>';
+                                                    echo '<i class="'.esc_attr($websitebox_qqqun['cls']).'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;color:'.esc_attr($websitebox_kefu['icon']).'" ></i>';
                                                 }else{
-                                                   echo '<i class="'.$websitebox_qqqun['cls'].'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;" ></i>';
+                                                   echo '<i class="'.esc_attr($websitebox_qqqun['cls']).'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;" ></i>';
                                                 }
                                             }else{
                                                 echo '<i class="websitebox websitebox-qqqun" icon-class="websitebox-qqqun" style="font-size:29px;">';
                                             }
                                             echo '</span>
-                                             <p>'.$websitebox_qqqun['qqqun'].'</p>
+                                             <p>'.esc_attr($websitebox_qqqun['qqqun']).'</p>
                                           
                                        </div>
                                     </div>
@@ -913,9 +915,9 @@ class websitebox_foot{
                                     if(isset($websitebox_mail['cls']) && $websitebox_mail['cls']){
                                                 
                                         if(isset($websitebox_kefu['icon']) && $websitebox_kefu['icon']){
-                                            echo '<i class="'.$websitebox_mail['cls'].'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;color:'.$websitebox_kefu['icon'].'" ></i>';
+                                            echo '<i class="'.esc_attr($websitebox_mail['cls']).'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;color:'.esc_attr($websitebox_kefu['icon']).'" ></i>';
                                         }else{
-                                           echo '<i class="'.$websitebox_mail['cls'].'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;" ></i>';
+                                           echo '<i class="'.esc_attr($websitebox_mail['cls']).'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;" ></i>';
                                         }
                                     }else{
                                         echo '<i class="websitebox websitebox-qq1" icon-class="websitebox-qq1" style="font-size:29px;"></i>';
@@ -931,15 +933,15 @@ class websitebox_foot{
                                              if(isset($websitebox_mail['cls']) && $websitebox_mail['cls']){
                                                 
                                                 if(isset($websitebox_kefu['icon']) && $websitebox_kefu['icon']){
-                                                    echo '<i class="'.$websitebox_mail['cls'].'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;color:'.$websitebox_kefu['icon'].'" ></i>';
+                                                    echo '<i class="'.esc_attr($websitebox_mail['cls']).'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;color:'.esc_attr($websitebox_kefu['icon']).'" ></i>';
                                                 }else{
-                                                   echo '<i class="'.$websitebox_mail['cls'].'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;" ></i>';
+                                                   echo '<i class="'.esc_attr($websitebox_mail['cls']).'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;" ></i>';
                                                 }
                                             }else{
                                                 echo '<i class="websitebox websitebox-qq1" icon-class="websitebox-qq1" style="font-size:29px;"></i>';
                                             }
                                             echo '</span>
-                                             <p>'.$websitebox_qq['qq'].'</p>
+                                             <p>'.esc_attr($websitebox_qq['qq']).'</p>
                                           
                                        </div>
                                     </div>
@@ -954,9 +956,9 @@ class websitebox_foot{
                                         if(isset($websitebox_qrcode['cls']) && $websitebox_qrcode['cls']){
                                                 
                                             if(isset($websitebox_kefu['icon']) && $websitebox_kefu['icon']){
-                                                echo '<i class="'.$websitebox_qrcode['cls'].'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;color:'.$websitebox_kefu['icon'].'" ></i>';
+                                                echo '<i class="'.esc_attr($websitebox_qrcode['cls']).'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;color:'.esc_attr($websitebox_kefu['icon']).'" ></i>';
                                             }else{
-                                               echo '<i class="'.$websitebox_qrcode['cls'].'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;" ></i>';
+                                               echo '<i class="'.esc_attr($websitebox_qrcode['cls']).'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;" ></i>';
                                             }
                                         }else{
                                             echo '<i class="websitebox websitebox-erweima" icon-class="websitebox-erweima" style="font-size:29px;"></i>';
@@ -966,7 +968,7 @@ class websitebox_foot{
                                      <div class="websitebox_hideBox">
                                         <div class="websitebox_hb">
                                            <h5>手机扫一扫打开</h5>
-                                           <img src="'.$websitebox_qrcode['qrcode'].'">
+                                           <img src="'.esc_attr($websitebox_qrcode['qrcode']).'">
                                         </div>
                                      </div>
                                   </li>';
@@ -980,15 +982,15 @@ class websitebox_foot{
                                         if(isset($websitebox_wb['cls']) && $websitebox_wb['cls']){
                                                 
                                             if(isset($websitebox_kefu['icon']) && $websitebox_kefu['icon']){
-                                                echo '<i class="'.$websitebox_wb['cls'].'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;color:'.$websitebox_kefu['icon'].'" ></i>';
+                                                echo '<i class="'.esc_attr($websitebox_wb['cls']).'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;color:'.esc_attr($websitebox_kefu['icon']).'" ></i>';
                                             }else{
-                                               echo '<i class="'.$websitebox_wb['cls'].'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;" ></i>';
+                                               echo '<i class="'.esc_attr($websitebox_wb['cls']).'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;" ></i>';
                                             }
                                         }else{
                                             echo '<i class="websitebox websitebox-xinlang" icon-class="websitebox-xinlang" style="font-size:29px;"></i>';
                                         }
                                         
-                                        echo '<h4><a href="'.$websitebox_wb['wb'].'" style="color:#fff;">链接</a></h4>
+                                        echo '<h4><a href="'.esc_attr($websitebox_wb['wb']).'" style="color:#fff;">链接</a></h4>
                                      </div>
                                   </li>';
                             }
@@ -1024,16 +1026,16 @@ class websitebox_foot{
                                                             if(isset($websitebox_phone['cls']) && $websitebox_phone['cls']){
                                                 
                                                                 if(isset($websitebox_kefu['icon']) && $websitebox_kefu['icon']){
-                                                                    echo '<i class="'.$websitebox_phone['cls'].'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;color:'.$websitebox_kefu['icon'].'" ></i>';
+                                                                    echo '<i class="'.esc_attr($websitebox_phone['cls']).'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;color:'.esc_attr($websitebox_kefu['icon']).'" ></i>';
                                                                 }else{
-                                                                   echo '<i class="'.$websitebox_phone['cls'].'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;" ></i>';
+                                                                   echo '<i class="'.esc_attr($websitebox_phone['cls']).'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;" ></i>';
                                                                 }
                                                             }else{
                                                                 echo '<i class="websitebox websitebox-iconfontcolor39" icon-class="websitebox-iconfontcolor39" style="font-size:29px;"></i>';
                                                             }
                                                             
                                                             echo '<span class="websitebox_info-name">客服热线</span>
-                                                            <span class="websitebox_info-value"><a href="tel:'.$websitebox_phone['phone'].'">'.$websitebox_phone['phone'].'</a></span>
+                                                            <span class="websitebox_info-value"><a href="tel:'.esc_attr($websitebox_phone['phone']).'">'.esc_attr($websitebox_phone['phone']).'</a></span>
                                                         </div>
                                                     </li>';
                                                 }
@@ -1045,9 +1047,9 @@ class websitebox_foot{
                                                             if(isset($websitebox_qq['cls']) && $websitebox_qq['cls']){
                                                 
                                                                 if(isset($websitebox_kefu['icon']) && $websitebox_kefu['icon']){
-                                                                    echo '<i class="'.$websitebox_qq['cls'].'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;color:'.$websitebox_kefu['icon'].'" ></i>';
+                                                                    echo '<i class="'.esc_attr($websitebox_qq['cls']).'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;color:'.esc_attr($websitebox_kefu['icon']).'" ></i>';
                                                                 }else{
-                                                                   echo '<i class="'.$websitebox_qq['cls'].'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;" ></i>';
+                                                                   echo '<i class="'.esc_attr($websitebox_qq['cls']).'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;" ></i>';
                                                                 }
                                                             }else{
                                                                 echo '<i class="websitebox websitebox-qq1" icon-class="websitebox-qq1" style="font-size:29px;top: 22px;"></i>';
@@ -1055,8 +1057,8 @@ class websitebox_foot{
                                                             
                                                             echo '<span class="websitebox_info-name">在线客服</span>
                                                             <span class="websitebox_info-value">
-                                                                <a href="http://wpa.qq.com/msgrd?v=3&amp;uin='.$websitebox_qq['qq'].'&amp;site=qq&amp;menu=yes">
-                                                                '.$websitebox_qq['qq'].'
+                                                                <a href="http://wpa.qq.com/msgrd?v=3&amp;uin='.esc_attr($websitebox_qq['qq']).'&amp;site=qq&amp;menu=yes">
+                                                                '.esc_attr($websitebox_qq['qq']).'
                                                                 </a>
                                                             </span>
                                                         </div>
@@ -1070,16 +1072,16 @@ class websitebox_foot{
                                                             if(isset($websitebox_qqqun['cls']) && $websitebox_qqqun['cls']){
                                                 
                                                                 if(isset($websitebox_kefu['icon']) && $websitebox_kefu['icon']){
-                                                                    echo '<i class="'.$websitebox_qqqun['cls'].'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;color:'.$websitebox_kefu['icon'].'" ></i>';
+                                                                    echo '<i class="'.esc_attr($websitebox_qqqun['cls']).'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;color:'.esc_attr($websitebox_kefu['icon']).'" ></i>';
                                                                 }else{
-                                                                   echo '<i class="'.$websitebox_qqqun['cls'].'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;" ></i>';
+                                                                   echo '<i class="'.esc_attr($websitebox_qqqun['cls']).'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;" ></i>';
                                                                 }
                                                             }else{
                                                                 echo '<i class="websitebox websitebox-qqqun" icon-class="websitebox-qqqun" style="font-size:29px;top: 22px;"></i>';
                                                             }
                                                             
                                                             echo '<span class="websitebox_info-name">QQ群</span>
-                                                            <span class="websitebox_info-value" style="font-size: 18px;font-weight: 700;color: #f90;">'.$websitebox_qqqun['qqqun'].'</span>
+                                                            <span class="websitebox_info-value" style="font-size: 18px;font-weight: 700;color: #f90;">'.esc_attr($websitebox_qqqun['qqqun']).'</span>
                                                         </div>
                                                     </li>';
                                                 }
@@ -1091,16 +1093,16 @@ class websitebox_foot{
                                                             if(isset($websitebox_mail['cls']) && $websitebox_mail['cls']){
                                                 
                                                                 if(isset($websitebox_kefu['icon']) && $websitebox_kefu['icon']){
-                                                                    echo '<i class="'.$websitebox_mail['cls'].'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;color:'.$websitebox_kefu['icon'].'" ></i>';
+                                                                    echo '<i class="'.esc_attr($websitebox_mail['cls']).'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;color:'.esc_attr($websitebox_kefu['icon']).'" ></i>';
                                                                 }else{
-                                                                   echo '<i class="'.$websitebox_mail['cls'].'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;" ></i>';
+                                                                   echo '<i class="'.esc_attr($websitebox_mail['cls']).'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;" ></i>';
                                                                 }
                                                             }else{
                                                                 echo '<i class="websitebox websitebox-qq1" icon-class="websitebox-qq1" style="font-size:29px;"></i>';
                                                             }
                                                             
                                                             echo '<span class="websitebox_info-name">邮箱</span>
-                                                            <span class="websitebox_info-value" style="font-size: 18px;font-weight: 700;color: #f90;">'.$websitebox_mail['mail'].'</span>
+                                                            <span class="websitebox_info-value" style="font-size: 18px;font-weight: 700;color: #f90;">'.esc_attr($websitebox_mail['mail']).'</span>
                                                         </div>
                                                     </li>';
                                                 }
@@ -1112,16 +1114,16 @@ class websitebox_foot{
                                                             if(isset($websitebox_wb['cls']) && $websitebox_wb['cls']){
                                                 
                                                                 if(isset($websitebox_kefu['icon']) && $websitebox_kefu['icon']){
-                                                                    echo '<i class="'.$websitebox_wb['cls'].'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;color:'.$websitebox_kefu['icon'].'" ></i>';
+                                                                    echo '<i class="'.esc_attr($websitebox_wb['cls']).'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;color:'.esc_attr($websitebox_kefu['icon']).'" ></i>';
                                                                 }else{
-                                                                   echo '<i class="'.$websitebox_wb['cls'].'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;" ></i>';
+                                                                   echo '<i class="'.esc_attr($websitebox_wb['cls']).'" icon-class="websitebox-iconfontcolor39" style="font-size:29px;" ></i>';
                                                                 }
                                                             }else{
                                                                 echo '<i class="websitebox websitebox-xinlang" icon-class="websitebox-xinlang" style="font-size:29px;top: 22px;"></i>';
                                                             }
                                                             
                                                             echo '<span class="websitebox_info-name">新浪微博</span>
-                                                            <span class="websitebox_info-value"><a href="'.$websitebox_wb['wb'].'">'.$websitebox_wb['wb'].'</a></span>
+                                                            <span class="websitebox_info-value"><a href="'.esc_attr($websitebox_wb['wb']).'">'.esc_attr($websitebox_wb['wb']).'</a></span>
                                                         </div>
                                                     </li>';
                                                 }
@@ -1136,7 +1138,7 @@ class websitebox_foot{
                                 <i class="websitebox websitebox-erweima" icon-class="websitebox-erweima" style="font-size:29px;"></i>
                                 <div class="websitebox_pic">
                                     <div class="websitebox_pic-content">
-                                       <img style="width:100%;" src="'.$websitebox_qrcode['qrcode'].'">
+                                       <img style="width:100%;" src="'.esc_attr($websitebox_qrcode['qrcode']).'">
                                     </div>
                                 </div>
                             </div>';
@@ -1176,14 +1178,14 @@ class websitebox_foot{
             			<div class="websitebox_circle"></div>
             			<div class="websitebox_content">';
             			if(isset($websitebox_shoujikefu['phone']) && $websitebox_shoujikefu['phone']){
-            			    echo '<a href="tel:'.$websitebox_shoujikefu['phone'].'">';
+            			    echo '<a href="tel:'.esc_attr($websitebox_shoujikefu['phone']).'">';
             			}else{
             			    echo '<a href="tel:400-0000-688">';
             			}
             			if(isset($websitebox_shoujikefu['kefuicon']) && $websitebox_shoujikefu['kefuicon']){
-            				 echo '<img src="'.$websitebox_shoujikefu['kefuicon'].'" style="width:50px;height:50px;border-radius:50%;vertical-align: middle;">';
+            				 echo '<img src="'.esc_attr($websitebox_shoujikefu['kefuicon']).'" style="width:50px;height:50px;border-radius:50%;vertical-align: middle;">';
             			}else{
-            			     echo ' <img src="'.plugin_dir_url( WEBSITEBOX_FILE ).'images/wztbbxkf.png" style="width:50px;height:50px;border-radius:50%;vertical-align: middle;">';
+            			     echo ' <img src="'.esc_url(plugins_url('../images/wztbbxkf.png',__FILE__)).'" style="width:50px;height:50px;border-radius:50%;vertical-align: middle;">';
             			}
             			echo '	</a>
             			</div>
@@ -1221,14 +1223,14 @@ class websitebox_foot{
                 if(isset($websitebox_sitebg['type']) && $websitebox_sitebg['type']==3){
                     
                     if($websitebox_sitebg['texiao']==1){
-                         wp_enqueue_script( 'cav', plugin_dir_url( WEBSITEBOX_FILE ).'js/cav.js', array('jquery'), '', false);
-                        wp_enqueue_script( 'getstart', plugin_dir_url( WEBSITEBOX_FILE ).'js/getstart.js', array('jquery'), '', false);
+                         wp_enqueue_script( 'cav', esc_attr(plugin_dir_url( WEBSITEBOX_FILE )).'js/cav.js', array('jquery'), '', false);
+                        wp_enqueue_script( 'getstart', esc_attr(plugin_dir_url( WEBSITEBOX_FILE )).'js/getstart.js', array('jquery'), '', false);
                          echo '<div id="container" class="smhide" style="position: fixed; bottom: 0;top: 0;left: 0; right: 0;z-index: -1;">
                             <div id="anitOut" class="anitOut" style="width:800px; height:100%;">
                             </div>
                             </div>';
                     }elseif($websitebox_sitebg['texiao']==2){
-                        wp_enqueue_script( 'ribbon', plugin_dir_url( WEBSITEBOX_FILE ).'js/ribbon.js', array('jquery'), '', false);
+                        wp_enqueue_script( 'ribbon', esc_attr(plugin_dir_url( WEBSITEBOX_FILE )).'js/ribbon.js', array('jquery'), '', false);
                     }elseif($websitebox_sitebg['texiao']==3){
                         echo '<div align="center" class="smhide" style=" position:fixed; left:0; top:0px; width:100%;bottom:0; height:100%;z-index:-1;">
                         <canvas id="q" width="1440" height="1000"></canvas>
@@ -1263,13 +1265,13 @@ class websitebox_foot{
                          </script>
                          ';
                     }elseif($websitebox_sitebg['texiao']==4){
-                        wp_enqueue_script( 'snowfall', plugin_dir_url( WEBSITEBOX_FILE ).'js/snowfall.jquery.js', array('jquery'), '', false);
+                        wp_enqueue_script( 'snowfall', esc_attr(plugin_dir_url( WEBSITEBOX_FILE )).'js/snowfall.jquery.js', array('jquery'), '', false);
                         echo '<script>
                         jQuery(document).ready(function($){
                             window.onload=function(){
                             $(document).snowfall("clear");
                             $(document).snowfall({
-                                image: "'.plugin_dir_url( WEBSITEBOX_FILE ).'images/huaban.png",
+                                image: "'.esc_url(plugins_url('../images/huaban.png',__FILE__)).'",
                                 flakeCount:30,
                                 minSize: 5,
                                 maxSize: 22
@@ -1279,7 +1281,7 @@ class websitebox_foot{
                             
                                 </script>';
                     }elseif($websitebox_sitebg['texiao']==5){
-                        wp_enqueue_script( 'particle', plugin_dir_url( WEBSITEBOX_FILE ).'js/canvas-particle.js', array('jquery'), '', false);
+                        wp_enqueue_script( 'particle', esc_attr(plugin_dir_url( WEBSITEBOX_FILE )).'js/canvas-particle.js', array('jquery'), '', false);
                         echo '<div id="mydiv" class="smhide" style="position:absolute;top:0px;left:0px;width:100%;height:100%;z-index:-1"></div><script type="text/javascript">
                         		
                         		window.onload =function() {
@@ -1507,7 +1509,7 @@ class websitebox_foot{
                         
                         <style>
                             .bbxscene .wall {
-                                background: url('.plugin_dir_url( WEBSITEBOX_FILE ).'images/wztxingkong.jpg);
+                                background: url('.esc_url(plugins_url('../images/wztxingkong.jpg',__FILE__)).');
                                 background-size: cover;
                             }
                             
@@ -2047,14 +2049,14 @@ class websitebox_foot{
                     jQuery(document).ready(function($){
                     $("body").addClass("websitebox_body");
                     let vsClick = new VsClick({
-                          effect: "'.$fengge.'",
+                          effect: "'.esc_attr($fengge).'",
                           dom:"websitebox_body",
-                          timer: "'.$websitebox_sbtexiao["sb_shixu"].'",
-                          height: "'.$websitebox_sbtexiao["sb_gaodu"].'",
-                          width: "'.$websitebox_sbtexiao["sb_kuandu"].'",
-                          spring: "'.$sb_tantiao.'",
-                          slide: "'.$sb_huadong.'", 
-                            lucency: "'.$sb_touming.'"
+                          timer: "'.esc_attr($websitebox_sbtexiao["sb_shixu"]).'",
+                          height: "'.esc_attr($websitebox_sbtexiao["sb_gaodu"]).'",
+                          width: "'.esc_attr($websitebox_sbtexiao["sb_kuandu"]).'",
+                          spring: "'.esc_attr($sb_tantiao).'",
+                          slide: "'.esc_attr($sb_huadong).'", 
+                            lucency: "'.esc_attr($sb_touming).'"
                         })
                     })
                 </script>';
@@ -2063,15 +2065,15 @@ class websitebox_foot{
                     jQuery(document).ready(function($){
                     $("body").addClass("websitebox_body");
                     let vsClick = new VsClick({
-                          effect: "'.$fengge.'",
+                          effect: "'.esc_attr($fengge).'",
                           dom:"websitebox_body",
                           emoji: ["🍋", "🍌", "🍉", "🍎", "🍒", "🍓", "🌽"],
-                          timer: "'.$websitebox_sbtexiao["sb_shixu"].'",
+                          timer: "'.esc_attr($websitebox_sbtexiao["sb_shixu"]).'",
                          
-                           width: "'.$websitebox_sbtexiao["sb_kuandu"].'",
-                          spring: "'.$sb_tantiao.'",
-                          slide: "'.$sb_huadong.'", 
-                            lucency: "'.$sb_touming.'"
+                           width: "'.esc_attr($websitebox_sbtexiao["sb_kuandu"]).'",
+                          spring: "'.esc_attr($sb_tantiao).'",
+                          slide: "'.esc_attr($sb_huadong).'", 
+                            lucency: "'.esc_attr($sb_touming).'"
                         })
                     })
                 </script>';
@@ -2080,33 +2082,34 @@ class websitebox_foot{
                     jQuery(document).ready(function($){
                     $("body").addClass("websitebox_body");
                     let vsClick = new VsClick({
-                          effect: "'.$fengge.'",
+                          effect: "'.esc_attr($fengge).'",
                           dom:"websitebox_body",
                           emoji: ["😍", "😆", "😀", "😂", "🤣", "😒", "😘", "😁", "😉", "😎"],
-                          timer: "'.$websitebox_sbtexiao["sb_shixu"].'",
+                          timer: "'.esc_attr($websitebox_sbtexiao["sb_shixu"]).'",
                          
-                           width: "'.$websitebox_sbtexiao["sb_kuandu"].'",
-                          spring: "'.$sb_tantiao.'",
-                          slide: "'.$sb_huadong.'", 
-                            lucency: "'.$sb_touming.'"
+                           width: "'.esc_attr($websitebox_sbtexiao["sb_kuandu"]).'",
+                          spring: "'.esc_attr($sb_tantiao).'",
+                          slide: "'.esc_attr($sb_huadong).'", 
+                            lucency: "'.esc_attr($sb_touming).'"
                         })
                     })
                 </script>';
             }elseif($websitebox_sbtexiao['nav']==4){
                 $title = explode(',',$websitebox_sbtexiao['title']);
+                $title = array_map('esc_attr',$title);
                  echo '<script>
                     jQuery(document).ready(function($){
                     $("html").addClass("websitebox_body");
                     let vsClick = new VsClick({
-                          effect: "'.$fengge.'",
+                          effect: "'.esc_attr($fengge).'",
                           dom:"websitebox_body",
-                          emoji: '.json_encode($title).',
-                          timer: "'.$websitebox_sbtexiao["sb_shixu"].'",
+                          emoji: '.wp_json_encode($title).',
+                          timer: "'.esc_attr($websitebox_sbtexiao["sb_shixu"]).'",
                          
-                           width: "'.$websitebox_sbtexiao["sb_kuandu"].'",
-                          spring: "'.$sb_tantiao.'",
-                          slide: "'.$sb_huadong.'", 
-                            lucency: "'.$sb_touming.'"
+                           width: "'.esc_attr($websitebox_sbtexiao["sb_kuandu"]).'",
+                          spring: "'.esc_attr($sb_tantiao).'",
+                          slide: "'.esc_attr($sb_huadong).'", 
+                            lucency: "'.esc_attr($sb_touming).'"
                         })
                     })
                 </script>';
@@ -2122,8 +2125,8 @@ class websitebox_foot{
                     echo '
                     <div class="websitebox_wztbaibao_box"></div>
                     <div class="websitebox_imgpopup">
-                        <img src="'.$websitebox_alert['pic'].'" alt="">
-                        <span class="websitebox_imgpopupgb"><img src="'.plugin_dir_url( WEBSITEBOX_FILE ).'images/wzt_chahao.png"></span>
+                        <img src="'.esc_url($websitebox_alert['pic']).'" alt="">
+                        <span class="websitebox_imgpopupgb"><img src="'.esc_attr(plugin_dir_url( WEBSITEBOX_FILE )).'images/wzt_chahao.png"></span>
                     </div>
                     <script>
                     jQuery(document).ready(function($){
@@ -2143,9 +2146,9 @@ class websitebox_foot{
     			
     	                </div>
                 		<div class="websitebox_wztbaibao_box1">
-            				<h3 style="background:'.$websitebox_alert['bg'].';color:'.$websitebox_alert['word'].';text-align: center;">'.$websitebox_alert['title'].'</h3>
+            				<h3 style="background:'.esc_attr($websitebox_alert['bg']).';color:'.esc_attr($websitebox_alert['word']).';text-align: center;">'.esc_attr($websitebox_alert['title']).'</h3>
             				<div class="websitebox_wztbaibao_box2">
-            				<p style="color:'.$websitebox_alert['content_color'].'">'.$websitebox_alert['content'].'</p>
+            				<p style="color:'.esc_attr($websitebox_alert['content_color']).'">'.esc_attr($websitebox_alert['content']).'</p>
             				</div>
             			</div>
             			<script>
@@ -2161,13 +2164,13 @@ class websitebox_foot{
             $websitebox_scroll = get_option('websitebox_scroll');
             if(isset($websitebox_scroll['auto']) && $websitebox_scroll['auto']==1){
                 $websitebox_scroll['speed'] = isset($websitebox_scroll['speed'])&& $websitebox_scroll['speed']?$websitebox_scroll['speed']:10;
-                echo '<div class="websitebox_demo" style="background:'.$websitebox_scroll['bg'].';position: fixed;top: 0;z-index: 999999;">
+                echo '<div class="websitebox_demo" style="background:'.esc_attr($websitebox_scroll['bg']).';position: fixed;top: 0;z-index: 999999;">
                         <div>
             				<div class="websitebox_demo-cont">
             					<div class="websitebox_txt-scroll websitebox_txt-scroll-curs">
             						<div class="websitebox_scrollbox">
-            							<div class="websitebox_txt" style="color:'.$websitebox_scroll['word'].'">
-            							    '.$websitebox_scroll['content'].'
+            							<div class="websitebox_txt" style="color:'.esc_attr($websitebox_scroll['word']).'">
+            							    '.esc_attr($websitebox_scroll['content']).'
             							</div>
             						</div>
             					</div>
@@ -2223,7 +2226,7 @@ class websitebox_foot{
                         });
                     };
                     $(".websitebox_txt-scroll-curs").txtscroll({
-                				"speed": '.$websitebox_scroll['speed'].'
+                				"speed": '.esc_attr($websitebox_scroll['speed']).'
                 			});
 		        })
                 </script>

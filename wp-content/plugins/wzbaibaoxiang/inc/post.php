@@ -8,7 +8,7 @@ class websitebox_post{
         $pay = websitebox_paymoney('/api/index/pay_money');
         
         if(!$pay){
-            echo json_encode(['msg'=>3]);exit;
+            echo wp_json_encode(['msg'=>3]);exit;
         }
         $data = $this->data;
         if(isset($data['nonce']) && isset($data['action']) && wp_verify_nonce($data['nonce'],$data['action'])){
@@ -29,7 +29,7 @@ class websitebox_post{
                     }else{
                         update_option('websitebox_base',$list);
                     }
-                    echo json_encode(['msg'=>1]);exit;
+                    echo wp_json_encode(['msg'=>1]);exit;
                     break;
                 case 2:
                     
@@ -64,7 +64,7 @@ class websitebox_post{
                         update_option('websitebox_qq',$list2);
                     }
                     $list3 = [];
-                    $list3['qrcode'] = esc_url($data['qrcode']);
+                    $list3['qrcode'] = sanitize_url($data['qrcode']);
                    
                     $list3['cls'] = sanitize_text_field($data['qrcode_cls']);
                     $get3 = get_option('websitebox_qrcode');
@@ -103,7 +103,7 @@ class websitebox_post{
                     }else{
                         update_option('websitebox_wb',$list6);
                     }
-                    echo json_encode(['msg'=>1]);exit;
+                    echo wp_json_encode(['msg'=>1]);exit;
                     break;
                 case 4:
                     $list = [];
@@ -117,7 +117,7 @@ class websitebox_post{
                     }else{
                         update_option('websitebox_liuyan',$list);
                     }
-                    echo json_encode(['msg'=>1]);exit;
+                    echo wp_json_encode(['msg'=>1]);exit;
                     break;
                 case 5:
                     $list = [];
@@ -125,7 +125,7 @@ class websitebox_post{
                     $list['mobile_auto'] = $data['mobile_auto'];
                     $list['type'] = (int)$data['type'];
                     $list['bg'] = sanitize_text_field($data['bg']);
-                    $list['back'] = esc_url($data['back']);
+                    $list['back'] = sanitize_url($data['back']);
                     $list['texiao'] = (int)$data['texiao'];
                     $get = get_option('websitebox_sitebg');
                     if(!$get){
@@ -151,7 +151,7 @@ class websitebox_post{
                     }else{
                         update_option('websitebox_alert',$list);
                     }
-                    echo json_encode(['msg'=>1]);exit;
+                    echo wp_json_encode(['msg'=>1]);exit;
                     break;
                 case 7:
                     $list = [];
@@ -166,7 +166,7 @@ class websitebox_post{
                     }else{
                         update_option('websitebox_scroll',$list);
                     }
-                    echo json_encode(['msg'=>1]);exit;
+                    echo wp_json_encode(['msg'=>1]);exit;
                     break;
                 case 10:
                     $list = [];
@@ -181,22 +181,22 @@ class websitebox_post{
                     }else{
                         update_option('websitebox_shuiyin',$list);
                     }
-                    echo json_encode(['msg'=>1]);exit;
+                    echo wp_json_encode(['msg'=>1]);exit;
                     break;
                 case 11:
                     $list = [];
                    
                     $list['share'] = $data['share'];
                     $list['open'] = $data['open'];
-                    $list['wx'] = esc_url($data['wx']);
-                    $list['ali'] = esc_url($data['ali']);
+                    $list['wx'] = sanitize_url($data['wx']);
+                    $list['ali'] = sanitize_url($data['ali']);
                     $get = get_option('websitebox_sanheyi');
                     if(!$get){
                         add_option('websitebox_sanheyi',$list);
                     }else{
                         update_option('websitebox_sanheyi',$list);
                     }
-                    echo json_encode(['msg'=>1]);exit;
+                    echo wp_json_encode(['msg'=>1]);exit;
                     break;
                 case 15:
                     global $wpdb;
@@ -204,16 +204,16 @@ class websitebox_post{
                     $res = $wpdb->insert($wpdb->prefix."websitebox_liuyan",['content'=>$content]);
                     
                     if($res){
-                        echo json_encode(['msg'=>1]);exit;
+                        echo wp_json_encode(['msg'=>1]);exit;
                     }else{
-                        echo json_encode(['msg'=>0]);exit;
+                        echo wp_json_encode(['msg'=>0]);exit;
                     }
                     break;
                 case 16:
                     global $wpdb;
                     $id = (int)$data['id'];
-                    $wpdb->query( "DELETE FROM " . $wpdb->prefix . "websitebox_liuyan where id=  ".$id ); 
-                    echo json_encode(['msg'=>1]);exit;
+                    $wpdb->query($wpdb->prepare("DELETE FROM " . $wpdb->prefix . "websitebox_liuyan where id=  %d",$id));
+                    echo wp_json_encode(['msg'=>1]);exit;
                     break;
                 case 17:
                     $list = [];
@@ -226,7 +226,7 @@ class websitebox_post{
                     }else{
                         update_option('websitebox_shoujikefu',$list);
                     }
-                    echo json_encode(['msg'=>1]);exit;
+                    echo wp_json_encode(['msg'=>1]);exit;
                     break;
                 case 18:
                     $list = [];
@@ -246,7 +246,7 @@ class websitebox_post{
                     }else{
                         update_option('websitebox_sbtexiao',$list);
                     }
-                    echo json_encode(['msg'=>1]);exit;
+                    echo wp_json_encode(['msg'=>1]);exit;
                     break;
                 case 19:
                     $list = [];
@@ -263,12 +263,12 @@ class websitebox_post{
                     }else{
                         update_option('websitebox_youhua',$list);
                     }
-                    echo json_encode(['msg'=>1]);exit;
+                    echo wp_json_encode(['msg'=>1]);exit;
                     break;
                 case 20:
                     $key = sanitize_text_field($_POST['website_key']);
                     $data =  websitebox_url();
-                    $url1 = $_SERVER['SERVER_NAME'];
+                    $url1 = sanitize_text_field($_SERVER['SERVER_NAME']);
                     $url = 'https://www.rbzzz.com/api/money/log2?url='.$data.'&url1=111&key='.$key;
                     $defaults = array(
                         'timeout' => 120,
@@ -287,10 +287,10 @@ class websitebox_post{
                     	    }else{
                     	        add_option('website_key',$key);
                     	    }
-                            echo json_encode(['status'=>1]);exit;
+                            echo wp_json_encode(['status'=>1]);exit;
                         }
                 	}
-                	echo json_encode(['status'=>0]);exit;
+                	echo wp_json_encode(['status'=>0]);exit;
                     break;
                 
                 

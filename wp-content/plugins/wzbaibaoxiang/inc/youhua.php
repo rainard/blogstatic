@@ -8,6 +8,7 @@ class websitebox_youhua{
         if(isset($data['thumb']) && $data['thumb']){
             $this->websitebox_thumb();
         }
+        
         if(isset($data['head_dy']) && $data['head_dy']){
             $this->websitebox_head_dy();
         }
@@ -68,7 +69,7 @@ class websitebox_youhua{
     	add_action('do_feed_atom', [$this,'websitebox_digwp_disable_feed'], 1);
     }
     public function websitebox_digwp_disable_feed(){
-        wp_die(__('<h1>Feed已经关闭, 请访问网站<a href="'.get_bloginfo('url').'">首页</a>!</h1>'));
+        wp_die('<h1>Feed已经关闭, 请访问网站<a href="'.esc_url(get_bloginfo('url')).'">首页</a>!</h1>');
     }
     public function websitebox_post_thumb(){
         add_action('before_delete_post', [$this,'websitebox_delete_post_and_attachments']);
@@ -76,16 +77,16 @@ class websitebox_youhua{
     public function websitebox_delete_post_and_attachments($post_ID){
         global $wpdb;
             //删除特色图片
-            $thumbnails = $wpdb->get_results( "SELECT * FROM $wpdb->postmeta WHERE meta_key = '_thumbnail_id' AND post_id = $post_ID" );
+            $thumbnails = $wpdb->get_results($wpdb->prepare("SELECT * FROM $wpdb->postmeta WHERE meta_key = '_thumbnail_id' AND post_id = %d",$post_ID));
             foreach ( $thumbnails as $thumbnail ) {
             wp_delete_attachment( $thumbnail->meta_value, true );
             }
             //删除图片附件
-            $attachments = $wpdb->get_results( "SELECT * FROM $wpdb->posts WHERE post_parent = $post_ID AND post_type = 'attachment'" );
+            $attachments = $wpdb->get_results($wpdb->prepare("SELECT * FROM $wpdb->posts WHERE post_parent = %d AND post_type = 'attachment'",$post_ID));
             foreach ( $attachments as $attachment ) {
             wp_delete_attachment( $attachment->ID, true );
             }
-            $wpdb->query( "DELETE FROM $wpdb->postmeta WHERE meta_key = '_thumbnail_id' AND post_id = $post_ID" );
+            $wpdb->query($wpdb->prepare("DELETE FROM $wpdb->postmeta WHERE meta_key = '_thumbnail_id' AND post_id = %d",$post_ID));
     }
     public function websitebox_gravatar(){
         add_filter( 'get_avatar', function ($avatar) {

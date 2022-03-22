@@ -8,18 +8,17 @@
 			
 			<div class="websitebox_news">
 				<ul>
-					<a href="<?php echo admin_url( 'admin.php?page=websitebox' ); ?>" ><li>常规设置</li></a>
-					<a href="<?php echo admin_url( 'admin.php?page=websitebox&book=11' ); ?>" ><li>WP优化</li></a>
-					<a href="<?php echo admin_url( 'admin.php?page=websitebox&book=1' ); ?>" ><li>侧边客服</li></a>
-					<a href="<?php echo admin_url( 'admin.php?page=websitebox&book=9' ); ?>" ><li>手机客服</li></a>
-					<a href="<?php echo admin_url( 'admin.php?page=websitebox&book=3' ); ?>" ><li>留言板</li></a>
-					<a href="<?php echo admin_url( 'admin.php?page=websitebox&book=4' ); ?>" class="websitebox_adm"><li>网站背景</li></a>
-					<a href="<?php echo admin_url( 'admin.php?page=websitebox&book=5' ); ?>"><li>提示框</li></a>
-					<a href="<?php echo admin_url( 'admin.php?page=websitebox&book=6' ); ?>"><li>滚动公告</li></a>
-					<a href="<?php echo admin_url( 'admin.php?page=websitebox&book=7' ); ?>"><li>图片水印</li></a>
-					<a href="<?php echo admin_url( 'admin.php?page=websitebox&book=8' ); ?>"><li>三合一</li></a>
-					<a href="<?php echo admin_url( 'admin.php?page=websitebox&book=10' ); ?>"><li>鼠标特效</li></a>
-					<!--<a href="<?php echo admin_url( 'admin.php?page=websitebox&book=12' ); ?>"><li>常见问题</li></a>-->
+					<a href="<?php echo esc_url(admin_url( 'admin.php?page=websitebox&nonce='.esc_attr(wp_create_nonce('websitebox')))); ?>" ><li>常规设置</li></a>
+        			<a href="<?php echo esc_url(admin_url( 'admin.php?page=websitebox&book=11&nonce='.esc_attr(wp_create_nonce('websitebox')))); ?>" ><li>WP优化</li></a>
+        			<a href="<?php echo esc_url(admin_url( 'admin.php?page=websitebox&book=1&nonce='.esc_attr(wp_create_nonce('websitebox')))); ?>" ><li>侧边客服</li></a>
+        			<a href="<?php echo esc_url(admin_url( 'admin.php?page=websitebox&book=9&nonce='.esc_attr(wp_create_nonce('websitebox')))); ?>" ><li>手机客服</li></a>
+        			<a href="<?php echo esc_url(admin_url( 'admin.php?page=websitebox&book=3&nonce='.esc_attr(wp_create_nonce('websitebox')))); ?>"><li>留言板</li></a>
+        			<a href="<?php echo esc_url(admin_url( 'admin.php?page=websitebox&book=4&nonce='.esc_attr(wp_create_nonce('websitebox')))); ?>" class="websitebox_adm"><li>网站背景</li></a>
+        			<a href="<?php echo esc_url(admin_url( 'admin.php?page=websitebox&book=5&nonce='.esc_attr(wp_create_nonce('websitebox')))); ?>"><li>提示框</li></a>
+        			<a href="<?php echo esc_url(admin_url( 'admin.php?page=websitebox&book=6&nonce='.esc_attr(wp_create_nonce('websitebox')))); ?>"><li>滚动公告</li></a>
+        			<a href="<?php echo esc_url(admin_url( 'admin.php?page=websitebox&book=7&nonce='.esc_attr(wp_create_nonce('websitebox')))); ?>"><li>图片水印</li></a>
+        			<a href="<?php echo esc_url(admin_url( 'admin.php?page=websitebox&book=8&nonce='.esc_attr(wp_create_nonce('websitebox')))); ?>"><li>三合一</li></a>
+        			<a href="<?php echo esc_url(admin_url( 'admin.php?page=websitebox&book=10&nonce='.esc_attr(wp_create_nonce('websitebox')))); ?>" class="websitebox_adm"><li>鼠标特效</li></a>
 				</ul>
 			</div>
 			<div class="websitebox_centen">
@@ -29,10 +28,10 @@
 					 <input type="hidden" name="websitebox" value="5">
 				  	 <input type="hidden" name="action" value="websitebox">
 				  	 <input type="hidden" name="back" value=" <?php 
-    					        if(isset($websitebox_sitebg['back']) && $websitebox_sitebg['back']){ echo $websitebox_sitebg['back'];}?>">
+    					        if(isset($websitebox_sitebg['back']) && $websitebox_sitebg['back']){ echo esc_url($websitebox_sitebg['back']);}?>">
     			    <input type="hidden" name="texiao" value=" <?php 
-    					        if(isset($websitebox_sitebg['texiao']) && $websitebox_sitebg['texiao']){ echo $websitebox_sitebg['texiao'];}?>">
-				  	 <input type="hidden" name="nonce" value="<?php echo wp_create_nonce('websitebox');?>">
+    					        if(isset($websitebox_sitebg['texiao']) && $websitebox_sitebg['texiao']){ echo esc_attr($websitebox_sitebg['texiao']);}?>">
+				  	 <input type="hidden" name="nonce" value="<?php echo esc_attr(wp_create_nonce('websitebox'));?>">
 					 <button type="submit" class="layui-btn websitebox_bot" lay-submit="" lay-filter="demo1">保存设置</button>
 				</div>
 				    <div class="layui-form-item bor" pane="">
@@ -82,7 +81,7 @@
 						  <div class="layui-input-inline" style="width: 120px;">
                             <input type="text" name="bg" placeholder="请选择颜色" class="layui-input" id="test-form-input1" value="<?php  
                             if(isset($websitebox_sitebg['bg']) && $websitebox_sitebg['bg']){
-                            echo $websitebox_sitebg['bg'];
+                            echo esc_attr($websitebox_sitebg['bg']);
                             }else{
                             echo '#fff';
                             } ?>">
@@ -101,13 +100,13 @@
     						   <div style="display: inline-block;position: relative;margin-top: 10px;margin-left: 110px;border: 1px solid #ccc;width:110px;height:110px;line-height: 100px;">
     						        <?php 
             					        if(isset($websitebox_sitebg['back']) && $websitebox_sitebg['back']){
-            					            echo '<img class="layui-upload-img" id="demo30" style="width:110px;" src="'.$websitebox_sitebg['back'].'">';
+            					            echo '<img class="layui-upload-img" id="demo30" style="width:110px;" src="'.esc_attr($websitebox_sitebg['back']).'">';
             					        }else{
             					            echo '<img class="layui-upload-img" id="demo30" style="width:110px;">';
             					        }
         					        ?>
         					        <p class="delete_pic">
-        					            <img src="<?php echo plugin_dir_url( WEBSITEBOX_FILE ); ?>images/wzt_chahao.png">
+        					            <img src="<?php echo esc_url(plugins_url('images/wzt_chahao.png',__FILE__)); ?>">
         					        </p>
         					   </div>
 						       <p id="demoText"></p>
@@ -121,63 +120,63 @@
 						 <div class="websitebox_wystyle2">
 							 <div class="websitebox_wystyle2-1" title="qq闪烁">
 								 <figure>
-									 <a href="#"><img src="<?php echo plugin_dir_url( WEBSITEBOX_FILE ); ?>images/bei1.png" style="width: 100%;"></a>
+									 <a href="#"><img src="<?php echo esc_url(plugins_url('images/bei1.png',__FILE__)); ?>" style="width: 100%;"></a>
 									 <figcaption><button  class="websitebox_qiyong <?php if(isset($websitebox_sitebg['texiao']) && $websitebox_sitebg['texiao']==1){ echo 'websitebox_xuanzhongh';}?>" type="button" data-texiao="1"><?php 
     					        if(isset($websitebox_sitebg['texiao']) && $websitebox_sitebg['texiao']==1){ echo '已启用';}else{echo '启用';}?></button></figcaption>
 								 </figure>
 							 </div>
 							 <div class="websitebox_wystyle2-1" title="彩带">
 								 <figure>
-									 <a href="#"><img src="<?php echo plugin_dir_url( WEBSITEBOX_FILE ); ?>images/bei2.png" style="width: 100%;"></a>
+									 <a href="#"><img src="<?php echo esc_url(plugins_url('images/bei2.png',__FILE__)); ?>" style="width: 100%;"></a>
 									 <figcaption><button class="websitebox_qiyong <?php if(isset($websitebox_sitebg['texiao']) && $websitebox_sitebg['texiao']==2){ echo 'websitebox_xuanzhongh';}?>" type="button" data-texiao="2"><?php 
     					        if(isset($websitebox_sitebg['texiao']) && $websitebox_sitebg['texiao']==2){ echo '已启用';}else{echo '启用';}?></button></figcaption>
 								 </figure>
 							 </div>
 							 <div class="websitebox_wystyle2-1" title="黑客帝国">
 								 <figure>
-									 <a href="#"><img src="<?php echo plugin_dir_url( WEBSITEBOX_FILE ); ?>images/bei3.png" style="width: 100%;"></a>
+									 <a href="#"><img src="<?php echo  esc_url(plugins_url('images/bei3.png',__FILE__)); ?>" style="width: 100%;"></a>
 									 <figcaption><button class="websitebox_qiyong <?php if(isset($websitebox_sitebg['texiao']) && $websitebox_sitebg['texiao']==3){ echo 'websitebox_xuanzhongh';}?>" type="button" data-texiao="3"><?php 
     					        if(isset($websitebox_sitebg['texiao']) && $websitebox_sitebg['texiao']==3){ echo '已启用';}else{echo '启用';}?></button></figcaption>
 								 </figure>
 							 </div>
 							<div class="websitebox_wystyle2-1" title="花瓣">
 								 <figure>
-									 <a href="#"><img src="<?php echo plugin_dir_url( WEBSITEBOX_FILE ); ?>images/bei4.png" style="width: 100%;"></a>
+									 <a href="#"><img src="<?php echo esc_url(plugins_url('images/bei4.png',__FILE__)); ?>" style="width: 100%;"></a>
 									 <figcaption><button class="websitebox_qiyong <?php if(isset($websitebox_sitebg['texiao']) && $websitebox_sitebg['texiao']==4){ echo 'websitebox_xuanzhongh';}?>" type="button" data-texiao="4"><?php 
     					        if(isset($websitebox_sitebg['texiao']) && $websitebox_sitebg['texiao']==4){ echo '已启用';}else{echo '启用';}?></button></figcaption>
 								 </figure>
 							</div>
 							 <div class="websitebox_wystyle2-1" title="漂浮">
 								 <figure>
-									 <a href="#"><img src="<?php echo plugin_dir_url( WEBSITEBOX_FILE ); ?>images/bei5.png" style="width: 100%;"></a>
+									 <a href="#"><img src="<?php echo esc_url(plugins_url('images/bei5.png',__FILE__)); ?>" style="width: 100%;"></a>
 									 <figcaption><button class="websitebox_qiyong <?php if(isset($websitebox_sitebg['texiao']) && $websitebox_sitebg['texiao']==5){ echo 'websitebox_xuanzhongh';}?>" type="button" data-texiao="5"><?php 
     					        if(isset($websitebox_sitebg['texiao']) && $websitebox_sitebg['texiao']==5){ echo '已启用';}else{echo '启用';}?></button></figcaption>
 								 </figure>
 							 </div>
 							 <div class="websitebox_wystyle2-1" title="星空1">
 								 <figure>
-									 <a href="#"><img src="<?php echo plugin_dir_url( WEBSITEBOX_FILE ); ?>images/bei6.png" style="width: 100%;"></a>
+									 <a href="#"><img src="<?php echo esc_url(plugins_url('images/bei6.png',__FILE__)); ?>" style="width: 100%;"></a>
 									 <figcaption><button class="websitebox_qiyong <?php if(isset($websitebox_sitebg['texiao']) && $websitebox_sitebg['texiao']==6){ echo 'websitebox_xuanzhongh';}?>" type="button" data-texiao="6"><?php 
     					        if(isset($websitebox_sitebg['texiao']) && $websitebox_sitebg['texiao']==6){ echo '已启用';}else{echo '启用';}?></button></figcaption>
 								 </figure>
 							 </div>
 							 <div class="websitebox_wystyle2-1" title="星空2">
 								 <figure>
-									 <a href="#"><img src="<?php echo plugin_dir_url( WEBSITEBOX_FILE ); ?>images/p7.png" style="width: 100%;"></a>
+									 <a href="#"><img src="<?php echo esc_url(plugins_url('images/p7.png',__FILE__)); ?>" style="width: 100%;"></a>
 									 <figcaption><button class="websitebox_qiyong <?php if(isset($websitebox_sitebg['texiao']) && $websitebox_sitebg['texiao']==7){ echo 'websitebox_xuanzhongh';}?>" type="button" data-texiao="7"><?php 
     					        if(isset($websitebox_sitebg['texiao']) && $websitebox_sitebg['texiao']==7){ echo '已启用';}else{echo '启用';}?></button></figcaption>
 								 </figure>
 							 </div>
 							 <div class="websitebox_wystyle2-1" title="星际穿梭">
 								 <figure>
-									 <a href="#"><img src="<?php echo plugin_dir_url( WEBSITEBOX_FILE ); ?>images/wztxingkong.png" style="width: 100%;"></a>
+									 <a href="#"><img src="<?php echo esc_url(plugins_url('images/wztxingkong.png',__FILE__)); ?>" style="width: 100%;"></a>
 									 <figcaption><button class="websitebox_qiyong <?php if(isset($websitebox_sitebg['texiao']) && $websitebox_sitebg['texiao']==8){ echo 'websitebox_xuanzhongh';}?>" type="button" data-texiao="8"><?php 
     					        if(isset($websitebox_sitebg['texiao']) && $websitebox_sitebg['texiao']==8){ echo '已启用';}else{echo '启用';}?></button></figcaption>
 								 </figure>
 							 </div>
 							 <div class="websitebox_wystyle2-1" title="海洋">
 								 <figure>
-									 <a href="#"><img src="<?php echo plugin_dir_url( WEBSITEBOX_FILE ); ?>images/wztyangguang.png" style="width: 100%;"></a>
+									 <a href="#"><img src="<?php echo esc_url(plugins_url('images/wztyangguang.png',__FILE__)); ?>" style="width: 100%;"></a>
 									 <figcaption><button class="websitebox_qiyong <?php if(isset($websitebox_sitebg['texiao']) && $websitebox_sitebg['texiao']==9){ echo 'websitebox_xuanzhongh';}?>" type="button" data-texiao="9"><?php 
     					        if(isset($websitebox_sitebg['texiao']) && $websitebox_sitebg['texiao']==9){ echo '已启用';}else{echo '启用';}?></button></figcaption>
 								 </figure>
@@ -276,9 +275,9 @@
 		  <h2 style="line-height: 40px;font-size: 16px;font-weight: 600;">相关推荐</h2>
 		  <div class="tj_lianjie">
 		  <div class="tj_lianjie1">
-			  <a href="/wp-admin/plugin-install.php?tab=plugin-information&plugin=baiduseo&TB_iframe=true&width=772&height=524">
+			  <a href="<?php echo esc_url_raw(admin_url('plugin-install.php?tab=plugin-information&plugin=baiduseo'));?>">
 				  <div class="tj_neirong">
-					 <img src="<?php echo plugin_dir_url( WEBSITEBOX_FILE ); ?>images/icon-256x256.png" class="tj_logo"> 
+					 <img src="<?php echo esc_url(plugins_url('images/icon-256x256.png',__FILE__)); ?>" class="tj_logo"> 
 					   <div>
 						   <h2>百度站长SEO合集</h2>
 						   <p>含百度站长、百度地图sitemap、关键词排名查询监控、网站蜘蛛、robots、图片alt标签、天级推送、死链查询、百度自动推送、批量提交URL到站长、百度收录查询、批量推送未收录、301/404等功能。</p>
@@ -292,9 +291,9 @@
 			  </a>
 		  </div>
 		  <div class="tj_lianjie1">
-			  <a href="/wp-admin/plugin-install.php?tab=plugin-information&plugin=auto-reply-wechat">
+			  <a href="<?php echo esc_url_raw(admin_url('plugin-install.php?tab=plugin-information&plugin=auto-reply-wechat'));?>">
 				  <div class="tj_neirong">
-					 <img src="<?php echo plugin_dir_url( WEBSITEBOX_FILE ); ?>images/icon_weixin.png" class="tj_logo"> 
+					 <img src="<?php echo esc_url(plugins_url('images/icon_weixin.png',__FILE__)); ?>" class="tj_logo"> 
 					   <div>
 						   <h2>公众号自动回复</h2>
 						   <p>本插件适用于订阅号（未认证也可以）、服务号。根据关键词自动获取网站相关文章：用户通过公众号发送关键词，公众号即可根据用户的关键词读取wordpress网站内相关的内容，推送URL回复用户。</p>
@@ -355,7 +354,7 @@
                 elem: '#test1'
                 ,color: '<?php  
                             if(isset($websitebox_sitebg['bg']) && $websitebox_sitebg['bg']){
-                            echo $websitebox_sitebg['bg'];
+                            echo esc_attr($websitebox_sitebg['bg']);
                             }else{
                             echo '#fff';
                             } ?>'

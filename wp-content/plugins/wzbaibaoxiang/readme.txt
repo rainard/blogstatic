@@ -3,8 +3,8 @@ Contributors: kelerkgibo
 Donate link: https://www.rbzzz.com
 Tags: 置顶, 网页宠物, 哀悼, 禁止复制, 禁止查看源码, 弹幕, WP优化, 在线客服, 留言板, 手机客服, 网站背景, 公告, 跑马灯, 水印, 分享, 打赏, 海报图, 鼠标事件特效。
 Requires at least: 4.8
-Tested up to: 5.8.2
-Stable tag: 0.0.7
+Tested up to: 5.9.2
+Stable tag: 0.0.8
 License: GNU General Public License v2.0 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -47,6 +47,13 @@ FTP上传安装
 
 
 == Changelog ==
+= 0.0.8 =2022/02/17
+*优化输出字段
+*优化sql语句
+*优化跳转链接
+*优化提交
+*优化计划任务发布文章
+*修复微信分享
 = 0.0.7 =2022/01/06
 * 留言板功能优化
 * 弹框优化
